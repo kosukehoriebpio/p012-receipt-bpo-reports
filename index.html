@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>レセプトBPOサービス — 市場調査レポート</title>
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; scroll-behavior: smooth; }
+body {
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  color: #1a1a1a;
+  background: #fff;
+  line-height: 1.7;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== Sidebar (PC) ===== */
+#sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 280px;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid #ccc;
+  background: #fafafa;
+  padding: 20px 16px;
+  z-index: 100;
+}
+#sidebar h2 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #333;
+  letter-spacing: 0.05em;
+}
+#sidebar ol {
+  list-style: none;
+  padding: 0;
+}
+#sidebar ol li {
+  margin-bottom: 2px;
+}
+#sidebar ol li a {
+  display: block;
+  padding: 4px 6px;
+  font-size: 0.78rem;
+  color: #333;
+  text-decoration: none;
+  border-radius: 3px;
+  line-height: 1.4;
+}
+#sidebar ol li a:hover {
+  background: #e8e8e8;
+}
+#sidebar ol li ol {
+  padding-left: 14px;
+}
+#sidebar ol li ol li a {
+  font-size: 0.73rem;
+  color: #555;
+}
+
+/* ===== Mobile TOC ===== */
+#mobile-toc {
+  display: none;
+  background: #fafafa;
+  border-bottom: 1px solid #ccc;
+  padding: 12px 20px;
+}
+#mobile-toc summary {
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: #333;
+}
+#mobile-toc ol {
+  margin-top: 8px;
+  padding-left: 18px;
+}
+#mobile-toc ol li {
+  margin-bottom: 2px;
+}
+#mobile-toc ol li a {
+  font-size: 0.78rem;
+  color: #333;
+  text-decoration: none;
+}
+#mobile-toc ol li ol {
+  padding-left: 14px;
+}
+#mobile-toc ol li ol li a {
+  font-size: 0.73rem;
+  color: #555;
+}
+
+/* ===== Main Content ===== */
+#main {
+  margin-left: 280px;
+  flex: 1;
+  max-width: 920px;
+  padding: 40px 48px 80px;
+}
+
+/* ===== Header ===== */
+.report-header {
+  border-bottom: 2px solid #1a1a1a;
+  padding-bottom: 20px;
+  margin-bottom: 32px;
+}
+.report-header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.report-header .subtitle {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 16px;
+}
+.report-header .summary-box {
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  padding: 16px 20px;
+  margin-top: 16px;
+}
+.report-header .summary-box h3 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.report-header .summary-box ol {
+  padding-left: 20px;
+  font-size: 0.82rem;
+}
+.report-header .summary-box ol li {
+  margin-bottom: 4px;
+}
+
+/* ===== Section Headings ===== */
+h2.section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-bottom: 1px solid #999;
+  padding-bottom: 6px;
+  margin-top: 48px;
+  margin-bottom: 20px;
+}
+h3.subsection-title {
+  font-size: 1.0rem;
+  font-weight: 700;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  padding-left: 10px;
+  border-left: 3px solid #555;
+}
+h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+/* ===== Tables ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 20px;
+  font-size: 0.82rem;
+}
+table th, table td {
+  border: 1px solid #bbb;
+  padding: 7px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+table th {
+  background: #f0f0f0;
+  font-weight: 700;
+  white-space: nowrap;
+}
+table td {
+  background: #fff;
+}
+table tr:nth-child(even) td {
+  background: #fafafa;
+}
+
+/* ===== Paragraphs & Lists ===== */
+p { margin-bottom: 10px; font-size: 0.88rem; }
+ul, ol { margin-bottom: 10px; padding-left: 22px; font-size: 0.88rem; }
+ul li, ol li { margin-bottom: 3px; }
+
+/* ===== Source tags ===== */
+.source {
+  font-size: 0.7rem;
+  color: #777;
+  white-space: nowrap;
+}
+
+/* ===== Flow diagram ===== */
+.flow-diagram {
+  background: #f7f7f7;
+  border: 1px solid #ccc;
+  padding: 16px 20px;
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 12px 0 20px;
+}
+
+/* ===== Highlight box ===== */
+.highlight-box {
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  padding: 14px 18px;
+  margin: 12px 0 20px;
+  font-size: 0.85rem;
+}
+.highlight-box strong {
+  color: #1a1a1a;
+}
+
+/* ===== Source list section ===== */
+.source-list {
+  margin-top: 24px;
+  padding-top: 12px;
+  border-top: 1px dashed #ccc;
+}
+.source-list h4 {
+  font-size: 0.82rem;
+  color: #555;
+  margin-bottom: 8px;
+}
+.source-list table {
+  font-size: 0.78rem;
+}
+.source-list table th {
+  background: #f5f5f5;
+}
+
+/* ===== Footer ===== */
+.report-footer {
+  border-top: 1px solid #999;
+  margin-top: 48px;
+  padding-top: 16px;
+  font-size: 0.78rem;
+  color: #777;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 960px) {
+  #sidebar { display: none; }
+  #mobile-toc { display: block; }
+  #main { margin-left: 0; padding: 24px 20px 60px; max-width: 100%; }
+  table { font-size: 0.78rem; }
+  table th, table td { padding: 5px 7px; }
+}
+
+/* ===== Print ===== */
+@media print {
+  #sidebar { display: none; }
+  #mobile-toc { display: none; }
+  #main { margin-left: 0; padding: 0; max-width: 100%; }
+  body { font-size: 10pt; }
+  .report-header h1 { font-size: 16pt; }
+  h2.section-title { font-size: 13pt; page-break-after: avoid; }
+  h3.subsection-title { font-size: 11pt; page-break-after: avoid; }
+  table { font-size: 8pt; page-break-inside: avoid; }
+  table th, table td { padding: 3px 5px; }
+  .report-header .summary-box { background: #f7f7f7 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  table th { background: #f0f0f0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Sidebar TOC (PC) ===== -->
+<nav id="sidebar">
+  <h2>目次</h2>
+  <ol>
+    <li><a href="#a1">A-1. レセプト業務ワークフロー</a></li>
+    <li><a href="#a2">A-2. レセコン市場と主要プレイヤー</a></li>
+    <li><a href="#a3">A-3. レセプト点検ツール市場</a></li>
+    <li><a href="#a4">A-4. 医療事務の人材市場</a></li>
+    <li><a href="#a5">A-5. レセプトBPO市場</a></li>
+    <li><a href="#a6">A-6. 規制・法的要件</a></li>
+    <li><a href="#a7">A-7. 医療機関のペインポイント</a></li>
+    <li><a href="#a8">A-8. 技術トレンド・将来展望</a></li>
+    <li><a href="#b1">B-1. ターゲット診療科の選定</a></li>
+    <li><a href="#b2">B-2. 診療報酬改定の詳細分析</a></li>
+    <li><a href="#b3">B-3. 共通算定モジュール</a></li>
+    <li><a href="#b4">B-4. 地域別分析</a></li>
+    <li><a href="#b5">B-5. レセコン別BPO適性</a></li>
+    <li><a href="#b6">B-6. クラウドセキュリティ要件</a></li>
+    <li><a href="#b7">B-7. 先行事例詳細</a></li>
+    <li><a href="#b8">B-8. 医療機関の意思決定プロセス</a></li>
+    <li><a href="#c1">C-1. AI点検ツール Build vs Buy</a></li>
+    <li><a href="#c2">C-2. 人材採用・育成モデル</a></li>
+    <li><a href="#c5">C-5. 料金シミュレーション</a></li>
+    <li><a href="#c7">C-7. パイロット顧客戦略</a></li>
+    <li><a href="#c8">C-8. 3年PL策定材料</a></li>
+    <li><a href="#sources">出典一覧</a></li>
+  </ol>
+</nav>
+
+<!-- ===== Mobile TOC ===== -->
+<details id="mobile-toc">
+  <summary>目次を開く</summary>
+  <ol>
+    <li><a href="#a1">A-1. レセプト業務ワークフロー</a></li>
+    <li><a href="#a2">A-2. レセコン市場と主要プレイヤー</a></li>
+    <li><a href="#a3">A-3. レセプト点検ツール市場</a></li>
+    <li><a href="#a4">A-4. 医療事務の人材市場</a></li>
+    <li><a href="#a5">A-5. レセプトBPO市場</a></li>
+    <li><a href="#a6">A-6. 規制・法的要件</a></li>
+    <li><a href="#a7">A-7. 医療機関のペインポイント</a></li>
+    <li><a href="#a8">A-8. 技術トレンド・将来展望</a></li>
+    <li><a href="#b1">B-1. ターゲット診療科の選定</a></li>
+    <li><a href="#b2">B-2. 診療報酬改定の詳細分析</a></li>
+    <li><a href="#b3">B-3. 共通算定モジュール</a></li>
+    <li><a href="#b4">B-4. 地域別分析</a></li>
+    <li><a href="#b5">B-5. レセコン別BPO適性</a></li>
+    <li><a href="#b6">B-6. クラウドセキュリティ要件</a></li>
+    <li><a href="#b7">B-7. 先行事例詳細</a></li>
+    <li><a href="#b8">B-8. 医療機関の意思決定プロセス</a></li>
+    <li><a href="#c1">C-1. AI点検ツール Build vs Buy</a></li>
+    <li><a href="#c2">C-2. 人材採用・育成モデル</a></li>
+    <li><a href="#c5">C-5. 料金シミュレーション</a></li>
+    <li><a href="#c7">C-7. パイロット顧客戦略</a></li>
+    <li><a href="#c8">C-8. 3年PL策定材料</a></li>
+    <li><a href="#sources">出典一覧</a></li>
+  </ol>
+</details>
+
+<!-- ===== Main Content ===== -->
+<div id="main">
+
+<header class="report-header">
+  <h1>レセプトBPOサービス — 市場調査レポート</h1>
+  <p class="subtitle">出典付き改訂版 / 2026年3月</p>
+  <div class="summary-box">
+    <h3>レポート構成</h3>
+    <ol>
+      <li><strong>A群（A-1〜A-8）</strong>: 市場・業界の全体像 — ワークフロー、レセコン市場、点検ツール、人材、BPO市場、規制、ペインポイント、技術トレンド</li>
+      <li><strong>B群（B-1〜B-8）</strong>: 深掘りリサーチ — ターゲット診療科、改定分析、共通算定モジュール、地域別、レセコン適性、セキュリティ、先行事例、意思決定プロセス</li>
+      <li><strong>C群（C-1〜C-8）</strong>: 事業戦略 — AI点検 Build vs Buy、人材モデル、料金シミュレーション、パイロット戦略、3年PL</li>
+    </ol>
+  </div>
+</header>
+
+
+<!-- ========================================== -->
+<!-- A-1: レセプト業務のワークフロー全体像       -->
+<!-- ========================================== -->
+<h2 class="section-title" id="a1">A-1. レセプト業務のワークフロー全体像</h2>
+
+<h3 class="subsection-title">病院経営における位置づけ</h3>
+<ul>
+  <li>診療報酬は医療機関の売上の大部分（窓口負担3割を除く7割以上）を占める</li>
+  <li>レセプト請求は収益に直結する最重要バックオフィス業務</li>
+</ul>
+
+<h3 class="subsection-title">一連の業務フロー</h3>
+<div class="flow-diagram">1. 患者来院・受付 — 保険証確認（オンライン資格確認/マイナ保険証）
+     ↓
+2. 診療 — 医師による診察・検査・処方
+     ↓
+3. 診療情報入力 — 電子カルテ/レセコンに入力
+     ↓
+4. 日次会計 — 窓口負担分の計算・請求
+     ↓
+5. 月末締め — 当月分のレセプトデータ集計・整理
+     ↓
+6. レセプト点検（翌月1日〜9日）— 算定ミス・病名漏れ・記載不備の確認
+     ↓
+7. レセプト提出（毎月10日締切）— オンライン請求システムで送信
+     社保 → 社会保険診療報酬支払基金
+     国保 → 国民健康保険団体連合会
+     ↓
+8. 審査 — 審査支払機関による内容審査
+     ↓
+9. 支払い — 請求翌月末頃に入金（実質約2ヶ月のタイムラグ）
+     ↓
+10. 返戻・査定 — 不備→返戻（修正後再請求）、減額→査定</div>
+
+<h3 class="subsection-title">月次サイクル</h3>
+<ul>
+  <li>毎月10日（24:00）が提出締切</li>
+  <li>2024年4月よりレセプト請求は原則オンラインに一本化（猶予届出なしの医療機関は2024年10月完全移行） <span class="source">[出典: 支払基金]</span></li>
+  <li>レセプト電子請求率: 約96〜97%（2025年時点） <span class="source">[出典: 支払基金 事業統計]</span></li>
+</ul>
+
+
+<!-- ========================================== -->
+<!-- A-2: レセコン市場と主要プレイヤー           -->
+<!-- ========================================== -->
+<h2 class="section-title" id="a2">A-2. レセコン市場と主要プレイヤー</h2>
+
+<h3 class="subsection-title">主要メーカー</h3>
+<table>
+  <tr><th>メーカー</th><th>カテゴリ</th><th>特徴</th></tr>
+  <tr>
+    <td>PHC/ウィーメックス（Medicom）</td>
+    <td>診療所向け</td>
+    <td>シェアNo.1（オンプレ含む全体）。AI自動算定機能搭載</td>
+  </tr>
+  <tr>
+    <td>エムスリーデジカル</td>
+    <td>クラウド型</td>
+    <td>クリニック向け電子カルテ購入シェア34.0%で首位 <span class="source">[出典: m3.com 2024年調査]</span>。レセコン一体型月額24,800円〜、レセコン単体月額14,800円〜（税抜） <span class="source">[出典: 公式料金ページ]</span></td>
+  </tr>
+  <tr>
+    <td>ORCA（日医標準レセプトソフト）</td>
+    <td>オープンソース</td>
+    <td>約18,170医療機関が導入（2026年2月時点） <span class="source">[出典: MSC（メディシスコ）集計]</span>。無償提供</td>
+  </tr>
+  <tr>
+    <td>富士通</td>
+    <td>大規模病院向け</td>
+    <td>400床以上の大規模病院で電子カルテシェア約47% <span class="source">[出典: ダイヤモンド・オンライン 2024年記事]</span></td>
+  </tr>
+  <tr>
+    <td>NEC</td>
+    <td>大規模病院向け</td>
+    <td>富士通に次ぐポジション</td>
+  </tr>
+</table>
+
+<h3 class="subsection-title">クラウド vs オンプレミス</h3>
+<ul>
+  <li>中小規模病院向け電子カルテ市場のクラウド型比率: 2023年度12.0% → 2026年度に16.8%到達見込み <span class="source">[出典: 矢野経済研究所]</span></li>
+  <li>ORCA連動型クラウド製品が上位10社中4社</li>
+</ul>
+
+<h3 class="subsection-title">価格帯</h3>
+<table>
+  <tr><th>形態</th><th>初期費用</th><th>月額費用</th></tr>
+  <tr><td>レセコン単体（オンプレ）</td><td>約150万円前後</td><td>約1.5万円（保守費）</td></tr>
+  <tr><td>クラウド型（一体型）</td><td>低額</td><td>2万〜3万円台</td></tr>
+  <tr><td>オンプレ型（中規模病院）</td><td>数百万円〜</td><td>数十万円以上</td></tr>
+</table>
+<p><small>※価格は業界相場（発注ラウンジ、各社公式情報等に基づく目安）</small></p>
+
+
+<!-- ========================================== -->
+<!-- A-3: レセプト点検ツール市場                 -->
+<!-- ========================================== -->
+<h2 class="section-title" id="a3">A-3. レセプト点検ツール市場</h2>
+
+<h3 class="subsection-title">主要製品</h3>
+<table>
+  <tr><th>製品</th><th>特徴</th></tr>
+  <tr>
+    <td>Mighty Checker EX</td>
+    <td>マイティーチェッカーシリーズ累計で全国20,000以上の医療機関導入 <span class="source">[出典: エーアイエス公式]</span></td>
+  </tr>
+  <tr>
+    <td>べてらん君 collaboration Plus</td>
+    <td>1万件を8分で処理 <span class="source">[出典: ウィーメックス ヘルスケアシステムズ公式]</span></td>
+  </tr>
+  <tr>
+    <td>レセプト博士NEO</td>
+    <td>DPC・慢性期・診療所・歯科の4ラインナップ</td>
+  </tr>
+</table>
+
+<h3 class="subsection-title">AI活用動向</h3>
+<ul>
+  <li>AIレセチェッカー（Medical AI LAB社）: 約4,000の点検ルール標準搭載、病名推奨精度が競合比約1.8倍 <span class="source">[出典: Medical AI LAB社発表]</span></li>
+  <li>AI学習型レセプト点検（過去データからパターン検出）</li>
+  <li>査定予測モデルの開発</li>
+</ul>
+
+<h3 class="subsection-title">市場規模（国内）</h3>
+<ul>
+  <li>医療ビッグデータ二次利用ビジネス: 2030年に350億円予測 <span class="source">[出典: 富士経済]</span></li>
+  <li>医療・ヘルスケア・製薬DX関連市場: 2030年に1兆円突破予測 <span class="source">[出典: 富士経済]</span></li>
+</ul>
+
+
+<!-- ========================================== -->
+<!-- A-4: 医療事務の人材市場                     -->
+<!-- ========================================== -->
+<h2 class="section-title" id="a4">A-4. 医療事務の人材市場</h2>
+
+<h3 class="subsection-title">需給状況</h3>
+<ul>
+  <li><strong>有効求人倍率: 1.97倍</strong>（2024年平均） <span class="source">[出典: 厚生労働省 職業別有効求人倍率]</span></li>
+  <li>2030年までの医療・福祉業界人手不足: <strong>187万人</strong> <span class="source">[出典: パーソル総合研究所「労働市場の未来推計2030」]</span></li>
+</ul>
+
+<h3 class="subsection-title">給与水準</h3>
+<table>
+  <tr><th>区分</th><th>金額</th><th>出典</th></tr>
+  <tr>
+    <td>正社員平均</td>
+    <td><strong>年収377万円</strong></td>
+    <td><span class="source">求人ボックス 給料ナビ（2026年1月26日更新）</span></td>
+  </tr>
+  <tr>
+    <td>一般病院勤務</td>
+    <td><strong>年収421.9万円</strong></td>
+    <td><span class="source">厚生労働省 賃金構造基本統計調査 令和6年</span></td>
+  </tr>
+  <tr>
+    <td>一般診療所勤務</td>
+    <td><strong>年収318.6万円</strong></td>
+    <td><span class="source">厚生労働省 賃金構造基本統計調査 令和6年</span></td>
+  </tr>
+  <tr>
+    <td>パート</td>
+    <td><strong>時給1,185円</strong></td>
+    <td><span class="source">求人ボックス 給料ナビ（2026年1月26日更新）</span></td>
+  </tr>
+  <tr>
+    <td>派遣</td>
+    <td><strong>時給1,794円</strong></td>
+    <td><span class="source">求人ボックス 給料ナビ（2026年1月26日更新）</span></td>
+  </tr>
+</table>
+
+<h3 class="subsection-title">離職率</h3>
+<ul>
+  <li>医療・福祉業界: <strong>15.3%</strong> <span class="source">[出典: 厚生労働省 雇用動向調査（令和4年）]</span></li>
+  <li>新卒3年以内離職率（医療・福祉業界、令和3年3月卒）: <strong>高卒49.3%、大卒41.5%</strong> <span class="source">[出典: 厚生労働省「新規学卒就職者の離職状況」]</span>
+    <ul><li>参考: 全産業平均（令和3年3月卒）は高卒38.4%、大卒34.9%</li></ul>
+  </li>
+</ul>
+
+<h3 class="subsection-title">資格体系</h3>
+<ul>
+  <li>診療報酬請求事務能力認定試験（通算平均合格率 <strong>30.1%</strong>） <span class="source">[出典: 公益財団法人 日本医療保険事務協会]</span></li>
+  <li>医療事務管理士技能認定試験</li>
+  <li>メディカルクラーク</li>
+  <li>全80種類以上（すべて民間資格）</li>
+</ul>
+
+
+<!-- ========================================== -->
+<!-- A-5: レセプトBPO市場                       -->
+<!-- ========================================== -->
+<h2 class="section-title" id="a5">A-5. レセプトBPO市場</h2>
+
+<h3 class="subsection-title">市場規模（国内）</h3>
+<ul>
+  <li>医療周辺アウトソーシング5分野合計: <strong>1兆7,030億円</strong>（2018年、前年比+1.2%） <span class="source">[出典: 矢野経済研究所 2019年11月プレスリリース]</span>
+    <ul><li>5分野: 医療事務、滅菌、医療廃棄物処理、病院・福祉施設給食、臨床検査</li></ul>
+  </li>
+  <li>うち医療事務受託: <strong>推定約2,000億円</strong> <span class="source">[出典: ソラスト 2018年6月 IR資料]</span></li>
+  <li>医療事務の外部委託率: <strong>37.2%</strong>（2021年度） <span class="source">[出典: 医療関連サービス振興会「令和3年度医療関連サービス実態調査」]</span></li>
+</ul>
+
+<h3 class="subsection-title">主要プレイヤー</h3>
+<table>
+  <tr><th>企業</th><th>シェア</th><th>契約数</th><th>特徴</th></tr>
+  <tr>
+    <td>ニチイ学館</td>
+    <td><strong>約55%</strong> <span class="source">[出典: ソラスト 2018年IR資料]</span></td>
+    <td>約7,000件（2025年4月時点） <span class="source">[出典: ニチイ公式]</span></td>
+    <td>日本生命グループ。遠隔対応。在宅医療に強み</td>
+  </tr>
+  <tr>
+    <td>ソラスト</td>
+    <td><strong>約25%</strong> <span class="source">[出典: ソラスト 2018年IR資料]</span></td>
+    <td>約1,400以上の医療機関 <span class="source">[出典: ソラスト公式]</span></td>
+    <td>iisyでリモートBPO。1965年創業</td>
+  </tr>
+  <tr>
+    <td>メディカルタクト</td>
+    <td>--</td>
+    <td>--</td>
+    <td>完全リモート。外来1件120円〜 <span class="source">[出典: 公式料金ページ]</span></td>
+  </tr>
+  <tr>
+    <td>パドルシップ</td>
+    <td>--</td>
+    <td>--</td>
+    <td>レセプト点検月額71,500円〜 <span class="source">[出典: 公式サイト]</span></td>
+  </tr>
+</table>
+
+<h3 class="subsection-title">料金体系</h3>
+<table>
+  <tr><th>形態</th><th>料金</th><th>出典</th></tr>
+  <tr>
+    <td>定額制</td>
+    <td>月額49,800円〜（ソラスト iisy レセプト点検プラン）</td>
+    <td><span class="source">ソラスト公式</span></td>
+  </tr>
+  <tr>
+    <td>従量課金</td>
+    <td>外来1件120円〜、最低月額60,000円</td>
+    <td><span class="source">メディカルタクト公式</span></td>
+  </tr>
+  <tr>
+    <td>ハイブリッド</td>
+    <td>基本料 + 従量</td>
+    <td>--</td>
+  </tr>
+</table>
+
+
+<!-- ========================================== -->
+<!-- A-6: 規制・法的要件                         -->
+<!-- ========================================== -->
+<h2 class="section-title" id="a6">A-6. 規制・法的要件</h2>
+
+<h3 class="subsection-title">3省2ガイドライン</h3>
+<ul>
+  <li>医療情報システムの安全管理ガイドライン（厚労省、第6.0版）</li>
+  <li>情報システム提供事業者安全管理ガイドライン（総務省・経産省、第2.0版）</li>
+  <li>個人情報取扱いガイダンス（個情委・厚労省）</li>
+</ul>
+
+<h3 class="subsection-title">外部委託の要件</h3>
+<ul>
+  <li>委託元の監督義務: 適切な選定、契約締結、取扱状況把握</li>
+  <li>認証: プライバシーマーク or ISMS認証</li>
+  <li>医療情報は「要配慮個人情報」に該当</li>
+</ul>
+
+<h3 class="subsection-title">適格性</h3>
+<ul>
+  <li>レセプト業務受託に特定の国家資格は法的には不要</li>
+  <li>実務上は「診療報酬請求事務能力認定試験」合格者配置が信頼性指標</li>
+</ul>
+
+
+<!-- ========================================== -->
+<!-- A-7: 医療機関のペインポイント               -->
+<!-- ========================================== -->
+<h2 class="section-title" id="a7">A-7. 医療機関のペインポイント</h2>
+
+<table>
+  <tr><th>課題</th><th>小規模クリニック</th><th>大病院</th></tr>
+  <tr><td>人材確保</td><td>1〜2名体制で離職=業務停止</td><td>人件費負担大</td></tr>
+  <tr><td>改定対応</td><td>専任スタッフ不在・情報不足</td><td>書類膨大</td></tr>
+  <tr><td>システム</td><td>導入コスト負担、IT人材不在</td><td>大規模更新費用</td></tr>
+  <tr><td>BPOニーズ</td><td><strong>高い</strong>（自前でできない）</td><td>選択的（特定業務切出し）</td></tr>
+  <tr><td>レセプト件数</td><td>月数百件</td><td>月数千〜数万件</td></tr>
+</table>
+
+<h3 class="subsection-title">査定・返戻</h3>
+<ul>
+  <li>査定率の目標値: 0.3%以下、返戻率の目標値: 0.5%以下（業界で広く使われる目安） <span class="source">[出典: 各種医療経営コンサル資料・佐々木総研等]</span></li>
+  <li>再審査請求の復活率は約6割とされる <span class="source">[出典: パドルシップ（メディサポ）解説記事、東京都医師会資料等]</span></li>
+</ul>
+
+
+<!-- ========================================== -->
+<!-- A-8: 技術トレンド・将来展望                 -->
+<!-- ========================================== -->
+<h2 class="section-title" id="a8">A-8. 技術トレンド・将来展望</h2>
+
+<h3 class="subsection-title">直近の動き</h3>
+<ul>
+  <li>2024年12月2日: 紙の健康保険証の新規発行廃止（経過措置として既存保険証は2025年12月1日まで使用可能） <span class="source">[出典: 政府広報オンライン]</span></li>
+  <li><strong>2026年度: 共通算定モジュール本格提供開始予定</strong>（2026年6月施行の診療報酬改定に合わせ段階的導入） <span class="source">[出典: 厚労省「医療DX工程表」]</span></li>
+  <li>2026年度診療報酬改定: 本体 <strong>+3.09%</strong>（2年度平均。2026年度+2.41%、2027年度+3.77%） <span class="source">[出典: 厚労省 2025年12月予算大臣折衝]</span>
+    <ul><li>内訳: 賃上げ+1.70%、物価対応+0.76%、食費等+0.09%、緊急対応+0.44%、適正化-0.15%、通常改定+0.25%</li></ul>
+  </li>
+</ul>
+
+<h3 class="subsection-title">AI・RPA活用</h3>
+<ul>
+  <li>RPA: レセプト転記自動化、算定漏れチェック、医事文書自動作成</li>
+  <li>AI: 自動点検、病名推奨、査定予測</li>
+  <li>生成AI: 音声からのカルテ記載支援</li>
+</ul>
+
+<!-- A群 出典一覧 -->
+<div class="source-list">
+<h4>A群 出典一覧</h4>
+<table>
+  <tr><th>#</th><th>出典</th><th>URL/参照先</th></tr>
+  <tr><td>1</td><td>厚生労働省 賃金構造基本統計調査 令和6年</td><td>https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/</td></tr>
+  <tr><td>2</td><td>求人ボックス 給料ナビ（2026年1月26日更新）</td><td>https://求人ボックス.com/医療事務の年収・時給</td></tr>
+  <tr><td>3</td><td>厚生労働省 職業別有効求人倍率（2024年平均）</td><td>https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/</td></tr>
+  <tr><td>4</td><td>パーソル総合研究所「労働市場の未来推計2030」</td><td>https://rc.persol-group.co.jp/</td></tr>
+  <tr><td>5</td><td>厚生労働省 雇用動向調査（令和4年）</td><td>https://www.mhlw.go.jp/toukei/itiran/roudou/koyou/doukou/</td></tr>
+  <tr><td>6</td><td>厚生労働省「新規学卒就職者の離職状況」</td><td>https://www.mhlw.go.jp/stf/houdou/0000177553_00007.html</td></tr>
+  <tr><td>7</td><td>公益財団法人 日本医療保険事務協会</td><td>https://www.shaho.co.jp/iryojimu/</td></tr>
+  <tr><td>8</td><td>矢野経済研究所（2019年11月プレスリリース）</td><td>https://www.yano.co.jp/press-release/show/press_id/2275</td></tr>
+  <tr><td>9</td><td>ソラスト IR資料（2018年6月）</td><td>https://www.solasto.co.jp/ir/</td></tr>
+  <tr><td>10</td><td>医療関連サービス振興会 令和3年度調査</td><td>https://ikss.net/about/research_list/20220406-2/</td></tr>
+  <tr><td>11</td><td>ニチイ学館 公式サイト</td><td>https://medi.nichiigakkan.co.jp/about/</td></tr>
+  <tr><td>12</td><td>ソラスト iisy公式</td><td>https://www.solasto.co.jp/business/iryou/iisy/</td></tr>
+  <tr><td>13</td><td>メディカルタクト 公式料金ページ</td><td>https://medical-takt.com/plan.html</td></tr>
+  <tr><td>14</td><td>m3.com クリニック向け電子カルテ実態調査（2024年）</td><td>https://clinic.m3.com/</td></tr>
+  <tr><td>15</td><td>MSC（メディシスコ）集計（2026年2月）</td><td>https://www.medisysco.jp/jyoukyo.html</td></tr>
+  <tr><td>16</td><td>矢野経済研究所</td><td>https://note.com/yri_lifescience/</td></tr>
+  <tr><td>17</td><td>エーアイエス公式</td><td>https://www.tais.co.jp/products/mighty-checker-ex/</td></tr>
+  <tr><td>18</td><td>Medical AI LAB社</td><td>https://mediailab.jp/product/</td></tr>
+  <tr><td>19</td><td>富士経済</td><td>有料レポート（プレスリリース経由）</td></tr>
+  <tr><td>20</td><td>政府広報オンライン</td><td>https://www.gov-online.go.jp/article/202407/entry-6238.html</td></tr>
+  <tr><td>21</td><td>厚生労働省「医療DX工程表」（2023年6月）</td><td>https://www.mhlw.go.jp/content/12400000/</td></tr>
+  <tr><td>22</td><td>厚生労働省 2025年12月予算大臣折衝</td><td>https://www.mhlw.go.jp/content/12401000/001620952.pdf</td></tr>
+  <tr><td>23</td><td>社会保険診療報酬支払基金</td><td>https://www.ssk.or.jp/smph/seikyushiharai/iryokikan/rezept_03.html</td></tr>
+  <tr><td>24</td><td>ダイヤモンド・オンライン（2024年）</td><td>https://diamond.jp/articles/-/347214</td></tr>
+  <tr><td>25</td><td>厚生労働省 令和5年医療施設調査</td><td>https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/23/</td></tr>
+</table>
+</div>
+
+
+<!-- ========================================== -->
+<!-- B-1: ターゲット診療科の選定                 -->
+<!-- ========================================== -->
+<h2 class="section-title" id="b1">B-1. ターゲット診療科の選定</h2>
+
+<h3 class="subsection-title">Phase 1で特化すべき診療科 TOP3</h3>
+<table>
+  <tr><th>順位</th><th>診療科</th><th>推奨理由</th></tr>
+  <tr>
+    <td><strong>1位</strong></td>
+    <td><strong>在宅医療・訪問診療</strong></td>
+    <td>複雑度最高、算定漏れ最多。日本の在宅医療市場は2024年272億米ドル→2033年546億米ドル（CAGR 8.1%）と予測 <span class="source">[出典: IMARC Group]</span>。在宅専門BPOはニチイ以外ほぼ不在</td>
+  </tr>
+  <tr>
+    <td><strong>2位</strong></td>
+    <td><strong>精神科・心療内科</strong></td>
+    <td>精神疾患患者数が2002年258万人→2020年615万人と約2.4倍に増加 <span class="source">[出典: 厚労省「患者調査」]</span>。精神科特化BPOがほぼ不在。時間管理ルール独特で算定ミス多い</td>
+  </tr>
+  <tr>
+    <td><strong>3位</strong></td>
+    <td><strong>整形外科</strong></td>
+    <td>リハビリ算定が複雑（単位管理・部位選択・日数上限）。無資格事務員の「なんとなく算定」が横行</td>
+  </tr>
+</table>
+
+<h3 class="subsection-title">診療科別比較</h3>
+<table>
+  <tr><th>診療科</th><th>複雑度</th><th>施設数（一般診療所）</th><th>BPO化</th><th>算定漏れ</th><th>成長性</th><th>既存BPO参入</th></tr>
+  <tr>
+    <td>在宅医療</td><td>★★★★★</td><td>急拡大中</td><td>高</td><td>非常に高</td><td>★★★★★</td><td>ニチイのみ</td>
+  </tr>
+  <tr>
+    <td>精神科</td><td>★★★★☆</td><td>拡大中</td><td>中〜高</td><td>高い</td><td>★★★★☆</td><td>ほぼ不在</td>
+  </tr>
+  <tr>
+    <td>整形外科</td><td>★★★★☆</td><td>多い</td><td>中</td><td>高い</td><td>★★★☆☆</td><td>中程度</td>
+  </tr>
+  <tr>
+    <td>内科</td><td>★★★☆☆</td><td>64,747 <span class="source">[出典: 厚労省 令和5年医療施設調査]</span></td><td>高</td><td>中〜高</td><td>★★★☆☆</td><td>レッドオーシャン</td>
+  </tr>
+  <tr>
+    <td>歯科</td><td>★★★☆☆</td><td>66,818（歯科診療所） <span class="source">[出典: 同上]</span></td><td>低〜中</td><td>中</td><td>★★★☆☆</td><td>歯科専業あり</td>
+  </tr>
+  <tr>
+    <td>小児科</td><td>★★★☆☆</td><td>17,778 <span class="source">[出典: 同上]</span></td><td>中</td><td>中</td><td>★★☆☆☆</td><td>低</td>
+  </tr>
+  <tr>
+    <td>皮膚科</td><td>★★☆☆☆</td><td>増加中</td><td>低</td><td>低</td><td>美容は高だがレセプト対象外</td><td>低</td>
+  </tr>
+  <tr>
+    <td>眼科</td><td>★★★☆☆</td><td>中</td><td>中</td><td>中</td><td>★★★☆☆</td><td>低</td>
+  </tr>
+</table>
+<p><small>※施設数は厚生労働省「令和5年（2023年）医療施設（静態・動態）調査」に基づく。内科・小児科は一般診療所のうち当該科を標榜する施設数。</small></p>
+
+
+<!-- ========================================== -->
+<!-- B-2: 診療報酬改定の詳細分析                 -->
+<!-- ========================================== -->
+<h2 class="section-title" id="b2">B-2. 診療報酬改定の詳細分析</h2>
+
+<h3 class="subsection-title">2024年度改定（本体+0.88%）</h3>
+<p><span class="source">[出典: 厚労省 2023年12月予算大臣折衝]</span></p>
+<ul>
+  <li>全体改定率は-0.12%（薬価等引下げ含む）。本体は引上げ+1.13%、適正化-0.25%の差し引きで+0.88%</li>
+  <li>生活習慣病管理の大幅見直し（内科に年間約223万円の減収インパクト）</li>
+  <li>在宅医療の在総管・施入管を細分化</li>
+  <li>精神科の早期診療体制充実加算新設</li>
+  <li>ベースアップ評価料で賃上げ対応</li>
+</ul>
+
+<h3 class="subsection-title">2026年度改定（本体+3.09%、30年ぶりの高水準）</h3>
+<p><span class="source">[出典: 厚労省 2025年12月予算大臣折衝]</span></p>
+<ul>
+  <li>2年度平均3.09%（2026年度+2.41%、2027年度+3.77%）</li>
+  <li>内訳: 賃上げ+1.70%、物価対応+0.76%、食費等+0.09%、緊急対応+0.44%、適正化-0.15%、通常改定+0.25%</li>
+  <li>急性期入院の大幅再編（急性期病院A/B新設）</li>
+  <li>共通算定モジュールの運用開始（2026年6月施行〜）</li>
+  <li>ベースアップ評価料: 初診6点→17点に引き上げ</li>
+</ul>
+
+<h3 class="subsection-title">BPO事業へのインパクト</h3>
+<ul>
+  <li>改定複雑化がBPO需要を押し上げ</li>
+  <li>算定漏れリスク増大 → 「算定最適化」が価値訴求</li>
+  <li>DX加算取得支援の新サービス機会</li>
+</ul>
+
+
+<!-- ========================================== -->
+<!-- B-3: 共通算定モジュール                     -->
+<!-- ========================================== -->
+<h2 class="section-title" id="b3">B-3. 共通算定モジュール</h2>
+
+<h3 class="subsection-title">スケジュール</h3>
+<p><span class="source">[出典: 厚労省「医療DX工程表」2023年6月]</span></p>
+<ul>
+  <li>2026年6月: 2026年度診療報酬改定施行に合わせ本格提供開始（小〜中規模病院から）</li>
+  <li>2027年頃: レセプト作成・提出の請求支援機能完成</li>
+  <li>2027年度〜: 対象施設の段階的拡大</li>
+</ul>
+
+<h3 class="subsection-title">BPO事業への影響</h3>
+<table>
+  <tr><th>影響</th><th>内容</th></tr>
+  <tr><td><strong>ポジティブ</strong></td><td>データ標準化でBPO効率化、移行期の需要増大</td></tr>
+  <tr><td><strong>ネガティブ</strong></td><td>単純な点検の価値低下、参入障壁の低下</td></tr>
+</table>
+
+<h3 class="subsection-title">対応策</h3>
+<ul>
+  <li>「算定最適化コンサルティング」への高度化</li>
+  <li>施設基準管理・届出支援の強化</li>
+  <li>診療科特化型の専門性強化</li>
+</ul>
+
+
+<!-- ========================================== -->
+<!-- B-4: 地域別分析                             -->
+<!-- ========================================== -->
+<h2 class="section-title" id="b4">B-4. 地域別分析</h2>
+
+<h3 class="subsection-title">推奨進出順序</h3>
+<table>
+  <tr><th>Phase</th><th>エリア</th><th>理由</th></tr>
+  <tr><td>Phase 1</td><td>東京・神奈川・埼玉</td><td>医療機関数最大。在宅クリニック新規開業集中</td></tr>
+  <tr><td>Phase 2</td><td>大阪・兵庫・福岡</td><td>第2ティア。福岡は病院密度トップクラス</td></tr>
+  <tr><td>Phase 3</td><td>地方中核都市</td><td>人材不足深刻化タイミングで進出</td></tr>
+  <tr><td>Phase 4</td><td>地方全域</td><td>リモートBPO実績を武器に全国展開</td></tr>
+</table>
+
+<h3 class="subsection-title">レセプトBPOのコア業務はオンライン完結可能</h3>
+<ul>
+  <li>ニチイ「NichiiConnect」、ソラスト「iisy」が既に遠隔実証済み</li>
+  <li>ただし営業活動は対面の信頼構築が重要</li>
+</ul>
+
+<!-- B群 出典一覧 -->
+<div class="source-list">
+<h4>B群 出典一覧（B-1〜B-8）</h4>
+<table>
+  <tr><th>#</th><th>出典</th><th>URL/参照先</th></tr>
+  <tr><td>1</td><td>厚生労働省 令和5年医療施設調査</td><td>https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/23/</td></tr>
+  <tr><td>2</td><td>厚生労働省 患者調査</td><td>https://www.mhlw.go.jp/toukei/saikin/hw/kanja/</td></tr>
+  <tr><td>3</td><td>IMARC Group "Japan Home Healthcare Market"</td><td>https://www.imarcgroup.com/japan-home-healthcare-market</td></tr>
+  <tr><td>4</td><td>厚労省 2023年12月 予算大臣折衝（2024年度改定）</td><td>https://gemmed.ghc-j.com/?p=58412</td></tr>
+  <tr><td>5</td><td>厚労省 2025年12月 予算大臣折衝（2026年度改定）</td><td>https://www.mhlw.go.jp/content/12401000/001620952.pdf</td></tr>
+  <tr><td>6</td><td>厚労省「医療DX工程表」（2023年6月）</td><td>https://www.mhlw.go.jp/content/12404000/001129862.pdf</td></tr>
+  <tr><td>7</td><td>MSC（メディシスコ）ORCA導入状況（2026年2月）</td><td>https://www.medisysco.jp/jyoukyo.html</td></tr>
+  <tr><td>8</td><td>エムスリーデジカル 公式料金ページ</td><td>https://digikar.m3.com/pricing</td></tr>
+  <tr><td>9</td><td>ソラスト iisy レセプト点検プラン</td><td>https://www.solasto.co.jp/business/iryou/iisy/receipt-inspection/</td></tr>
+  <tr><td>10</td><td>ソラスト ニュースリリース（iisy 100件突破）</td><td>https://www.solasto.co.jp/news/iisydx100/</td></tr>
+  <tr><td>11</td><td>ニチイ学館 NichiiConnect公式</td><td>https://medi.nichiigakkan.co.jp/service/medical/nichiiconnect/</td></tr>
+  <tr><td>12</td><td>ニチイ学館「ニチイの強み」</td><td>https://medi.nichiigakkan.co.jp/about/</td></tr>
+  <tr><td>13</td><td>メディカルタクト 料金プラン</td><td>https://medical-takt.com/plan.html</td></tr>
+</table>
+</div>
+
+
+<!-- ========================================== -->
+<!-- B-5: レセコン別BPO適性                     -->
+<!-- ========================================== -->
+<h2 class="section-title" id="b5">B-5. レセコン別BPO適性</h2>
+
+<table>
+  <tr><th>レセコン</th><th>BPO適性</th><th>主な理由</th></tr>
+  <tr>
+    <td>ORCA</td>
+    <td>★★★★★</td>
+    <td>OSS、API公開、WebORCAクラウド版、BPO実績多数。約18,170施設が導入 <span class="source">[出典: MSC 2026年2月集計]</span></td>
+  </tr>
+  <tr>
+    <td>エムスリーデジカル</td>
+    <td>★★★★☆</td>
+    <td>完全クラウド。レセコン単体月額14,800円〜、一体型月額24,800円〜（税抜） <span class="source">[出典: 公式料金ページ]</span>。BPO実績あり</td>
+  </tr>
+  <tr>
+    <td>CLINICS</td>
+    <td>★★★★☆</td>
+    <td>完全クラウド、ORCA内包、BPO実績あり</td>
+  </tr>
+  <tr>
+    <td>Medicom</td>
+    <td>★★★☆☆</td>
+    <td>Cloud Connect APIあるがベンダー交渉必要</td>
+  </tr>
+  <tr>
+    <td>富士通 HOPE</td>
+    <td>★★☆☆☆</td>
+    <td>病院向け中心、クラウド化進行中</td>
+  </tr>
+  <tr>
+    <td>NEC MegaOak</td>
+    <td>★★☆☆☆</td>
+    <td>病院向け、FHIR対応先進的だがBPO未整備</td>
+  </tr>
+</table>
+
+<div class="highlight-box">
+  <strong>Phase 1対応ターゲット</strong>: ORCA / エムスリーデジカル / CLINICS
+</div>
+
+
+<!-- ========================================== -->
+<!-- B-6: クラウドセキュリティ要件               -->
+<!-- ========================================== -->
+<h2 class="section-title" id="b6">B-6. クラウドセキュリティ要件</h2>
+
+<h3 class="subsection-title">3省2ガイドライン準拠の要件</h3>
+<ul>
+  <li>TLS 1.2以上、AES-256暗号化</li>
+  <li>多要素認証、RBAC、最小権限の原則</li>
+  <li>アクセスログ6年間保存</li>
+  <li>国内データ保管が強く推奨</li>
+</ul>
+
+<h3 class="subsection-title">クラウド基盤の選択</h3>
+<table>
+  <tr><th>プラットフォーム</th><th>特徴</th></tr>
+  <tr><td><strong>AWS</strong></td><td>医療向けリファレンス最充実。ISMAP認定済み</td></tr>
+  <tr><td><strong>Azure</strong></td><td>Medicom採用実績。499項目中325項目対応済み</td></tr>
+  <tr><td><strong>GCP</strong></td><td>PwC Japan作成リファレンスあり</td></tr>
+</table>
+
+<h3 class="subsection-title">VPN vs ゼロトラスト</h3>
+<ul>
+  <li>現時点はVPNが実務的選択（ソラストもソフトバンクVPN採用）</li>
+  <li>中長期的にはゼロトラスト移行を視野に</li>
+</ul>
+
+
+<!-- ========================================== -->
+<!-- B-7: 先行事例詳細                           -->
+<!-- ========================================== -->
+<h2 class="section-title" id="b7">B-7. 先行事例詳細</h2>
+
+<h3 class="subsection-title">ソラスト iisy</h3>
+<p><span class="source">[出典: ソラスト公式]</span></p>
+<ul>
+  <li>月額49,800円〜（税抜、レセプト点検プラン、最低契約期間3ヶ月） <span class="source">[出典: ソラスト iisy公式料金ページ]</span></li>
+  <li>2021年6月サービス開始、2022年3月に100件突破（約10ヶ月） <span class="source">[出典: ソラスト ニュースリリース]</span></li>
+  <li>ソフトバンクのVPN基盤</li>
+  <li>ほぼ全てのレセコン対応</li>
+  <li>ORCA管理機構と資本業務提携</li>
+</ul>
+
+<h3 class="subsection-title">ニチイ NichiiConnect</h3>
+<p><span class="source">[出典: ニチイ学館公式]</span></p>
+<ul>
+  <li>NTT東日本との協業</li>
+  <li>在宅医療・訪問診療のレセプト代行に強み</li>
+  <li>クラウド型電カル・医事コンのみ対応</li>
+  <li>全国約6,000施設（2025年3月末時点） <span class="source">[出典: ニチイ NichiiConnect公式ページ]</span></li>
+  <li>ニチイの医療事業全体では約7,000件の契約基盤（2025年4月時点） <span class="source">[出典: ニチイ公式「ニチイの強み」]</span></li>
+</ul>
+
+<h3 class="subsection-title">メディカルタクト</h3>
+<p><span class="source">[出典: メディカルタクト公式料金ページ]</span></p>
+<table>
+  <tr><th>項目</th><th>料金</th></tr>
+  <tr><td>外来（点検のみ）</td><td>120円〜/件</td></tr>
+  <tr><td>在宅</td><td>1,200円〜/件</td></tr>
+  <tr><td>算定業務含む</td><td>240円〜/件</td></tr>
+  <tr><td>最低月額</td><td>60,000円（税別）</td></tr>
+</table>
+<ul>
+  <li>完全リモート・全国対応</li>
+</ul>
+
+<h3 class="subsection-title">新興: リメディカ（ユカリア子会社）</h3>
+<ul>
+  <li>2025年4月設立。AI・RPA・AI-OCR活用</li>
+  <li>医療+介護の両方をカバー</li>
+</ul>
+
+
+<!-- ========================================== -->
+<!-- B-8: 医療機関の意思決定プロセス             -->
+<!-- ========================================== -->
+<h2 class="section-title" id="b8">B-8. 医療機関の意思決定プロセス</h2>
+
+<h3 class="subsection-title">規模別リードタイム</h3>
+<table>
+  <tr><th>規模</th><th>リードタイム</th><th>意思決定者</th></tr>
+  <tr><td>小規模クリニック</td><td>1〜3ヶ月</td><td>院長が直接判断</td></tr>
+  <tr><td>中規模病院</td><td>3〜6ヶ月</td><td>事務長起案→院長決裁</td></tr>
+  <tr><td>大規模病院</td><td>6ヶ月〜1年</td><td>入札・プロポーザル</td></tr>
+</table>
+
+<h3 class="subsection-title">最強チャネル: 口コミ・紹介</h3>
+<ul>
+  <li>医師同士の紹介が最強。1件の成功事例→5〜10件の紹介可能性</li>
+  <li>FAXDM→テレアポの2段階戦略が医療業界では有効</li>
+  <li>展示会（メディカルジャパン等）での名刺交換→フォローアップ</li>
+</ul>
+
+<h3 class="subsection-title">営業NG行為</h3>
+<ul>
+  <li>診療時間中の電話・訪問</li>
+  <li>初回から院長への取り次ぎ要求</li>
+  <li>セキュリティ意識の低い発言</li>
+  <li>他院の名前を許可なく出す</li>
+</ul>
+
+
+<!-- ========================================== -->
+<!-- C-1: AI点検ツール Build vs Buy             -->
+<!-- ========================================== -->
+<h2 class="section-title" id="c1">C-1. AI点検ツール Build vs Buy</h2>
+
+<h3 class="subsection-title">既製品の選択肢</h3>
+<table>
+  <tr><th>製品</th><th>月額</th><th>AI機能</th><th>BPO導入可否</th></tr>
+  <tr>
+    <td>チェックアイDX（ニチイ）</td>
+    <td>8,000円（有床診療所の場合、初期費用48,000円） <span class="source">[出典: ニチイ公式]</span></td>
+    <td>あり（AI病名推奨）</td>
+    <td>要確認（競合注意）</td>
+  </tr>
+  <tr>
+    <td>Mighty Checker Cloud</td>
+    <td>基本5,500円＋従量課金（上限15,000円）（税抜） <span class="source">[出典: エーアイエス公式]</span></td>
+    <td>あり</td>
+    <td>クリニック単位ライセンス</td>
+  </tr>
+  <tr>
+    <td>べてらん君 collaboration Plus</td>
+    <td>要問合せ <span class="source">[出典: 公式は個別見積り]</span></td>
+    <td>あり（スマートチェック）</td>
+    <td>要個別交渉</td>
+  </tr>
+  <tr>
+    <td>AIレセチェッカー（Medical AI LAB）</td>
+    <td>要問合せ</td>
+    <td>最先進的（約4,000点検ルール、病名推奨精度 競合比約1.8倍） <span class="source">[出典: Medical AI LAB社発表]</span></td>
+    <td>要交渉</td>
+  </tr>
+</table>
+
+<h3 class="subsection-title">自社開発コスト概算</h3>
+<table>
+  <tr><th>Phase</th><th>内容</th><th>費用</th><th>期間</th></tr>
+  <tr><td>Phase 1</td><td>UKEパーサー+ルールベース</td><td>500〜800万円</td><td>3〜4ヶ月</td></tr>
+  <tr><td>Phase 2</td><td>AI学習モデル</td><td>800〜1,500万円</td><td>4〜6ヶ月</td></tr>
+  <tr><td>Phase 3</td><td>本番運用</td><td>400〜600万円</td><td>2〜3ヶ月</td></tr>
+  <tr><td><strong>合計</strong></td><td>--</td><td><strong>1,700〜2,900万円</strong></td><td><strong>9〜13ヶ月</strong></td></tr>
+</table>
+<p><small>※開発コストは類似プロジェクトの相場に基づく概算。実際は要件・体制により変動。</small></p>
+
+<h3 class="subsection-title">推奨: Buy-then-Build戦略</h3>
+<ul>
+  <li><strong>Year 1</strong>: 既製品採用（月額5,500〜15,000円）でオペレーション立ち上げ</li>
+  <li><strong>Year 1〜2</strong>: UKEパーサー+ルールベースエンジンをPoC開発</li>
+  <li><strong>Year 2〜3</strong>: 自社AIに段階的移行、差別化</li>
+</ul>
+
+
+<!-- ========================================== -->
+<!-- C-2: 人材採用・育成モデル                   -->
+<!-- ========================================== -->
+<h2 class="section-title" id="c2">C-2. 人材採用・育成モデル</h2>
+
+<h3 class="subsection-title">給与設定（自社の設定案）</h3>
+<table>
+  <tr><th>区分</th><th>金額</th></tr>
+  <tr><td>正社員（未経験）</td><td>月給22万円〜</td></tr>
+  <tr><td>正社員（経験者）</td><td>月給25万円〜</td></tr>
+  <tr><td>パート</td><td>時給1,200〜1,350円</td></tr>
+  <tr><td>リモート業務委託</td><td>150円/件+品質インセンティブ</td></tr>
+</table>
+<p><small>※参考: 医療事務の市場平均は正社員年収377万円（月給約31万円） <span class="source">[出典: 求人ボックス 2026年1月]</span>、パート時給1,185円 <span class="source">[出典: 同]</span></small></p>
+
+<h3 class="subsection-title">教育プログラム</h3>
+<table>
+  <tr><th>ステップ</th><th>期間</th><th>内容</th></tr>
+  <tr><td>1. 基礎研修</td><td>2週間</td><td>制度概論、UKE構造、ツール操作</td></tr>
+  <tr><td>2. 実務研修</td><td>2週間</td><td>サンプル点検、エラーパターン学習</td></tr>
+  <tr><td>3. OJT</td><td>1〜2ヶ月</td><td>ペア点検</td></tr>
+  <tr><td>4. 専門化</td><td>3ヶ月〜</td><td>診療科別専門研修</td></tr>
+</table>
+
+<h3 class="subsection-title">キャリアパス</h3>
+<div class="flow-diagram">点検スタッフ → シニア（2〜3年）→ 品質管理リーダー（3〜5年）→ コンサルタント（5年〜）</div>
+
+
+<!-- ========================================== -->
+<!-- C-5: 料金シミュレーション                   -->
+<!-- ========================================== -->
+<h2 class="section-title" id="c5">C-5. 料金シミュレーション</h2>
+
+<h3 class="subsection-title">パターン別シミュレーション</h3>
+<table>
+  <tr><th>パターン</th><th>月間件数</th><th>月額売上</th><th>原価</th><th>粗利率</th></tr>
+  <tr>
+    <td>A: 小規模クリニック</td><td>300件</td><td>4.5〜6万円</td><td>2.2〜3万円</td><td>50〜51%</td>
+  </tr>
+  <tr>
+    <td>B: 在宅医療</td><td>150件</td><td>9〜18万円</td><td>3.7〜5.5万円</td><td><strong>59〜69%</strong></td>
+  </tr>
+  <tr>
+    <td>C: 中規模病院</td><td>2,000件</td><td>25〜40万円</td><td>11.8〜17.3万円</td><td>53〜57%</td>
+  </tr>
+</table>
+
+<div class="highlight-box">
+  <strong>在宅医療が最も高粗利セグメント</strong>
+</div>
+
+<p><small>※料金設定は競合比較（ソラスト iisy 49,800円〜 <span class="source">[出典: ソラスト公式]</span>、メディカルタクト 120円〜/件 <span class="source">[出典: メディカルタクト公式]</span>）に基づく試算。</small></p>
+
+<h3 class="subsection-title">成果連動型</h3>
+<ul>
+  <li>レベニューシェア率: 改善による増収分の20〜30%</li>
+  <li><strong>ハイブリッド推奨</strong>: 基本料（月額固定）+ 成果連動（増収シェア）</li>
+</ul>
+
+
+<!-- ========================================== -->
+<!-- C-7: パイロット顧客戦略                     -->
+<!-- ========================================== -->
+<h2 class="section-title" id="c7">C-7. パイロット顧客戦略</h2>
+
+<h3 class="subsection-title">理想のパイロット顧客</h3>
+<ul>
+  <li>無床診療所〜19床、月間200〜500件</li>
+  <li>在宅医療 or 内科 or 整形外科</li>
+  <li>レセプト担当が1人で属人化している</li>
+  <li>クラウド型レセコン導入済み</li>
+</ul>
+
+<h3 class="subsection-title">パイロット運用設計</h3>
+<table>
+  <tr><th>項目</th><th>内容</th></tr>
+  <tr><td>初期割引</td><td>初月無償 + 2〜3ヶ月目50%割引</td></tr>
+  <tr><td>点検方法</td><td>全件点検（サンプリングではなく全量）</td></tr>
+  <tr><td>フィードバック</td><td>週1回のフィードバックMTG（初月）</td></tr>
+  <tr><td>目標転換率</td><td>70%以上</td></tr>
+</table>
+
+<h3 class="subsection-title">獲得チャネル（優先順）</h3>
+<ol>
+  <li>既存BPOクライアント（p006/p008）からのクロスセル</li>
+  <li>税理士・社労士ネットワークからの紹介</li>
+  <li>展示会・セミナー</li>
+  <li>Web集客・比較サイト掲載</li>
+</ol>
+
+
+<!-- ========================================== -->
+<!-- C-8: 3年PL策定材料                         -->
+<!-- ========================================== -->
+<h2 class="section-title" id="c8">C-8. 3年PL策定材料</h2>
+
+<h3 class="subsection-title">初期投資: 約225〜510万円</h3>
+<table>
+  <tr><th>項目</th><th>費用</th><th>備考</th></tr>
+  <tr>
+    <td>Pマーク取得</td>
+    <td>60〜130万円</td>
+    <td>JIPDEC審査費用（約30万円）+ コンサルティング費用（30〜100万円） <span class="source">[出典: JIPDEC公式、LRM社等の市場相場]</span></td>
+  </tr>
+  <tr>
+    <td>E&amp;O保険</td>
+    <td>年50〜80万円</td>
+    <td>業界相場（BPO事業者向け賠償責任保険）</td>
+  </tr>
+  <tr>
+    <td>点検ツール</td>
+    <td>5〜50万円/年</td>
+    <td>Mighty Checker Cloud 月額5,500〜15,000円 <span class="source">[出典: エーアイエス公式]</span></td>
+  </tr>
+  <tr>
+    <td>採用費</td>
+    <td>60〜150万円</td>
+    <td>人材紹介手数料・求人広告の相場</td>
+  </tr>
+  <tr>
+    <td>Web・営業資料</td>
+    <td>50〜100万円</td>
+    <td>制作費の相場</td>
+  </tr>
+</table>
+
+<h3 class="subsection-title">3年PL概算（保守的試算）</h3>
+<table>
+  <tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th></tr>
+  <tr><td>期末顧客数</td><td>10</td><td>30</td><td>80</td></tr>
+  <tr><td>年間売上</td><td>480万円</td><td>1,920万円</td><td>5,280万円</td></tr>
+  <tr><td>粗利</td><td>264万円</td><td>1,056万円</td><td>2,904万円</td></tr>
+  <tr><td>固定費</td><td>1,120万円</td><td>1,930万円</td><td>3,700万円</td></tr>
+  <tr><td><strong>営業利益</strong></td><td><strong>-856万円</strong></td><td><strong>-874万円</strong></td><td><strong>-796万円</strong></td></tr>
+</table>
+<p><small>※前提: 顧客単価月80,000円（在宅医療中心）、粗利率55%で試算</small></p>
+
+<h3 class="subsection-title">損益分岐点</h3>
+<div class="highlight-box">
+  <strong>月間顧客数約15施設（月間売上120万円）</strong>でBEP<br>
+  Year 2後半〜Year 3前半での達成が現実的
+</div>
+
+<h3 class="subsection-title">加速策</h3>
+<ul>
+  <li>在宅特化で単価UP（8万→15万円）</li>
+  <li>既存BPOクロスセルでCAC大幅削減</li>
+  <li>成果連動型の上乗せ（+20〜30%）</li>
+</ul>
+
+<h3 class="subsection-title">ユニットエコノミクス</h3>
+<table>
+  <tr><th>指標</th><th>数値</th></tr>
+  <tr><td>顧客単価</td><td>月80,000円</td></tr>
+  <tr><td>CAC</td><td>30万円（クロスセルなら10万円以下）</td></tr>
+  <tr><td>LTV</td><td>400万円（LTV/CAC比 13.3倍）</td></tr>
+  <tr><td>CAC回収期間</td><td>6.8ヶ月</td></tr>
+</table>
+<p><small>※LTV算出前提: 平均契約期間50ヶ月（約4年）、月額80,000円</small></p>
+
+<!-- C群 出典一覧 -->
+<div class="source-list">
+<h4>C群 出典一覧（C-1〜C-8）</h4>
+<table>
+  <tr><th>#</th><th>出典</th><th>URL/参照先</th></tr>
+  <tr><td>1</td><td>ニチイ学館 チェックアイDX公式</td><td>https://medi.nichiigakkan.co.jp/service/medical/checkeye_dx/</td></tr>
+  <tr><td>2</td><td>エーアイエス Mighty Checker Cloud公式</td><td>https://mcc.ais-cloud.com/</td></tr>
+  <tr><td>3</td><td>Medical AI LAB AIレセチェッカー</td><td>https://mediailab.jp/product/</td></tr>
+  <tr><td>4</td><td>求人ボックス 給料ナビ（2026年1月更新）</td><td>https://求人ボックス.com/</td></tr>
+  <tr><td>5</td><td>ソラスト iisy公式料金</td><td>https://www.solasto.co.jp/business/iryou/iisy/receipt-inspection/</td></tr>
+  <tr><td>6</td><td>メディカルタクト 料金プラン</td><td>https://medical-takt.com/plan.html</td></tr>
+  <tr><td>7</td><td>JIPDEC プライバシーマーク費用</td><td>https://privacymark.jp/p-application/cost/index.html</td></tr>
+</table>
+</div>
+
+
+<!-- ========================================== -->
+<!-- 出典一覧（全出典の統合リスト）             -->
+<!-- ========================================== -->
+<h2 class="section-title" id="sources">出典一覧（全出典の統合リスト）</h2>
+
+<h3 class="subsection-title">政府・公的機関</h3>
+<table>
+  <tr><th>#</th><th>出典</th><th>内容</th><th>URL/参照先</th></tr>
+  <tr><td>1</td><td>厚生労働省 賃金構造基本統計調査 令和6年</td><td>医療事務給与データ</td><td>https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/</td></tr>
+  <tr><td>2</td><td>厚生労働省 職業別有効求人倍率（2024年平均）</td><td>医療関係職の求人倍率</td><td>https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/</td></tr>
+  <tr><td>3</td><td>厚生労働省 雇用動向調査（令和4年）</td><td>産業別離職率</td><td>https://www.mhlw.go.jp/toukei/itiran/roudou/koyou/doukou/</td></tr>
+  <tr><td>4</td><td>厚生労働省「新規学卒就職者の離職状況」</td><td>新卒3年以内離職率</td><td>https://www.mhlw.go.jp/stf/houdou/0000177553_00007.html</td></tr>
+  <tr><td>5</td><td>厚生労働省 令和5年医療施設調査</td><td>診療科別施設数</td><td>https://www.mhlw.go.jp/toukei/saikin/hw/iryosd/23/</td></tr>
+  <tr><td>6</td><td>厚生労働省 患者調査</td><td>精神疾患患者数推移</td><td>https://www.mhlw.go.jp/toukei/saikin/hw/kanja/</td></tr>
+  <tr><td>7</td><td>厚労省 2023年12月 予算大臣折衝</td><td>2024年度診療報酬改定率</td><td>https://gemmed.ghc-j.com/?p=58412</td></tr>
+  <tr><td>8</td><td>厚労省 2025年12月 予算大臣折衝</td><td>2026年度診療報酬改定率</td><td>https://www.mhlw.go.jp/content/12401000/001620952.pdf</td></tr>
+  <tr><td>9</td><td>厚労省「医療DX工程表」（2023年6月）</td><td>共通算定モジュールスケジュール</td><td>https://www.mhlw.go.jp/content/12404000/001129862.pdf</td></tr>
+  <tr><td>10</td><td>政府広報オンライン</td><td>健康保険証廃止スケジュール</td><td>https://www.gov-online.go.jp/article/202407/entry-6238.html</td></tr>
+  <tr><td>11</td><td>社会保険診療報酬支払基金</td><td>オンライン請求義務化・事業統計</td><td>https://www.ssk.or.jp/smph/seikyushiharai/iryokikan/rezept_03.html</td></tr>
+  <tr><td>12</td><td>公益財団法人 日本医療保険事務協会</td><td>認定試験合格率</td><td>https://www.shaho.co.jp/iryojimu/</td></tr>
+  <tr><td>13</td><td>JIPDEC プライバシーマーク費用</td><td>Pマーク審査費用</td><td>https://privacymark.jp/p-application/cost/index.html</td></tr>
+</table>
+
+<h3 class="subsection-title">調査会社・シンクタンク</h3>
+<table>
+  <tr><th>#</th><th>出典</th><th>内容</th><th>URL/参照先</th></tr>
+  <tr><td>14</td><td>矢野経済研究所（2019年11月プレスリリース）</td><td>医療周辺アウトソーシング市場規模</td><td>https://www.yano.co.jp/press-release/show/press_id/2275</td></tr>
+  <tr><td>15</td><td>矢野経済研究所</td><td>中小規模病院向け電カルのクラウド比率予測</td><td>https://note.com/yri_lifescience/</td></tr>
+  <tr><td>16</td><td>パーソル総合研究所「労働市場の未来推計2030」</td><td>医療・福祉業界の人手不足予測</td><td>https://rc.persol-group.co.jp/</td></tr>
+  <tr><td>17</td><td>富士経済</td><td>医療ビッグデータ・DX市場予測</td><td>有料レポート（プレスリリース経由）</td></tr>
+  <tr><td>18</td><td>IMARC Group "Japan Home Healthcare Market"</td><td>在宅医療市場規模予測</td><td>https://www.imarcgroup.com/japan-home-healthcare-market</td></tr>
+</table>
+
+<h3 class="subsection-title">企業・サービス</h3>
+<table>
+  <tr><th>#</th><th>出典</th><th>内容</th><th>URL/参照先</th></tr>
+  <tr><td>19</td><td>ソラスト IR資料（2018年6月）</td><td>医療事務受託市場シェア</td><td>https://www.solasto.co.jp/ir/</td></tr>
+  <tr><td>20</td><td>ソラスト iisy公式</td><td>サービス料金・実績</td><td>https://www.solasto.co.jp/business/iryou/iisy/</td></tr>
+  <tr><td>21</td><td>ソラスト iisy レセプト点検プラン</td><td>料金詳細</td><td>https://www.solasto.co.jp/business/iryou/iisy/receipt-inspection/</td></tr>
+  <tr><td>22</td><td>ソラスト ニュースリリース（iisy 100件突破）</td><td>サービス成長実績</td><td>https://www.solasto.co.jp/news/iisydx100/</td></tr>
+  <tr><td>23</td><td>ニチイ学館 公式サイト</td><td>契約施設数</td><td>https://medi.nichiigakkan.co.jp/about/</td></tr>
+  <tr><td>24</td><td>ニチイ学館 NichiiConnect公式</td><td>リモートBPOサービス</td><td>https://medi.nichiigakkan.co.jp/service/medical/nichiiconnect/</td></tr>
+  <tr><td>25</td><td>ニチイ学館 チェックアイDX公式</td><td>AI点検ツール料金</td><td>https://medi.nichiigakkan.co.jp/service/medical/checkeye_dx/</td></tr>
+  <tr><td>26</td><td>メディカルタクト 公式料金ページ</td><td>料金プラン</td><td>https://medical-takt.com/plan.html</td></tr>
+  <tr><td>27</td><td>エーアイエス公式</td><td>Mighty Checkerシリーズ導入実績</td><td>https://www.tais.co.jp/products/mighty-checker-ex/</td></tr>
+  <tr><td>28</td><td>エーアイエス Mighty Checker Cloud公式</td><td>クラウド版料金</td><td>https://mcc.ais-cloud.com/</td></tr>
+  <tr><td>29</td><td>Medical AI LAB社</td><td>AIレセチェッカーの機能・精度</td><td>https://mediailab.jp/product/</td></tr>
+  <tr><td>30</td><td>m3.com クリニック向け電子カルテ実態調査（2024年）</td><td>電子カルテ購入シェア</td><td>https://clinic.m3.com/</td></tr>
+  <tr><td>31</td><td>エムスリーデジカル 公式料金ページ</td><td>レセコン料金</td><td>https://digikar.m3.com/pricing</td></tr>
+  <tr><td>32</td><td>MSC（メディシスコ）集計（2026年2月）</td><td>ORCA導入施設数</td><td>https://www.medisysco.jp/jyoukyo.html</td></tr>
+  <tr><td>33</td><td>求人ボックス 給料ナビ（2026年1月26日更新）</td><td>医療事務の給与相場</td><td>https://求人ボックス.com/医療事務の年収・時給</td></tr>
+</table>
+
+<h3 class="subsection-title">業界団体・メディア・その他</h3>
+<table>
+  <tr><th>#</th><th>出典</th><th>内容</th><th>URL/参照先</th></tr>
+  <tr><td>34</td><td>医療関連サービス振興会 令和3年度調査</td><td>医療事務の外部委託率</td><td>https://ikss.net/about/research_list/20220406-2/</td></tr>
+  <tr><td>35</td><td>ダイヤモンド・オンライン（2024年）</td><td>電子カルテ市場シェア</td><td>https://diamond.jp/articles/-/347214</td></tr>
+  <tr><td>36</td><td>各種医療経営コンサル資料・佐々木総研等</td><td>査定率・返戻率目標値</td><td>--</td></tr>
+  <tr><td>37</td><td>パドルシップ（メディサポ）解説記事、東京都医師会資料等</td><td>再審査請求復活率</td><td>--</td></tr>
+  <tr><td>38</td><td>LRM社等の市場相場</td><td>Pマークコンサル費用</td><td>--</td></tr>
+</table>
+
+
+<!-- ===== Footer ===== -->
+<div class="report-footer">
+  <p>本レポートはプロジェクト p012（レセプトBPO）の事業検討資料として作成。全数値データには出典を明記。</p>
+  <p>最終更新: 2026年3月</p>
+</div>
+
+</div><!-- /#main -->
+</body>
+</html>

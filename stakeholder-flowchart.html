@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>レセプト業務 ステークホルダー分岐フローチャート</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --c-main: #2c3e50;
+    --c-keiri: #2980b9;
+    --c-roumu: #27ae60;
+    --c-soumu: #e67e22;
+    --c-jinji: #8e44ad;
+    --c-koubai: #16a085;
+    --c-keiei: #c0392b;
+    --c-gaibu: #7f8c8d;
+    --c-ishi: #f39c12;
+    --step-w: 260px;
+    --step-gap: 40px;
+    --branch-box-w: 230px;
+    --branch-row-h: 76px;
+    --branch-gap: 8px;
+    --arrow-h: 30px;
+  }
+
+  body {
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    background: #f5f6fa;
+    color: #2c3e50;
+    line-height: 1.5;
+    font-size: 13px;
+    overflow-x: auto;
+  }
+
+  /* --- Header --- */
+  .page-header {
+    position: sticky;
+    left: 0;
+    background: var(--c-main);
+    color: #fff;
+    padding: 20px 32px;
+  }
+  .page-header h1 { font-size: 20px; font-weight: 700; }
+  .page-header p { font-size: 13px; opacity: .8; margin-top: 4px; }
+
+  /* --- Legend --- */
+  .legend-bar {
+    position: sticky;
+    left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    padding: 14px 32px;
+    background: #fff;
+    border-bottom: 1px solid #dfe6e9;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .legend-swatch {
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .legend-badge {
+    display: inline-block;
+    background: #ecf0f1;
+    border-radius: 8px;
+    padding: 0 6px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 2px;
+  }
+
+  /* --- Chart container --- */
+  .chart-wrap {
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 28px 32px 40px;
+    scrollbar-width: auto;
+  }
+  .chart-wrap::-webkit-scrollbar { height: 12px; }
+  .chart-wrap::-webkit-scrollbar-thumb { background: #b2bec3; border-radius: 6px; }
+  .chart-wrap::-webkit-scrollbar-track { background: #dfe6e9; }
+
+  .chart-inner {
+    display: flex;
+    gap: var(--step-gap);
+    width: max-content;
+    position: relative;
+  }
+
+  /* --- Step column --- */
+  .step-col {
+    width: var(--step-w);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Main step box */
+  .step-box {
+    position: relative;
+    width: 100%;
+    background: var(--c-main);
+    color: #fff;
+    border-radius: 10px;
+    padding: 14px 14px 12px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    min-height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(44,62,80,.25);
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.2);
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  /* Arrow between steps */
+  .step-col:not(:last-child) .step-box::after {
+    content: '';
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0; height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 14px solid var(--c-main);
+  }
+  .step-col:not(:last-child) .step-box::before {
+    content: '';
+    position: absolute;
+    right: -26px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px; height: 3px;
+    background: var(--c-main);
+  }
+
+  /* Vertical connector from step to branches */
+  .vert-line {
+    width: 3px;
+    height: var(--arrow-h);
+    background: #b2bec3;
+    position: relative;
+  }
+  .vert-line::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #b2bec3;
+  }
+
+  /* Branch list */
+  .branch-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--branch-gap);
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .branch-box {
+    border-left: 4px solid;
+    border-radius: 6px;
+    padding: 8px 10px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,.07);
+    font-size: 12px;
+    line-height: 1.55;
+    width: 100%;
+  }
+  .branch-box .branch-label {
+    font-weight: 700;
+    font-size: 11px;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .branch-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .branch-box .branch-text {
+    color: #555;
+  }
+
+  /* colour helpers */
+  .bc-keiri   { border-color: var(--c-keiri); }
+  .bc-roumu   { border-color: var(--c-roumu); }
+  .bc-soumu   { border-color: var(--c-soumu); }
+  .bc-jinji   { border-color: var(--c-jinji); }
+  .bc-koubai  { border-color: var(--c-koubai); }
+  .bc-keiei   { border-color: var(--c-keiei); }
+  .bc-gaibu   { border-color: var(--c-gaibu); }
+  .bc-ishi    { border-color: var(--c-ishi); }
+
+  .bg-keiri   { background: var(--c-keiri); }
+  .bg-roumu   { background: var(--c-roumu); }
+  .bg-soumu   { background: var(--c-soumu); }
+  .bg-jinji   { background: var(--c-jinji); }
+  .bg-koubai  { background: var(--c-koubai); }
+  .bg-keiei   { background: var(--c-keiei); }
+  .bg-gaibu   { background: var(--c-gaibu); }
+  .bg-ishi    { background: var(--c-ishi); }
+
+  /* --- Summary table --- */
+  .summary-section {
+    position: sticky;
+    left: 0;
+    padding: 28px 32px 40px;
+    max-width: 1100px;
+  }
+  .summary-section h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--c-main);
+  }
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .summary-table th,
+  .summary-table td {
+    padding: 10px 14px;
+    border: 1px solid #dfe6e9;
+    text-align: left;
+    vertical-align: top;
+  }
+  .summary-table thead th {
+    background: var(--c-main);
+    color: #fff;
+    font-weight: 700;
+  }
+  .summary-table tbody tr:nth-child(even) { background: #f9fafb; }
+  .summary-table .area-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+  }
+  .area-swatch {
+    width: 12px; height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .stars { color: #f39c12; letter-spacing: 1px; }
+
+  /* --- Print --- */
+  @media print {
+    body { background: #fff; font-size: 10px; overflow: visible; }
+    .page-header { position: static; padding: 12px 16px; }
+    .legend-bar { position: static; padding: 10px 16px; }
+    .chart-wrap { padding: 12px 16px; overflow: visible; }
+    .chart-inner { gap: 16px; }
+    .step-col { width: 180px; }
+    .branch-box { font-size: 9px; padding: 5px 7px; }
+    .summary-section { position: static; padding: 16px; break-before: page; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<div class="page-header">
+  <h1>レセプト業務 ステークホルダー分岐フローチャート</h1>
+  <p>p012 レセプトBPOサービス / 2026年3月</p>
+</div>
+
+<!-- ===== Legend ===== -->
+<div class="legend-bar">
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--c-main)"></span>メインフロー</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--c-keiri)"></span>経理<span class="legend-badge">10</span></div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--c-roumu)"></span>労務<span class="legend-badge">5</span></div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--c-keiei)"></span>経営管理<span class="legend-badge">5</span></div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--c-soumu)"></span>総務<span class="legend-badge">4</span></div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--c-koubai)"></span>購買<span class="legend-badge">4</span></div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--c-jinji)"></span>人事<span class="legend-badge">3</span></div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--c-gaibu)"></span>外部機関<span class="legend-badge">4</span></div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--c-ishi)"></span>医師・医療スタッフ<span class="legend-badge">3</span></div>
+</div>
+
+<!-- ===== Flowchart ===== -->
+<div class="chart-wrap">
+<div class="chart-inner">
+
+  <!-- ===== Step 1 ===== -->
+  <div class="step-col">
+    <div class="step-box"><span class="step-num">1</span>患者来院・受付</div>
+    <div class="vert-line"></div>
+    <div class="branch-list">
+      <div class="branch-box bc-ishi">
+        <div class="branch-label"><span class="branch-dot bg-ishi"></span>受付スタッフ</div>
+        <div class="branch-text">保険証確認、オンライン資格確認</div>
+      </div>
+      <div class="branch-box bc-roumu">
+        <div class="branch-label"><span class="branch-dot bg-roumu"></span>労務</div>
+        <div class="branch-text">受付スタッフのシフト管理・勤怠</div>
+      </div>
+      <div class="branch-box bc-soumu">
+        <div class="branch-label"><span class="branch-dot bg-soumu"></span>総務</div>
+        <div class="branch-text">保険医療機関の届出維持</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Step 2 ===== -->
+  <div class="step-col">
+    <div class="step-box"><span class="step-num">2</span>診療</div>
+    <div class="vert-line"></div>
+    <div class="branch-list">
+      <div class="branch-box bc-ishi">
+        <div class="branch-label"><span class="branch-dot bg-ishi"></span>医師・看護師</div>
+        <div class="branch-text">診察・検査・処方</div>
+      </div>
+      <div class="branch-box bc-koubai">
+        <div class="branch-label"><span class="branch-dot bg-koubai"></span>購買</div>
+        <div class="branch-text">処方データ → 薬剤消費実績 → 発注</div>
+      </div>
+      <div class="branch-box bc-koubai">
+        <div class="branch-label"><span class="branch-dot bg-koubai"></span>購買</div>
+        <div class="branch-text">検査オーダー → 外注検査発注</div>
+      </div>
+      <div class="branch-box bc-roumu">
+        <div class="branch-label"><span class="branch-dot bg-roumu"></span>労務</div>
+        <div class="branch-text">医師の働き方改革対応（時間外上限管理）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Step 3 ===== -->
+  <div class="step-col">
+    <div class="step-box"><span class="step-num">3</span>診療情報入力</div>
+    <div class="vert-line"></div>
+    <div class="branch-list">
+      <div class="branch-box bc-ishi">
+        <div class="branch-label"><span class="branch-dot bg-ishi"></span>医療事務/クラーク</div>
+        <div class="branch-text">レセコン・電カル入力</div>
+      </div>
+      <div class="branch-box bc-soumu">
+        <div class="branch-label"><span class="branch-dot bg-soumu"></span>総務</div>
+        <div class="branch-text">施設基準に必要な傷病名・診療行為の確認</div>
+      </div>
+      <div class="branch-box bc-jinji">
+        <div class="branch-label"><span class="branch-dot bg-jinji"></span>人事</div>
+        <div class="branch-text">配置基準に必要な有資格者の確認</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Step 4 ===== -->
+  <div class="step-col">
+    <div class="step-box"><span class="step-num">4</span>日次会計<br>（窓口精算）</div>
+    <div class="vert-line"></div>
+    <div class="branch-list">
+      <div class="branch-box bc-keiri">
+        <div class="branch-label"><span class="branch-dot bg-keiri"></span>経理</div>
+        <div class="branch-text">窓口入金日計表 → 売上計上（毎日）</div>
+      </div>
+      <div class="branch-box bc-keiri">
+        <div class="branch-label"><span class="branch-dot bg-keiri"></span>経理</div>
+        <div class="branch-text">自費/保険の仕分け → 勘定科目別計上</div>
+      </div>
+      <div class="branch-box bc-keiri">
+        <div class="branch-label"><span class="branch-dot bg-keiri"></span>経理</div>
+        <div class="branch-text">未収金発生（窓口未払い）→ 未収金管理台帳</div>
+      </div>
+      <div class="branch-box bc-soumu">
+        <div class="branch-label"><span class="branch-dot bg-soumu"></span>総務</div>
+        <div class="branch-text">現金管理・自動精算機管理</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Step 5 ===== -->
+  <div class="step-col">
+    <div class="step-box"><span class="step-num">5</span>月末締め</div>
+    <div class="vert-line"></div>
+    <div class="branch-list">
+      <div class="branch-box bc-keiri">
+        <div class="branch-label"><span class="branch-dot bg-keiri"></span>経理</div>
+        <div class="branch-text">保険請求額確定 → 医業未収金計上<br><small style="color:#888">借方 医業未収金 / 貸方 外来診療収益</small></div>
+      </div>
+      <div class="branch-box bc-keiri">
+        <div class="branch-label"><span class="branch-dot bg-keiri"></span>経理</div>
+        <div class="branch-text">社保分/国保分の分離管理</div>
+      </div>
+      <div class="branch-box bc-keiei">
+        <div class="branch-label"><span class="branch-dot bg-keiei"></span>経営管理</div>
+        <div class="branch-text">月間診療データ集計 → KPI算定</div>
+      </div>
+      <div class="branch-box bc-roumu">
+        <div class="branch-label"><span class="branch-dot bg-roumu"></span>労務</div>
+        <div class="branch-text">レセプト週間の残業・シフト管理</div>
+      </div>
+      <div class="branch-box bc-koubai">
+        <div class="branch-label"><span class="branch-dot bg-koubai"></span>購買</div>
+        <div class="branch-text">材料費集計・棚卸</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Step 6 ===== -->
+  <div class="step-col">
+    <div class="step-box"><span class="step-num">6</span>レセプト点検</div>
+    <div class="vert-line"></div>
+    <div class="branch-list">
+      <div class="branch-box bc-ishi">
+        <div class="branch-label"><span class="branch-dot bg-ishi"></span>医師</div>
+        <div class="branch-text">病名漏れ・疑義照会</div>
+      </div>
+      <div class="branch-box bc-keiei">
+        <div class="branch-label"><span class="branch-dot bg-keiei"></span>経営管理</div>
+        <div class="branch-text">算定漏れ検出 → 収益改善分析</div>
+      </div>
+      <div class="branch-box bc-koubai">
+        <div class="branch-label"><span class="branch-dot bg-koubai"></span>購買</div>
+        <div class="branch-text">使用材料と請求内容の突合 → 請求漏れ防止</div>
+      </div>
+      <div class="branch-box bc-soumu">
+        <div class="branch-label"><span class="branch-dot bg-soumu"></span>総務</div>
+        <div class="branch-text">施設基準の充足確認</div>
+      </div>
+      <div class="branch-box bc-roumu">
+        <div class="branch-label"><span class="branch-dot bg-roumu"></span>労務</div>
+        <div class="branch-text">様式9作成（看護師勤務実績）・常勤換算計算</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Step 7 ===== -->
+  <div class="step-col">
+    <div class="step-box"><span class="step-num">7</span>レセプト提出</div>
+    <div class="vert-line"></div>
+    <div class="branch-list">
+      <div class="branch-box bc-gaibu">
+        <div class="branch-label"><span class="branch-dot bg-gaibu"></span>外部</div>
+        <div class="branch-text">社保 → 支払基金</div>
+      </div>
+      <div class="branch-box bc-gaibu">
+        <div class="branch-label"><span class="branch-dot bg-gaibu"></span>外部</div>
+        <div class="branch-text">国保 → 国保連合会</div>
+      </div>
+      <div class="branch-box bc-soumu">
+        <div class="branch-label"><span class="branch-dot bg-soumu"></span>総務</div>
+        <div class="branch-text">提出データの法定保管</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Step 8 ===== -->
+  <div class="step-col">
+    <div class="step-box"><span class="step-num">8</span>審査</div>
+    <div class="vert-line"></div>
+    <div class="branch-list">
+      <div class="branch-box bc-gaibu">
+        <div class="branch-label"><span class="branch-dot bg-gaibu"></span>外部</div>
+        <div class="branch-text">審査支払機関による審査</div>
+      </div>
+      <div class="branch-box bc-gaibu">
+        <div class="branch-label"><span class="branch-dot bg-gaibu"></span>外部</div>
+        <div class="branch-text">突合点検（調剤薬局との照合）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Step 9 ===== -->
+  <div class="step-col">
+    <div class="step-box"><span class="step-num">9</span>入金</div>
+    <div class="vert-line"></div>
+    <div class="branch-list">
+      <div class="branch-box bc-keiri">
+        <div class="branch-label"><span class="branch-dot bg-keiri"></span>経理</div>
+        <div class="branch-text">入金消込<br><small style="color:#888">借方 普通預金 / 貸方 医業未収金</small></div>
+      </div>
+      <div class="branch-box bc-keiri">
+        <div class="branch-label"><span class="branch-dot bg-keiri"></span>経理</div>
+        <div class="branch-text">査定・減点の差額処理（保険等調整増減）</div>
+      </div>
+      <div class="branch-box bc-keiri">
+        <div class="branch-label"><span class="branch-dot bg-keiri"></span>経理</div>
+        <div class="branch-text">源泉所得税処理（個人開業医の社保分）</div>
+      </div>
+      <div class="branch-box bc-keiei">
+        <div class="branch-label"><span class="branch-dot bg-keiei"></span>経営管理</div>
+        <div class="branch-text">診療科別収益分析</div>
+      </div>
+      <div class="branch-box bc-keiei">
+        <div class="branch-label"><span class="branch-dot bg-keiei"></span>経営管理</div>
+        <div class="branch-text">キャッシュフロー管理（診療月から約2ヶ月のタイムラグ）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Step 10 ===== -->
+  <div class="step-col">
+    <div class="step-box"><span class="step-num">10</span>返戻・査定対応</div>
+    <div class="vert-line"></div>
+    <div class="branch-list">
+      <div class="branch-box bc-ishi">
+        <div class="branch-label"><span class="branch-dot bg-ishi"></span>医師</div>
+        <div class="branch-text">臨床的妥当性の確認</div>
+      </div>
+      <div class="branch-box bc-keiri">
+        <div class="branch-label"><span class="branch-dot bg-keiri"></span>経理</div>
+        <div class="branch-text">減額修正仕訳（保険等調整増減）</div>
+      </div>
+      <div class="branch-box bc-keiri">
+        <div class="branch-label"><span class="branch-dot bg-keiri"></span>経理</div>
+        <div class="branch-text">再請求分の未収金再計上</div>
+      </div>
+      <div class="branch-box bc-keiei">
+        <div class="branch-label"><span class="branch-dot bg-keiei"></span>経営管理</div>
+        <div class="branch-text">査定率・返戻率分析 → KPI管理</div>
+      </div>
+      <div class="branch-box bc-jinji">
+        <div class="branch-label"><span class="branch-dot bg-jinji"></span>人事</div>
+        <div class="branch-text">スタッフ教育（レセプト精度向上）</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /chart-inner -->
+</div><!-- /chart-wrap -->
+
+<!-- ===== Summary ===== -->
+<div class="summary-section">
+  <h2>BPO タッチポイント・クロスセル サマリー</h2>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th style="width:140px">領域</th>
+        <th style="width:110px">タッチポイント数</th>
+        <th style="width:100px">強度</th>
+        <th>クロスセル可能性</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="area-cell"><span class="area-swatch" style="background:var(--c-keiri)"></span>経理</div></td>
+        <td style="font-weight:700;text-align:center">10箇所</td>
+        <td class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+        <td>レセプトデータ＝経理インプットの60-70%。最も自然な拡張先</td>
+      </tr>
+      <tr>
+        <td><div class="area-cell"><span class="area-swatch" style="background:var(--c-roumu)"></span>労務</div></td>
+        <td style="font-weight:700;text-align:center">5箇所</td>
+        <td class="stars">&#9733;&#9733;&#9733;&#9733;</td>
+        <td>施設基準維持＝勤怠データ。シフト管理・給与計算への展開</td>
+      </tr>
+      <tr>
+        <td><div class="area-cell"><span class="area-swatch" style="background:var(--c-keiei)"></span>経営管理</div></td>
+        <td style="font-weight:700;text-align:center">5箇所</td>
+        <td class="stars">&#9733;&#9733;&#9733;&#9733;</td>
+        <td>レセプトデータ＝最大の経営分析ソース。ダッシュボード提供</td>
+      </tr>
+      <tr>
+        <td><div class="area-cell"><span class="area-swatch" style="background:var(--c-soumu)"></span>総務</div></td>
+        <td style="font-weight:700;text-align:center">4箇所</td>
+        <td class="stars">&#9733;&#9733;&#9733;</td>
+        <td>施設基準の届出・維持管理。改定対応（2年ごと）</td>
+      </tr>
+      <tr>
+        <td><div class="area-cell"><span class="area-swatch" style="background:var(--c-jinji)"></span>人事</div></td>
+        <td style="font-weight:700;text-align:center">3箇所</td>
+        <td class="stars">&#9733;&#9733;&#9733;</td>
+        <td>人員配置基準の遵守。資格管理。教育研修</td>
+      </tr>
+      <tr>
+        <td><div class="area-cell"><span class="area-swatch" style="background:var(--c-koubai)"></span>購買</div></td>
+        <td style="font-weight:700;text-align:center">4箇所</td>
+        <td class="stars">&#9733;&#9733;</td>
+        <td>薬剤・材料の消費データ。薬価差益管理</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
