@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>レセプト業務マスタートレーニング Phase 1</title>
+<style>
+:root{--primary:#2563eb;--primary-dark:#1d4ed8;--primary-light:#dbeafe;--green:#059669;--green-light:#d1fae5;--green-bg:#ecfdf5;--bg:#f8f9fa;--card-bg:#fff;--text:#1f2937;--text-light:#6b7280;--border:#e5e7eb;--code-bg:#1e293b;--code-text:#e2e8f0;--shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);--shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05)}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:80px}body{font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;line-height:1.8;color:var(--text);background:var(--bg)}.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:12px 24px;box-shadow:0 2px 8px rgba(0,0,0,.15);display:flex;align-items:center;gap:16px}.site-header h1{font-size:1.2rem;font-weight:700}.site-header .subtitle{font-size:.85rem;opacity:.85}.hamburger{display:none;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer;padding:4px 8px;line-height:1}.sidebar{position:fixed;top:60px;left:0;bottom:0;width:300px;background:var(--card-bg);border-right:1px solid var(--border);overflow-y:auto;padding:16px 0;z-index:900;transition:transform .3s ease}.sidebar-nav{list-style:none}.sidebar-nav>li{margin-bottom:2px}.sidebar-nav>li>.nav-item-header>a,.sidebar-nav>li>a{display:block;padding:10px 20px;color:var(--text);text-decoration:none;font-weight:600;font-size:.95rem;border-left:3px solid transparent;transition:all .2s}.sidebar-nav>li>.nav-item-header>a:hover,.sidebar-nav>li>a:hover{background:var(--primary-light);border-left-color:var(--primary)}.sidebar-nav .sub-nav{list-style:none;display:none}.sidebar-nav .sub-nav.open{display:block}.sidebar-nav .sub-nav li a{display:block;padding:6px 20px 6px 36px;color:var(--text-light);text-decoration:none;font-size:.85rem;transition:all .2s}.sidebar-nav .sub-nav li a:hover{color:var(--primary);background:var(--primary-light)}.toggle-btn{background:none;border:none;cursor:pointer;color:var(--text-light);font-size:.8rem;padding:2px 6px;margin-left:4px;transition:transform .2s;flex-shrink:0}.toggle-btn.open{transform:rotate(90deg)}.nav-item-header{display:flex;align-items:center}.nav-item-header a{flex:1}.main-content{margin-left:300px;margin-top:60px;padding:32px 40px 80px;max-width:1060px}.module-card{background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow);padding:40px;margin-bottom:48px}.module-divider{height:4px;border:none;margin:48px 0;background:linear-gradient(90deg,var(--primary),var(--green),var(--primary));border-radius:2px}.module-card h2{font-size:1.8rem;color:var(--primary-dark);margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--primary)}.module-card h3{font-size:1.35rem;color:var(--text);margin-top:32px;margin-bottom:16px;padding-left:12px;border-left:4px solid var(--primary)}.module-card h4{font-size:1.1rem;color:var(--text);margin-top:24px;margin-bottom:12px}table{width:100%;border-collapse:separate;border-spacing:0;margin:16px 0 24px;border-radius:8px;overflow:hidden;box-shadow:var(--shadow);font-size:.92rem}thead th{background:var(--primary-dark);color:#fff;padding:12px 16px;text-align:left;font-weight:600}tbody td{padding:10px 16px;border-bottom:1px solid var(--border)}tbody tr:nth-child(even){background:#f9fafb}tbody tr:hover{background:var(--primary-light)}pre{background:var(--code-bg);color:var(--code-text);padding:20px 24px;border-radius:8px;overflow-x:auto;margin:16px 0 24px;font-size:.88rem;line-height:1.6}pre code{font-family:"Cascadia Code","Fira Code",Consolas,monospace;background:none;padding:0}code{font-family:"Cascadia Code","Fira Code",Consolas,monospace;background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:.9em}blockquote{border-left:4px solid var(--primary);background:var(--primary-light);padding:16px 20px;margin:16px 0 24px;border-radius:0 8px 8px 0;font-size:.95rem}blockquote strong{color:var(--primary-dark)}.bpo-callout{border-left:4px solid var(--green);background:var(--green-bg);padding:16px 20px;margin:16px 0 24px;border-radius:0 8px 8px 0}.bpo-callout-title{font-weight:700;color:var(--green);margin-bottom:8px;font-size:.9rem}details{margin:16px 0 24px;border:1px solid var(--border);border-radius:8px;overflow:hidden}summary{padding:12px 20px;cursor:pointer;font-weight:600;background:#f9fafb;color:var(--primary-dark);user-select:none}summary::-webkit-details-marker{display:none}details[open] summary{border-bottom:1px solid var(--border)}.answer{padding:16px 20px;background:var(--green-light)}.checklist{list-style:none;padding:0}.checklist li{padding:8px 0 8px 32px;position:relative;border-bottom:1px solid #f3f4f6}.checklist li::before{content:"";position:absolute;left:0;top:12px;width:18px;height:18px;border:2px solid var(--primary);border-radius:4px;background:#fff}ul,ol{margin:8px 0 16px 24px}li{margin-bottom:4px}p{margin-bottom:12px}.site-footer{margin-left:300px;padding:24px 40px;background:var(--card-bg);border-top:1px solid var(--border);text-align:center;color:var(--text-light);font-size:.85rem}.flow-chart{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:24px 0;padding:20px;background:#f9fafb;border-radius:12px}.flow-box{background:var(--primary);color:#fff;padding:10px 14px;border-radius:8px;font-weight:600;font-size:.85rem;text-align:center;min-width:100px}.flow-box.green{background:var(--green)}.flow-arrow{font-size:1.2rem;color:var(--primary);font-weight:700}.flow-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}@media(max-width:900px){.sidebar{transform:translateX(-100%);width:280px}.sidebar.open{transform:translateX(0);box-shadow:var(--shadow-lg)}.main-content{margin-left:0;padding:24px 16px 80px}.site-footer{margin-left:0}.hamburger{display:block}.module-card{padding:24px 20px}table{font-size:.82rem;display:block;overflow-x:auto}thead th,tbody td{padding:8px 10px}pre{padding:14px 16px;font-size:.82rem}}.sidebar-overlay{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:899}.sidebar-overlay.open{display:block}
+</style>
+</head>
+<body>
+<header class="site-header">
+<button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
+<div>
+<h1>レセプト業務マスタートレーニング &mdash; Phase 1</h1>
+<div class="subtitle">p012 レセプトBPOサービス</div>
+</div>
+</header>
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+<nav class="sidebar">
+<ul class="sidebar-nav">
+<li><div class="nav-item-header"><a href="#mod00">カリキュラム概要</a><button class="toggle-btn" onclick="toggleSubNav(this)">&#9654;</button></div>
+<ul class="sub-nav"><li><a href="#mod00-purpose">目的</a></li><li><a href="#mod00-map">カリキュラムマップ</a></li><li><a href="#mod00-modules">コアモジュール一覧</a></li><li><a href="#mod00-supplements">補足モジュール</a></li><li><a href="#mod00-progress">フェーズ別進捗</a></li><li><a href="#mod00-levels">スキルレベル定義</a></li></ul></li>
+<li><div class="nav-item-header"><a href="#mod01">01: 医療保険制度の基礎</a><button class="toggle-btn" onclick="toggleSubNav(this)">&#9654;</button></div>
+<ul class="sub-nav"><li><a href="#mod01-goals">学習目標</a></li><li><a href="#mod01-overview">国民皆保険制度</a></li><li><a href="#mod01-types">保険の種類と保険者</a></li><li><a href="#mod01-burden">患者負担割合</a></li><li><a href="#mod01-insured">被保険者と被扶養者</a></li><li><a href="#mod01-card">保険証の読み方</a></li><li><a href="#mod01-publicfund">公費負担医療</a></li><li><a href="#mod01-priority">保険の優先順位</a></li><li><a href="#mod01-oqs">オンライン資格確認</a></li><li><a href="#mod01-bpo">BPO視点</a></li><li><a href="#mod01-check">チェックリスト</a></li><li><a href="#mod01-exercises">演習問題</a></li></ul></li>
+<li><div class="nav-item-header"><a href="#mod02">02: 診療報酬制度の構造</a><button class="toggle-btn" onclick="toggleSubNav(this)">&#9654;</button></div>
+<ul class="sub-nav"><li><a href="#mod02-goals">学習目標</a></li><li><a href="#mod02-overview">制度の概要</a></li><li><a href="#mod02-structure">点数表の全体構造</a></li><li><a href="#mod02-basic">基本診療料の詳細</a></li><li><a href="#mod02-facility">施設基準と届出</a></li><li><a href="#mod02-addition">加算の仕組み</a></li><li><a href="#mod02-special">特掲診療料の主要カテゴリ</a></li><li><a href="#mod02-dpc">包括評価（DPC）</a></li><li><a href="#mod02-revision">診療報酬改定</a></li><li><a href="#mod02-lookup">点数表の引き方</a></li><li><a href="#mod02-bpo">BPO視点</a></li><li><a href="#mod02-check">チェックリスト</a></li><li><a href="#mod02-exercises">演習問題</a></li></ul></li>
+<li><div class="nav-item-header"><a href="#mod03">03: 受付・患者登録</a><button class="toggle-btn" onclick="toggleSubNav(this)">&#9654;</button></div>
+<ul class="sub-nav"><li><a href="#mod03-goals">学習目標</a></li><li><a href="#mod03-flow">受付業務の全体フロー</a></li><li><a href="#mod03-insurance">保険証の確認手順</a></li><li><a href="#mod03-oqs">オンライン資格確認</a></li><li><a href="#mod03-registration">患者情報のレセコン登録</a></li><li><a href="#mod03-multi">複数保険の登録</a></li><li><a href="#mod03-change">保険変更への対応</a></li><li><a href="#mod03-referral">紹介状・診療情報提供</a></li><li><a href="#mod03-privacy">個人情報保護</a></li><li><a href="#mod03-bpo">BPO視点</a></li><li><a href="#mod03-check">チェックリスト</a></li><li><a href="#mod03-exercises">演習問題</a></li></ul></li>
+<li><div class="nav-item-header"><a href="#glossary">用語集</a><button class="toggle-btn" onclick="toggleSubNav(this)">&#9654;</button></div>
+<ul class="sub-nav"><li><a href="#glossary-a">あ行</a></li><li><a href="#glossary-ka">か行</a></li><li><a href="#glossary-sa">さ行</a></li><li><a href="#glossary-ta">た行</a></li><li><a href="#glossary-na">な行</a></li><li><a href="#glossary-ha">は行</a></li><li><a href="#glossary-ma">ま行</a></li><li><a href="#glossary-ya">や行</a></li><li><a href="#glossary-ra">ら行</a></li><li><a href="#glossary-wa">わ行</a></li><li><a href="#glossary-alpha">アルファベット</a></li></ul></li>
+</ul>
+</nav>
+<main class="main-content">
+
+<!-- ========== MODULE 00: CURRICULUM OVERVIEW ========== -->
+<section id="mod00" class="module-card">
+<h2>カリキュラム概要</h2>
+
+<h3 id="mod00-purpose">目的</h3>
+<p>レセプト業務（医療事務における診療報酬請求業務）を1から10まで体系的に習得し、BPO事業者として医療機関に対するレセプト業務支援サービスを設計・提供できるレベルに到達する。</p>
+
+<h4>対象者</h4>
+<p>KosukeHorie &mdash; p012（レセプトBPOサービス）プロジェクトオーナー</p>
+
+<h4>学習の進め方</h4>
+<ol>
+<li>各モジュールのドキュメントを通読する</li>
+<li>不明点・疑問点をセッション内で質問する</li>
+<li>Q&amp;Aセクションに質疑応答を蓄積する</li>
+<li>チェックリストで理解度を自己確認する</li>
+<li>演習問題に取り組む</li>
+<li>理解を確認したら次のモジュールへ進む</li>
+</ol>
+
+<h3 id="mod00-map">カリキュラムマップ</h3>
+
+<h4>業務フロー全体像</h4>
+
+<div class="flow-chart">
+<div class="flow-row">
+<div class="flow-box">01 医療保険制度</div>
+<span class="flow-arrow">&darr;</span>
+</div>
+<div class="flow-row" style="margin-top:4px">
+<div class="flow-box">02 診療報酬制度</div>
+<span class="flow-arrow">&darr;</span>
+</div>
+<div class="flow-row" style="margin-top:4px">
+<div class="flow-box">03 受付・患者登録</div>
+<span class="flow-arrow">&rarr;</span>
+<div class="flow-box">04 レセコン入力</div>
+<span class="flow-arrow">&rarr;</span>
+<div class="flow-box">06 レセプト作成</div>
+</div>
+<div class="flow-row" style="margin-top:4px">
+<div class="flow-box green">05 会計・窓口精算</div>
+<span class="flow-arrow">&nearr;</span>
+</div>
+<div class="flow-row" style="margin-top:4px">
+<span class="flow-arrow">&darr;</span>
+</div>
+<div class="flow-row" style="margin-top:4px">
+<div class="flow-box">07 レセプト点検</div>
+<span class="flow-arrow">&rarr;</span>
+<div class="flow-box">08 医師確認</div>
+<span class="flow-arrow">&rarr;</span>
+<div class="flow-box">09 請求</div>
+<span class="flow-arrow">&rarr;</span>
+<div class="flow-box green">10 返戻・査定</div>
+</div>
+</div>
+
+<pre><code>[01 医療保険制度] ──┐
+                    ├─→ [03 受付・患者登録] → [04 レセコン入力] → [06 レセプト作成] ──┐
+[02 診療報酬制度] ──┘                                                                ├→ [07 レセプト点検] → [08 医師確認] → [09 請求] → [10 返戻・査定]
+                      [05 会計・窓口精算] ──────────────────────────────────────────────┘</code></pre>
+
+<h3 id="mod00-modules">コアモジュール一覧</h3>
+<table>
+<thead><tr><th>#</th><th>モジュール名</th><th>Phase</th><th>前提</th><th>重要度</th></tr></thead>
+<tbody>
+<tr><td>01</td><td>医療保険制度の基礎</td><td>1</td><td>なし</td><td>&#9733;&#9733;&#9733;</td></tr>
+<tr><td>02</td><td>診療報酬制度の構造</td><td>1</td><td>なし</td><td>&#9733;&#9733;&#9733;</td></tr>
+<tr><td>03</td><td>受付・患者登録</td><td>1</td><td>01, 02</td><td>&#9733;&#9733;</td></tr>
+<tr><td>04</td><td>診療情報のレセコン入力</td><td>2</td><td>03</td><td>&#9733;&#9733;&#9733;</td></tr>
+<tr><td>05</td><td>会計・窓口精算</td><td>2</td><td>01, 02</td><td>&#9733;&#9733;</td></tr>
+<tr><td>06</td><td>レセプト作成・出力</td><td>2</td><td>04</td><td>&#9733;&#9733;&#9733;</td></tr>
+<tr><td>07</td><td>レセプト点検</td><td>3</td><td>06</td><td>&#9733;&#9733;&#9733;&#9733;&#9733;</td></tr>
+<tr><td>08</td><td>医師確認・承認</td><td>3</td><td>07</td><td>&#9733;&#9733;</td></tr>
+<tr><td>09</td><td>審査支払機関への請求</td><td>4</td><td>08</td><td>&#9733;&#9733;&#9733;</td></tr>
+<tr><td>10</td><td>返戻・査定対応</td><td>4</td><td>09</td><td>&#9733;&#9733;&#9733;&#9733;</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod00-supplements">補足モジュール一覧</h3>
+<table>
+<thead><tr><th>#</th><th>モジュール名</th><th>前提</th><th>重要度</th></tr></thead>
+<tbody>
+<tr><td>s01</td><td>レセコン操作ガイド（ORCA/M3デジカル/CLINICS）</td><td>04完了後</td><td>&#9733;&#9733;&#9733;</td></tr>
+<tr><td>s02</td><td>在宅医療レセプトの特殊性</td><td>02, 06, 07完了後</td><td>&#9733;&#9733;&#9733;&#9733;&#9733;</td></tr>
+<tr><td>s03</td><td>電子レセプトvs紙レセプト</td><td>06完了後</td><td>&#9733;</td></tr>
+<tr><td>s04</td><td>高額療養費制度</td><td>01, 05完了後</td><td>&#9733;&#9733;</td></tr>
+<tr><td>s05</td><td>BPO受託要件と法的制約</td><td>独立</td><td>&#9733;&#9733;&#9733;</td></tr>
+<tr><td>s06</td><td>診療報酬改定への対応</td><td>02完了後</td><td>&#9733;&#9733;</td></tr>
+<tr><td>s07</td><td>共通算定モジュール（2026年6月〜）</td><td>02, 06完了後</td><td>&#9733;&#9733;</td></tr>
+</tbody>
+</table>
+
+<h4>演習一覧</h4>
+<table>
+<thead><tr><th>#</th><th>演習名</th><th>対象モジュール</th></tr></thead>
+<tbody>
+<tr><td>ex01</td><td>保険証読み取り演習</td><td>01, 03</td></tr>
+<tr><td>ex02</td><td>レセプト点検ドリル</td><td>07</td></tr>
+<tr><td>ex03</td><td>返戻事例分析演習</td><td>10</td></tr>
+<tr><td>ex04</td><td>在宅レセプト演習</td><td>s02</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod00-progress">フェーズ別進捗</h3>
+
+<h4>Phase 1: 基礎知識</h4>
+<table>
+<thead><tr><th>ドキュメント</th><th>ステータス</th><th>レビュー日</th><th>Q&amp;A数</th></tr></thead>
+<tbody>
+<tr><td>01 医療保険制度の基礎</td><td>作成済み</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>02 診療報酬制度の構造</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>03 受付・患者登録</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>glossary（初版）</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>ex01 保険証読み取り演習</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+
+<h4>Phase 2: コア業務</h4>
+<table>
+<thead><tr><th>ドキュメント</th><th>ステータス</th><th>レビュー日</th><th>Q&amp;A数</th></tr></thead>
+<tbody>
+<tr><td>04 レセコン入力</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>05 会計・窓口精算</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>06 レセプト作成・出力</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>s01 レセコン操作ガイド</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>s03 電子vs紙レセプト</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+
+<h4>Phase 3: 点検スキル</h4>
+<table>
+<thead><tr><th>ドキュメント</th><th>ステータス</th><th>レビュー日</th><th>Q&amp;A数</th></tr></thead>
+<tbody>
+<tr><td>07 レセプト点検</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>08 医師確認・承認</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>ex02 レセプト点検ドリル</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>s04 高額療養費制度</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+
+<h4>Phase 4: 請求・返戻</h4>
+<table>
+<thead><tr><th>ドキュメント</th><th>ステータス</th><th>レビュー日</th><th>Q&amp;A数</th></tr></thead>
+<tbody>
+<tr><td>09 審査支払機関への請求</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>10 返戻・査定対応</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>ex03 返戻事例分析演習</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+
+<h4>Phase 5: 専門領域</h4>
+<table>
+<thead><tr><th>ドキュメント</th><th>ステータス</th><th>レビュー日</th><th>Q&amp;A数</th></tr></thead>
+<tbody>
+<tr><td>s02 在宅医療レセプト</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>s05 BPO法的要件</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>s06 診療報酬改定対応</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>s07 共通算定モジュール</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>ex04 在宅レセプト演習</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>参考文献リンク集</td><td>未着手</td><td>&mdash;</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod00-levels">スキルレベル定義</h3>
+<table>
+<thead><tr><th>レベル</th><th>定義</th><th>到達基準</th></tr></thead>
+<tbody>
+<tr><td>Level 1: 理解</td><td>用語・制度・フローを説明できる</td><td>チェックリスト全項目クリア</td></tr>
+<tr><td>Level 2: 実行可能</td><td>実際の業務を手順に沿って遂行できる</td><td>演習問題80%以上正答</td></tr>
+<tr><td>Level 3: 指導可能</td><td>他者に教え、品質を評価できる</td><td>Q&amp;Aで想定外の質問に回答可能</td></tr>
+</tbody>
+</table>
+<p>本カリキュラムの到達目標: <strong>全コアモジュールでLevel 2以上、モジュール07（点検）と10（返戻・査定）でLevel 3</strong></p>
+</section>
+
+<hr class="module-divider">
+
+<!-- ========== MODULE 01: MEDICAL INSURANCE SYSTEM ========== -->
+<section id="mod01" class="module-card">
+<h2>モジュール01: 医療保険制度の基礎</h2>
+
+<h3 id="mod01-goals">1. このモジュールで学ぶこと</h3>
+<p>本モジュールを修了すると、以下ができるようになる。</p>
+<ol>
+<li><strong>国民皆保険制度の全体像を説明できる</strong> &mdash; 日本の医療保険がどのような仕組みで成り立ち、世界的にどのような位置づけにあるかを理解する</li>
+<li><strong>医療保険の種類と保険者を正確に区分できる</strong> &mdash; 被用者保険・国民健康保険・後期高齢者医療制度の違いを表で整理し、保険証から保険種別を判別できる</li>
+<li><strong>患者負担割合を年齢・所得区分ごとに即答できる</strong> &mdash; 窓口負担の計算を正確に行い、レセプトの一部負担金欄を検証できる</li>
+<li><strong>保険証（保険者番号・記号・番号）を正しく読み取れる</strong> &mdash; 法別番号から保険種別を特定し、入力ミスの発生しやすいポイントを理解する</li>
+<li><strong>公費負担医療制度と保険の併用ルールを理解できる</strong> &mdash; 主保険＋公費の組み合わせパターンを把握し、請求先の振り分けを判断できる</li>
+</ol>
+
+<h3 id="mod01-overview">2. 国民皆保険制度の概要</h3>
+
+<h4>2.1 歴史的背景</h4>
+<p>日本の国民皆保険制度は、<strong>1961年（昭和36年）</strong>に達成された。それ以前は、健康保険に加入できない自営業者・農業従事者などが無保険状態に置かれていた。1958年に国民健康保険法が全面改正され、すべての市町村に国民健康保険事業の実施が義務づけられたことにより、1961年4月にはすべての国民がいずれかの公的医療保険に加入する体制が確立された。</p>
+<p>以来60年以上にわたり、日本は<strong>全国民が公的医療保険に加入し、いつでもどこでも医療を受けられる</strong>制度を維持している。</p>
+
+<h4>2.2 日本の医療制度の特徴</h4>
+<table>
+<thead><tr><th>特徴</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>国民皆保険</strong></td><td>すべての国民がいずれかの公的医療保険に加入する</td></tr>
+<tr><td><strong>フリーアクセス</strong></td><td>患者が自由に医療機関を選択できる（紹介状不要で大病院を受診することも可能、ただし選定療養費が徴収される場合あり）</td></tr>
+<tr><td><strong>現物給付</strong></td><td>保険料の対価として「医療サービスそのもの」が給付される（償還払いではない）</td></tr>
+<tr><td><strong>出来高払い中心</strong></td><td>診療行為ごとに点数（1点＝10円）が定められ、実施した行為の合計で医療費が決まる（一部に包括払いあり）</td></tr>
+<tr><td><strong>低い患者自己負担率</strong></td><td>多くの国民は3割以下の自己負担で医療を受けられる</td></tr>
+</tbody>
+</table>
+
+<h4>2.3 医療費の全体フロー</h4>
+<p>医療費がどのように流れるかを理解することは、レセプト業務の根幹である。</p>
+<pre><code>┌──────────┐   ①受診・一部負担金   ┌──────────┐
+│          │ ──────────────────→ │          │
+│  患 者   │                      │ 医療機関  │
+│（被保険者）│ ←────────────────── │（病院・   │
+│          │   ④医療サービス提供   │ 診療所）  │
+└──────────┘                      └────┬─────┘
+                                       │
+                              ②レセプト提出（翌月10日まで）
+                                       │
+                                       ▼
+                              ┌──────────────┐
+                              │ 審査支払機関   │
+                              │ ・社保: 支払基金│
+                              │ ・国保: 国保連  │
+                              └───┬──────┬───┘
+                          ③審査済み  │      │  ⑤診療報酬
+                          レセプト   │      │  支払い
+                          送付      │      │
+                                    ▼      │
+                              ┌──────────┐  │
+                              │          │  │
+                              │ 保険者   │──┘
+                              │（健保組合 │
+                              │ 市町村等）│
+                              └──────────┘
+                                    ▲
+                              ⑥保険料納付
+                                    │
+                              ┌──────────┐
+                              │  患 者   │
+                              │（被保険者）│
+                              └──────────┘</code></pre>
+
+<p><strong>フローの説明:</strong></p>
+<ol>
+<li><strong>患者</strong>が医療機関を受診し、窓口で一部負担金（1〜3割）を支払う</li>
+<li><strong>医療機関</strong>は翌月10日までにレセプト（診療報酬明細書）を審査支払機関に提出する</li>
+<li><strong>審査支払機関</strong>（社会保険診療報酬支払基金 or 国民健康保険団体連合会）がレセプトを審査し、保険者に送付する</li>
+<li>医療機関は患者に医療サービスを提供する（現物給付）</li>
+<li><strong>保険者</strong>は審査支払機関を通じて医療機関に診療報酬（7〜9割）を支払う</li>
+<li><strong>被保険者（患者）</strong>は保険者に保険料を納付する</li>
+</ol>
+
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPO事業者の関与ポイント</div>
+p012（レセプトBPOサービス）が担うのは、主に上記②のレセプト作成・点検・提出業務である。
+</div>
+
+<h3 id="mod01-types">3. 医療保険の種類と保険者</h3>
+<p>日本の公的医療保険は、大きく3つに分類される。</p>
+
+<h4>3.1 全体分類</h4>
+<pre><code>公的医療保険
+├── 被用者保険（職域保険）…… 会社員・公務員とその家族
+│   ├── 健康保険
+│   │   ├── 全国健康保険協会（協会けんぽ）
+│   │   └── 健康保険組合（健保組合）
+│   ├── 共済組合
+│   │   ├── 国家公務員共済組合
+│   │   ├── 地方公務員共済組合
+│   │   ├── 警察共済組合
+│   │   └── 私立学校教職員共済
+│   └── 船員保険
+├── 国民健康保険 …… 自営業者・農業者・無職者等
+│   ├── 市町村国保（都道府県単位化）
+│   └── 国保組合（医師国保・歯科医師国保等）
+└── 後期高齢者医療制度 …… 75歳以上（65〜74歳の一定障害者含む）
+    └── 後期高齢者医療広域連合</code></pre>
+
+<h4>3.2 詳細比較表</h4>
+<table>
+<thead><tr><th>区分</th><th>保険種別</th><th>保険者</th><th>対象者</th><th>法別番号</th><th>保険者番号桁数</th></tr></thead>
+<tbody>
+<tr><td><strong>被用者保険</strong></td><td>協会けんぽ</td><td>全国健康保険協会</td><td>中小企業の会社員とその被扶養者</td><td>01</td><td>8桁</td></tr>
+<tr><td></td><td>健保組合</td><td>各健康保険組合</td><td>大企業の会社員とその被扶養者</td><td>06</td><td>8桁</td></tr>
+<tr><td></td><td>船員保険</td><td>全国健康保険協会</td><td>船員とその被扶養者</td><td>02</td><td>8桁</td></tr>
+<tr><td></td><td>国家公務員共済</td><td>各省庁の共済組合</td><td>国家公務員とその被扶養者</td><td>31</td><td>8桁</td></tr>
+<tr><td></td><td>地方公務員共済</td><td>各地方の共済組合</td><td>地方公務員とその被扶養者</td><td>32</td><td>8桁</td></tr>
+<tr><td></td><td>警察共済</td><td>警察共済組合</td><td>警察職員とその被扶養者</td><td>33</td><td>8桁</td></tr>
+<tr><td></td><td>私学共済</td><td>日本私立学校振興・共済事業団</td><td>私立学校教職員とその被扶養者</td><td>34</td><td>8桁</td></tr>
+<tr><td><strong>国民健康保険</strong></td><td>市町村国保</td><td>都道府県・市町村</td><td>自営業者・農業者・無職者等</td><td>なし</td><td>6桁</td></tr>
+<tr><td></td><td>国保組合</td><td>各国保組合</td><td>同種同業の自営業者（医師・歯科医師・建設業等）</td><td>なし</td><td>6桁</td></tr>
+<tr><td><strong>後期高齢者医療</strong></td><td>後期高齢者医療</td><td>後期高齢者医療広域連合</td><td>75歳以上（65〜74歳の一定障害者含む）</td><td>39</td><td>8桁</td></tr>
+</tbody>
+</table>
+<blockquote><strong>実務ポイント</strong>: 保険者番号が6桁なら国民健康保険（一般）、8桁ならそれ以外の保険制度と即座に判別できる。</blockquote>
+
+<h4>3.3 退職者医療制度（経過措置）</h4>
+<p>退職者医療制度（法別番号67）は2008年4月に廃止されたが、経過措置により2014年度末までの退職被保険者が65歳に達するまで適用される。現在は対象者がほぼいなくなっているが、古い保険証や過去のレセプトで目にすることがある。</p>
+
+<h4>3.4 特例退職被保険者</h4>
+<p>特定の健保組合が実施する制度で、定年退職者が国保に移行せず引き続き健保組合に加入するもの。法別番号は63。対象者は限定的だが、保険者番号を見た際に混乱しないよう知っておく必要がある。</p>
+
+<h3 id="mod01-burden">4. 患者負担割合</h3>
+
+<h4>4.1 年齢・所得区分別の一部負担金割合</h4>
+<table>
+<thead><tr><th>年齢区分</th><th>負担割合</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td><strong>6歳未満</strong>（義務教育就学前）</td><td><strong>2割</strong></td><td>誕生日の翌月1日が6歳に達した日の属する年度の3月31日まで</td></tr>
+<tr><td><strong>6歳〜69歳</strong></td><td><strong>3割</strong></td><td>義務教育就学後〜69歳</td></tr>
+<tr><td><strong>70歳〜74歳</strong></td><td><strong>2割</strong></td><td>高齢受給者証が交付される。<strong>現役並み所得者は3割</strong></td></tr>
+<tr><td><strong>75歳以上</strong></td><td><strong>1割</strong></td><td>後期高齢者医療制度に移行。<strong>一定以上所得者は2割</strong>、<strong>現役並み所得者は3割</strong></td></tr>
+</tbody>
+</table>
+
+<h4>4.2 75歳以上の負担割合の詳細（2022年10月〜）</h4>
+<p>2022年10月の制度改正により、75歳以上の窓口負担に<strong>2割負担</strong>区分が新設された。</p>
+<table>
+<thead><tr><th>区分</th><th>負担割合</th><th>判定基準</th></tr></thead>
+<tbody>
+<tr><td><strong>一般I</strong></td><td><strong>1割</strong></td><td>課税所得28万円未満</td></tr>
+<tr><td><strong>一般II</strong></td><td><strong>2割</strong></td><td>課税所得28万円以上 かつ 年金収入＋その他合計所得金額が単身200万円以上（複数世帯320万円以上）</td></tr>
+<tr><td><strong>現役並み</strong></td><td><strong>3割</strong></td><td>課税所得145万円以上（ただし収入額による判定あり）</td></tr>
+</tbody>
+</table>
+<blockquote><strong>注意</strong>: 2割負担導入時の配慮措置（1か月の外来負担増加額を3,000円までに抑える措置）は<strong>2025年9月30日に終了</strong>している。</blockquote>
+
+<h4>4.3 70歳〜74歳の負担割合</h4>
+<table>
+<thead><tr><th>区分</th><th>負担割合</th><th>判定基準</th></tr></thead>
+<tbody>
+<tr><td><strong>一般</strong></td><td><strong>2割</strong></td><td>課税所得145万円未満</td></tr>
+<tr><td><strong>現役並み</strong></td><td><strong>3割</strong></td><td>課税所得145万円以上（ただし収入額による判定あり）</td></tr>
+</tbody>
+</table>
+<p>70歳〜74歳の方には「高齢受給者証」が交付され、負担割合が記載される。レセプト作成時にはこの割合を正確に反映する必要がある。</p>
+
+<h4>4.4 具体的な計算例</h4>
+<p><strong>【例1】35歳の会社員が風邪で受診。医療費総額8,000円の場合</strong></p>
+<ul>
+<li>負担割合: 3割（6歳〜69歳）</li>
+<li>窓口負担: 8,000円 &times; 0.3 = <strong>2,400円</strong></li>
+<li>保険者負担: 8,000円 &times; 0.7 = <strong>5,600円</strong>（レセプトで請求）</li>
+</ul>
+<p><strong>【例2】78歳・一般所得の方が内科を受診。医療費総額15,000円の場合</strong></p>
+<ul>
+<li>負担割合: 1割（75歳以上・一般I）</li>
+<li>窓口負担: 15,000円 &times; 0.1 = <strong>1,500円</strong></li>
+<li>保険者負担: 15,000円 &times; 0.9 = <strong>13,500円</strong>（レセプトで請求）</li>
+</ul>
+<p><strong>【例3】72歳・現役並み所得者が整形外科を受診。医療費総額25,000円の場合</strong></p>
+<ul>
+<li>負担割合: 3割（70〜74歳・現役並み所得）</li>
+<li>窓口負担: 25,000円 &times; 0.3 = <strong>7,500円</strong></li>
+<li>保険者負担: 25,000円 &times; 0.7 = <strong>17,500円</strong>（レセプトで請求）</li>
+</ul>
+<blockquote><strong>レセプト実務との関連</strong>: レセプトの「一部負担金」欄に記載する金額は、上記の窓口負担額と一致していなければならない。不一致は返戻（レセプトの差し戻し）の原因となる。</blockquote>
+
+<h3 id="mod01-insured">5. 被保険者と被扶養者</h3>
+
+<h4>5.1 被保険者（本人）</h4>
+<p><strong>被保険者</strong>とは、医療保険に直接加入している本人を指す。被用者保険の場合は、事業所に使用されている者（会社員・公務員等）が被保険者となる。</p>
+<ul>
+<li>健康保険の適用事業所に使用される者は、原則として全員が被保険者となる</li>
+<li>パート・アルバイトでも、所定労働時間・日数が正社員の3/4以上であれば被保険者となる（2024年10月以降、従業員51人以上の事業所ではさらに要件が緩和）</li>
+<li>国民健康保険の場合は、世帯主が届出義務者となる</li>
+</ul>
+
+<h4>5.2 被扶養者（家族）</h4>
+<p><strong>被扶養者</strong>とは、被保険者に生計を維持されている家族のことを指す。被用者保険（健保・共済）にのみ存在する概念であり、国保には被扶養者の概念はない。</p>
+<p><strong>被扶養者の認定要件（主なもの）:</strong></p>
+<table>
+<thead><tr><th>要件</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>収入要件</td><td>年間収入130万円未満（60歳以上または障害者は180万円未満）、かつ被保険者の年間収入の1/2未満</td></tr>
+<tr><td>範囲</td><td>配偶者（事実婚含む）、子、孫、兄弟姉妹、父母等の直系尊属（同居不要）。その他3親等内の親族（同居要件あり）</td></tr>
+<tr><td>国内居住</td><td>原則として国内に住所を有すること（2020年4月〜）</td></tr>
+</tbody>
+</table>
+<blockquote><strong>重要</strong>: 国民健康保険には「被扶養者」の概念がない。家族全員がそれぞれ被保険者として加入し、世帯ごとに保険料が算定される。</blockquote>
+
+<h4>5.3 保険証上の区分表記</h4>
+<table>
+<thead><tr><th>保険種別</th><th>本人の表記</th><th>家族の表記</th></tr></thead>
+<tbody>
+<tr><td>健康保険（協会けんぽ・健保組合）</td><td>被保険者</td><td>被扶養者</td></tr>
+<tr><td>共済組合</td><td>組合員</td><td>被扶養者</td></tr>
+<tr><td>国民健康保険</td><td>（区分なし）世帯主が届出者</td><td>（区分なし）</td></tr>
+<tr><td>後期高齢者医療</td><td>被保険者</td><td>（被扶養者の概念なし）</td></tr>
+</tbody>
+</table>
+<p>レセプト上では「本人」「家族（六歳以上）」「家族（未就学者）」などの区分を選択する。この区分が負担割合と連動するため、入力ミスは返戻の直接原因となる。</p>
+
+<h3 id="mod01-card">6. 保険証の種類と読み方</h3>
+
+<h4>6.1 保険証に記載される主な情報</h4>
+<p>従来の健康保険証（カード型）には、以下の情報が記載されている。</p>
+<pre><code>┌────────────────────────────────────────────┐
+│     健 康 保 険 被 保 険 者 証              │
+│                                            │
+│  記号  12345                               │
+│  番号  67890                               │
+│  枝番  01                                  │
+│                                            │
+│  氏名  山田 太郎                            │
+│  生年月日  平成2年4月15日  性別 男          │
+│  資格取得年月日  令和3年4月1日              │
+│                                            │
+│  事業所名称  株式会社○○                    │
+│  保険者番号  01130012                       │
+│  保険者名称  全国健康保険協会 東京支部       │
+│                                            │
+│  交付年月日  令和3年4月5日                  │
+│  有効期限   ――                             │
+└────────────────────────────────────────────┘</code></pre>
+
+<h4>6.2 保険者番号の体系</h4>
+<p>保険者番号は、保険制度を特定するための最重要情報である。</p>
+<p><strong>8桁の保険者番号の構成:</strong></p>
+<pre><code>  01  13  001  2
+  ──  ──  ───  ─
+  ①   ②   ③   ④
+
+  ① 法別番号（2桁）: 医療保険制度の種別
+  ② 都道府県番号（2桁）: 保険者所在地
+  ③ 保険者別番号（3桁）: 保険者ごとの固有番号
+  ④ 検証番号（1桁）: チェックデジット</code></pre>
+<p><strong>6桁の保険者番号（国民健康保険）:</strong></p>
+<pre><code>  13  001  2
+  ──  ───  ─
+  ①   ②   ③
+
+  ① 都道府県番号（2桁）
+  ② 保険者別番号（3桁）
+  ③ 検証番号（1桁）
+
+  ※ 国民健康保険（一般）には法別番号がない</code></pre>
+
+<h4>6.3 法別番号と保険種別の対応表</h4>
+<table>
+<thead><tr><th>法別番号</th><th>保険種別</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td><strong>01</strong></td><td>協会けんぽ（全国健康保険協会管掌健康保険）</td><td>中小企業向け。最も件数が多い</td></tr>
+<tr><td><strong>02</strong></td><td>船員保険</td><td>船員とその被扶養者</td></tr>
+<tr><td><strong>03</strong></td><td>日雇特例被保険者の保険（一般療養）</td><td>日雇労働者</td></tr>
+<tr><td><strong>04</strong></td><td>日雇特例被保険者の保険（特別療養費）</td><td>日雇労働者</td></tr>
+<tr><td><strong>06</strong></td><td>組合管掌健康保険（健保組合）</td><td>大企業・業界団体</td></tr>
+<tr><td><strong>31</strong></td><td>国家公務員共済組合</td><td>各省庁の共済</td></tr>
+<tr><td><strong>32</strong></td><td>地方公務員共済組合</td><td>都道府県・市町村の共済</td></tr>
+<tr><td><strong>33</strong></td><td>警察共済組合</td><td>警察職員</td></tr>
+<tr><td><strong>34</strong></td><td>公立学校共済組合・私学共済</td><td>教職員</td></tr>
+<tr><td><strong>39</strong></td><td>後期高齢者医療制度</td><td>75歳以上</td></tr>
+<tr><td><strong>63</strong></td><td>特例退職被保険者</td><td>定年退職後の健保組合継続加入</td></tr>
+<tr><td><strong>67</strong></td><td>退職者医療（国保）</td><td>経過措置、ほぼ終了</td></tr>
+<tr><td><strong>72〜75</strong></td><td>特例退職被保険者（その他）</td><td>特定の健保組合</td></tr>
+<tr><td><strong>なし（6桁）</strong></td><td>国民健康保険（一般）</td><td>市町村国保・国保組合</td></tr>
+</tbody>
+</table>
+
+<h4>6.4 記号・番号・枝番の意味</h4>
+<table>
+<thead><tr><th>項目</th><th>意味</th><th>具体例</th></tr></thead>
+<tbody>
+<tr><td><strong>記号</strong></td><td>事業所（会社）を識別する番号。同じ会社の従業員は同じ記号を持つ</td><td>12345</td></tr>
+<tr><td><strong>番号</strong></td><td>被保険者個人（世帯）を識別する番号</td><td>67890</td></tr>
+<tr><td><strong>枝番</strong></td><td>被扶養者を個人単位で識別するための2桁の番号（2021年3月〜）</td><td>01, 02</td></tr>
+</tbody>
+</table>
+<blockquote><strong>枝番の導入背景</strong>: オンライン資格確認の開始に伴い、従来の世帯単位の番号付与では個人を特定できないため、2021年3月から2桁の枝番が追加された。被保険者本人は通常「00」、被扶養者は「01」「02」...と付番される。</blockquote>
+
+<h4>6.5 有効期限の確認</h4>
+<table>
+<thead><tr><th>保険種別</th><th>有効期限の特徴</th></tr></thead>
+<tbody>
+<tr><td>協会けんぽ</td><td>原則なし（退職時まで有効）</td></tr>
+<tr><td>健保組合</td><td>組合により異なる（1年更新の場合あり）</td></tr>
+<tr><td>共済組合</td><td>原則なし</td></tr>
+<tr><td>国民健康保険</td><td>通常1年（毎年更新）</td></tr>
+<tr><td>後期高齢者医療</td><td>通常1年（毎年8月更新）</td></tr>
+</tbody>
+</table>
+<blockquote><strong>レセプト実務での注意</strong>: 有効期限切れの保険証で受診した場合、資格喪失後受診として返戻される。受付時の有効期限確認は必須業務。</blockquote>
+
+<h4>6.6 マイナ保険証（マイナンバーカードによる資格確認）</h4>
+<p>2024年12月2日以降、従来の健康保険証は新規発行が停止され、<strong>マイナ保険証</strong>（マイナンバーカードの保険証利用）が基本となった。</p>
+<p><strong>移行スケジュール:</strong></p>
+<table>
+<thead><tr><th>時期</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>2021年3月</td><td>オンライン資格確認の運用開始</td></tr>
+<tr><td>2023年4月</td><td>医療機関でのオンライン資格確認導入が原則義務化</td></tr>
+<tr><td>2024年12月2日</td><td>従来の健康保険証の新規発行停止</td></tr>
+<tr><td>2025年12月1日</td><td>既存の健康保険証が失効（最長1年間の猶予）</td></tr>
+<tr><td>〜2026年3月末</td><td>期限切れ保険証でも保険診療可能な暫定措置</td></tr>
+<tr><td>2026年4月〜</td><td>期限切れ保険証は完全に使用不可</td></tr>
+</tbody>
+</table>
+<p><strong>マイナ保険証を持たない方への対応:</strong></p>
+<p>マイナンバーカードを持っていない、または保険証利用登録をしていない方には、保険者から<strong>「資格確認書」</strong>が無償で交付される。資格確認書の有効期間は最大5年。</p>
+<p><strong>マイナ保険証の仕組み:</strong></p>
+<pre><code>患者（マイナンバーカード提示）
+        │
+        ▼
+医療機関の顔認証付きカードリーダー
+        │
+        ▼ オンラインで照会
+支払基金・国保中央会の資格確認システム
+        │
+        ▼ 資格情報を返却
+医療機関の端末に表示
+（保険者番号・記号・番号・負担割合・限度額区分等）</code></pre>
+<p><strong>マイナ保険証のメリット（BPO事業者にとって）:</strong></p>
+<ul>
+<li>保険資格情報がリアルタイムで確認でき、資格過誤が大幅に減少する</li>
+<li>高額療養費の限度額区分が自動連携され、限度額適用認定証の提示が不要</li>
+<li>過去の薬剤情報・特定健診情報が閲覧可能になり、診療の質が向上する</li>
+<li>保険証の手入力が不要となり、入力ミスによる返戻が減少する</li>
+</ul>
+
+<h3 id="mod01-publicfund">7. 公費負担医療制度</h3>
+<p>公費負担医療とは、国または地方公共団体が医療費の全部または一部を公費（税金）で負担する制度である。レセプト業務では、主保険と公費を正しく組み合わせて請求する必要がある。</p>
+
+<h4>7.1 主要な公費負担制度一覧</h4>
+<table>
+<thead><tr><th>法別番号</th><th>制度名</th><th>根拠法</th><th>対象者</th><th>患者負担</th></tr></thead>
+<tbody>
+<tr><td><strong>10</strong></td><td>結核患者の適正医療</td><td>感染症法 第37条の2</td><td>結核患者</td><td>原則5%</td></tr>
+<tr><td><strong>12</strong></td><td>生活保護（医療扶助）</td><td>生活保護法</td><td>生活保護受給者</td><td><strong>自己負担なし</strong></td></tr>
+<tr><td><strong>13</strong></td><td>戦傷病者療養の給付</td><td>戦傷病者特別援護法</td><td>戦傷病者</td><td>なし</td></tr>
+<tr><td><strong>14</strong></td><td>戦傷病者更生医療</td><td>戦傷病者特別援護法</td><td>戦傷病者</td><td>なし</td></tr>
+<tr><td><strong>15</strong></td><td>自立支援医療（更生医療）</td><td>障害者総合支援法</td><td>18歳以上の身体障害者</td><td>原則1割（上限額あり）</td></tr>
+<tr><td><strong>16</strong></td><td>自立支援医療（育成医療）</td><td>障害者総合支援法</td><td>18歳未満の身体障害児</td><td>原則1割（上限額あり）</td></tr>
+<tr><td><strong>17</strong></td><td>療育の給付</td><td>児童福祉法</td><td>結核にかかっている児童</td><td>所得に応じた負担</td></tr>
+<tr><td><strong>18</strong></td><td>原爆（認定疾病医療）</td><td>原子爆弾被爆者援護法</td><td>被爆者（認定疾病）</td><td><strong>自己負担なし</strong></td></tr>
+<tr><td><strong>19</strong></td><td>原爆（一般疾病医療）</td><td>原子爆弾被爆者援護法</td><td>被爆者（一般疾病）</td><td><strong>自己負担なし</strong></td></tr>
+<tr><td><strong>21</strong></td><td>自立支援医療（精神通院医療）</td><td>障害者総合支援法</td><td>精神疾患で通院治療中の者</td><td>原則1割（上限額あり）</td></tr>
+<tr><td><strong>23</strong></td><td>養育医療</td><td>母子保健法</td><td>未熟児等</td><td>所得に応じた負担</td></tr>
+<tr><td><strong>28</strong></td><td>感染症入院医療</td><td>感染症法 第37条</td><td>一類・二類感染症等の入院患者</td><td>なし</td></tr>
+<tr><td><strong>29</strong></td><td>感染症一般医療</td><td>感染症法 第37条の2</td><td>新感染症の患者</td><td>なし</td></tr>
+<tr><td><strong>38</strong></td><td>肝炎治療・肝がん等</td><td>肝炎対策特別措置法等</td><td>B型・C型肝炎患者等</td><td>所得に応じた負担</td></tr>
+<tr><td><strong>51</strong></td><td>特定疾患治療研究事業</td><td>&mdash;</td><td>特定疾患患者（旧制度）</td><td>経過措置のみ</td></tr>
+<tr><td><strong>52</strong></td><td>小児慢性特定疾病</td><td>児童福祉法</td><td>18歳未満の小児慢性特定疾病患者</td><td>原則1割（上限額あり）</td></tr>
+<tr><td><strong>54</strong></td><td>難病医療費助成</td><td>難病法</td><td>指定難病患者</td><td>原則1割（上限額あり）</td></tr>
+<tr><td><strong>66</strong></td><td>石綿健康被害救済</td><td>石綿健康被害救済法</td><td>石綿（アスベスト）健康被害者</td><td>なし</td></tr>
+</tbody>
+</table>
+
+<h4>7.2 地方公費（地方単独事業）の例</h4>
+<p>都道府県や市町村が独自に実施する医療費助成制度もある。これらは法別番号が80番台で付番されることが多い（地域により異なる）。</p>
+<table>
+<thead><tr><th>法別番号（例:東京都）</th><th>制度名</th><th>対象者</th></tr></thead>
+<tbody>
+<tr><td>80</td><td>心身障害者医療費助成（マル障）</td><td>身体障害者手帳1・2級等</td></tr>
+<tr><td>81</td><td>ひとり親家庭等医療費助成（マル親）</td><td>ひとり親家庭の親と子</td></tr>
+<tr><td>88</td><td>乳幼児・義務教育就学児医療費助成（マル乳・マル子）</td><td>乳幼児〜中学生</td></tr>
+<tr><td>89</td><td>高校生等医療費助成（マル青）</td><td>高校生等</td></tr>
+</tbody>
+</table>
+<blockquote><strong>注意</strong>: 地方公費の法別番号・対象者・助成内容は自治体ごとに異なる。BPO事業者として業務を受託する際は、対象医療機関が所在する自治体の制度を必ず確認する。</blockquote>
+
+<h3 id="mod01-priority">8. 保険の優先順位と併用ルール</h3>
+
+<h4>8.1 基本原則</h4>
+<p>医療費の請求には、以下の優先順位が適用される。</p>
+<ol>
+<li><strong>労災保険</strong> / <strong>自賠責保険</strong>: 業務上の傷病や交通事故は、健康保険ではなく労災保険・自賠責保険が最優先</li>
+<li><strong>主保険</strong>（健康保険・国保・後期高齢者医療等）: 通常の医療費はまず主保険に請求</li>
+<li><strong>公費負担医療</strong>: 主保険で賄えない部分を公費で負担</li>
+</ol>
+
+<h4>8.2 主保険＋公費の組み合わせパターン</h4>
+<pre><code>パターン1: 主保険のみ（公費なし）
+  医療費 = 保険者負担（7〜9割） + 患者負担（1〜3割）
+
+パターン2: 主保険 + 公費1つ
+  医療費 = 保険者負担 + 公費負担 + 患者負担（公費により軽減）
+
+パターン3: 主保険 + 公費2つ
+  医療費 = 保険者負担 + 第一公費負担 + 第二公費負担 + 患者負担
+
+パターン4: 公費単独（生活保護等）
+  医療費 = 全額公費負担</code></pre>
+
+<h4>8.3 請求先の振り分け</h4>
+<table>
+<thead><tr><th>主保険の種類</th><th>公費の有無</th><th>レセプト提出先</th></tr></thead>
+<tbody>
+<tr><td>社保（協会けんぽ・健保組合・共済）</td><td>公費なし</td><td><strong>支払基金</strong></td></tr>
+<tr><td>社保 + 公費</td><td>公費あり</td><td><strong>支払基金</strong>（公費分も含めて）</td></tr>
+<tr><td>国保</td><td>公費なし</td><td><strong>国保連合会</strong></td></tr>
+<tr><td>国保 + 公費</td><td>公費あり</td><td><strong>国保連合会</strong>（公費分も含めて）</td></tr>
+<tr><td>後期高齢者</td><td>公費なし</td><td><strong>支払基金</strong> or <strong>国保連合会</strong>（地域による）</td></tr>
+<tr><td>公費単独（生活保護等）</td><td>主保険なし</td><td><strong>支払基金</strong> or <strong>国保連合会</strong>（公費の種類による）</td></tr>
+</tbody>
+</table>
+
+<h4>8.4 具体例</h4>
+<p><strong>【例1】協会けんぽの被保険者が難病（法別54）の認定を受けている場合</strong></p>
+<pre><code>医療費総額: 50,000円
+
+①主保険（協会けんぽ）: 50,000 × 0.7 = 35,000円
+②患者の本来負担: 50,000 × 0.3 = 15,000円
+③難病公費が②のうちの2割分を負担: 50,000 × 0.2 = 10,000円
+④患者の実際の負担: 50,000 × 0.1 = 5,000円（自己負担上限額以内の場合）
+
+レセプト: 支払基金に「社保＋公費54」で提出</code></pre>
+
+<p><strong>【例2】生活保護受給者（医療保険未加入）が受診した場合</strong></p>
+<pre><code>医療費総額: 30,000円
+
+全額が生活保護（法別12）による医療扶助で負担
+患者の窓口負担: 0円
+
+レセプト: 「公費単独（12）」で提出</code></pre>
+
+<h4>8.5 保険適用外のケース</h4>
+<table>
+<thead><tr><th>ケース</th><th>適用される制度</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>業務上の傷病・通勤災害</td><td><strong>労災保険</strong></td><td>労災指定医療機関で受診。レセプトではなく労災の様式で請求</td></tr>
+<tr><td>交通事故（第三者行為）</td><td><strong>自賠責保険</strong></td><td>自賠責→任意保険の順。健康保険を使う場合は「第三者行為による傷病届」が必要</td></tr>
+<tr><td>自費診療</td><td>なし</td><td>美容整形、先進医療の自費部分、予防接種等</td></tr>
+</tbody>
+</table>
+<blockquote><strong>実務での注意</strong>: 患者が「交通事故で怪我をした」と申告した場合、安易に健康保険で処理せず、自賠責・労災の確認が必要。誤って健康保険で請求すると、後から保険者から医療機関に返戻が来る。</blockquote>
+
+<h3 id="mod01-oqs">9. オンライン資格確認とマイナ保険証</h3>
+
+<h4>9.1 オンライン資格確認の経緯</h4>
+<table>
+<thead><tr><th>年月</th><th>出来事</th></tr></thead>
+<tbody>
+<tr><td>2021年3月</td><td>オンライン資格確認の運用開始（任意導入）</td></tr>
+<tr><td>2023年4月</td><td>保険医療機関・薬局でのオンライン資格確認導入が<strong>原則義務化</strong></td></tr>
+<tr><td>2024年12月</td><td>従来の保険証の新規発行停止、マイナ保険証への移行開始</td></tr>
+<tr><td>2025年12月</td><td>従来の保険証が完全失効</td></tr>
+</tbody>
+</table>
+
+<h4>9.2 資格確認の仕組み</h4>
+<pre><code>①患者がマイナンバーカードを提示
+        │
+        ▼
+②医療機関の顔認証付きカードリーダーで本人確認
+  （顔認証 or 暗証番号入力）
+        │
+        ▼
+③カードリーダーからオンラインで照会
+        │
+        ▼
+④社会保険診療報酬支払基金（中間サーバー）
+  ・各保険者から登録された資格情報を保持
+  ・リアルタイムで最新の資格情報を返却
+        │
+        ▼
+⑤医療機関の端末に資格情報が表示される
+  ・保険者番号、記号、番号、枝番
+  ・負担割合
+  ・限度額区分
+  ・薬剤情報（患者同意時）
+  ・特定健診情報（患者同意時）</code></pre>
+
+<h4>9.3 資格確認ができない場合の対応</h4>
+<p>オンライン資格確認ができない場合（システム障害、カードの読み取り不可等）の対応手順:</p>
+<ol>
+<li><strong>資格確認書の確認</strong>: マイナ保険証を持たない患者は資格確認書を持参しているはず</li>
+<li><strong>被保険者資格申立書の活用</strong>: 保険証も資格確認書も持っていない場合、患者に「被保険者資格申立書」を記載してもらい、後日確認する</li>
+<li><strong>10割請求の回避</strong>: 可能な限り保険診療として受け付け、後日資格確認を行う運用が推奨されている</li>
+</ol>
+
+<h4>9.4 BPO事業者への影響</h4>
+<table>
+<thead><tr><th>項目</th><th>従来</th><th>オンライン資格確認後</th></tr></thead>
+<tbody>
+<tr><td>保険証情報の入力</td><td>手入力（入力ミスのリスク高）</td><td>自動取得（入力ミス大幅減）</td></tr>
+<tr><td>資格過誤の検知</td><td>月末〜翌月のレセプト提出時に発覚</td><td>受診時にリアルタイムで検知可能</td></tr>
+<tr><td>返戻の発生率</td><td>資格関連の返戻が一定数あった</td><td>資格関連の返戻が大幅に減少</td></tr>
+<tr><td>限度額確認</td><td>限度額適用認定証の提示が必要</td><td>システム上で自動連携</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod01-bpo">10. BPO事業者としての視点</h3>
+
+<h4>10.1 なぜ保険制度の理解がBPOに必要か</h4>
+<p>レセプトBPO事業者は、医療機関に代わって（または医療機関と協働して）レセプトの作成・点検・請求を行う。保険制度を正しく理解していなければ、以下の業務を遂行できない。</p>
+<ul>
+<li><strong>保険種別の正確な判別</strong>: 保険者番号からどの保険制度かを即座に判断する</li>
+<li><strong>負担割合の検証</strong>: 年齢・所得区分に基づく負担割合がレセプトに正しく反映されているか確認する</li>
+<li><strong>公費併用の適切な処理</strong>: 複数の公費が併用される場合、請求先と負担割合を正しく振り分ける</li>
+<li><strong>資格確認</strong>: 保険資格が有効であることを確認し、資格過誤を未然に防ぐ</li>
+</ul>
+
+<h4>10.2 保険証情報の誤入力がレセプト返戻に直結する事例</h4>
+<table>
+<thead><tr><th>誤入力の内容</th><th>結果</th><th>影響</th></tr></thead>
+<tbody>
+<tr><td>保険者番号の入力ミス（1桁でも間違い）</td><td>レセプトが該当保険者に届かず返戻</td><td>再請求までの入金遅延（1〜2か月）</td></tr>
+<tr><td>法別番号の読み間違い（01と06の混同等）</td><td>請求先保険者が異なり返戻</td><td>再請求の事務コスト発生</td></tr>
+<tr><td>本人/家族の区分誤り</td><td>負担割合の不一致で返戻</td><td>患者への追加請求または返金が発生</td></tr>
+<tr><td>有効期限切れの保険証で処理</td><td>資格喪失後受診として返戻</td><td>患者への10割請求リスク</td></tr>
+<tr><td>枝番の未入力・誤入力</td><td>個人特定ができず照会</td><td>処理遅延</td></tr>
+</tbody>
+</table>
+
+<h4>10.3 資格過誤の発見とリカバリー</h4>
+<p><strong>資格過誤</strong>とは、保険資格を喪失した後に旧保険証で受診してしまうケースを指す（例: 転職後に前の会社の保険証で受診）。</p>
+<p><strong>発見のタイミング:</strong></p>
+<ol>
+<li><strong>受付時</strong>（オンライン資格確認で即座に検知可能 &mdash; 最善）</li>
+<li><strong>レセプト点検時</strong>（BPO事業者が点検で気づく）</li>
+<li><strong>審査支払機関の審査時</strong>（返戻として戻ってくる）</li>
+</ol>
+<p><strong>リカバリー手順:</strong></p>
+<ol>
+<li>返戻レセプトの内容を確認し、資格過誤であることを特定</li>
+<li>患者に連絡し、現在の保険情報を確認</li>
+<li>正しい保険情報でレセプトを再作成・再提出</li>
+<li>場合によっては患者に窓口負担の差額を請求</li>
+</ol>
+
+<h4>10.4 p012における保険確認業務の位置付け</h4>
+<pre><code>p012のサービスフロー:
+
+受託先医療機関 ──→ 患者情報・保険情報を共有
+                          │
+                    ┌─────▼──────┐
+                    │ 保険資格確認  │ ← ★本モジュールの知識が直結
+                    │ ・保険種別判別│
+                    │ ・負担割合確認│
+                    │ ・公費確認    │
+                    └─────┬──────┘
+                          │
+                    ┌─────▼──────┐
+                    │ レセプト作成  │ ← Module 04-06
+                    └─────┬──────┘
+                          │
+                    ┌─────▼──────┐
+                    │ レセプト点検  │ ← Module 07
+                    │ ・保険情報の  │
+                    │  整合性チェック│
+                    └─────┬──────┘
+                          │
+                    ┌─────▼──────┐
+                    │ 請求・提出    │ ← Module 09
+                    └──────────────┘</code></pre>
+<p>保険確認業務は、BPOサービスの<strong>入口（ゲートキーパー）</strong>であり、ここでの誤りはすべての後工程に波及する。本モジュールの知識は、p012のサービス品質を根底から支える基盤である。</p>
+
+<h3 id="mod01-check">11. チェックリスト</h3>
+<ul class="checklist">
+<li>国民皆保険制度が達成されたのは何年か？その背景を説明できるか？</li>
+<li>日本の医療制度の3つの特徴（国民皆保険・フリーアクセス・現物給付）を説明できるか？</li>
+<li>医療費の流れ（患者→医療機関→審査支払機関→保険者）を図示できるか？</li>
+<li>被用者保険と国民健康保険の違いを3つ以上挙げられるか？</li>
+<li>保険者番号が6桁と8桁の違いは何か？</li>
+<li>法別番号01, 06, 31, 32, 34, 39が何の保険かを即答できるか？</li>
+<li>6歳未満・6〜69歳・70〜74歳・75歳以上のそれぞれの負担割合を答えられるか？</li>
+<li>75歳以上の1割・2割・3割の判定基準を説明できるか？</li>
+<li>被保険者と被扶養者の違いを説明できるか？被扶養者の収入要件は？</li>
+<li>保険者番号の8桁の構成（法別番号・都道府県番号・保険者別番号・検証番号）を説明できるか？</li>
+<li>公費負担医療の主要な法別番号（12, 15, 16, 21, 52, 54）と制度名を対応付けられるか？</li>
+<li>社保＋公費のレセプトはどこに提出するか？国保＋公費の場合は？</li>
+<li>労災・自賠責が健康保険に優先する理由を説明できるか？</li>
+<li>オンライン資格確認の仕組みと義務化の経緯を説明できるか？</li>
+<li>保険証情報の誤入力がBPO事業にどのような影響を与えるか、3つ以上の事例を挙げられるか？</li>
+</ul>
+
+<h3 id="mod01-exercises">12. 演習問題</h3>
+
+<h4>演習1: 保険者番号からの保険種別判定</h4>
+<p>以下の保険者番号から、保険の種類と都道府県を特定せよ。</p>
+<table>
+<thead><tr><th>#</th><th>保険者番号</th><th>保険種別（回答欄）</th><th>都道府県（回答欄）</th></tr></thead>
+<tbody>
+<tr><td>(1)</td><td>01130015</td><td></td><td></td></tr>
+<tr><td>(2)</td><td>06270102</td><td></td><td></td></tr>
+<tr><td>(3)</td><td>39011302</td><td></td><td></td></tr>
+<tr><td>(4)</td><td>130045</td><td></td><td></td></tr>
+<tr><td>(5)</td><td>34140018</td><td></td><td></td></tr>
+</tbody>
+</table>
+<details>
+<summary>&#9654; 解答を見る</summary>
+<div class="answer">
+<table>
+<thead><tr><th>#</th><th>保険者番号</th><th>保険種別</th><th>都道府県</th></tr></thead>
+<tbody>
+<tr><td>(1)</td><td><strong>01</strong> 13 001 5</td><td>協会けんぽ（法別01）</td><td>東京都（13）</td></tr>
+<tr><td>(2)</td><td><strong>06</strong> 27 010 2</td><td>健保組合（法別06）</td><td>大阪府（27）</td></tr>
+<tr><td>(3)</td><td><strong>39</strong> 01 130 2</td><td>後期高齢者医療（法別39）</td><td>北海道（01）</td></tr>
+<tr><td>(4)</td><td>13 004 5（6桁）</td><td>国民健康保険（法別なし）</td><td>東京都（13）</td></tr>
+<tr><td>(5)</td><td><strong>34</strong> 14 001 8</td><td>私学共済（法別34）</td><td>神奈川県（14）</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+
+<h4>演習2: 負担割合の判定</h4>
+<p>以下の患者情報から、窓口負担割合と保険者への請求割合を答えよ。</p>
+<p><strong>(1)</strong> 患者A: 45歳、会社員、協会けんぽ加入</p>
+<p><strong>(2)</strong> 患者B: 4歳、患者Aの子（被扶養者）</p>
+<p><strong>(3)</strong> 患者C: 73歳、国保加入、課税所得120万円</p>
+<p><strong>(4)</strong> 患者D: 80歳、後期高齢者医療、課税所得30万円、年金収入＋その他所得=220万円（単身世帯）</p>
+<p><strong>(5)</strong> 患者E: 68歳、生活保護受給者、国保未加入</p>
+<details>
+<summary>&#9654; 解答を見る</summary>
+<div class="answer">
+<table>
+<thead><tr><th>#</th><th>患者</th><th>窓口負担割合</th><th>保険者請求割合</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>(1)</td><td>45歳・会社員</td><td><strong>3割</strong></td><td>7割</td><td>6〜69歳は一律3割</td></tr>
+<tr><td>(2)</td><td>4歳・被扶養者</td><td><strong>2割</strong></td><td>8割</td><td>6歳未満（義務教育就学前）は2割</td></tr>
+<tr><td>(3)</td><td>73歳・国保・課税所得120万円</td><td><strong>2割</strong></td><td>8割</td><td>70〜74歳で現役並み所得（145万円以上）未満</td></tr>
+<tr><td>(4)</td><td>80歳・後期高齢者・課税所得30万円・年金等220万円（単身）</td><td><strong>2割</strong></td><td>8割</td><td>課税所得28万円以上かつ年金収入等200万円以上（単身）→一般II</td></tr>
+<tr><td>(5)</td><td>68歳・生活保護</td><td><strong>0割（全額公費）</strong></td><td>&mdash;</td><td>生活保護（法別12）で医療扶助。公費単独で全額負担</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+
+<h4>演習3: 公費併用の請求先判定</h4>
+<p>以下のケースで、レセプトの提出先と請求構成を答えよ。</p>
+<p><strong>(1)</strong> 健保組合（法別06）加入の40歳が、指定難病（法別54）の認定を受けて受診</p>
+<p><strong>(2)</strong> 市町村国保加入の30歳が、精神通院医療（法別21）の受給者証を持って受診</p>
+<p><strong>(3)</strong> 生活保護受給者（医療保険未加入）の55歳が受診</p>
+<details>
+<summary>&#9654; 解答を見る</summary>
+<div class="answer">
+<p><strong>(1)</strong> 健保組合 + 難病（54）</p>
+<ul>
+<li>提出先: <strong>支払基金</strong></li>
+<li>構成: 主保険（健保組合）7割 + 難病公費（54）が残りの一部を負担 + 患者負担（原則1割、上限額あり）</li>
+</ul>
+<p><strong>(2)</strong> 国保 + 精神通院（21）</p>
+<ul>
+<li>提出先: <strong>国保連合会</strong></li>
+<li>構成: 主保険（国保）7割 + 精神通院公費（21）が残りの2割を負担 + 患者負担（原則1割、上限額あり）</li>
+</ul>
+<p><strong>(3)</strong> 生活保護単独（12）</p>
+<ul>
+<li>提出先: <strong>支払基金</strong>（生活保護の医療扶助は福祉事務所経由で支払基金に請求）</li>
+<li>構成: 公費（生活保護 12）が10割負担、患者負担なし</li>
+</ul>
+</div>
+</details>
+
+<h4>13. Q&amp;A</h4>
+<blockquote>このセクションは、モジュールレビュー時の質疑応答を蓄積する場所です。学習中に生じた疑問とその回答をここに追記していきます。</blockquote>
+<p>（レビュー後に蓄積）</p>
+
+<h4>参考情報</h4>
+<ul>
+<li>厚生労働省「我が国の医療保険について」</li>
+<li>厚生労働省「後期高齢者の窓口負担割合の変更等（令和3年法律改正について）」</li>
+<li>厚生労働省「保険者番号等の設定について」（昭和51年庁保発第34号）</li>
+<li>社会保険診療報酬支払基金「公費負担医療制度のしくみ」</li>
+<li>政府広報オンライン「マイナ保険証 2024年12月、マイナ保険証を基本とする仕組みへ」</li>
+<li>政府広報オンライン「後期高齢者医療制度 医療費の窓口負担割合はどれくらい？」</li>
+</ul>
+</section>
+
+<hr class="module-divider">
+
+<!-- ========== MODULE 02: SHINRYO HOUSHU ========== -->
+<section id="mod02" class="module-card">
+<h2>モジュール02: 診療報酬制度の構造</h2>
+
+<h3 id="mod02-goals">1. このモジュールで学ぶこと</h3>
+<p>本モジュールを修了すると、以下を説明・実行できるようになる。</p>
+<ol>
+<li><strong>診療報酬の基本構造</strong> &mdash; 「1点＝10円」の仕組み、点数表の全体構造、基本診療料と特掲診療料の違いを説明できる</li>
+<li><strong>点数表の引き方</strong> &mdash; しろぼんねっと等を使い、任意の診療行為の点数・算定要件を自力で調べられる</li>
+<li><strong>施設基準と加算の関係</strong> &mdash; 施設基準の届出制度を理解し、加算の算定可否を判断できる</li>
+<li><strong>改定サイクルへの対応</strong> &mdash; 2年に1度の改定がBPO業務に与える影響を理解し、対応手順を説明できる</li>
+<li><strong>BPO事業者としての活用視点</strong> &mdash; 算定漏れ分析や施設基準管理の付加価値を言語化できる</li>
+</ol>
+
+<h3 id="mod02-overview">2. 診療報酬制度の概要</h3>
+
+<h4>2.1 診療報酬とは何か</h4>
+<p>診療報酬とは、保険医療機関が患者に対して行った保険診療の対価として、保険者（健康保険組合、協会けんぽ、市区町村等）から支払われる報酬のことである。</p>
+<p>医療機関は提供した医療サービスを「点数」で算定し、審査支払機関（社会保険診療報酬支払基金・国民健康保険団体連合会）を経由して保険者に請求する。これがレセプト（診療報酬明細書）による請求の仕組みである。</p>
+<pre><code>患者 → 医療機関 → レセプト → 審査支払機関 → 保険者
+         ↑ 一部負担金    ↑ 診療報酬請求      ↑ 保険料
+         （1〜3割）       （7〜9割）</code></pre>
+
+<h4>2.2 「1点＝10円」の仕組み</h4>
+<p>診療報酬点数表に記載されたすべての点数は、<strong>1点＝10円</strong>で換算される。</p>
+<table>
+<thead><tr><th>例</th><th>点数</th><th>金額</th></tr></thead>
+<tbody>
+<tr><td>初診料</td><td>291点</td><td>2,910円</td></tr>
+<tr><td>再診料</td><td>75点</td><td>750円</td></tr>
+<tr><td>血液一般検査</td><td>21点</td><td>210円</td></tr>
+</tbody>
+</table>
+<blockquote><strong>実務ポイント</strong>: 1点＝10円は全国一律。歯科も同じ。ただし労災保険は1点＝12円、自賠責保険は1点＝12円（新基準）など、保険の種類によって単価が異なる場合がある。</blockquote>
+
+<h4>2.3 診療報酬の決定プロセス</h4>
+<ol>
+<li><strong>内閣が改定率を決定</strong> &mdash; 予算編成過程で本体改定率（＋○％等）を決定</li>
+<li><strong>中央社会保険医療協議会（中医協）が審議</strong> &mdash; 支払側（保険者）・診療側（医師等）・公益委員の三者構成で個別の点数配分を議論</li>
+<li><strong>厚生労働大臣が告示</strong> &mdash; 中医協の答申を受け、点数表を官報で告示</li>
+<li><strong>関連通知の発出</strong> &mdash; 算定要件の詳細、施設基準の具体的内容を通知で明示</li>
+<li><strong>疑義解釈の公開</strong> &mdash; 現場からの質問に対するQ&amp;A（事務連絡）を順次公開</li>
+</ol>
+
+<h4>2.4 2年に1度の改定サイクル</h4>
+<p>診療報酬は<strong>偶数年度に改定</strong>される（薬価は毎年改定）。直近の改定履歴は以下の通り。</p>
+<table>
+<thead><tr><th>改定年度</th><th>施行日</th><th>本体改定率</th><th>特記事項</th></tr></thead>
+<tbody>
+<tr><td>2024年度（令和6年度）</td><td>2024年6月1日</td><td>+0.88%</td><td>医療DX推進、賃上げ対応</td></tr>
+<tr><td>2026年度（令和8年度）</td><td>2026年6月1日</td><td>+3.09%</td><td>30年ぶり高水準、物価対応</td></tr>
+</tbody>
+</table>
+<blockquote><strong>注意</strong>: 2024年度改定から、薬価改定は4月施行、本体改定は<strong>6月施行</strong>に変更された。レセコンのマスタ更新タイミングに注意が必要。</blockquote>
+
+<h3 id="mod02-structure">3. 点数表の全体構造</h3>
+<p>医科診療報酬点数表（別表第一）は、大きく以下のように構成されている。</p>
+
+<h4>3.1 全体の章立て</h4>
+<table>
+<thead><tr><th>章</th><th>名称</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>第1章</strong></td><td><strong>基本診療料</strong></td><td>初・再診料、入院料等 &mdash; 診療の「基本料金」</td></tr>
+<tr><td><strong>第2章</strong></td><td><strong>特掲診療料</strong></td><td>医学管理、検査、投薬、手術等 &mdash; 個別の医療行為に対する報酬</td></tr>
+<tr><td>第3章</td><td>介護老人保健施設入所者に係る診療料</td><td>老健入所者の特例</td></tr>
+<tr><td>第4章</td><td>経過措置</td><td>改定時の経過措置規定</td></tr>
+</tbody>
+</table>
+<p>レセプト実務で日常的に扱うのは<strong>第1章（基本診療料）</strong>と<strong>第2章（特掲診療料）</strong>である。</p>
+
+<h4>3.2 第1章: 基本診療料の構成</h4>
+<p>基本診療料は、すべての患者に共通して算定される「診療の入口」にあたる点数である。</p>
+<table>
+<thead><tr><th>部</th><th>節</th><th>主な項目</th><th>代表的な点数（2024年度）</th></tr></thead>
+<tbody>
+<tr><td><strong>第1部 初・再診料</strong></td><td>第1節 初診料</td><td>A000 初診料</td><td>291点</td></tr>
+<tr><td></td><td>第2節 再診料</td><td>A001 再診料</td><td>75点</td></tr>
+<tr><td></td><td></td><td>A002 外来診療料</td><td>76点（200床以上病院）</td></tr>
+<tr><td><strong>第2部 入院料等</strong></td><td>第1節 入院基本料</td><td>A100 一般病棟入院基本料</td><td>612〜1,688点/日</td></tr>
+<tr><td></td><td></td><td>A101 療養病棟入院基本料</td><td>813〜968点/日</td></tr>
+<tr><td></td><td></td><td>A104 特定機能病院入院基本料</td><td>991〜1,822点/日</td></tr>
+<tr><td></td><td></td><td>A108 有床診療所入院基本料</td><td>611〜843点/日</td></tr>
+<tr><td></td><td>第2節 入院基本料等加算</td><td>A200〜 各種加算</td><td>施設基準に応じて</td></tr>
+<tr><td></td><td>第3節 特定入院料</td><td>A300〜 各種特定入院料</td><td>ICU等の特定病棟</td></tr>
+<tr><td></td><td>第4節 短期滞在手術等基本料</td><td>A400</td><td>日帰り〜4泊5日手術</td></tr>
+</tbody>
+</table>
+
+<h4>3.3 第2章: 特掲診療料の構成</h4>
+<p>特掲診療料は14部で構成され、個別の医療行為ごとの点数を定めている。</p>
+<table>
+<thead><tr><th>部</th><th>名称</th><th>主な内容</th><th>代表的な項目と点数</th></tr></thead>
+<tbody>
+<tr><td><strong>第1部</strong></td><td><strong>医学管理等</strong></td><td>疾患管理、指導料</td><td>特定疾患療養管理料 225点（診療所）</td></tr>
+<tr><td><strong>第2部</strong></td><td><strong>在宅医療</strong></td><td>訪問診療、在宅管理</td><td>在宅患者訪問診療料(I)-1 888点</td></tr>
+<tr><td><strong>第3部</strong></td><td><strong>検査</strong></td><td>血液検査、生体検査等</td><td>血液一般検査 21点</td></tr>
+<tr><td><strong>第4部</strong></td><td><strong>画像診断</strong></td><td>X線、CT、MRI等</td><td>単純X線撮影 68点</td></tr>
+<tr><td><strong>第5部</strong></td><td><strong>投薬</strong></td><td>処方料、薬剤料等</td><td>処方料 42点、処方箋料 68点</td></tr>
+<tr><td><strong>第6部</strong></td><td><strong>注射</strong></td><td>点滴、皮下注射等</td><td>点滴注射 98点（500mL以上）</td></tr>
+<tr><td><strong>第7部</strong></td><td><strong>リハビリテーション</strong></td><td>理学療法、作業療法等</td><td>脳血管疾患等リハ(I) 245点</td></tr>
+<tr><td><strong>第8部</strong></td><td><strong>精神科専門療法</strong></td><td>精神科デイケア等</td><td>通院精神療法 330点</td></tr>
+<tr><td><strong>第9部</strong></td><td><strong>処置</strong></td><td>創傷処置、消炎鎮痛等</td><td>創傷処置（100cm2未満）55点</td></tr>
+<tr><td><strong>第10部</strong></td><td><strong>手術</strong></td><td>各種手術</td><td>虫垂切除術 6,210点</td></tr>
+<tr><td><strong>第11部</strong></td><td><strong>麻酔</strong></td><td>全身麻酔、局所麻酔</td><td>全身麻酔（2時間まで）6,000点</td></tr>
+<tr><td><strong>第12部</strong></td><td><strong>放射線治療</strong></td><td>放射線照射</td><td>体外照射（1回）840点</td></tr>
+<tr><td><strong>第13部</strong></td><td><strong>病理診断</strong></td><td>組織診、細胞診</td><td>組織診断料 520点</td></tr>
+<tr><td><strong>第14部</strong></td><td><strong>その他</strong></td><td>&mdash;</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+<blockquote><strong>覚え方のコツ</strong>: 第2章の構成は、外来診療の流れに沿って並んでいる。「管理 → 在宅 → 検査 → 画像 → 投薬 → 注射 → リハ → 精神 → 処置 → 手術 → 麻酔 → 放射線 → 病理」。この順序感覚を身につけると、点数表を引くスピードが格段に上がる。</blockquote>
+
+<h3 id="mod02-basic">4. 基本診療料の詳細</h3>
+
+<h4>4.1 初診料と再診料の違い</h4>
+<table>
+<thead><tr><th>項目</th><th>初診料 A000</th><th>再診料 A001</th><th>外来診療料 A002</th></tr></thead>
+<tbody>
+<tr><td>点数</td><td>291点</td><td>75点</td><td>76点</td></tr>
+<tr><td>対象</td><td>初めての受診、または治療中断後の受診</td><td>2回目以降の受診</td><td>200床以上病院の再診</td></tr>
+<tr><td>算定回数</td><td>傷病1つにつき1回</td><td>受診のたびに算定可</td><td>受診のたびに算定可</td></tr>
+</tbody>
+</table>
+<p><strong>同一医療機関での初診・再診の判定ルール:</strong></p>
+<ul>
+<li>患者が任意に診療を中止し、<strong>1か月以上</strong>経過した後に再度同一の医療機関を受診した場合 → <strong>初診料</strong>を算定</li>
+<li>慢性疾患等で明らかに同一の疾病の継続である場合 → 期間にかかわらず<strong>再診料</strong></li>
+<li>同一日に同一医療機関の2つ目の診療科を受診 → 2つ目は初診料<strong>146点</strong>（半額ではなく別途規定）</li>
+</ul>
+
+<h4>4.2 初診料の算定要件</h4>
+<ul>
+<li><strong>紹介状なし初診</strong>: 特定機能病院および一般病床200床以上の地域医療支援病院等では、紹介状なしの初診に<strong>選定療養費</strong>（7,000円以上）を患者から徴収する義務がある（2024年度〜）。これは診療報酬とは別の患者負担。</li>
+<li><strong>健康診断で疾病が見つかった場合</strong>: 健診当日に治療を開始すれば初診料を算定可能</li>
+<li><strong>情報通信機器を用いた初診</strong>: 253点（対面の初診料291点より低い）</li>
+</ul>
+
+<h4>4.3 外来管理加算（52点）</h4>
+<p>再診料に加算できる外来管理加算（52点）は、頻出だが算定条件が厳しい。</p>
+<p><strong>算定できる条件:</strong></p>
+<ul>
+<li>再診料を算定する診察であること</li>
+<li>計画的な医学管理を行った場合</li>
+</ul>
+<p><strong>算定できない条件（重要）:</strong></p>
+<ul>
+<li>同一日に以下を実施した場合は算定不可:
+  <ul>
+  <li>処置（創傷処置等）</li>
+  <li>リハビリテーション</li>
+  <li>精神科専門療法</li>
+  <li>手術</li>
+  <li>麻酔</li>
+  <li>放射線治療</li>
+  <li>検査（超音波検査、眼底検査等の一部）</li>
+  <li>病理診断</li>
+  </ul>
+</li>
+<li>外来診療料（200床以上病院）を算定する場合も不可</li>
+</ul>
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPOチェックポイント</div>
+外来管理加算は算定漏れと誤算定の両方が多い項目。処置を行った日に加算が付いていないか（正しい）、処置のない日に加算が抜けていないか（算定漏れ）を重点チェックする。
+</div>
+
+<h4>4.4 時間外等の加算</h4>
+<table>
+<thead><tr><th>加算</th><th>初診料への加算</th><th>再診料への加算</th><th>適用時間帯</th></tr></thead>
+<tbody>
+<tr><td>時間外加算</td><td>+85点</td><td>+65点</td><td>診療時間外（各医療機関の定める時間外）</td></tr>
+<tr><td>休日加算</td><td>+250点</td><td>+190点</td><td>日曜・祝日・年末年始（12/29〜1/3）</td></tr>
+<tr><td>深夜加算</td><td>+480点</td><td>+420点</td><td>22:00〜6:00</td></tr>
+<tr><td>夜間・早朝等加算</td><td>+50点</td><td>+50点</td><td>平日18:00〜翌8:00、土曜12:00〜翌8:00（診療所のみ）</td></tr>
+</tbody>
+</table>
+<p><strong>時間外特例加算</strong>（小児科等の特例）: 6歳未満の乳幼児を診療した場合、上記に加えて乳幼児加算（初診+75点、再診+38点）を重複算定できる。</p>
+
+<h4>4.5 具体例: 平日夜間に初診で受診した場合の点数計算</h4>
+<p><strong>ケース</strong>: 40歳の会社員が、平日20時に診療所を初めて受診した。</p>
+<table>
+<thead><tr><th>項目</th><th>点数</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>初診料</td><td>291点</td><td>A000</td></tr>
+<tr><td>夜間・早朝等加算</td><td>50点</td><td>18:00以降の受診（診療所）</td></tr>
+<tr><td>医療情報取得加算1</td><td>3点</td><td>マイナ保険証未使用の場合</td></tr>
+<tr><td><strong>合計（基本診療料分）</strong></td><td><strong>344点</strong></td><td><strong>3,440円</strong></td></tr>
+</tbody>
+</table>
+<p>患者負担（3割）: 3,440円 &times; 0.3 ＝ 1,032円 → <strong>1,030円</strong>（10円未満四捨五入）</p>
+<blockquote><strong>注意</strong>: この例は基本診療料のみ。実際には検査・投薬等の特掲診療料が加わる。</blockquote>
+
+<h3 id="mod02-facility">5. 施設基準と届出制度</h3>
+
+<h4>5.1 施設基準とは何か</h4>
+<p>施設基準とは、特定の点数を算定するために医療機関が満たすべき<strong>人員配置・設備・体制等の条件</strong>のことである。</p>
+<table>
+<thead><tr><th>種類</th><th>内容</th><th>例</th></tr></thead>
+<tbody>
+<tr><td><strong>基本診療料の施設基準</strong></td><td>入院基本料のランク等を決定</td><td>急性期一般入院料1（7対1看護配置）</td></tr>
+<tr><td><strong>特掲診療料の施設基準</strong></td><td>特定の検査・手術・管理料の算定要件</td><td>機能強化加算、在宅療養支援診療所</td></tr>
+</tbody>
+</table>
+
+<h4>5.2 届出の仕組み</h4>
+<pre><code>医療機関 → 届出書類を作成 → 地方厚生局に提出 → 審査 → 受理通知
+                                                       ↓
+                                              受理日以降、算定可能</code></pre>
+<ul>
+<li>届出は<strong>地方厚生(支)局長</strong>宛てに行う</li>
+<li>届出が受理された日からでないと算定できない（届出前の遡及算定は不可）</li>
+<li>施設基準を満たさなくなった場合は<strong>速やかに届出の辞退</strong>が必要</li>
+<li>毎年7月1日時点の<strong>定例報告</strong>が義務付けられている</li>
+</ul>
+
+<h4>5.3 基本診療料の施設基準: 入院基本料の例</h4>
+<table>
+<thead><tr><th>区分</th><th>看護配置</th><th>点数（2024年度）</th><th>主な追加要件</th></tr></thead>
+<tbody>
+<tr><td>急性期一般入院料1</td><td>7対1</td><td>1,688点/日</td><td>重症度、医療・看護必要度基準あり、平均在院日数16日以内</td></tr>
+<tr><td>急性期一般入院料2</td><td>7対1</td><td>1,644点/日</td><td>必要度基準が入院料1より緩和</td></tr>
+<tr><td>急性期一般入院料3</td><td>7対1</td><td>1,569点/日</td><td>さらに緩和</td></tr>
+<tr><td>急性期一般入院料4</td><td>10対1</td><td>1,462点/日</td><td>平均在院日数21日以内</td></tr>
+<tr><td>急性期一般入院料5</td><td>10対1</td><td>1,451点/日</td><td>&mdash;</td></tr>
+<tr><td>急性期一般入院料6</td><td>10対1</td><td>1,404点/日</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+<blockquote><strong>看護配置「7対1」とは</strong>: 入院患者7人に対して常時看護師1人以上を配置すること。夜勤帯も含めた月平均で計算する。</blockquote>
+
+<h4>5.4 特掲診療料の施設基準の例</h4>
+<ul>
+<li><strong>在宅療養支援診療所（在支診）</strong>: 24時間往診・訪問看護が可能な体制の届出 → 在宅時医学総合管理料等の上位点数を算定可</li>
+<li><strong>がん性疼痛緩和指導管理料</strong>: 緩和ケアに関する研修を受けた医師の配置</li>
+<li><strong>CT撮影・MRI撮影</strong>: 機器の性能基準（16列以上CT等）</li>
+</ul>
+
+<h4>5.5 具体例: 機能強化加算（80点）の施設基準</h4>
+<p>機能強化加算は「かかりつけ医機能」を評価する加算で、初診料に80点を加算できる。</p>
+<p><strong>算定要件:</strong></p>
+<ul>
+<li>診療所または200床未満の病院であること</li>
+<li>以下のいずれか1つ以上の届出を行っていること:
+  <ul>
+  <li>地域包括診療加算1または2</li>
+  <li>地域包括診療料1または2</li>
+  <li>小児かかりつけ診療料1または2</li>
+  <li>在宅時医学総合管理料（在支診・在支病に限る）</li>
+  <li>施設入居時等医学総合管理料（在支診・在支病に限る）</li>
+  </ul>
+</li>
+<li>かかりつけ医機能に関する院内掲示・ホームページ掲示を行っていること</li>
+<li>地域におけるかかりつけ医機能に関する活動実績があること</li>
+</ul>
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPO視点</div>
+施設基準の要件を満たしているにもかかわらず届出をしていない医療機関は「機会損失」を起こしている。算定漏れ分析の一環として、届出状況の確認は重要なサービス提案につながる。
+</div>
+
+<h3 id="mod02-addition">6. 加算の仕組み</h3>
+
+<h4>6.1 加算の体系</h4>
+<p><strong>時間に関する加算</strong></p>
+<table>
+<thead><tr><th>加算名</th><th>点数（初診時）</th><th>算定条件</th></tr></thead>
+<tbody>
+<tr><td>時間外加算</td><td>+85点</td><td>標榜時間外の受診</td></tr>
+<tr><td>休日加算</td><td>+250点</td><td>日曜・祝日・年末年始</td></tr>
+<tr><td>深夜加算</td><td>+480点</td><td>22:00〜6:00</td></tr>
+<tr><td>夜間・早朝等加算</td><td>+50点</td><td>診療所、18:00以降等</td></tr>
+</tbody>
+</table>
+<p><strong>年齢に関する加算</strong></p>
+<table>
+<thead><tr><th>加算名</th><th>点数</th><th>算定条件</th></tr></thead>
+<tbody>
+<tr><td>乳幼児加算（初診）</td><td>+75点</td><td>6歳未満</td></tr>
+<tr><td>乳幼児加算（再診）</td><td>+38点</td><td>6歳未満</td></tr>
+<tr><td>乳幼児加算（処置等）</td><td>項目により異なる</td><td>6歳未満</td></tr>
+</tbody>
+</table>
+<p><strong>施設に関する加算（施設基準の届出が必要）</strong></p>
+<table>
+<thead><tr><th>加算名</th><th>点数</th><th>概要</th></tr></thead>
+<tbody>
+<tr><td>機能強化加算</td><td>+80点（初診）</td><td>かかりつけ医機能の評価</td></tr>
+<tr><td>医療安全対策加算1</td><td>+85点（入院初日）</td><td>医療安全管理体制</td></tr>
+<tr><td>感染対策向上加算1</td><td>+710点（入院初日）</td><td>感染防止対策</td></tr>
+<tr><td>医療DX推進体制整備加算</td><td>+8点（初診、月1回）</td><td>オンライン資格確認等の整備</td></tr>
+</tbody>
+</table>
+<p><strong>管理に関する加算</strong></p>
+<table>
+<thead><tr><th>加算名</th><th>点数</th><th>概要</th></tr></thead>
+<tbody>
+<tr><td>特定疾患療養管理料</td><td>225点（診療所、月2回）</td><td>慢性疾患の計画的管理</td></tr>
+<tr><td>外来管理加算</td><td>+52点（再診時）</td><td>計画的医学管理</td></tr>
+<tr><td>薬剤情報提供料</td><td>+10点</td><td>薬剤情報文書の提供</td></tr>
+</tbody>
+</table>
+
+<h4>6.2 加算の重複算定ルール</h4>
+<ul>
+<li><strong>時間外加算・休日加算・深夜加算は相互排他</strong>: 同時に2つ以上は算定できない</li>
+<li><strong>夜間・早朝等加算と時間外加算は併算定不可</strong>: いずれか一方のみ</li>
+<li><strong>乳幼児加算と時間外加算は併算定可</strong>: 6歳未満で時間外受診の場合、両方算定</li>
+<li><strong>外来管理加算は処置等と併算定不可</strong>: セクション4.3参照</li>
+<li><strong>施設基準に基づく加算は、届出のある項目のみ</strong>: 届出なしでの算定は不正請求</li>
+</ul>
+<blockquote><strong>実務上の注意</strong>: レセコンは多くの併算定ルールを自動チェックするが、すべてではない。特に施設基準に関連する加算の可否は、手動確認が必要な場合がある。</blockquote>
+
+<h3 id="mod02-special">7. 特掲診療料の主要カテゴリ</h3>
+
+<h4>7.1 医学管理等（第1部）</h4>
+<table>
+<thead><tr><th>項目</th><th>点数</th><th>算定ルール</th></tr></thead>
+<tbody>
+<tr><td>B000 特定疾患療養管理料（診療所）</td><td>225点</td><td>月2回まで。対象疾患に限る。2024年改定で糖尿病・脂質異常症・高血圧は除外</td></tr>
+<tr><td>B001-3-2 生活習慣病管理料(II)</td><td>333点</td><td>月1回。糖尿病・脂質異常症・高血圧が対象。2024年改定で新設</td></tr>
+<tr><td>B001-2-9 地域包括診療料</td><td>1,660点</td><td>月1回。複数の慢性疾患を有する患者の包括的管理</td></tr>
+</tbody>
+</table>
+<p><strong>2024年改定のポイント</strong>: 特定疾患療養管理料の対象から糖尿病・脂質異常症・高血圧が除外され、代わりに生活習慣病管理料(II)（333点）が新設された。</p>
+
+<h4>7.2 在宅医療（第2部）&mdash; p012最重要ターゲット</h4>
+<div class="bpo-callout">
+<div class="bpo-callout-title">p012最重要ターゲット</div>
+在宅医療は、p012（レセプトBPOサービス）の初期ターゲットである無床診療所（特に在宅療養支援診療所）において最も重要なカテゴリである。
+</div>
+<table>
+<thead><tr><th>項目</th><th>点数</th><th>算定ルール</th></tr></thead>
+<tbody>
+<tr><td>C001 在宅患者訪問診療料(I)-1（同一建物居住者以外）</td><td>888点</td><td>1日につき。月2回が基本上限</td></tr>
+<tr><td>C001 在宅患者訪問診療料(I)-1（同一建物居住者）</td><td>213点</td><td>施設入居者等</td></tr>
+<tr><td>C002 在宅時医学総合管理料（在支診・単一建物1人）</td><td>4,600点</td><td>月1回。施設基準による区分あり</td></tr>
+<tr><td>C002-2 施設入居時等医学総合管理料</td><td>3,450点</td><td>月1回。施設入居者向け</td></tr>
+<tr><td>C005 在宅患者訪問看護・指導料</td><td>580点</td><td>保険医療機関の看護師が訪問</td></tr>
+</tbody>
+</table>
+<p><strong>在宅医療の算定チェックポイント:</strong></p>
+<ul>
+<li>在支診の届出区分（機能強化型/従来型）により点数が大きく異なる</li>
+<li>訪問診療の回数制限（月2回基本、頻回訪問は逓減制が導入）</li>
+<li>2024年改定で、直近3月の訪問診療回数が月12回以上の患者は、5回目以降<strong>50%減算</strong></li>
+<li>同一建物の判定ルール（集合住宅の他の患者を同日に訪問する場合）</li>
+</ul>
+
+<h4>7.3 検査（第3部）</h4>
+<table>
+<thead><tr><th>項目</th><th>点数</th><th>算定ルール</th></tr></thead>
+<tbody>
+<tr><td>D005 血液形態・機能検査（末梢血液一般）</td><td>21点</td><td>血算。最も基本的な血液検査</td></tr>
+<tr><td>D007 血液化学検査（BUN）</td><td>11点</td><td>包括項目あり。5項目以上は逓減</td></tr>
+<tr><td>D006 出血・凝固検査（PT）</td><td>18点</td><td></td></tr>
+<tr><td>D017 排泄物、滲出物又は分泌物の細菌顕微鏡検査</td><td>61点</td><td></td></tr>
+</tbody>
+</table>
+<p><strong>検査の包括点数（マルメ）</strong>: 血液化学検査は、検査項目数に応じて包括点数が設定されている。例えば「5項目以上7項目以下」は93点、「8項目以上9項目以下」は99点、「10項目以上」は115点。</p>
+
+<h4>7.4 投薬（第5部）</h4>
+<table>
+<thead><tr><th>項目</th><th>点数</th><th>算定ルール</th></tr></thead>
+<tbody>
+<tr><td>F100 処方料</td><td>42点</td><td>院内処方の場合</td></tr>
+<tr><td>F400 処方箋料</td><td>68点</td><td>院外処方（処方箋発行）の場合</td></tr>
+<tr><td>F200 薬剤料</td><td>薬価による</td><td>1点未満は1点、15円以下の場合1点</td></tr>
+<tr><td>F500 調剤技術基本料</td><td>14点</td><td>院内処方で月1回</td></tr>
+</tbody>
+</table>
+<p><strong>計算方法</strong>: 薬剤料は「薬価（円）&divide; 10 ＝ 点数」で算出。五捨五超入（5.01以上で切り上げ）。</p>
+<p><strong>処方料と処方箋料の使い分け</strong>:</p>
+<ul>
+<li><strong>院内処方</strong>（医療機関で薬を渡す）→ 処方料 42点 ＋ 薬剤料 ＋ 調剤料</li>
+<li><strong>院外処方</strong>（処方箋を発行し調剤薬局で薬を受け取る）→ 処方箋料 68点のみ</li>
+</ul>
+
+<h4>7.5 注射（第6部）</h4>
+<table>
+<thead><tr><th>項目</th><th>点数</th><th>算定ルール</th></tr></thead>
+<tbody>
+<tr><td>G000 皮内、皮下及び筋肉内注射</td><td>22点</td><td>1回につき</td></tr>
+<tr><td>G001 静脈内注射</td><td>34点</td><td>1回につき</td></tr>
+<tr><td>G004 点滴注射（500mL以上）</td><td>98点</td><td>1日につき</td></tr>
+<tr><td>G004 点滴注射（500mL未満）</td><td>49点</td><td>1日につき</td></tr>
+</tbody>
+</table>
+
+<h4>7.6 処置（第9部）</h4>
+<table>
+<thead><tr><th>項目</th><th>点数</th><th>算定ルール</th></tr></thead>
+<tbody>
+<tr><td>J000 創傷処置（100cm2未満）</td><td>55点</td><td>1日につき</td></tr>
+<tr><td>J001 熱傷処置（100cm2未満）</td><td>147点</td><td>1日につき</td></tr>
+<tr><td>J119 消炎鎮痛等処置</td><td>35点</td><td>1日につき。算定は1日1回</td></tr>
+<tr><td>J118 介達牽引</td><td>35点</td><td>1日につき</td></tr>
+</tbody>
+</table>
+<blockquote><strong>注意</strong>: 多くの処置は面積・範囲によって点数が段階的に上がる。例えば創傷処置は100cm2未満55点、100cm2以上500cm2未満85点、500cm2以上3,000cm2未満155点と増加する。</blockquote>
+
+<h3 id="mod02-dpc">8. 包括評価（DPC/PDPS）</h3>
+
+<h4>8.1 DPCとは何か</h4>
+<p>DPC（Diagnosis Procedure Combination）とは、入院患者の傷病名と診療行為の組み合わせに基づく<strong>診断群分類</strong>のことである。DPC/PDPS（Per-Diem Payment System）は、この分類に基づく<strong>1日あたり定額払い制度</strong>を指す。</p>
+
+<h4>8.2 出来高払いとDPCの違い</h4>
+<table>
+<thead><tr><th>項目</th><th>出来高払い</th><th>DPC/PDPS</th></tr></thead>
+<tbody>
+<tr><td>計算方法</td><td>実施した医療行為の点数を積み上げ</td><td>診断群分類による1日定額 ＋ 一部出来高</td></tr>
+<tr><td>包括範囲</td><td>なし（すべて出来高）</td><td>入院基本料・投薬・注射・検査・画像診断・処置が包括</td></tr>
+<tr><td>出来高部分</td><td>&mdash;</td><td>手術・麻酔・リハビリ・放射線治療等は出来高</td></tr>
+<tr><td>適用対象</td><td>入院・外来すべて</td><td>入院のみ（外来は出来高）</td></tr>
+<tr><td>入院期間の影響</td><td>入院が長いほど医療機関の収入増</td><td>入院が長いほど1日あたり単価が逓減</td></tr>
+</tbody>
+</table>
+<p><strong>DPCの医療費計算式:</strong></p>
+<pre><code>入院医療費 ＝（1日あたり包括点数 × 入院日数 × 医療機関別係数）＋ 出来高分</code></pre>
+
+<h4>8.3 DPC対象病院の条件</h4>
+<ol>
+<li>急性期一般入院基本料等の届出を行っていること</li>
+<li>診療録管理体制加算の届出を行っていること</li>
+<li>DPC調査に適切に参加し、データを提出すること</li>
+<li>データ/(病床)比が0.875以上であること</li>
+</ol>
+<p>2024年6月時点で約<strong>1,786病院、約48万床</strong>がDPC対象であり、急性期病棟の約<strong>85%</strong>を占める。</p>
+
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPO視点: p012ではDPC病院は初期ターゲット外</div>
+p012（レセプトBPOサービス）の初期ターゲットは<strong>無床診療所</strong>である。DPC/PDPSは入院を持つ病院の制度であるため、初期段階では対象外とする。ただし、DPCの概念は知識として理解しておくべき。
+</div>
+
+<h3 id="mod02-revision">9. 診療報酬改定</h3>
+
+<h4>9.1 改定のプロセス</h4>
+<pre><code>予算編成（改定率決定）
+    ↓
+中医協で審議（個別点数の配分）
+    ↓
+答申（点数表の確定）
+    ↓
+厚生労働大臣告示（官報掲載）
+    ↓
+関連通知の発出（算定要件・施設基準の詳細）
+    ↓
+疑義解釈の公開（Q&amp;A形式で解釈を明確化）
+    ↓
+レセコンマスタ更新（ベンダーがシステムに反映）
+    ↓
+施行日（6月1日）から新点数で算定開始</code></pre>
+
+<h4>9.2 2024年度改定の主要ポイント</h4>
+<table>
+<thead><tr><th>カテゴリ</th><th>主な変更</th></tr></thead>
+<tbody>
+<tr><td><strong>基本診療料</strong></td><td>初診料 288→291点（+3）、再診料 73→75点（+2）</td></tr>
+<tr><td><strong>賃上げ対応</strong></td><td>外来・在宅ベースアップ評価料(I)新設（初診+6点、再診+2点）</td></tr>
+<tr><td><strong>医療DX</strong></td><td>医療DX推進体制整備加算 新設（初診+8点、月1回）</td></tr>
+<tr><td><strong>医療情報取得</strong></td><td>医療情報取得加算に名称変更、点数見直し（初診3点/1点）</td></tr>
+<tr><td><strong>生活習慣病</strong></td><td>特定疾患療養管理料から糖尿病等を除外、生活習慣病管理料(II) 333点 新設</td></tr>
+<tr><td><strong>在宅医療</strong></td><td>頻回訪問の逓減制導入（5回目以降50%減算）、ICT活用加算新設</td></tr>
+<tr><td><strong>施行時期</strong></td><td>薬価4月施行、本体<strong>6月施行</strong>（従来の4月から変更）</td></tr>
+</tbody>
+</table>
+
+<h4>9.3 2026年度改定の主要ポイント</h4>
+<table>
+<thead><tr><th>カテゴリ</th><th>主な変更</th></tr></thead>
+<tbody>
+<tr><td><strong>改定率</strong></td><td>本体<strong>+3.09%</strong>（30年ぶりの高水準）</td></tr>
+<tr><td><strong>賃上げ</strong></td><td>ベースアップ評価料を2〜3倍に大幅増点。全職種対象へ拡大</td></tr>
+<tr><td><strong>物価対応</strong></td><td>物価対応料を新設（初診・再診・入院に上乗せ）</td></tr>
+<tr><td><strong>急性期再編</strong></td><td>急性期病院一般入院基本料の新設</td></tr>
+<tr><td><strong>医療DX</strong></td><td>電子処方箋、オンライン診療のさらなる推進</td></tr>
+<tr><td><strong>施行時期</strong></td><td>薬価4月施行、本体<strong>6月施行</strong></td></tr>
+</tbody>
+</table>
+
+<h4>9.4 改定への対応方法</h4>
+<ol>
+<li><strong>情報収集</strong>（改定年の1月〜3月）: 中医協答申の確認、関連通知の収集、業界セミナーへの参加</li>
+<li><strong>マスタ更新の確認</strong>（施行日の1〜2週間前）: レセコンベンダーからのマスタ更新の適用、テスト算定の実施</li>
+<li><strong>算定ルールの変更確認</strong>（施行前後）: 既存の算定パターンへの影響洗い出し、施設基準の変更に伴う届出要否の確認</li>
+<li><strong>経過措置の管理</strong>（施行後6か月〜1年）: 経過措置期間のある項目のリスト管理、期限切れ前の届出変更・対応</li>
+</ol>
+
+<h3 id="mod02-lookup">10. 点数表の引き方</h3>
+
+<h4>10.1 「暗記ではなく引き方を覚える」原則</h4>
+<p>診療報酬点数表は約4,000の診療行為コードを含む膨大な体系である。すべてを暗記することは不可能であり、<strong>必要なときに正確に引ける力</strong>が実務では求められる。</p>
+<p>覚えるべきは:</p>
+<ul>
+<li>点数表の<strong>全体構造</strong>（本モジュールの内容）</li>
+<li>頻出項目の<strong>おおよその点数感覚</strong>（初診291、再診75、処方箋料68 等）</li>
+<li><strong>検索の仕方</strong></li>
+</ul>
+
+<h4>10.2 しろぼん（白本）の使い方</h4>
+<p>「しろぼん」とは、診療報酬点数表を収録した書籍の通称。</p>
+<p><strong>引き方の手順:</strong></p>
+<ol>
+<li>目的の診療行為のカテゴリを特定（検査か、処置か、投薬か等）</li>
+<li>第2章の該当部にアクセス</li>
+<li>節・区分を辿って該当コードを見つける</li>
+<li>本文（告示点数）を確認</li>
+<li>注（算定要件の補足・加算等）を確認</li>
+<li>通知（算定に関する留意事項）を確認</li>
+</ol>
+
+<h4>10.3 オンライン検索ツール</h4>
+<table>
+<thead><tr><th>ツール</th><th>URL</th><th>特徴</th></tr></thead>
+<tbody>
+<tr><td><strong>しろぼんねっと</strong></td><td>https://shirobon.net/</td><td>無料。点数表・薬価・添付文書を横断検索可能</td></tr>
+<tr><td><strong>今日の臨床サポート</strong></td><td>https://clinicalsup.jp/</td><td>有料。臨床情報と点数表が統合</td></tr>
+<tr><td><strong>社会保険研究所</strong></td><td>有料</td><td>告示・通知の原文を確認可能</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod02-bpo">11. BPO事業者としての視点</h3>
+
+<h4>11.1 算定漏れ分析の価値</h4>
+<p>算定漏れとは、本来算定できるはずの点数が算定されていない状態のこと。BPO事業者が算定漏れを発見し、改善提案を行うことは<strong>増収提案</strong>として医療機関にとって直接的な価値がある。</p>
+<p><strong>よくある算定漏れの例:</strong></p>
+<ul>
+<li>外来管理加算（処置なしの日に算定されていない）</li>
+<li>特定疾患療養管理料（対象疾患なのに管理料が算定されていない）</li>
+<li>在宅時医学総合管理料の区分選択ミス</li>
+<li>各種加算の未算定（施設基準は満たしているが加算を付け忘れ）</li>
+</ul>
+<p><strong>年間影響額の試算例:</strong></p>
+<table>
+<thead><tr><th>項目</th><th>漏れ頻度</th><th>点数</th><th>年間影響額（概算）</th></tr></thead>
+<tbody>
+<tr><td>外来管理加算の漏れ</td><td>月20件</td><td>52点</td><td>52 &times; 10円 &times; 20件 &times; 12月 ＝ <strong>124,800円</strong></td></tr>
+<tr><td>管理料の漏れ</td><td>月5件</td><td>225点</td><td>225 &times; 10円 &times; 5件 &times; 12月 ＝ <strong>135,000円</strong></td></tr>
+<tr><td>在総管の区分ミス</td><td>月3件</td><td>差額500点</td><td>500 &times; 10円 &times; 3件 &times; 12月 ＝ <strong>180,000円</strong></td></tr>
+<tr><td><strong>合計</strong></td><td></td><td></td><td><strong>年間 約44万円の増収</strong></td></tr>
+</tbody>
+</table>
+
+<h4>11.2 施設基準の管理支援</h4>
+<ul>
+<li><strong>届出漏れの発見</strong>: 施設基準を満たしているのに届出をしていない項目の指摘</li>
+<li><strong>要件充足の定期確認</strong>: 看護配置や実績要件が維持されているかのモニタリング</li>
+<li><strong>変更漏れの防止</strong>: 人員変更や設備変更時の届出変更要否の判断</li>
+<li><strong>経過措置のカレンダー管理</strong>: 改定時の経過措置期限のトラッキング</li>
+</ul>
+
+<h4>11.3 改定対応サービスとしての価値</h4>
+<p>BPO事業者がこれらを代行・支援することで、<strong>改定のたびに解約されるリスクを低減し、逆に契約更新の理由を作る</strong>ことができる。</p>
+
+<h4>11.4 p012サービスにおける算定チェックの位置付け</h4>
+<pre><code>[日常業務]               [付加価値サービス]
+レセプト入力代行    →    算定漏れ分析
+レセプト点検       →    施設基準管理支援
+返戻・査定対応     →    改定対応支援
+                        増収提案レポート</code></pre>
+
+<h3 id="mod02-check">12. チェックリスト</h3>
+<ul class="checklist">
+<li>1点＝10円の仕組みと、保険種別による単価の違い（労災等）を説明できる</li>
+<li>診療報酬の決定プロセス（中医協→告示→通知→疑義解釈）を説明できる</li>
+<li>2年に1度の改定サイクルと、2024年・2026年改定の主要変更を3つ以上挙げられる</li>
+<li>点数表の「第1章 基本診療料」と「第2章 特掲診療料」の違いを説明できる</li>
+<li>第2章の14部（医学管理等〜病理診断）を順序通り列挙できる</li>
+<li>初診料（291点）と再診料（75点）の算定判定ルール（1か月ルール等）を説明できる</li>
+<li>外来管理加算（52点）の算定可否条件を3つ以上挙げられる</li>
+<li>時間外加算・休日加算・深夜加算の点数を概ね正確に言える</li>
+<li>施設基準とは何か、届出の流れを説明できる</li>
+<li>機能強化加算（80点）の施設基準の要件を3つ以上挙げられる</li>
+<li>特定疾患療養管理料の2024年改定での変更点を説明できる</li>
+<li>在宅患者訪問診療料(I)の点数（888点/213点）と同一建物居住者の判定を説明できる</li>
+<li>DPC/PDPSの基本的な仕組みと、p012で初期ターゲット外とする理由を説明できる</li>
+<li>しろぼんねっとで任意の診療行為の点数を検索できる</li>
+<li>BPO事業者として算定漏れ分析が増収提案につながる理由を説明できる</li>
+</ul>
+
+<h3 id="mod02-exercises">13. 演習問題</h3>
+
+<h4>演習1: 基本的な外来診療の点数計算</h4>
+<p><strong>問題</strong>: 55歳の患者（3割負担）が、月曜10時に診療所を初めて受診した。医師は問診・診察を行い、血液検査（血液一般21点、CRP16点）を実施し、高血圧と診断して降圧薬を7日分処方した（院外処方）。マイナ保険証を利用した。</p>
+<p>以下の点数を計算せよ（薬剤料は除く）。</p>
+<details>
+<summary>&#9654; 解答を見る</summary>
+<div class="answer">
+<table>
+<thead><tr><th>項目</th><th>点数</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>初診料</td><td>291点</td><td>A000</td></tr>
+<tr><td>医療情報取得加算2</td><td>1点</td><td>マイナ保険証利用（初診・加算2）</td></tr>
+<tr><td>血液一般検査</td><td>21点</td><td>D005 末梢血液一般</td></tr>
+<tr><td>CRP</td><td>16点</td><td>D015 C反応性蛋白（CRP）</td></tr>
+<tr><td>血液採取料（静脈）</td><td>37点</td><td>D400</td></tr>
+<tr><td>検体検査判断料（血液学的検査）</td><td>125点</td><td>D026-1 月1回</td></tr>
+<tr><td>検体検査判断料（免疫学的検査）</td><td>144点</td><td>D026-6 月1回（CRPは免疫学的検査に分類）</td></tr>
+<tr><td>処方箋料</td><td>68点</td><td>F400 院外処方</td></tr>
+<tr><td><strong>合計</strong></td><td><strong>703点</strong></td><td><strong>7,030円</strong></td></tr>
+</tbody>
+</table>
+<p>患者負担: 7,030円 &times; 0.3 ＝ 2,109円 → <strong>2,110円</strong>（10円未満四捨五入）</p>
+<p><strong>注意</strong>: 初診であるため外来管理加算は算定不可。また、特定疾患療養管理料は初診月には算定できない。</p>
+</div>
+</details>
+
+<h4>演習2: 施設基準に関する判断問題</h4>
+<p><strong>問題</strong>: 以下の医療機関A〜Cについて、機能強化加算（80点）を算定できるか判断し、理由を述べよ。</p>
+<ul>
+<li><strong>医療機関A</strong>: 診療所。地域包括診療加算1の届出あり。院内にかかりつけ医機能の掲示あり。</li>
+<li><strong>医療機関B</strong>: 300床の総合病院。在宅時医学総合管理料の届出あり。</li>
+<li><strong>医療機関C</strong>: 診療所。在宅療養支援診療所の届出あり。在宅時医学総合管理料の届出あり。院内掲示あり。</li>
+</ul>
+<details>
+<summary>&#9654; 解答を見る</summary>
+<div class="answer">
+<ul>
+<li><strong>医療機関A</strong>: <strong>算定可能</strong>。診療所であり、地域包括診療加算の届出があり、院内掲示もある。</li>
+<li><strong>医療機関B</strong>: <strong>算定不可</strong>。機能強化加算は「診療所または200床未満の病院」が対象。300床の病院は対象外。</li>
+<li><strong>医療機関C</strong>: <strong>算定可能</strong>。診療所であり、在支診として在宅時医学総合管理料の届出があり、院内掲示もある。</li>
+</ul>
+</div>
+</details>
+
+<h4>演習3: 算定漏れの発見</h4>
+<p><strong>問題</strong>: 以下のレセプト内容を確認し、算定漏れまたは誤算定がないか指摘せよ。</p>
+<p>患者: 70歳、2型糖尿病で月2回通院中（再診）。2024年7月分。</p>
+<ul>
+<li>再診料 75点 &times; 2回</li>
+<li>外来管理加算 52点 &times; 2回</li>
+<li>生活習慣病管理料(II) 333点 &times; 1回</li>
+<li>処方箋料 68点 &times; 2回</li>
+<li>血液検査（HbA1c等）</li>
+</ul>
+<details>
+<summary>&#9654; 解答を見る</summary>
+<div class="answer">
+<p><strong>問題点:</strong></p>
+<ol>
+<li><strong>外来管理加算の誤算定</strong>: 生活習慣病管理料(II)を算定する月に外来管理加算は算定できない（生活習慣病管理料には管理の要素が含まれるため）。</li>
+<li><strong>血液検査の実施日の確認</strong>: 血液検査を実施した日に外来管理加算は算定できない（検査を行っているため）。</li>
+</ol>
+<p><strong>修正案</strong>: 血液検査を実施した回は外来管理加算を削除。もう1回の受診で処置・検査がなければ外来管理加算は算定可能だが、生活習慣病管理料との併算定可否をレセコンの算定ルールで確認する必要がある。</p>
+</div>
+</details>
+
+<h4>演習4: 在宅医療の点数計算</h4>
+<p><strong>問題</strong>: 在宅療養支援診療所（機能強化型・単独型）が、85歳の在宅患者（要介護3、単独居住）に月2回の訪問診療を行った。同一建物居住者なし。この月の在宅医療に関する基本的な点数を計算せよ。</p>
+<details>
+<summary>&#9654; 解答を見る</summary>
+<div class="answer">
+<table>
+<thead><tr><th>項目</th><th>点数</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>在宅患者訪問診療料(I)-1（同一建物居住者以外）</td><td>888点 &times; 2回 ＝ 1,776点</td><td>C001</td></tr>
+<tr><td>在宅時医学総合管理料（機能強化型・単一建物1人）</td><td>5,400点</td><td>C002 月1回</td></tr>
+<tr><td><strong>合計（在宅基本分）</strong></td><td><strong>7,176点</strong></td><td><strong>71,760円</strong></td></tr>
+</tbody>
+</table>
+<p><strong>注意</strong>: 実際には上記に加え、各種指導管理料、薬剤料、検査料等が加算される。</p>
+</div>
+</details>
+
+<h4>演習5: 改定対応シミュレーション</h4>
+<p><strong>問題</strong>: あなたはBPO事業者として、クライアントの診療所に対し、2026年6月の診療報酬改定への対応スケジュールを提案してください。以下の時期ごとに実施すべきアクションを3つずつ挙げよ。</p>
+<ul>
+<li>2026年3月〜4月（改定内容公表後）</li>
+<li>2026年5月（施行直前）</li>
+<li>2026年6月〜7月（施行後）</li>
+</ul>
+<details>
+<summary>&#9654; 解答例を見る</summary>
+<div class="answer">
+<p><strong>2026年3月〜4月（改定内容公表後）:</strong></p>
+<ol>
+<li>中医協答申と個別改定項目一覧から、クライアントに影響のある項目を抽出</li>
+<li>施設基準の新設・変更に伴う届出要否を確認（特に物価対応料、ベースアップ評価料）</li>
+<li>点数変更による収入シミュレーションを作成し、クライアントに報告</li>
+</ol>
+<p><strong>2026年5月（施行直前）:</strong></p>
+<ol>
+<li>レセコンベンダーからのマスタ更新スケジュールを確認し、適用テストを実施</li>
+<li>新設の届出が必要な施設基準の書類を作成し、地方厚生局へ提出</li>
+<li>算定ルールの変更点をまとめたチェックシートを作成し、医師・スタッフに配布</li>
+</ol>
+<p><strong>2026年6月〜7月（施行後）:</strong></p>
+<ol>
+<li>施行月のレセプトを重点点検（新点数の適用、旧点数の混在がないか）</li>
+<li>経過措置項目のカレンダーを作成し、期限管理を開始</li>
+<li>疑義解釈の公開をウォッチし、関連する算定ルールの解釈を随時更新</li>
+</ol>
+</div>
+</details>
+
+<h4>14. Q&amp;A</h4>
+<p><em>（学習中に出てきた質問と回答をここに蓄積する）</em></p>
+
+<h4>参考情報</h4>
+<ul>
+<li>厚生労働省「令和6年度診療報酬改定の概要」</li>
+<li>しろぼんねっと「令和6年 医科診療報酬点数表」 https://shirobon.net/</li>
+<li>厚生労働省「令和8年度診療報酬改定」</li>
+</ul>
+<blockquote><strong>注記</strong>: 本モジュールの点数は2024年度（令和6年度）改定版をベースとしている。2026年6月施行の改定により点数が変更される項目があるため、実務では最新の点数表を必ず確認すること。</blockquote>
+</section>
+
+<hr class="module-divider">
+
+<!-- ========== MODULE 03: RECEPTION ========== -->
+<section id="mod03" class="module-card">
+<h2>モジュール03: 受付・患者登録</h2>
+
+<h3 id="mod03-goals">1. このモジュールで学ぶこと</h3>
+<ol>
+<li><strong>受付業務の全体フロー</strong>を初診・再診・予約制の各パターンで説明できる</li>
+<li><strong>保険証の確認手順</strong>（月初確認ルール、有効期限、変更チェック）を正確に実行できる</li>
+<li><strong>オンライン資格確認（OQS）</strong>の仕組みと操作手順を理解し、マイナ保険証・資格確認書それぞれの対応ができる</li>
+<li><strong>レセコンへの患者情報登録</strong>（基本情報・保険情報・公費情報）を正確に入力できる</li>
+<li><strong>保険変更・複数保険・紹介状</strong>に関する実務判断ができる</li>
+</ol>
+<blockquote><strong>前提知識</strong>: モジュール01（医療保険制度の基礎）・モジュール02（診療報酬制度の構造）を修了していること。</blockquote>
+
+<h3 id="mod03-flow">2. 受付業務の全体フロー</h3>
+
+<h4>2.1 初診の場合</h4>
+<pre><code>患者来院
+  ↓
+① 問診票の記入依頼
+  ↓
+② 保険証（マイナ保険証/資格確認書）の提示・確認
+  ↓
+③ オンライン資格確認（OQS）の実施
+  ↓
+④ 患者基本情報のレセコン新規登録
+  ↓
+⑤ 保険情報の登録
+  ↓
+⑥ 診察券の発行・カルテ作成
+  ↓
+⑦ 診察へ案内</code></pre>
+<p><strong>ポイント</strong>: 初診は情報量が最も多い。問診票の記入と保険証確認を同時並行で進め、待ち時間を短縮する。</p>
+
+<h4>2.2 再診の場合</h4>
+<pre><code>患者来院
+  ↓
+① 診察券の提示
+  ↓
+② 月初の場合：保険証の確認（※マイナ保険証の場合は省略可）
+  ↓
+③ 変更事項の有無を口頭確認
+  ↓
+④ 変更があればレセコンの患者情報を更新
+  ↓
+⑤ 診察へ案内</code></pre>
+
+<h4>2.3 予約制の場合のフロー差異</h4>
+<table>
+<thead><tr><th>項目</th><th>予約なし</th><th>予約あり</th></tr></thead>
+<tbody>
+<tr><td>来院時の対応</td><td>順番待ち受付</td><td>予約確認 → 受付</td></tr>
+<tr><td>保険証確認</td><td>来院時に実施</td><td>来院時に実施（予約時点ではしない）</td></tr>
+<tr><td>待ち時間の管理</td><td>順番制</td><td>時間枠制</td></tr>
+<tr><td>初診受入れ</td><td>随時</td><td>予約枠がある場合のみ（医療機関による）</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod03-insurance">3. 保険証の確認手順</h3>
+
+<h4>3.1 月初の保険証確認ルール</h4>
+<p>保険医療機関は、被保険者資格の確認が療養担当規則で義務づけられている。実務上は<strong>毎月最初の受診日に保険証を確認する</strong>ルールが標準運用となっている。</p>
+
+<h4>3.2 確認すべき項目</h4>
+<table>
+<thead><tr><th>確認項目</th><th>確認内容</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>有効期限</td><td>期限切れでないか</td><td>特に任意継続被保険者証は期限が短い</td></tr>
+<tr><td>保険者番号</td><td>変更がないか</td><td>転職・退職で変わる</td></tr>
+<tr><td>記号・番号・枝番</td><td>前回と一致するか</td><td>事業所変更で変わることがある</td></tr>
+<tr><td>本人/家族区分</td><td>被保険者か被扶養者か</td><td>負担割合に直結</td></tr>
+<tr><td>負担割合</td><td>記載の割合</td><td>年齢・所得で変動（1割/2割/3割）</td></tr>
+<tr><td>氏名・生年月日</td><td>レセコン登録と一致するか</td><td>婚姻等による姓変更</td></tr>
+</tbody>
+</table>
+
+<h4>3.3 保険証忘れ・紛失時の対応</h4>
+<p><strong>原則</strong>: 保険証を提示できない場合は<strong>全額自費（10割負担）</strong>で支払う。</p>
+<ol>
+<li>患者に保険証を持参できない旨を確認</li>
+<li>全額自費（10割負担）で精算することを説明</li>
+<li>自費扱いの領収証を発行</li>
+<li>「保険証持参時に差額を返金する」旨を案内</li>
+<li>保険証持参の期限を設定（通常は当月中を推奨）</li>
+<li>後日保険証を持参 → 保険適用分の差額を返金</li>
+</ol>
+<blockquote><strong>注意</strong>: 月をまたぐと返金処理が煩雑になるため、同月中の持参を強く推奨する。</blockquote>
+
+<h4>3.4 保険証のコピーの取り扱い</h4>
+<ul>
+<li>保険証のコピー（写し）は<strong>原本の代わりとして認められない</strong></li>
+<li>コピーで受付した場合、後日原本確認が必要</li>
+<li>コピーを医療機関側で保管する場合は、個人情報保護の観点から適切な管理が必要</li>
+</ul>
+
+<h3 id="mod03-oqs">4. オンライン資格確認（OQS）</h3>
+
+<h4>4.1 システムの仕組み</h4>
+<pre><code>[患者] マイナンバーカード提示
+    ↓
+[顔認証付きカードリーダー] 本人認証（顔認証 or 暗証番号）
+    ↓
+[資格確認端末] 認証結果を送信
+    ↓
+[社会保険診療報酬支払基金 中間サーバー] 資格照会
+    ↓
+[各保険者] 資格情報を返却
+    ↓
+[資格確認端末] 結果表示 → レセコンへ連携</code></pre>
+
+<h4>4.2 確認できる情報</h4>
+<table>
+<thead><tr><th>情報種別</th><th>内容</th><th>患者同意</th></tr></thead>
+<tbody>
+<tr><td>資格情報</td><td>保険者番号、記号、番号、枝番、負担割合、資格有効性</td><td>不要</td></tr>
+<tr><td>負担割合</td><td>正確な窓口負担割合</td><td>不要</td></tr>
+<tr><td>限度額区分</td><td>高額療養費の自己負担限度額区分</td><td>不要（2024年10月〜同意画面省略）</td></tr>
+<tr><td>薬剤情報</td><td>過去に処方された薬剤の情報</td><td>要同意</td></tr>
+<tr><td>特定健診情報</td><td>健診結果の情報</td><td>要同意</td></tr>
+<tr><td>診療情報</td><td>他の医療機関での診療情報</td><td>要同意</td></tr>
+</tbody>
+</table>
+
+<h4>4.3 マイナ保険証での確認手順</h4>
+<ol>
+<li>患者がマイナンバーカードを<strong>顔認証付きカードリーダー</strong>にセット</li>
+<li>認証方法を選択（顔認証 または 4桁の暗証番号）</li>
+<li>顔認証の場合：カメラに顔をかざして本人認証</li>
+<li>薬剤情報・特定健診情報等の閲覧同意を選択（包括同意可）</li>
+<li>資格確認完了 → 資格情報が資格確認端末に表示</li>
+<li>受付スタッフがレセコンに資格情報を取り込み（自動連携または手動入力）</li>
+</ol>
+
+<h4>4.4 資格確認書での確認手順</h4>
+<ol>
+<li>患者が資格確認書を提示</li>
+<li>受付スタッフが記載内容を目視確認（保険者番号、記号、番号、枝番、有効期限）</li>
+<li>資格確認端末で手入力による資格照会を実施（オンラインで有効性を確認）</li>
+<li>レセコンに保険情報を入力</li>
+</ol>
+<p><strong>資格確認書の特徴</strong>:</p>
+<ul>
+<li>有効期間は最長5年以内（保険者が設定）</li>
+<li>マイナンバーカード未取得者、利用登録未了者に申請不要で交付</li>
+<li>後期高齢者は2026年7月末まで無償交付</li>
+</ul>
+
+<h4>4.5 システム障害時の対応</h4>
+<table>
+<thead><tr><th>状況</th><th>対応</th></tr></thead>
+<tbody>
+<tr><td>カードリーダー故障</td><td>資格確認書・マイナンバーカードの券面情報を目視確認し、手入力で対応</td></tr>
+<tr><td>ネットワーク障害</td><td>同上。復旧後に改めてOQSで確認</td></tr>
+<tr><td>中間サーバー障害</td><td>厚労省・支払基金からの障害通知を確認。目視確認で暫定受付</td></tr>
+<tr><td>資格情報が返ってこない</td><td>患者に事情を説明し、保険証等の券面情報で受付。後日再確認</td></tr>
+</tbody>
+</table>
+<blockquote><strong>重要</strong>: 障害時も診療を拒否してはならない。まず受付し、資格確認は事後対応とする。</blockquote>
+
+<h4>4.6 保険証廃止後の移行スケジュール</h4>
+<table>
+<thead><tr><th>時期</th><th>出来事</th></tr></thead>
+<tbody>
+<tr><td>2024年12月2日</td><td>従来の健康保険証の<strong>新規発行停止</strong></td></tr>
+<tr><td>2025年12月1日</td><td>既存の健康保険証の<strong>有効期限満了</strong>（完全廃止）</td></tr>
+<tr><td>〜2026年3月末</td><td><strong>暫定措置</strong>: 期限切れ保険証でも一定条件下で保険診療として取扱可</td></tr>
+<tr><td>2026年4月〜</td><td>暫定措置終了。マイナ保険証 or 資格確認書のみ有効</td></tr>
+<tr><td>〜2026年7月末</td><td>後期高齢者への資格確認書無償交付の特例期限</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod03-registration">5. 患者情報のレセコン登録</h3>
+
+<h4>5.1 新患登録の入力項目</h4>
+<p><strong>患者基本情報</strong></p>
+<table>
+<thead><tr><th>項目</th><th>入力内容</th><th>必須</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>患者ID</td><td>自動採番（医療機関ごとのルール）</td><td>○</td><td>手入力の場合は重複チェック</td></tr>
+<tr><td>氏名（漢字）</td><td>保険証記載のとおり</td><td>○</td><td>旧字体・異体字に注意</td></tr>
+<tr><td>氏名（カナ）</td><td>正確な読みを確認</td><td>○</td><td>「ヅ」と「ズ」、「ヂ」と「ジ」等の表記ゆれ</td></tr>
+<tr><td>生年月日</td><td>西暦 or 和暦（レセコンによる）</td><td>○</td><td>元号の境目に注意（S64/H1、H31/R1）</td></tr>
+<tr><td>性別</td><td>男/女</td><td>○</td><td>保険証の性別と一致確認</td></tr>
+<tr><td>郵便番号</td><td>7桁</td><td>△</td><td>住所の自動補完に使用</td></tr>
+<tr><td>住所</td><td>保険証記載の住所</td><td>○</td><td>番地・マンション名まで正確に</td></tr>
+<tr><td>電話番号</td><td>固定/携帯</td><td>△</td><td>連絡先として最低1件</td></tr>
+</tbody>
+</table>
+
+<p><strong>保険情報</strong></p>
+<table>
+<thead><tr><th>項目</th><th>入力内容</th><th>必須</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>保険種別</td><td>社保/国保/後期高齢者/公費単独等</td><td>○</td><td>レセプト請求先に直結</td></tr>
+<tr><td>保険者番号</td><td>8桁（6桁+2桁の検証番号）</td><td>○</td><td>1桁でも誤ると返戻の原因</td></tr>
+<tr><td>記号</td><td>保険証記載の記号</td><td>○</td><td>全角/半角、スペースの有無に注意</td></tr>
+<tr><td>番号</td><td>保険証記載の番号</td><td>○</td><td>枝番と混同しない</td></tr>
+<tr><td>枝番</td><td>2桁（個人単位の番号）</td><td>○</td><td>2020年10月〜導入。未記載の場合は「00」</td></tr>
+<tr><td>本人/家族区分</td><td>被保険者 or 被扶養者</td><td>○</td><td>負担割合の判定に使用</td></tr>
+<tr><td>負担割合</td><td>1割/2割/3割</td><td>○</td><td>年齢・所得による</td></tr>
+<tr><td>資格取得日</td><td>保険証記載の日付</td><td>○</td><td>有効期間の開始日</td></tr>
+<tr><td>有効期限</td><td>保険証記載の日付</td><td>△</td><td>記載がある場合のみ</td></tr>
+</tbody>
+</table>
+
+<p><strong>負担割合の早見表</strong>:</p>
+<table>
+<thead><tr><th>年齢</th><th>原則の負担割合</th><th>例外</th></tr></thead>
+<tbody>
+<tr><td>6歳未満（義務教育就学前）</td><td>2割</td><td>&mdash;</td></tr>
+<tr><td>6歳〜69歳</td><td>3割</td><td>&mdash;</td></tr>
+<tr><td>70〜74歳</td><td>2割</td><td>現役並み所得者は3割</td></tr>
+<tr><td>75歳以上（後期高齢者）</td><td>1割</td><td>一定以上所得者は2割、現役並み所得者は3割</td></tr>
+</tbody>
+</table>
+
+<p><strong>公費情報</strong></p>
+<table>
+<thead><tr><th>項目</th><th>入力内容</th><th>必須</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>公費負担者番号</td><td>8桁</td><td>○</td><td>法別番号（上2桁）で制度を判別</td></tr>
+<tr><td>受給者番号</td><td>7桁</td><td>○</td><td>個人を特定する番号</td></tr>
+<tr><td>適用開始日</td><td>受給者証記載</td><td>○</td><td>&mdash;</td></tr>
+<tr><td>適用終了日</td><td>受給者証記載</td><td>○</td><td>期限切れに注意</td></tr>
+<tr><td>公費種別</td><td>生活保護、自立支援、特定疾患等</td><td>○</td><td>法別番号から判断</td></tr>
+</tbody>
+</table>
+
+<h4>5.2 入力時のよくあるミスと防止策</h4>
+<table>
+<thead><tr><th>ミスの内容</th><th>影響</th><th>防止策</th></tr></thead>
+<tbody>
+<tr><td>保険者番号の桁数・数字の間違い</td><td>返戻（請求先不明）</td><td>入力後にチェックデジット検証、OQS結果と照合</td></tr>
+<tr><td>記号・番号の全角/半角混在</td><td>電子レセプトのエラー</td><td>レセコンの入力モードを統一</td></tr>
+<tr><td>枝番の未入力</td><td>返戻（2020年10月以降は必須）</td><td>保険証に記載がなければ「00」を入力</td></tr>
+<tr><td>本人/家族区分の誤り</td><td>負担割合の誤り → 患者負担額の過不足</td><td>保険証の「被保険者」「被扶養者」を目視確認</td></tr>
+<tr><td>生年月日の和暦/西暦変換ミス</td><td>年齢計算の誤り → 負担割合の誤り</td><td>保険証記載のまま入力、変換はシステムに任せる</td></tr>
+<tr><td>氏名のカナ入力ミス</td><td>レセプトの氏名不一致で返戻</td><td>保険証のカナと照合、患者に読みを口頭確認</td></tr>
+<tr><td>旧保険証の情報を登録</td><td>資格喪失後受診 → 返戻</td><td>OQSで最新資格を確認してから入力</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod03-multi">6. 複数保険の登録</h3>
+
+<h4>6.1 主保険 + 公費の同時登録パターン</h4>
+<table>
+<thead><tr><th>パターン</th><th>主保険</th><th>公費</th><th>患者負担</th></tr></thead>
+<tbody>
+<tr><td>社保 + 自立支援医療</td><td>社会保険（3割）</td><td>自立支援（法別番号21）</td><td>1割（上限あり）</td></tr>
+<tr><td>国保 + 特定疾患</td><td>国民健康保険</td><td>特定医療費（法別番号54）</td><td>公費で軽減</td></tr>
+<tr><td>後期高齢者 + 重度障害</td><td>後期高齢者医療</td><td>地方単独公費</td><td>自治体による</td></tr>
+<tr><td>社保 + 乳幼児医療費助成</td><td>社会保険（2割）</td><td>地方単独公費</td><td>自治体による（多くは無料）</td></tr>
+</tbody>
+</table>
+
+<h4>6.2 保険の優先順位ルール</h4>
+<table>
+<thead><tr><th>状況</th><th>主保険（第1保険）</th><th>第2保険以降</th></tr></thead>
+<tbody>
+<tr><td>社保 + 公費</td><td>社会保険</td><td>公費</td></tr>
+<tr><td>国保 + 公費</td><td>国民健康保険</td><td>公費</td></tr>
+<tr><td>後期高齢者 + 公費</td><td>後期高齢者医療</td><td>公費</td></tr>
+<tr><td>公費単独（生活保護）</td><td>生活保護（医療扶助）が主保険扱い</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+
+<h4>6.3 生活保護（医療扶助）のみの場合</h4>
+<ul>
+<li>生活保護受給者で他の保険資格がない場合、<strong>公費単独</strong>（法別番号12）で登録</li>
+<li>保険者番号は福祉事務所番号を使用</li>
+<li>患者負担は原則0円（全額公費負担）</li>
+<li>医療券の提示を受けて登録、有効期間を必ず確認</li>
+</ul>
+
+<h4>6.4 労災・自賠責のフラグ設定</h4>
+<table>
+<thead><tr><th>区分</th><th>レセコン上の設定</th><th>請求先</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>労災（業務災害）</td><td>労災保険フラグをON</td><td>労働基準監督署</td><td>健康保険は使用不可。様式第5号等の提出</td></tr>
+<tr><td>労災（通勤災害）</td><td>労災保険フラグをON</td><td>労働基準監督署</td><td>様式第16号の3等の提出</td></tr>
+<tr><td>自賠責（交通事故）</td><td>自賠責フラグをON</td><td>損害保険会社</td><td>第三者行為届出が必要</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod03-change">7. 保険変更への対応</h3>
+
+<h4>7.1 月途中の保険変更</h4>
+<p><strong>主な発生原因</strong>:</p>
+<ul>
+<li>転職（社保A → 社保B）</li>
+<li>退職（社保 → 国保、または任意継続）</li>
+<li>就職（国保 → 社保）</li>
+<li>年齢到達（70歳 → 高齢受給者証の追加、75歳 → 後期高齢者医療）</li>
+<li>扶養変更（被扶養者 → 被保険者、またはその逆）</li>
+</ul>
+
+<h4>7.2 レセプト分割のルール</h4>
+<p><strong>基本原則</strong>: 同月内に保険者番号または本人・家族区分が変更になった場合、<strong>保険者ごとに別のレセプト</strong>を作成する。</p>
+<table>
+<thead><tr><th>ケース</th><th>レセプト枚数</th><th>処理</th></tr></thead>
+<tbody>
+<tr><td>社保A → 社保B（保険者番号が異なる）</td><td>2枚</td><td>分割</td></tr>
+<tr><td>国保 → 社保</td><td>2枚</td><td>分割</td></tr>
+<tr><td>社保 → 国保</td><td>2枚</td><td>分割</td></tr>
+<tr><td>同一保険者内で記号・番号のみ変更</td><td>1枚</td><td>変更後の記号・番号で請求</td></tr>
+<tr><td>本人 → 家族（同一保険者）</td><td>2枚</td><td>分割</td></tr>
+</tbody>
+</table>
+<p><strong>変更後レセプトの記載ルール</strong>:</p>
+<ol>
+<li>診療開始日欄に新しい保険証の<strong>資格取得年月日</strong>を記載</li>
+<li>摘要欄に「保険者変更」等のコメントを記載（コード: 830000002）</li>
+<li>コメントがないと返戻の原因になる</li>
+</ol>
+
+<h4>7.3 遡及適用</h4>
+<p><strong>対応手順</strong>:</p>
+<ol>
+<li>旧保険者への請求分は返戻（または取下げ）</li>
+<li>新しい保険資格を確認</li>
+<li>新保険者宛にレセプトを再作成・再請求</li>
+<li>患者負担額に差額がある場合は精算</li>
+</ol>
+
+<h4>7.4 資格過誤への対応</h4>
+<p><strong>対応手順</strong>:</p>
+<ol>
+<li>患者に連絡し、現在の保険資格を確認</li>
+<li>新しい保険証（またはマイナ保険証）の提示を依頼</li>
+<li>レセコンの保険情報を更新</li>
+<li>返戻レセプトを新しい保険者宛に再請求</li>
+<li>新保険に加入していない期間がある場合 → 全額自費請求を検討</li>
+</ol>
+<blockquote><strong>予防策</strong>: OQSを徹底活用することで、資格喪失後の受診を受付時点で検出できる。</blockquote>
+
+<h3 id="mod03-referral">8. 紹介状・診療情報提供</h3>
+
+<h4>8.1 紹介状（診療情報提供書）の受領と処理</h4>
+<ol>
+<li>紹介状の有無を確認</li>
+<li>紹介状がある場合、封筒ごと受け取り</li>
+<li>レセコンに「紹介あり」のフラグを設定</li>
+<li>紹介元の医療機関名を記録</li>
+<li>診療情報提供書が添付されている場合は、医師に速やかに渡す</li>
+</ol>
+
+<h4>8.2 紹介なし初診の選定療養費</h4>
+<table>
+<thead><tr><th>対象医療機関</th><th>初診時（税抜）</th><th>再診時（税抜）</th></tr></thead>
+<tbody>
+<tr><td>特定機能病院</td><td>7,000円以上</td><td>3,000円以上</td></tr>
+<tr><td>200床以上の地域医療支援病院</td><td>7,000円以上</td><td>3,000円以上</td></tr>
+<tr><td>紹介受診重点医療機関（200床以上）</td><td>7,000円以上</td><td>3,000円以上</td></tr>
+</tbody>
+</table>
+<p><strong>徴収対象外のケース</strong>: 他院からの紹介状を持参、救急搬送、がん検診で精密検査指示、受診後そのまま入院、生活保護受給者、特定疾患等の公費対象者。</p>
+
+<h3 id="mod03-privacy">9. 受付における個人情報保護</h3>
+
+<h4>9.1 受付時の具体的な注意事項</h4>
+<table>
+<thead><tr><th>場面</th><th>推奨対応</th><th>NG対応</th></tr></thead>
+<tbody>
+<tr><td>患者の呼び出し</td><td>受付番号で呼ぶ。フルネームを使う場合は院内方針に従う</td><td>病名を添えて呼ぶ</td></tr>
+<tr><td>保険証の取り扱い</td><td>確認後すぐに返却。コピーは施錠保管</td><td>保険証をカウンターに放置</td></tr>
+<tr><td>問診票</td><td>患者に直接手渡し。記入用のスペースを確保</td><td>他の患者が見える場所に置く</td></tr>
+<tr><td>PC画面</td><td>離席時はスクリーンロック。覗き見防止フィルター</td><td>患者情報を表示したまま離席</td></tr>
+<tr><td>書類の廃棄</td><td>シュレッダー処理</td><td>そのままゴミ箱へ</td></tr>
+</tbody>
+</table>
+
+<h4>9.2 電話での問い合わせ対応ルール</h4>
+<ul>
+<li>電話では相手の本人確認が困難なため、<strong>患者の診療情報・予約情報を安易に伝えない</strong></li>
+<li>患者本人からの問い合わせ: 氏名・生年月日・住所等で本人確認を行った上で対応</li>
+<li>家族からの問い合わせ: 患者本人の同意がある場合のみ対応</li>
+<li>警察・保険会社等からの問い合わせ: 院内規定に従い、原則として文書での照会を求める</li>
+</ul>
+
+<h3 id="mod03-bpo">10. BPO事業者としての視点</h3>
+
+<h4>10.1 受付業務とBPOの関係</h4>
+<p>受付業務は<strong>現地業務</strong>であり、リモートBPOの直接的な対象ではない。しかし、受付で入力されるデータがレセプト業務全体の起点となる。</p>
+<table>
+<thead><tr><th>サービス</th><th>内容</th><th>価値</th></tr></thead>
+<tbody>
+<tr><td>保険情報の定期監査</td><td>登録済み患者の保険情報を定期的にOQS等でチェック</td><td>資格過誤の早期発見、返戻削減</td></tr>
+<tr><td>入力精度レポート</td><td>保険情報の入力エラー率を集計・報告</td><td>受付スタッフの教育改善に活用</td></tr>
+<tr><td>返戻原因分析</td><td>返戻レセプトを分析し、受付起因の返戻を特定</td><td>根本原因の改善提案</td></tr>
+<tr><td>マスタ整備支援</td><td>保険者マスタ・公費マスタの更新支援</td><td>入力時の選択肢を最新化</td></tr>
+</tbody>
+</table>
+
+<h4>10.2 在宅医療特有の受付</h4>
+<table>
+<thead><tr><th>項目</th><th>外来診療</th><th>在宅医療</th></tr></thead>
+<tbody>
+<tr><td>保険証確認の場所</td><td>医療機関の受付窓口</td><td>患者の自宅（訪問先）</td></tr>
+<tr><td>OQSの利用</td><td>据置型カードリーダー</td><td>モバイル端末 or 事前確認</td></tr>
+<tr><td>受付のタイミング</td><td>患者来院時</td><td>訪問前に事前確認</td></tr>
+<tr><td>問診票</td><td>来院時に記入</td><td>初回訪問時に聴取</td></tr>
+<tr><td>保険証コピー</td><td>受付でコピー取得</td><td>訪問時に撮影 or 事前にFAX</td></tr>
+</tbody>
+</table>
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPOとしてのチャンス</div>
+在宅医療では医師・看護師が訪問に集中するため、保険情報の事前確認・登録・更新をBPOで代行する需要が高い。
+</div>
+
+<h3 id="mod03-check">11. チェックリスト</h3>
+<ul class="checklist">
+<li>初診と再診の受付フローの違いを説明できる</li>
+<li>月初の保険証確認ルールと、マイナ保険証利用時の違いを説明できる</li>
+<li>保険証忘れ時の対応手順（全額自費→後日返金）を説明できる</li>
+<li>OQSの仕組み（カードリーダー→中間サーバー→保険者）を図示できる</li>
+<li>マイナ保険証と資格確認書それぞれの確認手順を説明できる</li>
+<li>OQS障害時の代替手段を3つ以上挙げられる</li>
+<li>レセコンの新患登録に必要な入力項目を漏れなく列挙できる</li>
+<li>保険者番号・記号・番号・枝番の違いを説明できる</li>
+<li>負担割合を年齢から正しく判定できる</li>
+<li>複数保険（主保険+公費）の優先順位ルールを説明できる</li>
+<li>月途中の保険変更時のレセプト分割ルールを説明できる</li>
+<li>選定療養費の対象医療機関と金額を答えられる</li>
+<li>受付における個人情報保護の注意事項を5つ以上挙げられる</li>
+<li>在宅医療における受付の特殊性を説明できる</li>
+</ul>
+
+<h3 id="mod03-exercises">12. 演習問題</h3>
+
+<h4>演習1: 保険証情報の読み取りと登録</h4>
+<p>以下の情報から、レセコンに登録すべき保険情報を整理せよ。</p>
+<p><strong>患者情報</strong>: 氏名: 山田 花子（ヤマダ ハナコ）、生年月日: 1958年4月15日（68歳）、保険証: 協会けんぽ、保険者番号: 01130012、記号: 7ア、番号: 123456、枝番: 02、資格: 被扶養者</p>
+<p><strong>設問</strong>:</p>
+<ol>
+<li>この患者の負担割合は何割か。根拠とともに答えよ。</li>
+<li>レセコンの「本人/家族」区分はどちらを選択するか。</li>
+<li>枝番「02」は何を意味するか。</li>
+</ol>
+
+<h4>演習2: 月途中の保険変更シナリオ</h4>
+<p><strong>シナリオ</strong>: 田中太郎さん（45歳）は3月5日にA社の社会保険で初診を受けた。その後3月15日にA社を退職し、3月16日に国民健康保険に加入した。3月25日に再診で来院した際に、国保の保険証を提示した。</p>
+<ol>
+<li>3月分のレセプトは何枚作成する必要があるか。</li>
+<li>それぞれのレセプトに記載すべき診療期間を答えよ。</li>
+<li>2枚目のレセプトの摘要欄に記載すべきコメントは何か。</li>
+</ol>
+
+<h4>演習3: 複数保険の登録判断</h4>
+<p>以下の3人の患者について、レセコンにどのように保険を登録するかを答えよ。</p>
+<ul>
+<li><strong>患者A</strong>: 72歳、後期高齢者医療（1割負担）、特定疾患医療受給者証あり</li>
+<li><strong>患者B</strong>: 35歳、生活保護受給者（他の保険なし）、医療券提示</li>
+<li><strong>患者C</strong>: 5歳、父親の社会保険の被扶養者、乳幼児医療費助成の受給者証あり</li>
+</ul>
+
+<h4>演習4: OQS障害対応シナリオ</h4>
+<p><strong>シナリオ</strong>: 受付開始直後にOQSのネットワーク障害が発生し、オンライン資格確認ができない状態になった。マイナ保険証のみを持参した初診患者が来院した。</p>
+<ol>
+<li>この患者の受付をどのように進めるか、手順を述べよ。</li>
+<li>資格確認ができない場合でも診療を行ってよい根拠は何か。</li>
+<li>ネットワーク復旧後に行うべき対応は何か。</li>
+</ol>
+
+<h4>13. Q&amp;A</h4>
+<p>（学習中の質疑応答をここに蓄積する）</p>
+
+<h4>参考情報</h4>
+<ul>
+<li>厚生労働省「オンライン資格確認について」</li>
+<li>政府広報オンライン「マイナ保険証」</li>
+<li>社会保険診療報酬支払基金 請求支払Q&amp;A</li>
+<li>医療機関等向けオンライン資格確認ポータルサイト</li>
+</ul>
+</section>
+
+<hr class="module-divider">
+
+<!-- ========== GLOSSARY ========== -->
+<section id="glossary" class="module-card">
+<h2>レセプト業務用語集</h2>
+<p>本用語集はトレーニングモジュール全体で使用される専門用語を五十音順に整理したものです。各モジュールの学習時に参照してください。</p>
+
+<h3 id="glossary-a">あ行</h3>
+<p><strong>一部負担金（いちぶふたんきん）</strong><br>患者が医療機関の窓口で支払う自己負担額。年齢や所得に応じて医療費の1〜3割を負担する。</p>
+<p><strong>医科診療報酬点数表（いかしんりょうほうしゅうてんすうひょう）</strong><br>医科（医師による診療）の診療報酬を定めた点数表。基本診療料と特掲診療料で構成される。厚生労働大臣告示として2年に1度改定。</p>
+<p><strong>医療扶助（いりょうふじょ）</strong><br>生活保護法に基づく医療費の公費負担制度。患者の自己負担はなく、全額公費で賄われる。法別番号12。</p>
+<p><strong>オンライン資格確認（OQS: Online Qualification System）</strong><br>マイナンバーカードや保険証を使って、医療機関の窓口で患者の保険資格をリアルタイムに確認する仕組み。2023年4月から原則義務化。</p>
+<p><strong>オンライン請求</strong><br>レセプトデータを電子的に審査支払機関に送信する方式。毎月10日が提出期限。2024年原則義務化。</p>
+
+<h3 id="glossary-ka">か行</h3>
+<p><strong>介護保険（かいごほけん）</strong><br>40歳以上が加入する公的保険制度。要介護・要支援認定を受けた者が介護サービスを利用できる。医療保険とは別体系だが、在宅医療で接点が多い。</p>
+<p><strong>加算（かさん）</strong><br>基本点数に上乗せされる点数。時間帯（時間外・休日・深夜）、年齢（乳幼児）、施設要件（機能強化加算等）などの条件で算定される。</p>
+<p><strong>画像診断（がぞうしんだん）</strong><br>X線、CT、MRI等による画像検査。撮影料＋診断料の2段階で点数が設定される。</p>
+<p><strong>共済組合（きょうさいくみあい）</strong><br>公務員・私学教職員が加入する医療保険。国家公務員共済（法別番号31）、地方公務員共済（32）、警察共済（33）、私学共済（34）がある。</p>
+<p><strong>協会けんぽ（きょうかいけんぽ）</strong><br>全国健康保険協会が運営する健康保険。中小企業の従業員が主な加入者。法別番号01。</p>
+<p><strong>区分番号（くぶんばんごう）</strong><br>診療報酬点数表において各診療行為に付与される識別番号。例: A000（初診料）、A001（再診料）。</p>
+<p><strong>健保組合（けんぽくみあい）</strong><br>大企業等が独自に設立する健康保険組合。法別番号06。</p>
+<p><strong>後期高齢者医療制度（こうきこうれいしゃいりょうせいど）</strong><br>75歳以上（一定の障害がある場合は65歳以上）を対象とする医療保険制度。都道府県ごとの広域連合が保険者。</p>
+<p><strong>高額療養費制度（こうがくりょうようひせいど）</strong><br>月ごとの医療費の自己負担額が一定の上限を超えた場合、超過分が保険者から支給される制度。</p>
+<p><strong>公費負担医療（こうひふたんいりょう）</strong><br>国や地方自治体が医療費の全部または一部を負担する制度の総称。生活保護、自立支援医療、難病医療等。</p>
+<p><strong>国民健康保険（こくみんけんこうほけん / 国保）</strong><br>自営業者、農業者、無職者等が加入する医療保険。市区町村が保険者の「市町村国保」と、同種の事業従事者が加入する「国保組合」がある。</p>
+<p><strong>国保連合会（こくほれんごうかい / 国保連）</strong><br>国民健康保険のレセプト審査・支払いを行う機関。各都道府県に設置。</p>
+
+<h3 id="glossary-sa">さ行</h3>
+<p><strong>査定（さてい）</strong><br>審査支払機関がレセプトの請求内容を審査し、不適切と判断した項目の点数を減額すること。A査定（適応外）、B査定（過剰）、C査定（重複）、D査定（その他）に分類。</p>
+<p><strong>再診料（さいしんりょう）</strong><br>同一医療機関で2回目以降の受診時に算定する基本診療料。75点。</p>
+<p><strong>再審査請求（さいしんさせいきゅう）</strong><br>査定に対して医療機関が不服を申し立て、再度の審査を求めること。復活率は約6割。</p>
+<p><strong>算定（さんてい）</strong><br>診療報酬点数表に基づき、診療行為に対応する点数を計上すること。「算定する」＝「点数を請求に含める」。</p>
+<p><strong>算定漏れ（さんていもれ）</strong><br>本来算定できるはずの点数を請求に含めていない状態。BPOサービスにおける算定漏れの発見・指摘は高い付加価値となる。</p>
+<p><strong>支払基金（しはらいききん）</strong><br>社会保険診療報酬支払基金の略称。被用者保険（社保）のレセプト審査・支払いを行う。</p>
+<p><strong>施設基準（しせつきじゅん）</strong><br>特定の診療報酬を算定するために医療機関が満たすべき要件。人員配置、設備、体制等の基準が定められ、地方厚生局への届出が必要。</p>
+<p><strong>主傷病名（しゅしょうびょうめい）</strong><br>レセプト上で主たる傷病として記載する傷病名。原則として最も医療資源を投入した傷病。</p>
+<p><strong>初診料（しょしんりょう）</strong><br>初めての受診時、または前回の傷病が治癒した後の再受診時に算定する基本診療料。291点。</p>
+<p><strong>症状詳記（しょうじょうしょうき）</strong><br>レセプトに添付する、診療内容の医学的必要性を説明する文書。高額請求や特殊な診療の場合に添付し、査定防止に有効。</p>
+<p><strong>診療報酬（しんりょうほうしゅう）</strong><br>医療機関が保険診療を行った対価として受け取る報酬。1点=10円で計算。</p>
+<p><strong>診療報酬改定（しんりょうほうしゅうかいてい）</strong><br>2年に1度行われる診療報酬点数の見直し。中央社会保険医療協議会（中医協）の答申に基づき厚生労働大臣が告示。</p>
+<p><strong>摘要欄（てきようらん）</strong><br>レセプトにおいて、算定した診療内容の補足説明を記載する欄。コメントコード入力が必要な項目が増加中。</p>
+
+<h3 id="glossary-ta">た行</h3>
+<p><strong>中医協（ちゅういきょう）</strong><br>中央社会保険医療協議会の略称。診療報酬改定の審議を行う厚生労働大臣の諮問機関。</p>
+<p><strong>DPC/PDPS（ディーピーシー / ピーディーピーエス）</strong><br>Diagnosis Procedure Combination / Per-Diem Payment System。入院患者の診断群分類に基づく1日当たり定額払い制度。急性期病院が対象。</p>
+<p><strong>電子レセプト（でんしレセプト）</strong><br>電子データとして作成されるレセプト。UKE形式（CSVベースの標準フォーマット）で記録。</p>
+<p><strong>点数（てんすう）</strong><br>診療報酬の単位。1点=10円。点数&times;10円が医療費総額となる。</p>
+<p><strong>特掲診療料（とっけいしんりょうりょう）</strong><br>基本診療料以外の個別の診療行為に対する報酬。検査、画像診断、投薬、注射、処置、手術等。</p>
+<p><strong>突合点検（とつごうてんけん）</strong><br>医科レセプトと調剤レセプトを突き合わせて、処方内容の整合性を確認する点検方法。</p>
+
+<h3 id="glossary-na">な行</h3>
+<p><strong>難病医療（なんびょういりょう）</strong><br>難病法に基づく指定難病の医療費助成制度。法別番号54。患者負担は所得に応じた上限額。</p>
+
+<h3 id="glossary-ha">は行</h3>
+<p><strong>返戻（へんれい）</strong><br>審査支払機関がレセプトの内容に不備・疑義がある場合に、レセプトを医療機関に差し戻すこと。査定と異なり、修正・再提出が可能。</p>
+<p><strong>被保険者（ひほけんしゃ）</strong><br>医療保険に加入している本人。保険料を納める義務を負う。</p>
+<p><strong>被扶養者（ひふようしゃ）</strong><br>被保険者に生計を維持されている家族。被用者保険では保険料の追加負担なく保険が適用される。年収130万円未満等の条件あり。</p>
+<p><strong>病名（びょうめい）</strong><br>レセプトに記載する傷病名。診療行為の医学的根拠となる。ICD-10コードで標準化されており、病名と診療内容の整合性がレセプト点検の核。</p>
+<p><strong>不正請求（ふせいせいきゅう）</strong><br>実際に行っていない診療行為を請求する、または診療報酬を不正に高く請求すること。保険医療機関の取消処分の対象。</p>
+<p><strong>副傷病名（ふくしょうびょうめい）</strong><br>主傷病名以外の傷病名。合併症や併存疾患として記載。</p>
+<p><strong>法別番号（ほうべつばんごう）</strong><br>保険者番号の先頭2桁。保険の種類を識別する番号。01=協会けんぽ、06=組合健保、31-34=共済等。</p>
+<p><strong>保険外併用療養費（ほけんがいへいようりょうようひ）</strong><br>保険適用の診療と保険外の診療を併用する場合の取り扱い。選定療養（差額ベッド等）と評価療養（先進医療等）がある。</p>
+<p><strong>保険者（ほけんしゃ）</strong><br>医療保険を運営する主体。協会けんぽ、健保組合、市町村（国保）、広域連合（後期高齢者）等。</p>
+<p><strong>保険者番号（ほけんしゃばんごう）</strong><br>各保険者に割り当てられた8桁の番号。法別番号2桁 + 都道府県番号2桁 + 保険者別番号3桁 + 検証番号1桁。</p>
+
+<h3 id="glossary-ma">ま行</h3>
+<p><strong>マイナ保険証（マイナほけんしょう）</strong><br>マイナンバーカードを健康保険証として利用する仕組み。オンライン資格確認に対応した医療機関で使用可能。2024年12月以降、従来の保険証は新規発行停止。</p>
+<p><strong>窓口負担（まどぐちふたん）</strong><br>&rarr; 一部負担金を参照</p>
+
+<h3 id="glossary-ya">や行</h3>
+<p><strong>薬剤料（やくざいりょう）</strong><br>処方された薬剤の費用。薬価基準に基づく薬価&times;使用量で計算。</p>
+<p><strong>薬価基準（やっかきじゅん）</strong><br>厚生労働大臣が定める医薬品の公定価格一覧。2年に1度の改定に加え、毎年の中間年改定が導入。</p>
+
+<h3 id="glossary-ra">ら行</h3>
+<p><strong>レセプト（れせぷと）</strong><br>診療報酬明細書の通称。ドイツ語の Rezept（処方箋）に由来。医療機関が保険者に診療報酬を請求するための書類。月ごと・患者ごとに作成。</p>
+<p><strong>レセプト電算処理システム（れせぷとでんさんしょりシステム）</strong><br>レセプトを電子データ（UKEファイル形式）で作成・提出・処理するシステム。</p>
+<p><strong>レセプト病名（れせぷとびょうめい）</strong><br>診療行為を保険請求上正当化するためだけに付けられた傷病名。医学的根拠が薄い場合が多く、返戻・査定の原因となりうる。</p>
+<p><strong>レセコン（れせこん）</strong><br>レセプトコンピューターの略称。診療報酬の計算とレセプト作成を行う専用コンピューターシステム。主要製品にORCA、M3デジカル、CLINICS等がある。</p>
+
+<h3 id="glossary-wa">わ行</h3>
+<p><strong>枝番（えだばん）</strong><br>被保険者証の個人単位化に伴い、記号・番号に加えて付与された2桁の番号。個人を識別するために使用。</p>
+
+<h3 id="glossary-alpha">アルファベット</h3>
+<p><strong>BPO（ビジネス・プロセス・アウトソーシング）</strong><br>業務プロセスを外部の専門事業者に委託すること。レセプト業務のBPOでは、レセプト作成・点検・請求・返戻対応等を受託する。</p>
+<p><strong>DPC &rarr; DPC/PDPS を参照</strong></p>
+<p><strong>E&amp;O保険（Errors and Omissions Insurance）</strong><br>専門職業賠償責任保険。レセプト請求業務におけるミスから生じる損害を補償する保険。BPO事業者に推奨。</p>
+<p><strong>ICD-10（アイシーディーテン）</strong><br>WHO（世界保健機関）が定めた疾病及び関連保健問題の国際統計分類第10版。レセプトの傷病名コーディングに使用。</p>
+<p><strong>OQS &rarr; オンライン資格確認 を参照</strong></p>
+<p><strong>ORCA（オルカ）</strong><br>日本医師会が開発したオープンソースのレセプトコンピューター。正式名称は「日医標準レセプトソフト」。無床診療所を中心に普及。</p>
+<p><strong>SLA（Service Level Agreement）</strong><br>サービス品質保証契約。BPOにおける納期、品質（返戻率・査定率の上限）、レスポンスタイム等を定めた契約上の合意。</p>
+<p><strong>UKE形式（ウケけいしき）</strong><br>レセプト電算処理の標準フォーマット。CSVベースのテキストファイルで、各レコードがレセプトの各要素に対応。</p>
+<p><em>本用語集はトレーニングの進行に伴い、随時追加・更新されます。</em></p>
+</section>
+
+</main>
+
+<footer class="site-footer">
+<p>p012 レセプトBPOサービス &mdash; レセプト業務マスタートレーニング</p>
+<p>最終更新日: 2026-03-09</p>
+</footer>
+
+<script>
+function toggleSidebar(){
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.querySelector('.sidebar-overlay').classList.toggle('open');
+}
+function toggleSubNav(btn){
+  var subNav=btn.parentElement.nextElementSibling;
+  if(subNav){subNav.classList.toggle('open');btn.classList.toggle('open');}
+}
+document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(){
+    if(window.innerWidth<=900){
+      document.querySelector('.sidebar').classList.remove('open');
+      document.querySelector('.sidebar-overlay').classList.remove('open');
+    }
+  });
+});
+</script>
+</body>
+</html>
