@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>レセプト業務マスタートレーニング Phase 2</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>document.addEventListener('DOMContentLoaded',function(){mermaid.initialize({startOnLoad:true,theme:'default',flowchart:{useMaxWidth:true,htmlLabels:true},sequence:{useMaxWidth:true}});});</script>
+<style>
+:root{--primary:#2563eb;--primary-dark:#1d4ed8;--primary-light:#dbeafe;--green:#059669;--green-light:#d1fae5;--green-bg:#ecfdf5;--bg:#f8f9fa;--card-bg:#fff;--text:#1f2937;--text-light:#6b7280;--border:#e5e7eb;--code-bg:#1e293b;--code-text:#e2e8f0;--shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);--shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05)}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:80px}body{font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;line-height:1.8;color:var(--text);background:var(--bg)}.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:12px 24px;box-shadow:0 2px 8px rgba(0,0,0,.15);display:flex;align-items:center;gap:16px}.site-header h1{font-size:1.2rem;font-weight:700}.site-header .subtitle{font-size:.85rem;opacity:.85}.hamburger{display:none;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer;padding:4px 8px;line-height:1}.sidebar{position:fixed;top:60px;left:0;bottom:0;width:300px;background:var(--card-bg);border-right:1px solid var(--border);overflow-y:auto;padding:16px 0;z-index:900;transition:transform .3s ease}.sidebar-nav{list-style:none}.sidebar-nav>li{margin-bottom:2px}.sidebar-nav>li>.nav-item-header>a,.sidebar-nav>li>a{display:block;padding:10px 20px;color:var(--text);text-decoration:none;font-weight:600;font-size:.95rem;border-left:3px solid transparent;transition:all .2s}.sidebar-nav>li>.nav-item-header>a:hover,.sidebar-nav>li>a:hover{background:var(--primary-light);border-left-color:var(--primary)}.sidebar-nav .sub-nav{list-style:none;display:none}.sidebar-nav .sub-nav.open{display:block}.sidebar-nav .sub-nav li a{display:block;padding:6px 20px 6px 36px;color:var(--text-light);text-decoration:none;font-size:.85rem;transition:all .2s}.sidebar-nav .sub-nav li a:hover{color:var(--primary);background:var(--primary-light)}.toggle-btn{background:none;border:none;cursor:pointer;color:var(--text-light);font-size:.8rem;padding:2px 6px;margin-left:4px;transition:transform .2s;flex-shrink:0}.toggle-btn.open{transform:rotate(90deg)}.nav-item-header{display:flex;align-items:center}.nav-item-header a{flex:1}.main-content{margin-left:300px;margin-top:60px;padding:32px 40px 80px;max-width:1060px}.module-card{background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow);padding:40px;margin-bottom:48px}.module-divider{height:4px;border:none;margin:48px 0;background:linear-gradient(90deg,var(--primary),var(--green),var(--primary));border-radius:2px}.module-card h2{font-size:1.8rem;color:var(--primary-dark);margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--primary)}.module-card h3{font-size:1.35rem;color:var(--text);margin-top:32px;margin-bottom:16px;padding-left:12px;border-left:4px solid var(--primary)}.module-card h4{font-size:1.1rem;color:var(--text);margin-top:24px;margin-bottom:12px}table{width:100%;border-collapse:separate;border-spacing:0;margin:16px 0 24px;border-radius:8px;overflow:hidden;box-shadow:var(--shadow);font-size:.92rem}thead th{background:var(--primary-dark);color:#fff;padding:12px 16px;text-align:left;font-weight:600}tbody td{padding:10px 16px;border-bottom:1px solid var(--border)}tbody tr:nth-child(even){background:#f9fafb}tbody tr:hover{background:var(--primary-light)}pre{background:var(--code-bg);color:var(--code-text);padding:20px 24px;border-radius:8px;overflow-x:auto;margin:16px 0 24px;font-size:.88rem;line-height:1.6}pre code{font-family:"Cascadia Code","Fira Code",Consolas,monospace;background:none;padding:0}code{font-family:"Cascadia Code","Fira Code",Consolas,monospace;background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:.9em}blockquote{border-left:4px solid var(--primary);background:var(--primary-light);padding:16px 20px;margin:16px 0 24px;border-radius:0 8px 8px 0;font-size:.95rem}blockquote strong{color:var(--primary-dark)}.bpo-callout{border-left:4px solid var(--green);background:var(--green-bg);padding:16px 20px;margin:16px 0 24px;border-radius:0 8px 8px 0}.bpo-callout-title{font-weight:700;color:var(--green);margin-bottom:8px;font-size:.9rem}details{margin:16px 0 24px;border:1px solid var(--border);border-radius:8px;overflow:hidden}summary{padding:12px 20px;cursor:pointer;font-weight:600;background:#f9fafb;color:var(--primary-dark);user-select:none}summary::-webkit-details-marker{display:none}details[open] summary{border-bottom:1px solid var(--border)}.answer{padding:16px 20px;background:var(--green-light)}.checklist{list-style:none;padding:0}.checklist li{padding:8px 0 8px 32px;position:relative;border-bottom:1px solid #f3f4f6}.checklist li::before{content:"";position:absolute;left:0;top:12px;width:18px;height:18px;border:2px solid var(--primary);border-radius:4px;background:#fff}ul,ol{margin:8px 0 16px 24px}li{margin-bottom:4px}p{margin-bottom:12px}.site-footer{margin-left:300px;padding:24px 40px;background:var(--card-bg);border-top:1px solid var(--border);text-align:center;color:var(--text-light);font-size:.85rem}.flow-chart{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:24px 0;padding:20px;background:#f9fafb;border-radius:12px}.flow-box{background:var(--primary);color:#fff;padding:10px 14px;border-radius:8px;font-weight:600;font-size:.85rem;text-align:center;min-width:100px}.flow-box.green{background:var(--green)}.flow-arrow{font-size:1.2rem;color:var(--primary);font-weight:700}.flow-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}.story-callout{background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 50%,#e0f2fe 100%);border-left:5px solid var(--primary);border-radius:0 12px 12px 0;padding:24px 28px;margin:0 0 32px 0;position:relative;box-shadow:0 2px 8px rgba(37,99,235,.1)}.story-callout::before{content:"";position:absolute;top:0;left:-5px;bottom:0;width:5px;background:linear-gradient(180deg,#3b82f6,#1d4ed8);border-radius:3px 0 0 3px}.story-callout-icon{font-size:1.5rem;margin-bottom:8px;display:block}.story-callout-title{font-weight:700;color:var(--primary-dark);font-size:1.05rem;margin-bottom:10px}.story-callout p{margin-bottom:8px;color:#1e3a5f;font-size:.95rem;line-height:1.7}.story-callout p:last-child{margin-bottom:0}.mermaid-container{background:#fff;border-radius:12px;box-shadow:var(--shadow-lg);padding:24px;margin:20px 0 28px;overflow-x:auto}.mermaid-container .mermaid{display:flex;justify-content:center}.narrative-intro{font-size:1.1rem;line-height:1.9;color:var(--text);margin-bottom:24px;padding:0 4px}.narrative-question{background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:5px solid #f59e0b;border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;font-size:1.05rem;font-weight:600;color:#92400e}.phase-story{background:#f8fafc;border-radius:12px;padding:24px 28px;margin:20px 0;border:1px solid var(--border)}.phase-story h4{color:var(--primary-dark);margin-top:0;font-size:1.15rem}.phase-story p{color:var(--text);font-size:.95rem}@media(max-width:900px){.sidebar{transform:translateX(-100%);width:280px}.sidebar.open{transform:translateX(0);box-shadow:var(--shadow-lg)}.main-content{margin-left:0;padding:24px 16px 80px}.site-footer{margin-left:0}.hamburger{display:block}.module-card{padding:24px 20px}table{font-size:.82rem;display:block;overflow-x:auto}thead th,tbody td{padding:8px 10px}pre{padding:14px 16px;font-size:.82rem}}.sidebar-overlay{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:899}.sidebar-overlay.open{display:block}
+</style>
+</head>
+<body>
+<header class="site-header">
+<button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
+<div>
+<h1>レセプト業務マスタートレーニング &mdash; Phase 2</h1>
+<div class="subtitle">p012 レセプトBPOサービス &mdash; コア業務編</div>
+</div>
+</header>
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+<nav class="sidebar">
+<ul class="sidebar-nav">
+<li><div class="nav-item-header"><a href="#mod04">04: レセコン入力</a><button class="toggle-btn" onclick="toggleSubNav(this)">&#9654;</button></div>
+<ul class="sub-nav"><li><a href="#mod04-goals">学習目標</a></li><li><a href="#mod04-overview">レセコンとは</a></li><li><a href="#mod04-systems">主要レセコンシステム</a></li><li><a href="#mod04-flow">入力業務の全体フロー</a></li><li><a href="#mod04-input">診療行為の入力</a></li><li><a href="#mod04-byomei">病名の登録</a></li><li><a href="#mod04-comment">コメント入力</a></li><li><a href="#mod04-denshi">電子カルテ連携</a></li><li><a href="#mod04-errors">よくある入力ミス</a></li><li><a href="#mod04-bpo">BPO視点</a></li><li><a href="#mod04-check">チェックリスト</a></li><li><a href="#mod04-exercises">演習問題</a></li></ul></li>
+<li><div class="nav-item-header"><a href="#mod05">05: 会計・窓口精算</a><button class="toggle-btn" onclick="toggleSubNav(this)">&#9654;</button></div>
+<ul class="sub-nav"><li><a href="#mod05-goals">学習目標</a></li><li><a href="#mod05-flow">会計業務の全体フロー</a></li><li><a href="#mod05-calc">一部負担金の計算</a></li><li><a href="#mod05-round">端数処理のルール</a></li><li><a href="#mod05-receipt">領収証・明細書</a></li><li><a href="#mod05-special">特殊な会計パターン</a></li><li><a href="#mod05-unpaid">未収金管理</a></li><li><a href="#mod05-daily">日次締め処理</a></li><li><a href="#mod05-bpo">BPO視点</a></li><li><a href="#mod05-check">チェックリスト</a></li><li><a href="#mod05-exercises">演習問題</a></li></ul></li>
+<li><div class="nav-item-header"><a href="#mod06">06: レセプト作成・出力</a><button class="toggle-btn" onclick="toggleSubNav(this)">&#9654;</button></div>
+<ul class="sub-nav"><li><a href="#mod06-goals">学習目標</a></li><li><a href="#mod06-overview">レセプトとは</a></li><li><a href="#mod06-format">レセプトの様式と記載項目</a></li><li><a href="#mod06-flow">月次作成フロー</a></li><li><a href="#mod06-uke">UKEファイルの構造</a></li><li><a href="#mod06-create">レセコンでの作成手順</a></li><li><a href="#mod06-rules">記載ルール</a></li><li><a href="#mod06-errors">よくある作成ミス</a></li><li><a href="#mod06-bpo">BPO視点</a></li><li><a href="#mod06-check">チェックリスト</a></li><li><a href="#mod06-exercises">演習問題</a></li></ul></li>
+</ul>
+</nav>
+<main class="main-content">
+<!-- ========== MODULE 04: RESECON INPUT ========== -->
+<section id="mod04" class="module-card">
+<h2>モジュール04: 診療情報のレセコン入力</h2>
+
+<div class="story-callout">
+<span class="story-callout-icon">&#128187;</span>
+<div class="story-callout-title">なぜこのモジュールを学ぶのか</div>
+<p>Phase 1で学んだ保険制度・診療報酬制度・受付業務は、すべてこのモジュールの「入力」に集約される。レセコン（レセプトコンピューター）は医療機関の収益を計算する心臓部であり、ここに入力されたデータがそのままレセプト（診療報酬明細書）となって保険者に請求される。</p>
+<p>つまり、<strong>入力の正確さ＝請求の正確さ＝医療機関の収益</strong>である。1つの入力ミスが算定漏れ（収益減）や過剰請求（返戻・査定）に直結する。BPO事業者にとって、レセコン入力の品質管理は最も基本的かつ重要なサービスである。</p>
+</div>
+
+<h3 id="mod04-goals">1. このモジュールで学ぶこと</h3>
+<p>本モジュールを修了すると、以下を説明・実行できるようになる。</p>
+<ol>
+<li><strong>レセコンの基本概念</strong> &mdash; レセコンの役割・主要システムの特徴を説明できる</li>
+<li><strong>診療行為の入力</strong> &mdash; 診療内容をレセコンに正しく入力する手順を実行できる</li>
+<li><strong>病名登録</strong> &mdash; 傷病名コード（ICD-10対応）を使った病名登録を正しく行える</li>
+<li><strong>コメント入力</strong> &mdash; レセプト摘要欄に必要なコメントを漏れなく入力できる</li>
+<li><strong>入力ミスの防止</strong> &mdash; よくある入力ミスのパターンと防止策を説明できる</li>
+</ol>
+
+<h3 id="mod04-overview">2. レセコンとは何か</h3>
+
+<h4>2.1 レセコンの定義と役割</h4>
+<p>レセコン（レセプトコンピューター）とは、医療機関において診療報酬の計算とレセプト（診療報酬明細書）の作成を行う専用コンピューターシステムである。</p>
+<p>レセコンの主な機能は以下の通り。</p>
+<table>
+<thead><tr><th>機能</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>患者管理</td><td>患者の基本情報・保険情報の登録・管理</td></tr>
+<tr><td>診療行為入力</td><td>医師が行った診療内容の入力・点数自動計算</td></tr>
+<tr><td>会計計算</td><td>一部負担金（患者窓口負担）の自動計算</td></tr>
+<tr><td>レセプト作成</td><td>月次のレセプトデータ（UKEファイル）の生成</td></tr>
+<tr><td>統計・帳票</td><td>日計表、月報、各種統計資料の出力</td></tr>
+</tbody>
+</table>
+
+<h4>2.2 レセコンと電子カルテの違い</h4>
+<table>
+<thead><tr><th>項目</th><th>レセコン</th><th>電子カルテ</th></tr></thead>
+<tbody>
+<tr><td>主な目的</td><td>診療報酬の算定・請求</td><td>診療記録の電子化</td></tr>
+<tr><td>記録する内容</td><td>保険算定に必要な情報</td><td>診療経過・所見・検査結果等すべて</td></tr>
+<tr><td>法的根拠</td><td>療担規則に基づく請求</td><td>医師法24条（カルテ記載義務）</td></tr>
+<tr><td>導入義務</td><td>オンライン請求に必要</td><td>義務なし（普及率約60%）</td></tr>
+<tr><td>データ連携</td><td>電子カルテからオーダー受信</td><td>レセコンに算定データを送信</td></tr>
+</tbody>
+</table>
+<blockquote><strong>実務ポイント</strong>: 電子カルテとレセコンが一体型のシステム（例: M3デジカル、CLINICS）と、電子カルテとレセコンが分離しているシステムがある。一体型はデータ連携の手間が少ないが、カスタマイズ性では分離型が優れる。</blockquote>
+
+<h3 id="mod04-systems">3. 主要レセコンシステム</h3>
+
+<h4>3.1 主要製品の比較</h4>
+<table>
+<thead><tr><th>製品名</th><th>開発元</th><th>特徴</th><th>主な対象</th></tr></thead>
+<tbody>
+<tr><td><strong>ORCA（日レセ）</strong></td><td>日本医師会</td><td>オープンソース、無床診療所に強い。カスタマイズ性が高いが操作が独特</td><td>無床診療所</td></tr>
+<tr><td><strong>M3デジカル</strong></td><td>エムスリーデジカル</td><td>クラウド型、電子カルテ一体型。UIが直感的で導入しやすい</td><td>診療所全般</td></tr>
+<tr><td><strong>CLINICS</strong></td><td>メドレー</td><td>クラウド型、オンライン診療連携。在宅医療にも対応</td><td>診療所（在宅含む）</td></tr>
+<tr><td><strong>Medical Edge</strong></td><td>CSI</td><td>病院向け大規模システム。DPC対応</td><td>中〜大規模病院</td></tr>
+<tr><td><strong>HOPE</strong></td><td>富士通</td><td>大規模病院向け。高度なカスタマイズ対応</td><td>大規模病院</td></tr>
+</tbody>
+</table>
+
+<h4>3.2 クラウド型とオンプレミス型</h4>
+<table>
+<thead><tr><th>項目</th><th>クラウド型</th><th>オンプレミス型</th></tr></thead>
+<tbody>
+<tr><td>データ保管</td><td>クラウドサーバー</td><td>院内サーバー</td></tr>
+<tr><td>初期費用</td><td>低い（月額課金）</td><td>高い（サーバー・ライセンス）</td></tr>
+<tr><td>アップデート</td><td>自動（改定対応含む）</td><td>手動（ベンダー対応待ち）</td></tr>
+<tr><td>障害時</td><td>インターネット障害で停止</td><td>院内障害のみ影響</td></tr>
+<tr><td>BPOとの親和性</td><td><strong>高い</strong>（リモートアクセス可能）</td><td>低い（VPN等が必要）</td></tr>
+</tbody>
+</table>
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPO実務の視点</div>
+クラウド型レセコンはリモートからのアクセスが容易で、BPO事業者にとって業務効率が高い。クライアント医療機関のレセコン種類を把握し、各システムの操作に習熟することがBPO品質の基盤となる。
+</div>
+
+<h3 id="mod04-flow">4. 入力業務の全体フロー</h3>
+<p>レセコン入力は、医師の診療行為をデータとして記録する工程である。以下に外来診療における入力の全体フローを示す。</p>
+
+<div class="mermaid-container">
+<div class="mermaid">
+flowchart TD
+    A["診察終了<br>医師がカルテ記載"] --> B["カルテ内容の確認"]
+    B --> C["診療行為の入力<br>（初再診・検査・投薬等）"]
+    C --> D["病名の確認・登録"]
+    D --> E["コメント入力<br>（摘要欄）"]
+    E --> F["自動算定チェック<br>（レセコンの警告確認）"]
+    F --> G["会計計算<br>→ モジュール05へ"]
+
+    style A fill:#7c3aed,color:#fff,stroke:#6d28d9
+    style B fill:#2563eb,color:#fff,stroke:#1d4ed8
+    style C fill:#2563eb,color:#fff,stroke:#1d4ed8
+    style D fill:#2563eb,color:#fff,stroke:#1d4ed8
+    style E fill:#2563eb,color:#fff,stroke:#1d4ed8
+    style F fill:#dc2626,color:#fff,stroke:#b91c1c
+    style G fill:#059669,color:#fff,stroke:#047857
+</div>
+</div>
+
+<h4>4.1 電子カルテ連携の場合</h4>
+<p>電子カルテとレセコンが連携している場合、医師のオーダー入力が自動的にレセコンに反映される。ただし、以下の点に注意が必要。</p>
+<ul>
+<li>電子カルテのオーダーとレセコンの算定コードが<strong>正しくマッピング</strong>されているか確認</li>
+<li>自動連携されない項目（医学管理料の一部、コメント等）は<strong>手動入力</strong>が必要</li>
+<li>連携エラー（コード不一致）が発生した場合の<strong>エラーログ確認</strong>手順を把握</li>
+</ul>
+
+<h4>4.2 手入力の場合</h4>
+<p>紙カルテの医療機関や、電子カルテ非連携のレセコンでは、カルテを見ながら手動で入力する。</p>
+<ol>
+<li>カルテの日付・患者名を確認</li>
+<li>レセコンで該当患者を呼び出し</li>
+<li>診療日を選択</li>
+<li>診療内容を項目ごとに入力（初再診 → 医学管理 → 検査 → 投薬 → 処置 → 手術 の順）</li>
+<li>入力後にレセコンの自動チェック結果を確認</li>
+</ol>
+
+<h3 id="mod04-input">5. 診療行為の入力</h3>
+
+<h4>5.1 入力の基本単位</h4>
+<p>レセコンへの入力は、診療報酬点数表の区分に沿って行う。各入力項目には<strong>診療行為コード</strong>（9桁のコード）が割り当てられている。</p>
+<table>
+<thead><tr><th>区分</th><th>入力例</th><th>コード例</th><th>点数</th></tr></thead>
+<tbody>
+<tr><td>初・再診</td><td>初診料</td><td>111000110</td><td>291点</td></tr>
+<tr><td>医学管理</td><td>特定疾患療養管理料</td><td>113001810</td><td>225点</td></tr>
+<tr><td>検査</td><td>血液一般検査</td><td>160000310</td><td>21点</td></tr>
+<tr><td>投薬</td><td>処方料（その他）</td><td>120002270</td><td>42点</td></tr>
+<tr><td>処置</td><td>創傷処置（100cm2未満）</td><td>140000150</td><td>55点</td></tr>
+</tbody>
+</table>
+<blockquote><strong>実務ポイント</strong>: 実際の入力では9桁コードを直接入力することは少なく、診療行為名の一部をキーワード検索して選択する方式が一般的。ただし、頻用項目のコードを暗記しておくと入力速度が大幅に向上する。</blockquote>
+
+<h4>5.2 入力カテゴリ別の注意点</h4>
+
+<p><strong>初・再診料</strong></p>
+<ul>
+<li>同一日に2科目を受診した場合 → 2科目は<strong>146点</strong>（初診料の特例）</li>
+<li>時間外・休日・深夜加算は診療時間帯に応じて自動加算されるレセコンが多いが、<strong>設定確認</strong>が必要</li>
+<li>電話再診（情報通信機器を用いた場合）は75点ではなく<strong>73点</strong></li>
+</ul>
+
+<p><strong>医学管理料</strong></p>
+<ul>
+<li>特定疾患療養管理料は月2回まで算定可。<strong>対象疾患の病名</strong>が登録されていることが必須</li>
+<li>生活習慣病管理料は2024年改定で大幅改定。<strong>療養計画書の作成</strong>が算定要件</li>
+<li>在宅時医学総合管理料（在医総管）は<strong>月1回</strong>、訪問回数や施設基準に応じて点数が変動</li>
+</ul>
+
+<p><strong>検査</strong></p>
+<ul>
+<li>検体検査は<strong>判断料</strong>（血液学的検査判断料125点等）を忘れずに入力</li>
+<li>同一日に複数の検体検査を行った場合、判断料は<strong>区分ごとに1回</strong>のみ算定</li>
+<li>外注検査の場合は<strong>検体検査管理加算</strong>の有無を確認（施設基準が必要）</li>
+</ul>
+
+<p><strong>投薬</strong></p>
+<ul>
+<li>院内処方と院外処方で入力方法が異なる</li>
+<li>院内処方: 薬剤名・用量・日数を入力 → 薬剤料＋調剤料＋処方料が自動算定</li>
+<li>院外処方: 処方箋料（68点）を入力。薬剤の詳細は薬局側で算定</li>
+<li><strong>一般名処方加算</strong>（1: 7点 / 2: 5点）は一般名で処方した場合に加算</li>
+</ul>
+
+<p><strong>注射</strong></p>
+<ul>
+<li>皮下・筋肉内注射（20点）、静脈内注射（34点）、点滴注射（98点/500mL以上）</li>
+<li>薬剤料は使用量に基づき別途入力</li>
+<li>外来化学療法加算は<strong>施設基準</strong>の届出が必要</li>
+</ul>
+
+<h4>5.3 セット入力（テンプレート）</h4>
+<p>多くのレセコンには、頻繁に使う診療行為の組み合わせを「セット」として登録する機能がある。</p>
+<table>
+<thead><tr><th>セット例</th><th>含まれる項目</th><th>用途</th></tr></thead>
+<tbody>
+<tr><td>高血圧セット</td><td>再診料、特定疾患管理料、処方料、薬剤</td><td>高血圧の定期通院</td></tr>
+<tr><td>採血セット</td><td>血液一般、生化学、判断料、採血料</td><td>定期血液検査</td></tr>
+<tr><td>在宅訪問セット</td><td>訪問診療料、在医総管、処方料</td><td>在宅患者の定期訪問</td></tr>
+</tbody>
+</table>
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPO実務の視点</div>
+クライアント医療機関ごとにセット内容が異なるため、受託時に既存のセット一覧を取得し、内容の適正性を確認する。算定要件が変わった改定後にセットが未更新のまま使われているケースが多い。
+</div>
+
+<h3 id="mod04-byomei">6. 病名の登録</h3>
+
+<h4>6.1 病名登録の重要性</h4>
+<p>レセプトにおいて病名（傷病名）は<strong>診療行為の医学的根拠</strong>を示すものである。適切な病名がなければ、いかに正しく診療行為を入力しても、審査で<strong>査定（減額）</strong>される。</p>
+
+<div class="narrative-question">病名がなぜそこまで重要なのか？</div>
+<p>審査支払機関は「この患者にこの検査・処置を行う医学的必要性があるか」を病名で判断する。例えば、糖尿病の病名がない患者にHbA1c検査が入力されていれば、「なぜこの検査を行ったのか」という疑義が生じ、査定の対象となる。</p>
+
+<h4>6.2 病名の種類と入力項目</h4>
+<table>
+<thead><tr><th>項目</th><th>内容</th><th>例</th></tr></thead>
+<tbody>
+<tr><td>傷病名コード</td><td>レセプト電算処理用の標準コード</td><td>8830900（2型糖尿病）</td></tr>
+<tr><td>ICD-10コード</td><td>国際疾病分類コード</td><td>E11（2型糖尿病）</td></tr>
+<tr><td>修飾語</td><td>傷病名の前後に付く修飾語</td><td>「急性」「慢性」「左」「右」</td></tr>
+<tr><td>開始日</td><td>診断日または傷病の発症日</td><td>2026-01-15</td></tr>
+<tr><td>転帰</td><td>治癒・中止・死亡・継続</td><td>治癒（2026-03-01）</td></tr>
+<tr><td>主病名フラグ</td><td>主たる傷病名の指定</td><td>主病名: 2型糖尿病</td></tr>
+</tbody>
+</table>
+
+<h4>6.3 病名登録のルール</h4>
+<ol>
+<li><strong>主病名は1つ</strong>: 主たる傷病名を1つ指定する。特定疾患療養管理料等の算定根拠となる</li>
+<li><strong>開始日は正確に</strong>: 診療行為の実施日より前の日付であること。初診日以前の開始日は不可</li>
+<li><strong>転帰を適時入力</strong>: 治療が終了した病名は「治癒」「中止」等の転帰を入力する。放置すると病名が永久に残る</li>
+<li><strong>レセプト病名を避ける</strong>: 保険請求の辻褄合わせのためだけに付ける病名（レセプト病名）は医学的根拠が薄く、査定の原因となる</li>
+<li><strong>疑い病名</strong>: 確定診断前は「○○の疑い」で登録する。確定したら疑いを外して正式病名に変更する</li>
+</ol>
+
+<h4>6.4 病名と診療行為の対応関係</h4>
+<table>
+<thead><tr><th>診療行為</th><th>必要な病名の例</th><th>病名がないと</th></tr></thead>
+<tbody>
+<tr><td>HbA1c検査</td><td>糖尿病、糖尿病の疑い</td><td>査定</td></tr>
+<tr><td>心電図（12誘導）</td><td>不整脈、狭心症、心不全等</td><td>査定</td></tr>
+<tr><td>特定疾患療養管理料</td><td>対象疾患（糖尿病、高血圧等）</td><td>返戻</td></tr>
+<tr><td>創傷処置</td><td>裂創、擦過傷、挫傷等</td><td>査定</td></tr>
+<tr><td>リハビリテーション</td><td>対象疾患＋発症日</td><td>返戻</td></tr>
+</tbody>
+</table>
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPOチェックポイント</div>
+病名漏れはレセプト点検（モジュール07）で検出すべき最重要項目である。BPO事業者は「診療行為と病名の整合性チェック」を自動化し、漏れを防止する仕組みを構築する。
+</div>
+
+<h3 id="mod04-comment">7. コメント入力（摘要欄）</h3>
+
+<h4>7.1 コメントの種類</h4>
+<p>レセプトの摘要欄に記載するコメントには、<strong>必須コメント</strong>と<strong>任意コメント</strong>がある。必須コメントを漏らすと返戻の原因となる。</p>
+<table>
+<thead><tr><th>種類</th><th>内容</th><th>例</th></tr></thead>
+<tbody>
+<tr><td>算定回数超過の理由</td><td>月の算定回数上限を超える場合の理由</td><td>「症状悪化のため」</td></tr>
+<tr><td>検査の必要性</td><td>頻回検査等の医学的理由</td><td>「治療効果確認のため」</td></tr>
+<tr><td>保険変更</td><td>月途中の保険者変更の旨</td><td>「3/16 保険者変更」</td></tr>
+<tr><td>診療開始日</td><td>初診料算定時の初診年月日</td><td>自動入力される場合が多い</td></tr>
+<tr><td>処方日数の理由</td><td>長期処方の理由</td><td>「安定しているため90日分」</td></tr>
+</tbody>
+</table>
+
+<h4>7.2 コメントコード</h4>
+<p>2024年以降、多くのコメントは<strong>コメントコード</strong>による選択式入力が推奨されている。フリーテキストではなくコードで入力することで、審査の電子化に対応する。</p>
+<blockquote><strong>注意</strong>: コメントコードの体系は「レセプト電算処理システム用コード」として厚生労働省が定めている。レセコンにはこのコードマスタが組み込まれており、該当するコメントをコード選択で入力できる。</blockquote>
+
+<h3 id="mod04-denshi">8. 電子カルテとレセコンの連携</h3>
+
+<h4>8.1 連携パターン</h4>
+<div class="mermaid-container">
+<div class="mermaid">
+flowchart LR
+    subgraph パターンA ["一体型"]
+        A1["電子カルテ"] --- A2["レセコン機能<br>（内蔵）"]
+    end
+    subgraph パターンB ["連携型"]
+        B1["電子カルテ"] -->|"オーダー<br>データ"| B2["レセコン"]
+        B2 -->|"算定結果<br>フィードバック"| B1
+    end
+    subgraph パターンC ["分離型"]
+        C1["紙カルテ<br>or 電子カルテ"] -.->|"手動転記"| C2["レセコン"]
+    end
+
+    style A1 fill:#2563eb,color:#fff
+    style A2 fill:#2563eb,color:#fff
+    style B1 fill:#7c3aed,color:#fff
+    style B2 fill:#059669,color:#fff
+    style C1 fill:#6b7280,color:#fff
+    style C2 fill:#059669,color:#fff
+</div>
+</div>
+
+<h4>8.2 連携時の注意事項</h4>
+<ul>
+<li><strong>マッピングテーブルの確認</strong>: 電子カルテのオーダーコードとレセコンの算定コードの対応表を定期的に確認・更新する</li>
+<li><strong>未連携項目のリスト化</strong>: 自動連携されない項目（医学管理料、加算等）をリスト化し、手動入力漏れを防止する</li>
+<li><strong>二重入力の防止</strong>: 自動連携された項目を手動でも入力してしまう「二重入力」に注意</li>
+<li><strong>改定時の対応</strong>: 診療報酬改定時にマッピングテーブルが未更新の場合、旧点数で算定される危険がある</li>
+</ul>
+
+<h3 id="mod04-errors">9. よくある入力ミスと防止策</h3>
+<table>
+<thead><tr><th>ミスの種類</th><th>具体例</th><th>影響</th><th>防止策</th></tr></thead>
+<tbody>
+<tr><td>算定漏れ</td><td>判断料の入力忘れ、加算の入力忘れ</td><td>収益減</td><td>セット入力の活用、チェックリスト</td></tr>
+<tr><td>過剰算定</td><td>月の上限回数を超えて入力</td><td>返戻・査定</td><td>レセコンの回数チェック機能を活用</td></tr>
+<tr><td>日付間違い</td><td>診療日と入力日の不一致</td><td>返戻</td><td>入力前に日付を必ず確認</td></tr>
+<tr><td>患者取り違え</td><td>別の患者に診療行為を入力</td><td>重大事故</td><td>患者名・ID・生年月日の三点確認</td></tr>
+<tr><td>病名漏れ</td><td>検査に対応する病名の未登録</td><td>査定</td><td>入力時の病名整合性チェック</td></tr>
+<tr><td>コメント漏れ</td><td>必須コメントの未入力</td><td>返戻</td><td>コメント必須項目のリスト化</td></tr>
+<tr><td>数量間違い</td><td>薬剤の用量・日数の入力ミス</td><td>査定・安全上の問題</td><td>処方箋との照合</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod04-bpo">10. BPO事業者としての視点</h3>
+
+<h4>10.1 BPOにおけるレセコン入力の位置づけ</h4>
+<p>レセコン入力のBPOには、大きく2つのパターンがある。</p>
+<table>
+<thead><tr><th>パターン</th><th>内容</th><th>必要条件</th></tr></thead>
+<tbody>
+<tr><td><strong>リアルタイム入力代行</strong></td><td>診察終了後に即時入力。クラウド型レセコンへリモートアクセス</td><td>クラウド型レセコン、即時性</td></tr>
+<tr><td><strong>バッチ入力</strong></td><td>1日分のカルテをまとめて入力。翌営業日に処理</td><td>カルテのスキャン/共有手段</td></tr>
+</tbody>
+</table>
+
+<h4>10.2 品質管理指標（KPI）</h4>
+<table>
+<thead><tr><th>指標</th><th>目標値</th><th>計測方法</th></tr></thead>
+<tbody>
+<tr><td>入力正確率</td><td>99.5%以上</td><td>点検時の修正件数 / 総入力件数</td></tr>
+<tr><td>入力完了率</td><td>当日100%</td><td>未入力カルテ件数 / 総診察件数</td></tr>
+<tr><td>算定漏れ検出数</td><td>月次トレンド管理</td><td>点検時に発見された算定漏れ件数</td></tr>
+<tr><td>平均入力所要時間</td><td>診療科・複雑度別に設定</td><td>1患者あたりの平均入力時間</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod04-check">11. チェックリスト</h3>
+<ul class="checklist">
+<li>レセコンの定義と主な5つの機能を説明できる</li>
+<li>電子カルテとレセコンの違いを3つ以上挙げられる</li>
+<li>主要レセコンシステム（ORCA、M3デジカル、CLINICS）の特徴を説明できる</li>
+<li>診療行為入力の全体フロー（カルテ確認→入力→病名→コメント→チェック→会計）を説明できる</li>
+<li>診療行為コード（9桁）の仕組みを理解し、検索方法を知っている</li>
+<li>検査入力時に判断料を忘れずに入力する重要性を説明できる</li>
+<li>院内処方と院外処方の入力の違いを説明できる</li>
+<li>病名登録の5つのルール（主病名・開始日・転帰・レセプト病名回避・疑い病名）を説明できる</li>
+<li>診療行為と病名の対応関係を5組以上挙げられる</li>
+<li>必須コメントの種類と入力方法を説明できる</li>
+<li>よくある入力ミス7種類とその防止策を説明できる</li>
+</ul>
+
+<h3 id="mod04-exercises">12. 演習問題</h3>
+
+<h4>演習1: 外来診療の入力</h4>
+<p>以下のカルテ内容をレセコンに入力する際の手順と項目を列挙せよ。</p>
+<p><strong>カルテ内容</strong>: 45歳男性。高血圧症で通院中。再診。血圧測定、採血（血液一般・生化学5項目）実施。アムロジピン5mg 1錠 分1 朝食後 30日分を院内処方。</p>
+<ol>
+<li>入力すべき診療行為をすべて列挙せよ（加算・判断料含む）。</li>
+<li>登録すべき病名は何か。</li>
+<li>特定疾患療養管理料は算定できるか。根拠とともに答えよ。</li>
+</ol>
+
+<h4>演習2: 病名と査定リスク</h4>
+<p>以下の入力内容について、査定リスクのある箇所を指摘し、正しい対応を述べよ。</p>
+<ul>
+<li>患者A: 病名「感冒」のみ。診療行為に「心電図（12誘導）」が入力されている。</li>
+<li>患者B: 病名「2型糖尿病」。転帰が「治癒」になっているが、今月もHbA1cを検査している。</li>
+<li>患者C: 病名「腰痛症」の開始日が「2026-03-15」。創傷処置の実施日が「2026-03-10」。</li>
+</ul>
+
+<h4>演習3: セット入力の設計</h4>
+<p>在宅療養支援診療所の定期訪問診療（月2回訪問）について、入力セットを設計せよ。以下を含めること。</p>
+<ol>
+<li>セットに含める診療行為の一覧と各点数</li>
+<li>施設基準として必要な届出の確認事項</li>
+<li>このセットで算定漏れが起きやすい項目とその対策</li>
+</ol>
+
+<h4>13. Q&amp;A</h4>
+<p>（学習中の質疑応答をここに蓄積する）</p>
+
+<h4>参考情報</h4>
+<ul>
+<li>厚生労働省「診療報酬情報提供サービス」</li>
+<li>しろぼんねっと「診療報酬点数表検索」</li>
+<li>日本医師会「ORCA Project」マニュアル</li>
+<li>社会保険診療報酬支払基金「レセプト電算処理用コードマスタ」</li>
+</ul>
+</section>
+
+<hr class="module-divider">
+
+<!-- ========== MODULE 05: ACCOUNTING ========== -->
+<section id="mod05" class="module-card">
+<h2>モジュール05: 会計・窓口精算</h2>
+
+<div class="story-callout">
+<span class="story-callout-icon">&#128176;</span>
+<div class="story-callout-title">なぜこのモジュールを学ぶのか</div>
+<p>モジュール04で入力された診療データは、最終的に「患者が窓口でいくら支払うか」という金額に変換される。この会計処理は、患者と医療機関が直接やり取りする唯一の金銭的接点であり、ミスは患者からの信頼喪失に直結する。</p>
+<p><strong>正しく計算し、正しく徴収し、正しく記録する</strong> &mdash; この3つが会計業務の本質である。BPO事業者として会計フローを理解することは、レセプト請求との整合性確認や未収金管理の提案につながる。</p>
+</div>
+
+<h3 id="mod05-goals">1. このモジュールで学ぶこと</h3>
+<p>本モジュールを修了すると、以下を説明・実行できるようになる。</p>
+<ol>
+<li><strong>会計業務の全体フロー</strong> &mdash; 診察終了から精算完了までの一連の流れを説明できる</li>
+<li><strong>一部負担金の計算</strong> &mdash; 保険種別・年齢・公費に応じた窓口負担金を正しく計算できる</li>
+<li><strong>端数処理</strong> &mdash; 四捨五入・10円未満の端数処理のルールを正しく適用できる</li>
+<li><strong>領収証・明細書の発行</strong> &mdash; 法的要件に基づき正しい領収証・明細書を発行できる</li>
+<li><strong>日次締め処理</strong> &mdash; 日計表の作成と現金残高の照合ができる</li>
+</ol>
+
+<h3 id="mod05-flow">2. 会計業務の全体フロー</h3>
+
+<div class="mermaid-container">
+<div class="mermaid">
+flowchart TD
+    A["診察終了<br>レセコン入力完了"] --> B["自動計算<br>保険点数 → 金額変換"]
+    B --> C["一部負担金の確定<br>（負担割合の適用）"]
+    C --> D["患者呼び出し<br>金額の案内"]
+    D --> E["精算<br>（現金/カード/電子マネー）"]
+    E --> F["領収証・明細書<br>の発行"]
+    F --> G["処方箋の交付<br>（院外処方の場合）"]
+    G --> H["日次締め処理"]
+
+    style A fill:#7c3aed,color:#fff,stroke:#6d28d9
+    style B fill:#2563eb,color:#fff,stroke:#1d4ed8
+    style C fill:#2563eb,color:#fff,stroke:#1d4ed8
+    style D fill:#2563eb,color:#fff,stroke:#1d4ed8
+    style E fill:#059669,color:#fff,stroke:#047857
+    style F fill:#059669,color:#fff,stroke:#047857
+    style G fill:#6b7280,color:#fff,stroke:#4b5563
+    style H fill:#dc2626,color:#fff,stroke:#b91c1c
+</div>
+</div>
+
+<h4>2.1 保険点数から金額への変換</h4>
+<p>診療報酬の点数は<strong>1点 = 10円</strong>で金額に変換される。この金額を「診療報酬総額」と呼び、保険者負担と患者負担に分けられる。</p>
+<pre><code>例: 診療報酬 500点の場合
+  総額 = 500点 × 10円 = 5,000円
+  3割負担の患者: 5,000円 × 0.3 = 1,500円（窓口負担）
+  保険者負担:    5,000円 × 0.7 = 3,500円（レセプトで請求）</code></pre>
+
+<h3 id="mod05-calc">3. 一部負担金の計算</h3>
+
+<h4>3.1 負担割合の一覧</h4>
+<table>
+<thead><tr><th>対象者</th><th>負担割合</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>義務教育就学前（6歳未満）</td><td><strong>2割</strong></td><td>自治体の医療費助成で実質0〜1割の場合が多い</td></tr>
+<tr><td>義務教育就学後〜69歳</td><td><strong>3割</strong></td><td>一般的な負担割合</td></tr>
+<tr><td>70歳〜74歳（一般）</td><td><strong>2割</strong></td><td>高齢受給者証で確認</td></tr>
+<tr><td>70歳〜74歳（現役並み所得）</td><td><strong>3割</strong></td><td>高齢受給者証に記載</td></tr>
+<tr><td>75歳以上（一般・低所得）</td><td><strong>1割</strong></td><td>後期高齢者医療制度</td></tr>
+<tr><td>75歳以上（一定以上所得）</td><td><strong>2割</strong></td><td>2022年10月〜</td></tr>
+<tr><td>75歳以上（現役並み所得）</td><td><strong>3割</strong></td><td>後期高齢者医療被保険者証で確認</td></tr>
+</tbody>
+</table>
+
+<h4>3.2 公費負担がある場合</h4>
+<p>公費負担医療の対象者は、保険の一部負担金からさらに公費分が差し引かれる。</p>
+<table>
+<thead><tr><th>公費の種類</th><th>患者負担</th><th>計算方法</th></tr></thead>
+<tbody>
+<tr><td>生活保護（法別番号12）</td><td>0円</td><td>全額公費負担</td></tr>
+<tr><td>自立支援医療（精神通院）</td><td>原則1割（上限あり）</td><td>保険7割＋公費2割＋自己負担1割</td></tr>
+<tr><td>特定医療費（指定難病）</td><td>原則2割（上限あり）</td><td>所得に応じた月額上限</td></tr>
+<tr><td>乳幼児医療費助成（マル乳）</td><td>自治体による</td><td>保険の一部負担金を自治体が助成</td></tr>
+</tbody>
+</table>
+<blockquote><strong>実務ポイント</strong>: 公費の適用順序には優先順位がある（モジュール01参照）。複数の公費が併用される場合、レセコンの自動計算結果を必ず手動で検算する。特に自治体独自の医療費助成制度は地域ごとに異なるため、クライアント所在地のルールを確認する。</blockquote>
+
+<h4>3.3 計算例</h4>
+
+<p><strong>例1: 一般的な3割負担</strong></p>
+<pre><code>診療報酬: 1,234点
+総額: 1,234 × 10 = 12,340円
+患者負担: 12,340 × 0.3 = 3,702円
+→ 10円未満四捨五入 → 3,700円</code></pre>
+
+<p><strong>例2: 高齢受給者（2割負担）</strong></p>
+<pre><code>診療報酬: 856点
+総額: 856 × 10 = 8,560円
+患者負担: 8,560 × 0.2 = 1,712円
+→ 10円未満四捨五入 → 1,710円</code></pre>
+
+<p><strong>例3: 乳幼児（2割負担）＋自治体助成（全額）</strong></p>
+<pre><code>診療報酬: 320点
+総額: 320 × 10 = 3,200円
+保険の自己負担: 3,200 × 0.2 = 640円
+自治体助成: △640円
+患者窓口負担: 0円</code></pre>
+
+<h3 id="mod05-round">4. 端数処理のルール</h3>
+
+<h4>4.1 基本ルール</h4>
+<table>
+<thead><tr><th>場面</th><th>端数処理</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>保険診療の窓口負担</td><td>10円未満を<strong>四捨五入</strong></td><td>健康保険法施行令</td></tr>
+<tr><td>自費診療</td><td>医療機関の規定による</td><td>法的規定なし</td></tr>
+<tr><td>労災・自賠責</td><td>1点12円で計算、1円未満切り上げ</td><td>労災保険診療費算定基準</td></tr>
+<tr><td>薬剤料（院内）</td><td>薬価の合計で五捨五超入（15円以下は1点）</td><td>診療報酬点数表</td></tr>
+</tbody>
+</table>
+
+<h4>4.2 端数処理の注意点</h4>
+<ul>
+<li><strong>70歳以上の外来</strong>: 一部負担金の端数は1円単位まで計算し、最終的に10円未満を四捨五入</li>
+<li><strong>入院</strong>: 高額療養費の自己負担限度額を超える部分は現物給付。限度額適用認定証の確認が必要</li>
+<li><strong>レセコンの自動計算</strong>: ほとんどのレセコンは端数処理を自動で行うが、設定ミスがあると全患者の計算が狂うため、導入時・改定時に必ず検証する</li>
+</ul>
+
+<h3 id="mod05-receipt">5. 領収証・明細書の発行</h3>
+
+<h4>5.1 領収証の法的要件</h4>
+<p>2010年4月以降、すべての保険医療機関は<strong>個別の診療報酬の算定項目がわかる領収証</strong>の発行が義務づけられている。</p>
+<table>
+<thead><tr><th>記載項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>医療機関名・住所</td><td>保険医療機関の名称と所在地</td></tr>
+<tr><td>患者氏名</td><td>受診した患者のフルネーム</td></tr>
+<tr><td>診療日（期間）</td><td>診療を受けた日付または期間</td></tr>
+<tr><td>保険点数の内訳</td><td>初・再診、医学管理、検査、投薬等の区分別点数</td></tr>
+<tr><td>負担割合</td><td>適用された負担割合</td></tr>
+<tr><td>一部負担金額</td><td>患者が支払う金額</td></tr>
+<tr><td>保険外費用</td><td>文書料、容器代等の自費分（ある場合）</td></tr>
+</tbody>
+</table>
+
+<h4>5.2 診療明細書</h4>
+<p>領収証に加え、<strong>診療明細書</strong>（個々の診療行為の名称・点数を記載した書類）の無料発行も原則義務である。</p>
+<ul>
+<li>正当な理由がある場合（患者が不要と申し出た場合等）は発行しないことも可</li>
+<li>自動発行の設定がレセコンで行える（通常はデフォルトで有効）</li>
+<li>患者の知る権利と透明性確保のために重要な書類</li>
+</ul>
+
+<h3 id="mod05-special">6. 特殊な会計パターン</h3>
+
+<h4>6.1 自費診療の会計</h4>
+<table>
+<thead><tr><th>自費項目の例</th><th>価格設定</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>診断書・各種証明書</td><td>医療機関独自（3,000〜10,000円程度）</td><td>価格表の掲示義務</td></tr>
+<tr><td>予防接種（任意）</td><td>医療機関独自</td><td>公費補助がある場合は差額のみ徴収</td></tr>
+<tr><td>健康診断（自費分）</td><td>医療機関独自</td><td>保険診療との混合に注意</td></tr>
+<tr><td>先進医療の自費部分</td><td>医療技術ごとに設定</td><td>保険診療部分と分けて計算</td></tr>
+</tbody>
+</table>
+<blockquote><strong>重要</strong>: 保険診療と自費診療の「混合診療」は原則禁止。ただし、評価療養・選定療養・患者申出療養として認められたものは例外。領収証上でも保険分と自費分を明確に区分する必要がある。</blockquote>
+
+<h4>6.2 交通事故（自賠責保険）</h4>
+<ul>
+<li>1点単価は<strong>12円</strong>（保険診療の1.2倍）</li>
+<li>患者窓口負担は原則なし（加害者側の保険会社が支払う）</li>
+<li>健康保険を使う場合は「第三者行為による傷病届」が必要</li>
+<li>レセコンでは自賠責用の点数テーブルを使用</li>
+</ul>
+
+<h4>6.3 労災保険</h4>
+<ul>
+<li>1点単価は<strong>12円</strong></li>
+<li>患者窓口負担は<strong>0円</strong></li>
+<li>労災指定医療機関でなければ受診不可（原則）</li>
+<li>労災用のレセプト（様式第7号等）で別途請求</li>
+</ul>
+
+<h4>6.4 月途中の保険変更</h4>
+<p>転職・退職等で月途中に保険者が変わった場合。</p>
+<ol>
+<li>変更前の保険者分と変更後の保険者分で<strong>レセプトを分割</strong></li>
+<li>窓口負担はそれぞれの保険に基づき計算</li>
+<li>レセコン上で「保険変更」を入力し、摘要欄にコメントを追記</li>
+</ol>
+
+<h3 id="mod05-unpaid">7. 未収金管理</h3>
+
+<h4>7.1 未収金が発生するケース</h4>
+<table>
+<thead><tr><th>ケース</th><th>対応</th></tr></thead>
+<tbody>
+<tr><td>保険証未持参</td><td>一旦10割負担で徴収。後日保険証持参時に差額を返金</td></tr>
+<tr><td>手持ち不足</td><td>分割払い、次回来院時に支払い等を案内</td></tr>
+<tr><td>救急搬送（意識なし）</td><td>後日請求。保険情報が不明な場合は10割で仮計上</td></tr>
+<tr><td>保険資格喪失後の受診</td><td>資格喪失が判明した時点で正しい保険に切り替え、差額を精算</td></tr>
+</tbody>
+</table>
+
+<h4>7.2 未収金の管理方法</h4>
+<ul>
+<li>レセコンの「未収金管理」機能で個人別・日付別に記録</li>
+<li>一定期間経過後の督促手順を定める（電話→文書→法的手段）</li>
+<li>未収金は月次で集計し、経営報告に含める</li>
+</ul>
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPO実務の視点</div>
+未収金の管理・督促はBPOが担うケースが増えている。未収金率の低減はBPO事業者の提案ポイントとなる。クライアント医療機関の未収金ポリシーを受託時に確認し、SLAに組み込む。
+</div>
+
+<h3 id="mod05-daily">8. 日次締め処理</h3>
+
+<h4>8.1 日計表とは</h4>
+<p>日計表（日次集計表）は、1日の診療・会計の結果をまとめた帳票である。レセコンから自動出力される。</p>
+<table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>外来患者数</td><td>当日の延べ外来患者数</td></tr>
+<tr><td>保険種別内訳</td><td>社保・国保・後期高齢者・自費等の件数</td></tr>
+<tr><td>診療報酬点数合計</td><td>当日の総点数</td></tr>
+<tr><td>一部負担金合計</td><td>患者から徴収すべき総額</td></tr>
+<tr><td>入金合計</td><td>実際に入金された金額（現金・カード等）</td></tr>
+<tr><td>未収金</td><td>徴収すべきだが未入金の金額</td></tr>
+</tbody>
+</table>
+
+<h4>8.2 締め処理の手順</h4>
+<ol>
+<li><strong>レセコンの日計表を出力</strong>: 診療終了後、当日の日計表をレセコンから出力する</li>
+<li><strong>現金残高の照合</strong>: 日計表の入金合計とレジの現金残高を照合する</li>
+<li><strong>カード・電子マネーの照合</strong>: 決済端末の日次集計と照合する</li>
+<li><strong>差異の確認</strong>: 差異がある場合は原因を調査（釣銭ミス、入力漏れ等）</li>
+<li><strong>未収金の確認</strong>: 当日発生した未収金をリストアップし記録する</li>
+<li><strong>承認・保管</strong>: 日計表に責任者の承認を得て保管する</li>
+</ol>
+
+<div class="mermaid-container">
+<div class="mermaid">
+flowchart LR
+    A["レセコン<br>日計表出力"] --> B["現金照合"]
+    B --> C["カード照合"]
+    C --> D{"差異あり?"}
+    D -->|なし| E["承認・保管"]
+    D -->|あり| F["原因調査"]
+    F --> G["修正入力"]
+    G --> E
+
+    style A fill:#2563eb,color:#fff
+    style B fill:#2563eb,color:#fff
+    style C fill:#2563eb,color:#fff
+    style D fill:#f59e0b,color:#fff
+    style E fill:#059669,color:#fff
+    style F fill:#dc2626,color:#fff
+    style G fill:#dc2626,color:#fff
+</div>
+</div>
+
+<h3 id="mod05-bpo">9. BPO事業者としての視点</h3>
+
+<h4>9.1 会計業務のBPO範囲</h4>
+<table>
+<thead><tr><th>業務</th><th>BPO可否</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>会計金額の計算・確認</td><td>可</td><td>レセコン入力の延長。リモート対応可能</td></tr>
+<tr><td>窓口での現金受け渡し</td><td>不可（原則）</td><td>対面業務。常駐スタッフが必要</td></tr>
+<tr><td>領収証・明細書の発行設定</td><td>可</td><td>レセコンの設定業務</td></tr>
+<tr><td>日計表の作成・照合</td><td>可</td><td>レセコンデータの集計・確認</td></tr>
+<tr><td>未収金管理・督促</td><td>可</td><td>データ管理＋事務的連絡</td></tr>
+</tbody>
+</table>
+
+<h4>9.2 会計関連のKPI</h4>
+<table>
+<thead><tr><th>指標</th><th>目標値</th><th>計測方法</th></tr></thead>
+<tbody>
+<tr><td>会計精度</td><td>100%（過不足ゼロ）</td><td>日次照合での差異件数</td></tr>
+<tr><td>未収金率</td><td>0.5%以下</td><td>未収金額 / 一部負担金総額</td></tr>
+<tr><td>未収金回収率</td><td>90%以上（3ヶ月以内）</td><td>回収額 / 発生額</td></tr>
+<tr><td>日次締め完了時間</td><td>診療終了後30分以内</td><td>締め処理の所要時間</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod05-check">10. チェックリスト</h3>
+<ul class="checklist">
+<li>保険点数から窓口負担金への変換計算（1点=10円 × 負担割合）を正しく実行できる</li>
+<li>年齢別の負担割合（2割・3割・1割）を正確に説明できる</li>
+<li>70歳以上の2割・3割の判定基準（高齢受給者証）を説明できる</li>
+<li>公費負担がある場合の計算方法を説明できる</li>
+<li>端数処理のルール（10円未満四捨五入）を正しく適用できる</li>
+<li>領収証に記載すべき項目を7つ以上挙げられる</li>
+<li>診療明細書の発行義務とその例外を説明できる</li>
+<li>自賠責・労災の計算方法（1点=12円）を説明できる</li>
+<li>未収金が発生する4つのケースと対応を説明できる</li>
+<li>日次締め処理の6ステップを順番に説明できる</li>
+</ul>
+
+<h3 id="mod05-exercises">11. 演習問題</h3>
+
+<h4>演習1: 一部負担金の計算</h4>
+<p>以下の各ケースについて、患者の窓口負担金を計算せよ。</p>
+<ol>
+<li>35歳会社員。社会保険3割負担。診療報酬 1,485点。</li>
+<li>72歳、一般所得。高齢受給者証あり（2割）。診療報酬 2,130点。</li>
+<li>4歳児。国民健康保険2割負担。自治体の乳幼児医療費助成で全額助成対象。診療報酬 450点。</li>
+<li>80歳、現役並み所得。後期高齢者3割負担。診療報酬 3,276点。</li>
+</ol>
+
+<details>
+<summary>解答</summary>
+<div class="answer">
+<ol>
+<li>1,485 × 10 = 14,850円 × 0.3 = 4,455円 → 四捨五入 → <strong>4,460円</strong></li>
+<li>2,130 × 10 = 21,300円 × 0.2 = 4,260円 → 端数なし → <strong>4,260円</strong></li>
+<li>450 × 10 = 4,500円 × 0.2 = 900円。助成で全額 → <strong>0円</strong>（医療機関は自治体に900円を請求）</li>
+<li>3,276 × 10 = 32,760円 × 0.3 = 9,828円 → 四捨五入 → <strong>9,830円</strong></li>
+</ol>
+</div>
+</details>
+
+<h4>演習2: 日次締めの差異分析</h4>
+<p>ある日の日計表は以下の通りだった。問題点を指摘し、考えられる原因と対応を述べよ。</p>
+<pre><code>日計表:
+  外来患者数:   48名
+  一部負担金合計: 152,340円
+  入金合計:     148,090円
+  未収金記録:    2,500円
+  差異:         1,750円（不足）</code></pre>
+
+<details>
+<summary>解答例</summary>
+<div class="answer">
+<p><strong>問題点</strong>: 一部負担金合計 152,340円 に対し、入金合計148,090円 + 未収金2,500円 = 150,590円。差異1,750円が未説明。</p>
+<p><strong>考えられる原因</strong>:</p>
+<ul>
+<li>釣銭の渡し過ぎ（合計で1,750円分）</li>
+<li>未収金の記録漏れ（ある患者の未払いを未収金に登録し忘れた）</li>
+<li>レセコンの入力修正が会計後に行われ、金額が変動した</li>
+<li>自費分の徴収漏れ</li>
+</ul>
+<p><strong>対応</strong>: カード決済の有無を確認。各患者の入金記録と照合。修正入力の履歴を確認。翌日以降、同様の差異が続くかモニタリング。</p>
+</div>
+</details>
+
+<h4>演習3: 保険変更時の対応</h4>
+<p>以下のケースの会計処理手順を説明せよ。</p>
+<p>患者Aは3月15日に退職し、社会保険を喪失。3月18日に国民健康保険に加入した。3月10日と3月22日に同じ医療機関を受診した。</p>
+
+<details>
+<summary>解答例</summary>
+<div class="answer">
+<ol>
+<li>3月10日の受診分: 社会保険で計算。レセプトは社保宛に作成。</li>
+<li>3月22日の受診分: 国民健康保険で計算。レセプトは国保宛に作成。</li>
+<li>レセコンで保険変更日（3月16日〜国保）を入力。</li>
+<li>3月分のレセプトは社保と国保の2枚に分割して作成。</li>
+<li>摘要欄に「月途中保険変更」のコメントを入力。</li>
+</ol>
+<p><strong>注意</strong>: 3月16日〜17日に受診があった場合、保険の空白期間の扱いを確認する必要がある。</p>
+</div>
+</details>
+
+<h4>12. Q&amp;A</h4>
+<p>（学習中の質疑応答をここに蓄積する）</p>
+
+<h4>参考情報</h4>
+<ul>
+<li>厚生労働省「保険医療機関及び保険薬局の指定並びに保険医及び保険薬剤師の登録に関する省令」</li>
+<li>健康保険法施行令 第32条（一部負担金の端数処理）</li>
+<li>厚生労働省「医療費の内容の分かる領収証及び個別の診療報酬の算定項目の分かる明細書の交付について」</li>
+</ul>
+</section>
+
+<hr class="module-divider">
+
+<!-- ========== MODULE 06: RECEIPT CREATION ========== -->
+<section id="mod06" class="module-card">
+<h2>モジュール06: レセプト作成・出力</h2>
+
+<div class="story-callout">
+<span class="story-callout-icon">&#128203;</span>
+<div class="story-callout-title">なぜこのモジュールを学ぶのか</div>
+<p>ここまで学んできた保険制度（Phase 1）、レセコン入力（モジュール04）、会計（モジュール05）は、すべてこのモジュールの「レセプト作成」に収束する。レセプト（診療報酬明細書）は、医療機関が保険者に診療報酬を請求するための<strong>公式な請求書</strong>である。</p>
+<p>月に1度、その月に行ったすべての診療内容を患者ごとにまとめ、審査支払機関に提出する。この作成プロセスの正確さが、<strong>医療機関の収益と資金繰り</strong>を左右する。BPO事業者にとって、レセプト作成は最もコアなサービスの一つである。</p>
+</div>
+
+<h3 id="mod06-goals">1. このモジュールで学ぶこと</h3>
+<p>本モジュールを修了すると、以下を説明・実行できるようになる。</p>
+<ol>
+<li><strong>レセプトの全体像</strong> &mdash; レセプトの定義・種類・提出先を説明できる</li>
+<li><strong>レセプトの様式</strong> &mdash; 記載項目の意味と記載ルールを理解している</li>
+<li><strong>月次作成フロー</strong> &mdash; 月初から提出までの作業手順を実行できる</li>
+<li><strong>UKEファイル</strong> &mdash; 電子レセプトのデータ構造を理解している</li>
+<li><strong>よくある作成ミス</strong> &mdash; ミスのパターンと防止策を説明できる</li>
+</ol>
+
+<h3 id="mod06-overview">2. レセプトとは何か</h3>
+
+<h4>2.1 レセプトの定義</h4>
+<p>レセプト（診療報酬明細書）とは、保険医療機関が1か月分の診療内容を患者ごと・保険者ごとにまとめた請求書である。ドイツ語の「Rezept」に由来する。</p>
+
+<div class="narrative-question">なぜ1か月単位なのか？</div>
+<p>日本の診療報酬制度は「月単位の包括算定」が多く（例: 特定疾患療養管理料は月2回まで、在医総管は月1回）、月をまたぐと算定ルールがリセットされる。また、保険者への請求事務の効率化のため、毎月の診療をまとめて翌月10日までに提出する仕組みになっている。</p>
+
+<h4>2.2 レセプトの種類</h4>
+<table>
+<thead><tr><th>種類</th><th>対象</th><th>提出先</th><th>様式</th></tr></thead>
+<tbody>
+<tr><td>医科入院</td><td>入院患者</td><td>社保: 支払基金 / 国保: 国保連</td><td>入院用</td></tr>
+<tr><td>医科入院外</td><td>外来患者</td><td>同上</td><td>外来用</td></tr>
+<tr><td>歯科</td><td>歯科患者</td><td>同上</td><td>歯科用</td></tr>
+<tr><td>調剤</td><td>薬局の調剤</td><td>同上</td><td>調剤用</td></tr>
+<tr><td>DPC</td><td>DPC対象病院の入院</td><td>支払基金</td><td>DPC用</td></tr>
+</tbody>
+</table>
+<blockquote><strong>実務ポイント</strong>: BPOで最も需要が多いのは「医科入院外（外来）」のレセプト。無床診療所（クリニック）はすべて外来レセプトである。病院のBPOでは入院レセプトも対象となる。</blockquote>
+
+<h4>2.3 提出先と提出期限</h4>
+<div class="mermaid-container">
+<div class="mermaid">
+flowchart LR
+    A["医療機関"] -->|社保レセプト<br>翌月10日まで| B["社会保険診療報酬<br>支払基金"]
+    A -->|国保レセプト<br>翌月10日まで| C["国民健康保険<br>団体連合会"]
+    B -->|審査後| D["健保組合<br>協会けんぽ等"]
+    C -->|審査後| E["市区町村<br>国保"]
+
+    style A fill:#2563eb,color:#fff
+    style B fill:#7c3aed,color:#fff
+    style C fill:#059669,color:#fff
+    style D fill:#6b7280,color:#fff
+    style E fill:#6b7280,color:#fff
+</div>
+</div>
+<p><strong>提出期限</strong>: 診療月の翌月<strong>10日まで</strong>（土日祝の場合は翌営業日）。例: 3月分のレセプト → 4月10日が期限。</p>
+
+<h3 id="mod06-format">3. レセプトの様式と記載項目</h3>
+
+<h4>3.1 外来レセプト（医科入院外）の主要記載項目</h4>
+<table>
+<thead><tr><th>欄</th><th>記載内容</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>医療機関情報</td><td>医療機関コード、名称、所在地、電話番号</td><td>レセコンにマスタ登録済み</td></tr>
+<tr><td>保険者情報</td><td>保険者番号、記号・番号</td><td>資格確認との整合性</td></tr>
+<tr><td>患者情報</td><td>氏名、性別、生年月日</td><td>旧字体・外国籍の表記に注意</td></tr>
+<tr><td>傷病名</td><td>主傷病名＋副傷病名、診療開始日、転帰</td><td>最重要。病名漏れは査定直結</td></tr>
+<tr><td>診療実日数</td><td>その月に実際に診療した日数</td><td>算定日数と一致するか確認</td></tr>
+<tr><td>点数欄</td><td>区分別の点数（初再診・医学管理・検査・投薬等）</td><td>各区分の合計と総合計</td></tr>
+<tr><td>摘要欄</td><td>診療行為の詳細、コメント</td><td>コメントコードの使用推奨</td></tr>
+<tr><td>請求点数</td><td>合計請求点数</td><td>保険者への請求額の根拠</td></tr>
+<tr><td>一部負担金</td><td>患者が窓口で支払った金額</td><td>モジュール05の計算結果</td></tr>
+</tbody>
+</table>
+
+<h4>3.2 レセプトの構造図</h4>
+<pre><code>┌──────────────────────────────────────────────┐
+│ 【レセプト（外来）】                          │
+│                                              │
+│ ■ ヘッダー部                                 │
+│   医療機関コード: 1234567                     │
+│   保険者番号: 06130012                        │
+│   被保険者記号・番号: ABC-12345               │
+│   氏名: 堀江 太郎  性別: 男  生年月日: S50.4.1│
+│                                              │
+│ ■ 傷病名部                                   │
+│   主) 2型糖尿病    開始日: R7.1.15  継続      │
+│   副) 高血圧症     開始日: R6.8.20  継続      │
+│   副) 脂質異常症   開始日: R7.2.1   継続      │
+│                                              │
+│ ■ 点数部                                     │
+│   初・再診  73 × 2回 =   146                 │
+│   医学管理  225 × 1回 =  225                 │
+│   投  薬   42+薬剤料  =  312                 │
+│   検  査   判断料含む =  489                  │
+│   ─────────────────────                      │
+│   合計               1,172点                  │
+│                                              │
+│ ■ 摘要欄                                     │
+│   [投薬] アムロジピン5mg 1T 分1朝 30日分     │
+│   [投薬] メトホルミン250mg 2T 分2朝夕 30日分 │
+│   [検査] HbA1c, 血糖, 脂質4項目              │
+│                                              │
+│ ■ 請求部                                     │
+│   請求点数: 1,172点  負担金: 3,520円          │
+└──────────────────────────────────────────────┘</code></pre>
+
+<h3 id="mod06-flow">4. 月次レセプト作成フロー</h3>
+
+<div class="mermaid-container">
+<div class="mermaid">
+flowchart TD
+    A["月末: 当月の入力完了確認"] --> B["月初1日〜3日:<br>レセプトデータ仮締め"]
+    B --> C["自動チェック実行<br>（レセコンのエラーチェック）"]
+    C --> D["エラー・警告の修正"]
+    D --> E["レセプト点検<br>（→ モジュール07で詳細）"]
+    E --> F["医師確認・承認<br>（→ モジュール08で詳細）"]
+    F --> G["UKEファイル生成<br>（電子レセプト出力）"]
+    G --> H["オンライン請求<br>（→ モジュール09で詳細）"]
+    H --> I["提出完了<br>（翌月10日期限）"]
+
+    style A fill:#6b7280,color:#fff
+    style B fill:#2563eb,color:#fff
+    style C fill:#2563eb,color:#fff
+    style D fill:#dc2626,color:#fff
+    style E fill:#7c3aed,color:#fff
+    style F fill:#7c3aed,color:#fff
+    style G fill:#059669,color:#fff
+    style H fill:#059669,color:#fff
+    style I fill:#059669,color:#fff
+</div>
+</div>
+
+<h4>4.1 月末の準備作業</h4>
+<ol>
+<li><strong>未入力の確認</strong>: 当月中に未入力のカルテがないか確認。入力漏れがあるとレセプトに反映されない</li>
+<li><strong>保険情報の確認</strong>: 月途中の保険変更が正しく入力されているか確認</li>
+<li><strong>病名の整理</strong>: 当月の転帰（治癒・中止等）が入力されているか確認。不要な病名が残っていないか</li>
+<li><strong>算定漏れの確認</strong>: 月に1回の算定項目（特定疾患療養管理料等）が漏れていないか</li>
+</ol>
+
+<h4>4.2 レセコンの自動チェック</h4>
+<p>レセプト作成時にレセコンが自動で実行するチェックには以下がある。</p>
+<table>
+<thead><tr><th>チェック項目</th><th>検出内容</th><th>レベル</th></tr></thead>
+<tbody>
+<tr><td>病名チェック</td><td>診療行為に対応する病名がない</td><td>エラー</td></tr>
+<tr><td>算定回数チェック</td><td>月の上限回数を超えている</td><td>エラー</td></tr>
+<tr><td>年齢チェック</td><td>年齢に適さない算定（小児加算を成人に適用等）</td><td>エラー</td></tr>
+<tr><td>併算定チェック</td><td>同時に算定できない項目の組み合わせ</td><td>エラー</td></tr>
+<tr><td>コメント不足</td><td>必須コメントが入力されていない</td><td>警告</td></tr>
+<tr><td>日数チェック</td><td>診療実日数と入力日数の不一致</td><td>警告</td></tr>
+</tbody>
+</table>
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPOチェックポイント</div>
+レセコンの自動チェックは万能ではない。特に「病名と診療行為の医学的整合性」は自動では判断しきれない。BPO事業者はレセコンの自動チェックに加え、独自のチェックリストで二重チェックを行う（モジュール07で詳細に学ぶ）。
+</div>
+
+<h3 id="mod06-uke">5. UKEファイルの構造</h3>
+
+<h4>5.1 電子レセプトとは</h4>
+<p>現在、ほぼすべての医療機関がレセプトを電子データ（UKEファイル）として提出している。オンライン請求または電子媒体（CD-R等）での提出が義務化されている。</p>
+
+<h4>5.2 UKEファイルの基本構造</h4>
+<p>UKEファイルはCSVに似た固定形式のテキストファイルで、レコード識別子で行の種類を区別する。</p>
+<table>
+<thead><tr><th>レコード識別</th><th>名称</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>IR</td><td>医療機関情報</td><td>医療機関コード、名称等</td></tr>
+<tr><td>RE</td><td>レセプト共通</td><td>患者情報、保険情報、診療年月</td></tr>
+<tr><td>HO</td><td>保険者</td><td>保険者番号、記号・番号</td></tr>
+<tr><td>KO</td><td>公費</td><td>公費負担者番号、受給者番号</td></tr>
+<tr><td>SY</td><td>傷病名</td><td>病名コード、開始日、転帰</td></tr>
+<tr><td>SI</td><td>診療行為</td><td>診療行為コード、数量、点数</td></tr>
+<tr><td>IY</td><td>医薬品</td><td>薬剤コード、用量、日数</td></tr>
+<tr><td>TO</td><td>特定器材</td><td>特定器材コード、数量</td></tr>
+<tr><td>CO</td><td>コメント</td><td>コメントコード、自由文</td></tr>
+<tr><td>SJ</td><td>症状詳記</td><td>詳記の区分、内容</td></tr>
+<tr><td>GO</td><td>合計</td><td>請求点数の合計</td></tr>
+</tbody>
+</table>
+
+<h4>5.3 UKEファイルの例</h4>
+<pre><code>IR,1,13,1,1234567,医療法人○○クリニック,,
+RE,1,1130,202603,堀江,太郎,1,19750401,,,
+HO,06130012,ABC,12345,,
+SY,8830900,2型糖尿病,20260115,,,1,,
+SY,8841600,本態性高血圧症,20260820,,,,,
+SI,20,111001110,1,73,,1,,,,,,2,20260305,20260319
+SI,20,113001810,1,225,,1,,,,,,1,20260305
+IY,20,620003953,1,5.60,1,30,,,,,,20260305
+CO,20,820000082,治療効果確認のため,,,,,,20260305
+GO,1172,3520,,,</code></pre>
+<blockquote><strong>実務ポイント</strong>: UKEファイルの中身を直接編集することは通常ない。しかし、エラー時のデバッグやデータ分析のために構造を理解しておくことは重要。BPO事業者はUKEファイルのパース（解析）ツールを持っていると、品質管理に有利。</blockquote>
+
+<h3 id="mod06-create">6. レセコンでの作成手順</h3>
+
+<h4>6.1 基本的な操作フロー</h4>
+<ol>
+<li><strong>月次処理メニュー</strong>を開く</li>
+<li><strong>対象年月</strong>を指定する（例: 2026年3月分）</li>
+<li><strong>レセプト一括作成</strong>を実行する → レセコンが全患者分のレセプトデータを生成</li>
+<li><strong>エラーチェック結果</strong>を確認する</li>
+<li>エラーがあれば<strong>個別に修正</strong>し、再度チェックを実行</li>
+<li>エラーが0件になったら<strong>UKEファイルを出力</strong></li>
+<li>出力されたUKEファイルを<strong>オンライン請求システムにアップロード</strong>（または電子媒体に保存）</li>
+</ol>
+
+<h4>6.2 保険者別のレセプト分離</h4>
+<p>1人の患者でも月途中に保険者が変わった場合、保険者ごとにレセプトが分かれる。レセコンは保険変更日に基づき自動的に分離するが、結果の確認は必須。</p>
+
+<h4>6.3 公費併用のレセプト</h4>
+<p>公費負担医療を受けている患者のレセプトは、主保険と公費の両方の情報を記載する必要がある。</p>
+<ul>
+<li>レセプトのHO（保険者）レコードとKO（公費）レコードの両方が出力される</li>
+<li>点数の按分（保険者負担分と公費負担分）が正しいか確認</li>
+<li>公費の受給者番号の有効期限にも注意</li>
+</ul>
+
+<h3 id="mod06-rules">7. 記載ルール</h3>
+
+<h4>7.1 傷病名の記載ルール</h4>
+<table>
+<thead><tr><th>ルール</th><th>内容</th><th>違反時の影響</th></tr></thead>
+<tbody>
+<tr><td>主傷病名の指定</td><td>必ず1つの主傷病名を指定する</td><td>返戻</td></tr>
+<tr><td>開始日の記載</td><td>初診日以降の日付であること</td><td>返戻</td></tr>
+<tr><td>転帰の記載</td><td>治癒・中止等を適時入力</td><td>不必要な病名の蓄積→査定リスク</td></tr>
+<tr><td>病名の数</td><td>30以上の病名は「レセプト病名」の疑い</td><td>詳記を求められる</td></tr>
+<tr><td>標準病名の使用</td><td>レセプト電算処理用傷病名マスタの病名を使用</td><td>コードなし病名は査定対象</td></tr>
+</tbody>
+</table>
+
+<h4>7.2 摘要欄の記載ルール</h4>
+<ul>
+<li><strong>コメントコードの優先使用</strong>: 該当するコメントコードがある場合はフリーテキストではなくコードを使用</li>
+<li><strong>診療行為の詳細</strong>: 投薬内容（薬剤名・用量・日数）、検査項目の内訳等</li>
+<li><strong>算定根拠の説明</strong>: 月上限超え、頻回検査等の医学的理由</li>
+<li><strong>特記事項</strong>: 月途中の保険変更、施設基準に基づく加算の根拠等</li>
+</ul>
+
+<h4>7.3 特記事項欄</h4>
+<p>レセプトの特記事項欄には、特定のコードを記載して審査支払機関に情報を伝える。</p>
+<table>
+<thead><tr><th>コード</th><th>意味</th><th>使用場面</th></tr></thead>
+<tbody>
+<tr><td>01 公</td><td>公費負担医療あり</td><td>公費併用レセプト</td></tr>
+<tr><td>02 長</td><td>長期入院</td><td>180日超の入院</td></tr>
+<tr><td>03 長処</td><td>長期処方</td><td>14日以上の投薬</td></tr>
+<tr><td>26 区ア</td><td>高額療養費 区分ア</td><td>限度額適用認定証に基づく</td></tr>
+<tr><td>27 区イ</td><td>高額療養費 区分イ</td><td>同上</td></tr>
+<tr><td>28 区ウ</td><td>高額療養費 区分ウ</td><td>同上</td></tr>
+<tr><td>29 区エ</td><td>高額療養費 区分エ</td><td>同上</td></tr>
+<tr><td>30 区オ</td><td>高額療養費 区分オ</td><td>同上</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod06-errors">8. よくある作成ミスと防止策</h3>
+<table>
+<thead><tr><th>ミスの種類</th><th>具体例</th><th>影響</th><th>防止策</th></tr></thead>
+<tbody>
+<tr><td>病名漏れ</td><td>検査に対応する病名がない</td><td>査定（減額）</td><td>病名チェックリスト、レセコン自動チェック</td></tr>
+<tr><td>転帰の放置</td><td>治癒済みの病名が「継続」のまま</td><td>不要な請求→査定</td><td>月末に病名一覧を医師と確認</td></tr>
+<tr><td>算定漏れ</td><td>加算や管理料の入力忘れ</td><td>収益減</td><td>セット入力、月次チェックリスト</td></tr>
+<tr><td>二重算定</td><td>同じ項目を重複入力</td><td>過剰請求→返戻</td><td>レセコンの重複チェック機能</td></tr>
+<tr><td>保険情報の誤り</td><td>保険者番号の入力ミス</td><td>返戻</td><td>オンライン資格確認の活用</td></tr>
+<tr><td>日付の誤り</td><td>診療日と算定日の不一致</td><td>返戻</td><td>日付の目視確認</td></tr>
+<tr><td>コメント漏れ</td><td>必須コメントの未入力</td><td>返戻</td><td>必須コメント一覧の整備</td></tr>
+<tr><td>UKEファイルの破損</td><td>出力時のエラー、文字化け</td><td>提出不能</td><td>出力後のファイル検証</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod06-bpo">9. BPO事業者としての視点</h3>
+
+<h4>9.1 レセプト作成BPOのサービス範囲</h4>
+<table>
+<thead><tr><th>サービス</th><th>内容</th><th>付加価値</th></tr></thead>
+<tbody>
+<tr><td>入力代行</td><td>日次の診療行為入力（モジュール04）</td><td>入力正確率の保証</td></tr>
+<tr><td>月次レセプト作成</td><td>月末〜月初のレセプト一括作成</td><td>期限遵守率100%</td></tr>
+<tr><td>エラー修正</td><td>自動チェックで検出されたエラーの修正</td><td>エラー0件での提出</td></tr>
+<tr><td>点検（モジュール07）</td><td>自動チェックでは検出できない項目の目視確認</td><td>査定率の低減</td></tr>
+<tr><td>分析レポート</td><td>月次の請求データ分析（診療科別、項目別等）</td><td>経営改善の提案</td></tr>
+</tbody>
+</table>
+
+<h4>9.2 月次スケジュール（BPO事業者の標準フロー）</h4>
+<table>
+<thead><tr><th>日程</th><th>作業内容</th><th>担当</th></tr></thead>
+<tbody>
+<tr><td>月末</td><td>当月入力の最終確認、未入力カルテの催促</td><td>BPO</td></tr>
+<tr><td>翌月1日〜3日</td><td>レセプト一括作成、自動チェック、エラー修正</td><td>BPO</td></tr>
+<tr><td>翌月3日〜5日</td><td>目視点検（モジュール07の範囲）</td><td>BPO</td></tr>
+<tr><td>翌月5日〜7日</td><td>医師確認・承認（モジュール08の範囲）</td><td>医師＋BPO</td></tr>
+<tr><td>翌月7日〜9日</td><td>最終修正、UKEファイル生成</td><td>BPO</td></tr>
+<tr><td>翌月10日</td><td>オンライン請求の送信</td><td>BPO or 医療機関</td></tr>
+</tbody>
+</table>
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPO実務の視点</div>
+月初の10日間はレセプト業務の繁忙期であり、BPO事業者にとって最もリソース負荷が高い期間。複数のクライアントを抱える場合、スケジュール管理が極めて重要。前月の入力精度が高いほど月初の修正作業が減り、全体の効率が向上する。
+</div>
+
+<h4>9.3 品質管理指標（KPI）</h4>
+<table>
+<thead><tr><th>指標</th><th>目標値</th><th>計測方法</th></tr></thead>
+<tbody>
+<tr><td>期限遵守率</td><td>100%</td><td>10日期限に対する提出完了率</td></tr>
+<tr><td>エラーゼロ提出率</td><td>95%以上</td><td>自動チェックエラー0件で提出できたレセプトの割合</td></tr>
+<tr><td>返戻率</td><td>0.5%以下</td><td>返戻件数 / 提出件数</td></tr>
+<tr><td>査定率</td><td>0.3%以下</td><td>査定件数 / 提出件数</td></tr>
+<tr><td>算定漏れ検出率</td><td>月次トレンド管理</td><td>点検で発見された算定漏れの件数</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod06-check">10. チェックリスト</h3>
+<ul class="checklist">
+<li>レセプトの定義（1か月分の患者ごと・保険者ごとの請求書）を説明できる</li>
+<li>レセプトの種類（医科入院・入院外・歯科・調剤・DPC）を5つ挙げられる</li>
+<li>提出先（社保→支払基金、国保→国保連）と期限（翌月10日）を正確に述べられる</li>
+<li>外来レセプトの主要記載項目を9つ挙げられる</li>
+<li>月次作成フローの手順（月末準備→仮締め→自動チェック→修正→点検→承認→出力→提出）を説明できる</li>
+<li>UKEファイルの主要レコード識別子（IR/RE/HO/SY/SI/IY/CO/GO）の意味を説明できる</li>
+<li>傷病名の記載ルール（主傷病名・開始日・転帰・標準病名）を説明できる</li>
+<li>摘要欄にコメントコードを使うべき理由を説明できる</li>
+<li>よくある作成ミス8種類とその防止策を説明できる</li>
+<li>BPO事業者としての月次スケジュール（月末〜10日）を説明できる</li>
+</ul>
+
+<h3 id="mod06-exercises">11. 演習問題</h3>
+
+<h4>演習1: レセプト作成の判断</h4>
+<p>以下の各ケースについて、レセプトの作成方法を説明せよ。</p>
+<ol>
+<li>患者Aは3月に3回来院。すべて同じ社会保険。→ レセプトは何枚作成するか。</li>
+<li>患者Bは3月に2回来院。1回目は社保、2回目は退職後に国保で受診。→ レセプトは何枚か。</li>
+<li>患者Cは3月に1回来院。社保＋自立支援医療（精神通院）の公費併用。→ レセプトはどのように作成するか。</li>
+</ol>
+
+<details>
+<summary>解答</summary>
+<div class="answer">
+<ol>
+<li><strong>1枚</strong>。同一保険者での同一月の受診はすべて1枚のレセプトにまとめる。</li>
+<li><strong>2枚</strong>。保険者が異なるため、社保分と国保分で別々のレセプトを作成する。社保分は支払基金へ、国保分は国保連へ提出。</li>
+<li><strong>1枚</strong>。ただし、保険者情報（HOレコード）と公費情報（KOレコード）の両方を記載する。点数の按分（保険者負担分と公費負担分）を正しく計算する。</li>
+</ol>
+</div>
+</details>
+
+<h4>演習2: UKEファイルの読み取り</h4>
+<p>以下のUKEファイル抜粋を読み取り、質問に答えよ。</p>
+<pre><code>RE,1,1130,202603,山田,花子,2,19480315,,,
+HO,39130015,XYZ,67890,,
+SY,8844400,骨粗鬆症,20250601,,,1,,
+SY,8830100,変形性膝関節症,20251101,,,,,
+SI,20,111001110,1,73,,1,,,,,,2,20260310,20260324
+SI,20,114003010,1,147,,1,,,,,,1,20260310</code></pre>
+<ol>
+<li>この患者の年齢（2026年3月時点）と推定される負担割合は？</li>
+<li>主傷病名は何か？</li>
+<li>3月の診療実日数は何日か？</li>
+<li>再診料（73点）は何回算定されているか？</li>
+</ol>
+
+<details>
+<summary>解答</summary>
+<div class="answer">
+<ol>
+<li>生年月日: 1948年3月15日 → <strong>77歳</strong>。後期高齢者医療制度の対象。保険者番号39で始まるのは後期高齢者。負担割合は<strong>1割または2割</strong>（所得による）。</li>
+<li><strong>骨粗鬆症</strong>。SYレコードの最後から2番目のフィールドが「1」のものが主傷病名。</li>
+<li><strong>2日</strong>。SIレコードの日付から3月10日と3月24日に受診。</li>
+<li><strong>2回</strong>。SIレコードの最後に「2」と記載されている（=2回分）。カンマ区切りの日付「20260310,20260324」で2日分。</li>
+</ol>
+</div>
+</details>
+
+<h4>演習3: 月次スケジュールの作成</h4>
+<p>あなたがBPO事業者として、クリニックA（外来のみ、月平均患者数800名、社保60%・国保35%・後期高齢者5%）のレセプト業務を受託した。4月分レセプトの作成スケジュールを作成せよ。以下を含めること。</p>
+<ol>
+<li>4月30日から5月10日までの日別作業計画</li>
+<li>各工程の担当（BPO/医師/クリニック事務）</li>
+<li>リスクポイントと対策</li>
+</ol>
+
+<h4>12. Q&amp;A</h4>
+<p>（学習中の質疑応答をここに蓄積する）</p>
+
+<h4>参考情報</h4>
+<ul>
+<li>厚生労働省「診療報酬請求書等の記載要領」</li>
+<li>社会保険診療報酬支払基金「レセプト電算処理システムの概要」</li>
+<li>国民健康保険中央会「電子レセプトの作成手引き」</li>
+<li>厚生労働省「レセプト電算処理用コードマスタ」</li>
+<li>しろぼんねっと「レセプトの書き方」</li>
+</ul>
+</section>
+
+</main>
+<footer class="site-footer">
+<p>p012 レセプトBPOサービス &mdash; レセプト業務マスタートレーニング Phase 2</p>
+<p>最終更新日: 2026-03-09</p>
+</footer>
+<script>
+function toggleSidebar(){
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.querySelector('.sidebar-overlay').classList.toggle('open');
+}
+function toggleSubNav(btn){
+  var subNav=btn.parentElement.nextElementSibling;
+  if(subNav){subNav.classList.toggle('open');btn.classList.toggle('open');}
+}
+document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(){
+    if(window.innerWidth<=900){
+      document.querySelector('.sidebar').classList.remove('open');
+      document.querySelector('.sidebar-overlay').classList.remove('open');
+    }
+  });
+});
+</script>
+</body>
+</html>
