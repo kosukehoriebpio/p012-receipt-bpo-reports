@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>レセプト業務マスタートレーニング Phase 3</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>document.addEventListener('DOMContentLoaded',function(){mermaid.initialize({startOnLoad:true,theme:'default',flowchart:{useMaxWidth:true,htmlLabels:true},sequence:{useMaxWidth:true}});});</script>
+<style>
+:root{--primary:#2563eb;--primary-dark:#1d4ed8;--primary-light:#dbeafe;--green:#059669;--green-light:#d1fae5;--green-bg:#ecfdf5;--bg:#f8f9fa;--card-bg:#fff;--text:#1f2937;--text-light:#6b7280;--border:#e5e7eb;--code-bg:#1e293b;--code-text:#e2e8f0;--shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);--shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05)}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:80px}body{font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;line-height:1.8;color:var(--text);background:var(--bg)}.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:12px 24px;box-shadow:0 2px 8px rgba(0,0,0,.15);display:flex;align-items:center;gap:16px}.site-header h1{font-size:1.2rem;font-weight:700}.site-header .subtitle{font-size:.85rem;opacity:.85}.hamburger{display:none;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer;padding:4px 8px;line-height:1}.sidebar{position:fixed;top:60px;left:0;bottom:0;width:300px;background:var(--card-bg);border-right:1px solid var(--border);overflow-y:auto;padding:16px 0;z-index:900;transition:transform .3s ease}.sidebar-nav{list-style:none}.sidebar-nav>li{margin-bottom:2px}.sidebar-nav>li>.nav-item-header>a,.sidebar-nav>li>a{display:block;padding:10px 20px;color:var(--text);text-decoration:none;font-weight:600;font-size:.95rem;border-left:3px solid transparent;transition:all .2s}.sidebar-nav>li>.nav-item-header>a:hover,.sidebar-nav>li>a:hover{background:var(--primary-light);border-left-color:var(--primary)}.sidebar-nav .sub-nav{list-style:none;display:none}.sidebar-nav .sub-nav.open{display:block}.sidebar-nav .sub-nav li a{display:block;padding:6px 20px 6px 36px;color:var(--text-light);text-decoration:none;font-size:.85rem;transition:all .2s}.sidebar-nav .sub-nav li a:hover{color:var(--primary);background:var(--primary-light)}.toggle-btn{background:none;border:none;cursor:pointer;color:var(--text-light);font-size:.8rem;padding:2px 6px;margin-left:4px;transition:transform .2s;flex-shrink:0}.toggle-btn.open{transform:rotate(90deg)}.nav-item-header{display:flex;align-items:center}.nav-item-header a{flex:1}.main-content{margin-left:300px;margin-top:60px;padding:32px 40px 80px;max-width:1060px}.module-card{background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow);padding:40px;margin-bottom:48px}.module-divider{height:4px;border:none;margin:48px 0;background:linear-gradient(90deg,var(--primary),var(--green),var(--primary));border-radius:2px}.module-card h2{font-size:1.8rem;color:var(--primary-dark);margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--primary)}.module-card h3{font-size:1.35rem;color:var(--text);margin-top:32px;margin-bottom:16px;padding-left:12px;border-left:4px solid var(--primary)}.module-card h4{font-size:1.1rem;color:var(--text);margin-top:24px;margin-bottom:12px}table{width:100%;border-collapse:separate;border-spacing:0;margin:16px 0 24px;border-radius:8px;overflow:hidden;box-shadow:var(--shadow);font-size:.92rem}thead th{background:var(--primary-dark);color:#fff;padding:12px 16px;text-align:left;font-weight:600}tbody td{padding:10px 16px;border-bottom:1px solid var(--border)}tbody tr:nth-child(even){background:#f9fafb}tbody tr:hover{background:var(--primary-light)}pre{background:var(--code-bg);color:var(--code-text);padding:20px 24px;border-radius:8px;overflow-x:auto;margin:16px 0 24px;font-size:.88rem;line-height:1.6}pre code{font-family:"Cascadia Code","Fira Code",Consolas,monospace;background:none;padding:0}code{font-family:"Cascadia Code","Fira Code",Consolas,monospace;background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:.9em}blockquote{border-left:4px solid var(--primary);background:var(--primary-light);padding:16px 20px;margin:16px 0 24px;border-radius:0 8px 8px 0;font-size:.95rem}blockquote strong{color:var(--primary-dark)}.bpo-callout{border-left:4px solid var(--green);background:var(--green-bg);padding:16px 20px;margin:16px 0 24px;border-radius:0 8px 8px 0}.bpo-callout-title{font-weight:700;color:var(--green);margin-bottom:8px;font-size:.9rem}details{margin:16px 0 24px;border:1px solid var(--border);border-radius:8px;overflow:hidden}summary{padding:12px 20px;cursor:pointer;font-weight:600;background:#f9fafb;color:var(--primary-dark);user-select:none}summary::-webkit-details-marker{display:none}details[open] summary{border-bottom:1px solid var(--border)}.answer{padding:16px 20px;background:var(--green-light)}.checklist{list-style:none;padding:0}.checklist li{padding:8px 0 8px 32px;position:relative;border-bottom:1px solid #f3f4f6}.checklist li::before{content:"";position:absolute;left:0;top:12px;width:18px;height:18px;border:2px solid var(--primary);border-radius:4px;background:#fff}ul,ol{margin:8px 0 16px 24px}li{margin-bottom:4px}p{margin-bottom:12px}.site-footer{margin-left:300px;padding:24px 40px;background:var(--card-bg);border-top:1px solid var(--border);text-align:center;color:var(--text-light);font-size:.85rem}.flow-chart{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:24px 0;padding:20px;background:#f9fafb;border-radius:12px}.flow-box{background:var(--primary);color:#fff;padding:10px 14px;border-radius:8px;font-weight:600;font-size:.85rem;text-align:center;min-width:100px}.flow-box.green{background:var(--green)}.flow-arrow{font-size:1.2rem;color:var(--primary);font-weight:700}.flow-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}.story-callout{background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 50%,#e0f2fe 100%);border-left:5px solid var(--primary);border-radius:0 12px 12px 0;padding:24px 28px;margin:0 0 32px 0;position:relative;box-shadow:0 2px 8px rgba(37,99,235,.1)}.story-callout::before{content:"";position:absolute;top:0;left:-5px;bottom:0;width:5px;background:linear-gradient(180deg,#3b82f6,#1d4ed8);border-radius:3px 0 0 3px}.story-callout-icon{font-size:1.5rem;margin-bottom:8px;display:block}.story-callout-title{font-weight:700;color:var(--primary-dark);font-size:1.05rem;margin-bottom:10px}.story-callout p{margin-bottom:8px;color:#1e3a5f;font-size:.95rem;line-height:1.7}.story-callout p:last-child{margin-bottom:0}.mermaid-container{background:#fff;border-radius:12px;box-shadow:var(--shadow-lg);padding:24px;margin:20px 0 28px;overflow-x:auto}.mermaid-container .mermaid{display:flex;justify-content:center}.narrative-intro{font-size:1.1rem;line-height:1.9;color:var(--text);margin-bottom:24px;padding:0 4px}.narrative-question{background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:5px solid #f59e0b;border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;font-size:1.05rem;font-weight:600;color:#92400e}.phase-story{background:#f8fafc;border-radius:12px;padding:24px 28px;margin:20px 0;border:1px solid var(--border)}.phase-story h4{color:var(--primary-dark);margin-top:0;font-size:1.15rem}.phase-story p{color:var(--text);font-size:.95rem}@media(max-width:900px){.sidebar{transform:translateX(-100%);width:280px}.sidebar.open{transform:translateX(0);box-shadow:var(--shadow-lg)}.main-content{margin-left:0;padding:24px 16px 80px}.site-footer{margin-left:0}.hamburger{display:block}.module-card{padding:24px 20px}table{font-size:.82rem;display:block;overflow-x:auto}thead th,tbody td{padding:8px 10px}pre{padding:14px 16px;font-size:.82rem}}.sidebar-overlay{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:899}.sidebar-overlay.open{display:block}
+</style>
+</head>
+<body>
+<header class="site-header">
+<button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
+<div>
+<h1>レセプト業務マスタートレーニング &mdash; Phase 3</h1>
+<div class="subtitle">p012 レセプトBPOサービス &mdash; 点検スキル編</div>
+</div>
+</header>
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+<nav class="sidebar">
+<ul class="sidebar-nav">
+<li><div class="nav-item-header"><a href="#mod07">07: レセプト点検 ★★★★★</a><button class="toggle-btn" onclick="toggleSubNav(this)">&#9654;</button></div>
+<ul class="sub-nav"><li><a href="#mod07-goals">学習目標</a></li><li><a href="#mod07-story">導入ストーリー</a></li><li><a href="#mod07-overview">全体像</a></li><li><a href="#mod07-types">点検の種類</a></li><li><a href="#mod07-checklist">点検チェックリスト</a></li><li><a href="#mod07-violations">算定ルール違反パターン</a></li><li><a href="#mod07-flow">点検フロー</a></li><li><a href="#mod07-tools">ツール・支援システム</a></li><li><a href="#mod07-bpo">BPO視点</a></li><li><a href="#mod07-selfcheck">自己評価チェック</a></li><li><a href="#mod07-exercises">演習問題</a></li></ul></li>
+<li><div class="nav-item-header"><a href="#mod08">08: 医師確認・承認</a><button class="toggle-btn" onclick="toggleSubNav(this)">&#9654;</button></div>
+<ul class="sub-nav"><li><a href="#mod08-goals">学習目標</a></li><li><a href="#mod08-story">導入ストーリー</a></li><li><a href="#mod08-overview">全体像</a></li><li><a href="#mod08-cases">確認が必要なケース</a></li><li><a href="#mod08-inquiry">疑義照会フロー</a></li><li><a href="#mod08-detail">症状詳記</a></li><li><a href="#mod08-approval">承認プロセス</a></li><li><a href="#mod08-bpo">BPO視点</a></li><li><a href="#mod08-check">チェックリスト</a></li><li><a href="#mod08-exercises">演習問題</a></li></ul></li>
+</ul>
+</nav>
+<main class="main-content">
+<!-- ========== MODULE 07: RECEIPT INSPECTION ========== -->
+<section id="mod07" class="module-card">
+<h2>モジュール07: レセプト点検 &#9733;&#9733;&#9733;&#9733;&#9733;</h2>
+
+<div class="story-callout">
+<span class="story-callout-icon">&#128269;</span>
+<div class="story-callout-title">なぜこのモジュールが最重要なのか</div>
+<p>医療機関のレセプト業務は、受付・診療・入力・会計を経て「レセプト作成」で完了するように見える。しかし作成されたレセプトをそのまま審査支払機関に提出することは極めて危険である。</p>
+<p>レセプトには数十〜数百の算定項目が含まれ、各項目に個別の算定要件・回数制限・適応症・コメント要件が存在する。これらを日々の入力で完全に把握することは現実的に不可能であり、<strong>レセプト点検はエラーを請求前に発見・修正する「最終防衛ライン」</strong>である。</p>
+<p>BPO事業者にとって、レセプト点検は<strong>最もクライアントへの付加価値を発揮できる業務</strong>である。算定漏れの発見による収益増加、返戻・査定率の低下、医師への算定教育フィードバック &mdash; BPO費用を超えるROIを証明しやすい。</p>
+</div>
+
+<h3 id="mod07-goals">1. このモジュールで学ぶこと</h3>
+<p>本モジュールを修了すると、以下を説明・実行できるようになる。</p>
+<ol>
+<li><strong>レセプト点検の全体像</strong> &mdash; 点検の定義・目的・種類・業務フロー上の位置づけを体系的に説明できる</li>
+<li><strong>点検4種の実施</strong> &mdash; 内容点検・縦覧点検・突合点検・資格点検を目的と手順を区別して実施できる</li>
+<li><strong>点検チェックリストの活用</strong> &mdash; 基本情報・傷病名・診療行為・投薬・検査の各カテゴリを網羅的にチェックできる</li>
+<li><strong>算定ルール違反パターンの識別</strong> &mdash; 代表的な返戻・査定事例15件を挙げ、発生原因と対策を説明できる</li>
+<li><strong>3段階点検フローの運用</strong> &mdash; 1次（システム）・2次（目視）・3次（管理者）の各フローを設計・運用できる</li>
+<li><strong>BPO受託時の品質設計</strong> &mdash; クライアント向けの点検体制・SLA・品質報告の枠組みを設計できる</li>
+</ol>
+<blockquote><strong>Level 3目標</strong>: このモジュールは「指導可能レベル」が到達目標。自分が実行できるだけでなく、クライアントのスタッフに点検手順を教え、品質を評価できるレベルを目指す。</blockquote>
+
+<h3 id="mod07-story">2. 点検を怠った場合のリスク</h3>
+<table>
+<thead><tr><th>リスク</th><th>発生メカニズム</th><th>医療機関への影響</th></tr></thead>
+<tbody>
+<tr><td><strong>返戻</strong></td><td>審査機関が記載不備・要件不充足と判断 → 請求を差し戻し</td><td>翌月以降の再請求が必要。キャッシュフロー悪化</td></tr>
+<tr><td><strong>査定</strong></td><td>審査機関が過剰算定と判断 → 一部または全額を削除して支払い</td><td>算定分が回収できず実質的な収益減</td></tr>
+<tr><td><strong>監査</strong></td><td>不正請求が疑われる場合の行政調査</td><td>最悪の場合は保険医療機関の指定取消し</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod07-overview">3. レセプト点検の全体像</h3>
+
+<h4>3.1 業務フロー上の位置づけ</h4>
+<div class="flow-chart">
+<div class="flow-row">
+<div class="flow-box">診療</div><span class="flow-arrow">&rarr;</span>
+<div class="flow-box">レセコン入力</div><span class="flow-arrow">&rarr;</span>
+<div class="flow-box">月次レセプト作成<br><small>Module 06</small></div><span class="flow-arrow">&rarr;</span>
+<div class="flow-box green">&#9733; レセプト点検 &#9733;<br><small>Module 07</small></div><span class="flow-arrow">&rarr;</span>
+<div class="flow-box">医師確認・承認<br><small>Module 08</small></div><span class="flow-arrow">&rarr;</span>
+<div class="flow-box">電子請求提出<br><small>Module 09</small></div>
+</div>
+</div>
+<p>点検で発見されたエラーは、<strong>レセコン上で修正 → 再度レセプト出力 → 再点検</strong>というループを経て解消される。</p>
+
+<h4>3.2 点検の実施時期</h4>
+<table>
+<thead><tr><th>タイミング</th><th>名称</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>月次（10日前後）</td><td>月次点検</td><td>前月分レセプトの全件点検。<strong>最重要</strong></td></tr>
+<tr><td>日次</td><td>日次点検</td><td>入力内容の翌日チェック。エラーを早期発見</td></tr>
+<tr><td>随時</td><td>スポット点検</td><td>返戻があった患者・特殊算定のある患者を重点チェック</td></tr>
+</tbody>
+</table>
+
+<h4>3.3 点検の対象範囲（リスク階層化）</h4>
+<table>
+<thead><tr><th>優先度</th><th>対象</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>最優先</td><td>高額レセプト（15万点以上）</td><td>審査機関が重点審査対象とする</td></tr>
+<tr><td>優先</td><td>新規算定項目・特別管理加算を含むもの</td><td>算定要件の見落としリスクが高い</td></tr>
+<tr><td>優先</td><td>傷病名と診療行為の整合性に疑義があるもの</td><td>レセプト病名トラブルの温床</td></tr>
+<tr><td>通常</td><td>継続算定の一般レセプト</td><td>パターンが安定しているが慢心注意</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod07-types">4. 点検の種類</h3>
+
+<h4>4.1 内容点検（コンテンツチェック）</h4>
+<p>レセプトの診療内容が診療報酬点数表のルールに適合しているかを確認する。最も基本的かつ作業量の多い点検。</p>
+<table>
+<thead><tr><th>確認カテゴリ</th><th>具体的な確認内容</th><th>主なエラー例</th></tr></thead>
+<tbody>
+<tr><td>算定ルール違反</td><td>同時算定禁止項目の重複、算定回数超過</td><td>初診料と再診料の同時算定、週2回制限超過</td></tr>
+<tr><td>記載漏れ</td><td>必須コメント・症状詳記の欠如</td><td>特定薬剤のコメント未記載</td></tr>
+<tr><td>コメント不備</td><td>コメントの内容が不十分・様式コード誤り</td><td>「症状詳記」の内容が薄い</td></tr>
+<tr><td>傷病名と診療行為の不整合</td><td>傷病名に対応しない診療行為の算定</td><td>高血圧症の傷病名で感染症治療薬を処方</td></tr>
+<tr><td>点数誤算定</td><td>点数マスタ更新漏れによる旧点数での算定</td><td>改定後の点数が反映されていない</td></tr>
+</tbody>
+</table>
+
+<h4>4.2 縦覧点検（ロンギチュードチェック）</h4>
+<p>同一患者の複数月にわたるレセプトを横断的に確認する点検。「縦覧」とは「縦（時間軸）に一覧する」意味。</p>
+<p><strong>縦覧点検が必要な主な理由:</strong></p>
+<ol>
+<li><strong>算定回数制限の跨月確認</strong> &mdash; 「前○ヶ月以内」「年1回」など月跨ぎの制限が多数</li>
+<li><strong>転帰の整合性</strong> &mdash; 「治癒」記載の翌月に同じ傷病名が再登場していないか</li>
+<li><strong>慢性疾患の傷病名管理</strong> &mdash; 継続疾患が途中で消えていないか</li>
+<li><strong>初診・再診の区分誤り</strong> &mdash; 前月まで通院があるのに今月が初診料算定になっていないか</li>
+</ol>
+<table>
+<thead><tr><th>算定制限</th><th>確認対象期間</th></tr></thead>
+<tbody>
+<tr><td>月2回制限</td><td>当月のみ確認</td></tr>
+<tr><td>月1回制限</td><td>当月＋前月</td></tr>
+<tr><td>3ヶ月制限</td><td>当月＋前2ヶ月</td></tr>
+<tr><td>6ヶ月制限</td><td>当月＋前5ヶ月</td></tr>
+<tr><td>年1回制限</td><td>当月＋前11ヶ月</td></tr>
+</tbody>
+</table>
+<blockquote><strong>実務ポイント</strong>: 支払基金は「縦覧チェック」として算定回数・傷病名の経時的整合性を自動チェックしており、医療機関側での事前確認が必須。</blockquote>
+
+<h4>4.3 突合点検（マッチングチェック）</h4>
+<p>医科レセプトと調剤レセプトを突合（照合）し、整合性を確認する点検。</p>
+<table>
+<thead><tr><th>確認項目</th><th>医科側</th><th>調剤側</th><th>確認内容</th></tr></thead>
+<tbody>
+<tr><td>処方薬と調剤薬の一致</td><td>処方箋内容</td><td>調剤内容</td><td>処方した薬と調剤された薬が一致しているか</td></tr>
+<tr><td>傷病名と処方薬の適応</td><td>傷病名</td><td>調剤薬</td><td>傷病名に対応した薬が処方されているか</td></tr>
+<tr><td>日数制限</td><td>処方日数</td><td>調剤日数</td><td>投薬日数制限（向精神薬等）への適合</td></tr>
+<tr><td>用量の適切性</td><td>処方量</td><td>調剤量</td><td>規定用量内か（過剰投与の疑い）</td></tr>
+</tbody>
+</table>
+<div class="bpo-callout">
+<div class="bpo-callout-title">2024年改定ポイント</div>
+突合点検の強化が明記された。特に向精神薬・オピオイド系薬剤については審査機関の突合チェックが厳格化されており、処方側の傷病名管理が一層重要。
+</div>
+
+<h4>4.4 資格点検（エリジビリティチェック）</h4>
+<p>患者の保険資格が診療月において有効であったかを確認する点検。</p>
+<table>
+<thead><tr><th>手段</th><th>概要</th><th>確認タイミング</th></tr></thead>
+<tbody>
+<tr><td>オンライン資格確認（マイナ保険証）</td><td>マイナポータルに紐づいた保険情報をリアルタイム確認</td><td>受付時（2024年以降原則義務化）</td></tr>
+<tr><td>被保険者証の目視確認</td><td>有効期限・記号番号の確認</td><td>受付時</td></tr>
+<tr><td>レセプト返戻後確認</td><td>「被保険者資格なし」返戻を受けた後の調査</td><td>返戻後（事後対応）</td></tr>
+<tr><td>電話照会</td><td>保険者への電話での資格確認</td><td>疑義が生じた場合</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod07-checklist">5. 点検項目チェックリスト</h3>
+
+<h4>5.1 基本情報チェック</h4>
+<table>
+<thead><tr><th>#</th><th>チェック項目</th><th>確認内容</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>B-01</td><td>患者氏名</td><td>レセプトと保険証の氏名が一致するか</td><td>旧姓・通称名・外国人名の漢字変換に注意</td></tr>
+<tr><td>B-02</td><td>生年月日</td><td>正しく入力されているか</td><td>1桁違いのエラー（例: 1965年→1956年）が多い</td></tr>
+<tr><td>B-03</td><td>性別</td><td>傷病名・診療行為と整合するか</td><td>男性に婦人科疾患の傷病名が登録されていないか</td></tr>
+<tr><td>B-04</td><td>保険者番号</td><td>正しい保険者番号か</td><td>法別番号（2桁）の確認。01=健保組合、02=協会けんぽ等</td></tr>
+<tr><td>B-05</td><td>記号・番号</td><td>保険証と一致するか</td><td>転記ミス・OCR読み取りエラーが発生しやすい</td></tr>
+<tr><td>B-06</td><td>公費番号</td><td>公費の法別番号・受給者番号が正しいか</td><td>公費の有効期間・優先順位も確認</td></tr>
+<tr><td>B-07</td><td>負担割合</td><td>年齢・所得区分に応じた正しい割合か</td><td>75歳以上→後期高齢者（1割/2割/3割）</td></tr>
+<tr><td>B-08</td><td>一部負担金額</td><td>計算が正しいか</td><td>端数処理（五捨五超入）の適用を確認</td></tr>
+<tr><td>B-09</td><td>診療実日数</td><td>実際の通院日数と一致するか</td><td>往診・訪問診療は別カウント</td></tr>
+<tr><td>B-10</td><td>請求点数合計</td><td>各区分の合計と一致するか</td><td>レセコンの合計チェック機能を活用</td></tr>
+</tbody>
+</table>
+
+<h4>5.2 傷病名チェック</h4>
+<table>
+<thead><tr><th>#</th><th>チェック項目</th><th>確認内容</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>D-01</td><td>主病名の設定</td><td>主病名が適切に設定されているか</td><td>生活習慣病指導管理料等の主病名は算定要件に関わる</td></tr>
+<tr><td>D-02</td><td>傷病名コード</td><td>ICD-10に基づく正しいコードか</td><td>「疑い」病名は別コード（Z03等）を使用</td></tr>
+<tr><td>D-03</td><td>診療開始日</td><td>傷病名の開始日が正しいか</td><td>月の途中から新規疾患の場合は日付入力が必要</td></tr>
+<tr><td>D-04</td><td>転帰</td><td>治癒・中止・継続の区分が正しいか</td><td>「治癒」後に同傷病名が再登場する矛盾を防ぐ</td></tr>
+<tr><td>D-05</td><td>レセプト病名</td><td>不適切なレセプト病名が使われていないか</td><td>適応外処方を隠すための傷病名は不正請求に該当</td></tr>
+<tr><td>D-06</td><td>傷病名と診療行為の整合</td><td>すべての診療行為に対応する傷病名があるか</td><td>「傷病名のない診療行為」は返戻・査定の主要原因</td></tr>
+<tr><td>D-07</td><td>傷病名数の適切性</td><td>傷病名が過少または過多になっていないか</td><td>傷病名が多すぎると審査で要注意扱いになる場合あり</td></tr>
+<tr><td>D-08</td><td>疑い病名の転帰</td><td>「疑い」病名が長期間残っていないか</td><td>診断確定後は確定病名に変更する</td></tr>
+</tbody>
+</table>
+
+<h4>5.3 診療行為チェック</h4>
+<table>
+<thead><tr><th>#</th><th>チェック項目</th><th>確認内容</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>A-01</td><td>初診料・再診料</td><td>正しい区分で算定されているか</td><td>初診：初めての受診または前回治癒後の再受診</td></tr>
+<tr><td>A-02</td><td>算定回数</td><td>月内・年内の算定回数制限を超えていないか</td><td>縦覧点検と連動して確認</td></tr>
+<tr><td>A-03</td><td>併算定禁止</td><td>同日・同月に算定できない組み合わせがないか</td><td>例: 訪問診療と往診の同日算定不可</td></tr>
+<tr><td>A-04</td><td>施設基準</td><td>届出を行っていない加算を算定していないか</td><td>施設基準は届出ごとに管理が必要</td></tr>
+<tr><td>A-05</td><td>加算の算定要件</td><td>各加算の要件（診療時間・体制等）を満たしているか</td><td>夜間・休日加算は実際の診療時刻の確認が必要</td></tr>
+<tr><td>A-06</td><td>処置・手術の部位</td><td>左右・部位が正確に記載されているか</td><td>「右」「左」の記載誤りは査定対象</td></tr>
+<tr><td>A-07</td><td>医学管理料</td><td>算定要件（指導内容の記録等）が満たされているか</td><td>カルテへの記録がないと算定不可</td></tr>
+<tr><td>A-08</td><td>在宅医療</td><td>訪問回数・時間・距離等の算定要件を満たすか</td><td>在宅医療は算定要件が複雑で返戻リスクが高い</td></tr>
+<tr><td>A-09</td><td>DPC病院特有項目</td><td>包括部分と出来高部分の区分が正しいか</td><td>DPC対象外患者への誤適用に注意</td></tr>
+<tr><td>A-10</td><td>リハビリテーション</td><td>発症日・手術日からの日数制限内か</td><td>疾患別リハは算定上限日数を厳守</td></tr>
+</tbody>
+</table>
+
+<h4>5.4 投薬チェック</h4>
+<table>
+<thead><tr><th>#</th><th>チェック項目</th><th>確認内容</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>M-01</td><td>用法・用量</td><td>薬事承認の用法用量の範囲内か</td><td>用量超過は要コメント（or返戻）</td></tr>
+<tr><td>M-02</td><td>投薬日数制限</td><td>日数制限のある薬剤を超えていないか</td><td>麻薬は14日、ベンゾジアゼピン系は30日等</td></tr>
+<tr><td>M-03</td><td>適応症との整合</td><td>傷病名と薬剤の適応症が一致するか</td><td>適応外使用の場合は保険給付外になる可能性</td></tr>
+<tr><td>M-04</td><td>薬剤料の算定</td><td>薬価に基づく正しい薬剤料か</td><td>薬価改定は毎年4月。マスタ更新を確認</td></tr>
+<tr><td>M-05</td><td>処方料・調剤料</td><td>院内・院外処方の区分が正しいか</td><td>院内と院外で点数が異なる</td></tr>
+<tr><td>M-06</td><td>後発品変更</td><td>先発品→後発品変更時のコメントがあるか</td><td>変更不可の処方箋はコメント必須</td></tr>
+<tr><td>M-07</td><td>重複投薬</td><td>同効能の薬剤を複数処方していないか</td><td>突合点検（調剤との照合）が必要</td></tr>
+<tr><td>M-08</td><td>長期投薬</td><td>30日超の長期処方に正当な理由があるか</td><td>慢性疾患でも90日超は審査で確認される場合あり</td></tr>
+</tbody>
+</table>
+
+<h4>5.5 検査チェック</h4>
+<table>
+<thead><tr><th>#</th><th>チェック項目</th><th>確認内容</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td>L-01</td><td>判断料</td><td>検体検査判断料が正しく算定されているか</td><td>検尿・血液・生化学・細菌等で判断料が異なる</td></tr>
+<tr><td>L-02</td><td>算定回数制限</td><td>月内回数制限のある検査を超えていないか</td><td>例: 心電図は月2回算定制限等</td></tr>
+<tr><td>L-03</td><td>適応症の整合</td><td>実施した検査に対応する傷病名があるか</td><td>傷病名なしで高額な検査は査定対象</td></tr>
+<tr><td>L-04</td><td>包括規定</td><td>包括算定の検査を個別算定していないか</td><td>初診料・再診料の中に含まれる検査がある</td></tr>
+<tr><td>L-05</td><td>検査コメント</td><td>特定の検査で必要なコメントが記載されているか</td><td>HbA1c算定時の注記等</td></tr>
+<tr><td>L-06</td><td>生体検査</td><td>実施要件・実施者要件を満たすか</td><td>超音波検査等は実施者の記録が必要</td></tr>
+<tr><td>L-07</td><td>外注検査</td><td>外注先機関との請求重複がないか</td><td>院内で算定していないか確認</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod07-violations">6. 算定ルール違反の代表パターン</h3>
+
+<h4>6.1 返戻になる主なパターン</h4>
+<table>
+<thead><tr><th>#</th><th>違反パターン</th><th>具体例</th><th>返戻理由</th><th>対策</th></tr></thead>
+<tbody>
+<tr><td>V-01</td><td><strong>必須コメント未記載</strong></td><td>特定薬剤治療管理料でコメントなし</td><td>摘要欄へのコードコメント未記載</td><td>コメントコード一覧を整備し、対象薬剤に紐づけてチェック</td></tr>
+<tr><td>V-02</td><td><strong>傷病名なしの診療行為</strong></td><td>腰痛症の傷病名なしでNSAIDsを処方</td><td>対応する病名が存在しない</td><td>処方・検査・処置に対応傷病名があるか一覧化して確認</td></tr>
+<tr><td>V-03</td><td><strong>保険資格切れ</strong></td><td>退職後も旧健保番号でレセプト提出</td><td>診療日時点で被保険者資格なし</td><td>オンライン資格確認の徹底。受付時の確認を義務化</td></tr>
+<tr><td>V-04</td><td><strong>記号番号の誤記</strong></td><td>保険証の転記ミスで番号が1桁違う</td><td>被保険者番号不一致</td><td>保険証原本との照合。OCR活用</td></tr>
+<tr><td>V-05</td><td><strong>症状詳記の内容不足</strong></td><td>「詳記あり」とだけ記載</td><td>詳記内容が審査要件を満たさない</td><td>詳記のひな型を用意し、具体的な内容を記載</td></tr>
+</tbody>
+</table>
+
+<h4>6.2 査定になる主なパターン</h4>
+<table>
+<thead><tr><th>#</th><th>違反パターン</th><th>具体例</th><th>査定理由</th><th>対策</th></tr></thead>
+<tbody>
+<tr><td>V-06</td><td><strong>算定回数超過</strong></td><td>週1回制限の検査を月5回算定</td><td>回数制限超過</td><td>レセコンの回数チェック機能を有効化。縦覧点検で跨月も確認</td></tr>
+<tr><td>V-07</td><td><strong>併算定禁止違反</strong></td><td>同日に訪問診療料と往診料を両方算定</td><td>同日算定不可の組み合わせ</td><td>算定ルールのマトリクスを作成し、チェックリストに組込む</td></tr>
+<tr><td>V-08</td><td><strong>適応外薬剤</strong></td><td>禁煙治療薬を禁煙症なしの患者に処方</td><td>薬剤の適応症と傷病名の不一致</td><td>薬剤マスタに適応症を紐づけ、傷病名との整合チェックを自動化</td></tr>
+<tr><td>V-09</td><td><strong>施設基準未届出の加算</strong></td><td>地域包括診療加算を届出なしで算定</td><td>施設基準要件未充足</td><td>届出加算の一覧表を作成し、算定前に届出状況を必ず確認</td></tr>
+<tr><td>V-10</td><td><strong>過剰な診療頻度</strong></td><td>月15回の外来受診</td><td>診療の必要性に疑義</td><td>月15回超の患者は詳記を添付し、医師のコメントを明記</td></tr>
+<tr><td>V-11</td><td><strong>リハビリ日数超過</strong></td><td>脳梗塞後のリハビリを200日以降も算定</td><td>疾患別リハビリ算定上限日数超過</td><td>発症日を患者ごとに管理し、上限日到来を事前アラート</td></tr>
+<tr><td>V-12</td><td><strong>重複検査</strong></td><td>同一項目の検査を同日に複数回算定</td><td>同一検査の重複算定</td><td>レセコンの重複チェック機能を活用。日次入力時に確認</td></tr>
+<tr><td>V-13</td><td><strong>処置点数の誤り</strong></td><td>改定前の旧点数で算定</td><td>算定点数の誤り</td><td>改定時のマスタ更新を標準化。改定後1ヶ月は集中チェック</td></tr>
+<tr><td>V-14</td><td><strong>投薬日数制限超過</strong></td><td>向精神薬を1回で90日分処方</td><td>投薬日数の制限超過</td><td>日数制限のある薬剤をマスタで管理し、入力時に警告表示</td></tr>
+<tr><td>V-15</td><td><strong>初診料の誤算定</strong></td><td>同月内に別の科でも初診料を算定</td><td>同一医療機関での重複初診料</td><td>患者ID・受診日の照合。複数科受診に注意</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod07-flow">7. 点検業務のフロー</h3>
+
+<h4>7.1 月次点検スケジュール</h4>
+<pre><code>【月次点検スケジュール（請求締切が月10日の場合）】
+
+前月末日  : 月次レセプトをレセコンで作成・出力
+ 1日〜 3日 : 1次点検（レセコン自動チェック）→ 軽微エラーを一括修正
+ 3日〜 6日 : 2次点検（スタッフによる目視・手動チェック）→ アラートリスト作成
+ 6日〜 8日 : 医師確認（モジュール08）→ 傷病名・処方内容の最終確認
+ 8日〜 9日 : 3次点検（管理者・BPOチーフによる最終確認）
+   10日    : 電子請求提出（モジュール09）</code></pre>
+
+<h4>7.2 3段階点検フロー</h4>
+<div class="mermaid-container">
+<div class="mermaid">
+flowchart TD
+    A["月次レセプト作成"] --> B{"1次点検<br>レセコン自動チェック"}
+    B -->|エラーあり| C["自動修正・警告リスト出力"]
+    C --> D["軽微エラーの一括修正"]
+    D --> B
+    B -->|1次クリア| E{"2次点検<br>スタッフ目視チェック"}
+    E -->|要修正| F["修正内容の記録・レセコン修正"]
+    F --> E
+    E -->|2次クリア| G{"傷病名・処方等<br>医師確認 Module08"}
+    G -->|修正依頼| H["医師指示によるレセコン修正"]
+    H --> G
+    G -->|医師承認| I{"3次点検<br>管理者・BPO最終確認"}
+    I -->|要修正| J["最終修正・再出力"]
+    J --> I
+    I -->|最終承認| K["電子請求データ提出"]
+
+    style A fill:#7c3aed,color:#fff,stroke:#6d28d9
+    style B fill:#2563eb,color:#fff,stroke:#1d4ed8
+    style E fill:#2563eb,color:#fff,stroke:#1d4ed8
+    style G fill:#f59e0b,color:#fff,stroke:#d97706
+    style I fill:#dc2626,color:#fff,stroke:#b91c1c
+    style K fill:#059669,color:#fff,stroke:#047857
+</div>
+</div>
+
+<h4>7.3 1次点検（レセコン自動チェック）</h4>
+<p><strong>目的</strong>: システムが検知可能な機械的エラーを全件一括で排除する。</p>
+<table>
+<thead><tr><th>チェック機能</th><th>検知できるエラー例</th><th>限界</th></tr></thead>
+<tbody>
+<tr><td>マスタ照合</td><td>薬剤コード・診療行為コードの誤り</td><td>コードが正しくても内容が誤りの場合は検知不可</td></tr>
+<tr><td>算定回数チェック</td><td>月内回数制限超過</td><td>跨月の回数制限は月次単体では検知できない</td></tr>
+<tr><td>必須コメントチェック</td><td>コメントコード未入力</td><td>コメントの内容の適切性は判断不可</td></tr>
+<tr><td>保険情報チェック</td><td>法別番号の形式誤り</td><td>実際の資格有効性は確認不可</td></tr>
+<tr><td>金額計算チェック</td><td>点数・金額の計算誤り</td><td>点数自体が正しいかは判断不可</td></tr>
+</tbody>
+</table>
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPO実務の視点</div>
+1次点検でのエラー件数・エラー率を月次でKPIとして記録すること。エラー率が上昇した月は入力担当の教育強化のサインである。
+</div>
+
+<h4>7.4 2次点検（スタッフ目視チェック）</h4>
+<p><strong>目的</strong>: 機械では検知できない文脈的エラー・判断が必要なエラーを人の目で確認する。</p>
+<ol>
+<li><strong>高リスクレセプトの抽出</strong> &mdash; 高額レセプト・新規算定・前月返戻患者を優先リスト化</li>
+<li><strong>傷病名と診療行為の整合確認</strong> &mdash; 全件で病名と行為の対応を目視確認</li>
+<li><strong>コメント内容の確認</strong> &mdash; コメントが記載されているだけでなく、内容が適切か確認</li>
+<li><strong>縦覧点検</strong> &mdash; 算定回数制限のある項目について過去月分をさかのぼり確認</li>
+<li><strong>突合点検</strong> &mdash; 院外処方箋発行分について調剤レセプトとの照合</li>
+<li><strong>修正記録の作成</strong> &mdash; 修正した項目・理由・修正後内容を記録（監査対応・教育目的）</li>
+</ol>
+
+<h4>7.5 3次点検（管理者・BPO最終確認）</h4>
+<table>
+<thead><tr><th>確認項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>修正記録の確認</td><td>2次点検の修正内容が適切に反映されているか</td></tr>
+<tr><td>高額レセプト全件レビュー</td><td>15万点以上のレセプトをチーフが個別確認</td></tr>
+<tr><td>新規算定項目の確認</td><td>今月から新たに算定を開始した項目の要件確認</td></tr>
+<tr><td>症状詳記・特記事項の確認</td><td>添付書類の内容が十分か</td></tr>
+<tr><td>件数・金額の確認</td><td>前月比で大きく変動している場合は原因確認</td></tr>
+<tr><td>返戻・査定傾向との照合</td><td>前月に返戻・査定があった項目が修正されているか</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod07-tools">8. 点検ツール・支援システム</h3>
+
+<h4>8.1 審査支払機関提供ツール</h4>
+<table>
+<thead><tr><th>提供機関</th><th>ツール名</th><th>対象</th><th>主な機能</th></tr></thead>
+<tbody>
+<tr><td>社会保険診療報酬支払基金</td><td>レセプトチェックソフト</td><td>医科・歯科・調剤</td><td>算定ルール整合チェック、縦覧チェック</td></tr>
+<tr><td>国民健康保険団体連合会</td><td>国保レセプト電算処理システム</td><td>国保・後期高齢</td><td>同上（国保版）</td></tr>
+</tbody>
+</table>
+<blockquote><strong>重要</strong>: 審査支払機関が無償で提供するレセプトチェッカーをインストールし、提出前に必ずチェックを行うこと。審査機関と同等のロジックで事前確認できる。</blockquote>
+
+<h4>8.2 民間レセプトチェックシステム</h4>
+<table>
+<thead><tr><th>製品</th><th>特徴</th><th>費用感</th></tr></thead>
+<tbody>
+<tr><td><strong>レセプト電算処理チェックシステム</strong></td><td>基金提供の無償版。基本的なチェック</td><td>無償</td></tr>
+<tr><td><strong>メディアスグループ製品</strong></td><td>AI活用、査定予測機能。大規模病院向け</td><td>月額数十万〜</td></tr>
+<tr><td><strong>オルカネット（ORCA連携）</strong></td><td>ORCA使用施設との親和性が高い</td><td>別途見積</td></tr>
+<tr><td><strong>EMシステムズ RE-SCAN</strong></td><td>診療所向け。縦覧点検・突合点検に強い</td><td>月額数万〜</td></tr>
+</tbody>
+</table>
+
+<h4>8.3 2024年改定で変更されたチェックポイント</h4>
+<table>
+<thead><tr><th>変更項目</th><th>変更内容</th><th>点検への影響</th></tr></thead>
+<tbody>
+<tr><td>初診料・再診料</td><td>初診料291点→305点、再診料75点→76点</td><td>レセコンマスタ更新確認が必須</td></tr>
+<tr><td>医療DX推進体制整備加算</td><td>新設（初診時8点）</td><td>算定要件（マイナ保険証対応等）の確認</td></tr>
+<tr><td>外来・在宅ベースアップ評価料</td><td>新設（賃上げ対応）</td><td>届出施設のみ算定可。届出状況の確認</td></tr>
+<tr><td>生活習慣病管理料</td><td>生活習慣病管理料II新設（月1回）、旧管理料廃止</td><td>算定体制の切替確認</td></tr>
+<tr><td>リハビリテーション</td><td>一部点数改定、摂食嚥下支援加算拡充</td><td>対象疾患・点数の再確認</td></tr>
+<tr><td>訪問診療</td><td>在宅医療の一部算定要件変更</td><td>在宅専門クリニックは特に注意</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod07-bpo">9. BPO視点 &mdash; 受託時の点検体制設計</h3>
+
+<h4>9.1 受託前の現状把握（アセスメント）</h4>
+<table>
+<thead><tr><th>調査項目</th><th>確認内容</th><th>確認方法</th></tr></thead>
+<tbody>
+<tr><td>返戻・査定率</td><td>直近6ヶ月の返戻率・査定率</td><td>前月比較表の提示を依頼</td></tr>
+<tr><td>現行点検体制</td><td>誰が・何時間・どのように点検しているか</td><td>担当者へのヒアリング</td></tr>
+<tr><td>使用レセコン</td><td>機種・バージョン・自動チェック機能の有効化状況</td><td>システム確認</td></tr>
+<tr><td>主な傷病・診療科</td><td>どの診療科が中心か</td><td>レセプトサンプルの確認</td></tr>
+<tr><td>算定加算の状況</td><td>どの加算を届け出しているか</td><td>施設基準届出一覧の取得</td></tr>
+<tr><td>問題点の自覚</td><td>クライアント自身が感じている課題</td><td>院長・事務長へのヒアリング</td></tr>
+</tbody>
+</table>
+
+<h4>9.2 点検体制の設計</h4>
+<p><strong>小規模診療所（月200件以下）向け標準体制:</strong></p>
+<pre><code>BPO担当者1名
+ ├── 1次点検（システム）: 1時間
+ ├── 2次点検（目視）: 4-6時間
+ └── 医師確認後の修正・最終確認: 2時間
+合計: 約7-9時間/月</code></pre>
+
+<p><strong>中規模クリニック（月200-500件）向け標準体制:</strong></p>
+<pre><code>BPO担当者2名（点検担当1名 + チーフ1名）
+ ├── 1次点検（システム）: 1時間
+ ├── 2次点検（担当者）: 8-12時間
+ ├── 医師確認対応: 2-3時間
+ └── 3次点検（チーフ）: 3-4時間
+合計: 約14-20時間/月</code></pre>
+
+<h4>9.3 品質契約（SLA）の設定</h4>
+<table>
+<thead><tr><th>KPI</th><th>目標値</th><th>計測方法</th></tr></thead>
+<tbody>
+<tr><td>返戻率</td><td>&le; 1.0%（業界平均2-3%）</td><td>返戻件数 / 提出件数</td></tr>
+<tr><td>査定率</td><td>&le; 0.5%（点数ベース）</td><td>査定点数 / 請求点数</td></tr>
+<tr><td>点検完了タイミング</td><td>請求締切2日前までに完了</td><td>月次作業記録</td></tr>
+<tr><td>エラー発見率（内部）</td><td>&ge; 95%（1次+2次で検出）</td><td>返戻後の原因分析</td></tr>
+<tr><td>月次報告提出</td><td>翌月5日以内</td><td>報告書提出日</td></tr>
+</tbody>
+</table>
+
+<h4>9.4 月次報告フォーマット</h4>
+<pre><code>月次点検報告書（標準構成）
+
+1. 今月の概要
+   - 点検対象件数・点数
+   - エラー発見件数・種別分布
+   - 前月比較
+
+2. 主なエラー内容と修正結果
+   - エラー種別ごとの件数と修正対応
+
+3. 返戻・査定の状況（前月提出分）
+   - 返戻件数・返戻理由分析
+   - 再請求の対応状況
+
+4. 今月の注意点・改善提案
+   - 繰り返し発生するエラーのパターン
+   - 入力スタッフへのフィードバック内容
+
+5. 来月に向けた対応
+   - 改定・制度変更への対応状況
+   - 特記すべき患者の対応方針</code></pre>
+
+<h4>9.5 よくあるトラブルと対応</h4>
+<table>
+<thead><tr><th>トラブル</th><th>原因</th><th>対応策</th></tr></thead>
+<tbody>
+<tr><td>点検完了後に医師が大量修正を依頼</td><td>医師への確認フローが後半に集中</td><td>2次点検中に疑問点を早期リスト化し、医師確認を早める</td></tr>
+<tr><td>返戻率が突然上昇</td><td>改定後のルール変更への対応遅れ</td><td>改定施行後1ヶ月は点検工数を1.5倍に設定</td></tr>
+<tr><td>「なぜ返戻が来るのか」と指摘</td><td>査定と返戻の区別が説明できていない</td><td>SLA契約時に返戻ゼロは不可能であることを丁寧に説明</td></tr>
+<tr><td>点検工数が予算超過</td><td>初期見積もりが甘い</td><td>アセスメント時にエラー率を正確に把握。バッファ20%加算</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod07-selfcheck">10. チェックリスト（自己評価）</h3>
+
+<h4>知識チェック</h4>
+<ul class="checklist">
+<li>レセプト点検の目的と、点検を怠った場合の3種類のリスクを説明できる</li>
+<li>内容点検・縦覧点検・突合点検・資格点検の違いを具体例を挙げて説明できる</li>
+<li>縦覧点検が必要な算定制限の種類とそれぞれの確認期間を説明できる</li>
+<li>突合点検で確認すべき4項目を説明できる</li>
+<li>資格点検の手段としてオンライン資格確認の仕組みを説明できる</li>
+<li>代表的な返戻事例5件と査定事例5件を具体的に挙げ、発生理由を説明できる</li>
+<li>3段階点検フロー（1次・2次・3次）の目的と実施者を説明できる</li>
+</ul>
+
+<h4>実務チェック</h4>
+<ul class="checklist">
+<li>5.1〜5.5の点検チェックリストを使い、実際のレセプトを点検できる</li>
+<li>高リスクレセプトの抽出基準を適用できる</li>
+<li>レセプトチェッカー（基金提供）の基本操作を実行できる</li>
+<li>月次点検スケジュールを作成し、請求締切に間に合う計画を立てられる</li>
+</ul>
+
+<h4>BPO視点チェック</h4>
+<ul class="checklist">
+<li>受託前アセスメントで確認すべき6項目を説明できる</li>
+<li>クライアント規模に応じた点検体制（工数・担当者数）を設計できる</li>
+<li>SLAの主要KPI（返戻率・査定率・報告タイミング）を設定できる</li>
+<li>月次点検報告書の5つの構成要素を説明できる</li>
+<li>「なぜ返戻が来るのか」という質問に論理的に回答できる</li>
+</ul>
+
+<h3 id="mod07-exercises">11. 演習問題</h3>
+
+<h4>演習1: チェックリストを使った点検実践</h4>
+<p>以下のレセプトサンプル（架空）を読み、5.1〜5.5のチェックリストを参照しながら問題のある箇所を列挙せよ。</p>
+<pre><code>患者: 山田太郎（男性・45歳）
+保険: 協会けんぽ 法別番号02 記号001234 番号5678
+傷病名: 高血圧症（開始日: 2024年4月1日）
+
+診療行為:
+- 再診料 75点
+- 特定疾患療養管理料（診療所） 225点
+- 血圧測定（処置）
+- 血液一般検査 21点
+- 血液化学検査（7項目以上10項目以下）104点
+- 血液形態・機能検査 判断料 なし
+- アムロジピン錠5mg 1錠/日 × 30日
+- バイアスピリン100mg 1錠/日 × 30日</code></pre>
+<p><strong>ヒント</strong>: 判断料の算定、傷病名と投薬の整合性、再診料の点数を確認すること。</p>
+<details>
+<summary>解答を表示</summary>
+<div class="answer">
+<ol>
+<li><strong>再診料の点数誤り</strong>: 2024年改定後は76点（旧75点）。レセコンのマスタ更新漏れの可能性（V-13に該当）</li>
+<li><strong>判断料の算定漏れ</strong>: 血液検査を実施しているが検体検査判断料が「なし」。血液学的検査判断料（125点）が未算定（L-01に該当）</li>
+<li><strong>バイアスピリンの適応症不整合</strong>: バイアスピリン（アスピリン）の保険適応症は血栓・塞栓形成抑制等であり、「高血圧症」のみでは適応が不十分。「脳梗塞の既往」「虚血性心疾患」等の傷病名の追加が必要か医師に確認すべき（M-03、D-06に該当）</li>
+</ol>
+</div>
+</details>
+
+<h4>演習2: 縦覧点検の実施</h4>
+<p>患者Aの直近3ヶ月のレセプトが以下の通りであるとき、問題となる箇所を特定せよ。</p>
+<pre><code>1月分: 腰椎椎間板ヘルニア 傷病名開始 → 運動器リハビリテーション料I × 12回
+2月分: 腰椎椎間板ヘルニア 継続 → 運動器リハビリテーション料I × 20回
+3月分: 腰椎椎間板ヘルニア 継続 → 運動器リハビリテーション料I × 20回</code></pre>
+<p><strong>ヒント</strong>: 運動器リハビリの月内算定回数制限（月13単位）と発症日からの算定上限日数（150日）を確認すること。</p>
+<details>
+<summary>解答を表示</summary>
+<div class="answer">
+<ol>
+<li><strong>月内算定回数超過</strong>: 運動器リハビリテーション料は原則月13単位（1単位=20分）が上限。2月20回・3月20回はいずれも超過している（A-02に該当）</li>
+<li><strong>回数の急増に注意</strong>: 1月12回→2月以降20回への急増は査定リスク。医学的に必要性を裏付ける症状詳記や医師コメントが必要</li>
+</ol>
+</div>
+</details>
+
+<h4>演習3: 返戻理由の特定と対策立案</h4>
+<p>以下の返戻通知を分析し、修正内容と再発防止策を述べよ。</p>
+<pre><code>返戻通知（一部抜粋）:
+- 患者: 鈴木花子（女性・72歳）後期高齢者
+- 返戻事由コード: 02「傷病名不備」
+- 対象項目: 骨粗鬆症薬（アレンドロン酸ナトリウム錠）
+- コメント:「算定した診療行為に対応する傷病名が確認できない」</code></pre>
+<details>
+<summary>解答を表示</summary>
+<div class="answer">
+<p><strong>返戻理由</strong>: アレンドロン酸ナトリウム（骨粗鬆症治療薬）が処方されているが、レセプトの傷病名欄に「骨粗鬆症」の記載がない（V-02に該当）。</p>
+<p><strong>修正内容</strong>: 医師に確認の上、「骨粗鬆症」の傷病名を追加し、レセプトを修正して再請求。</p>
+<p><strong>再発防止策</strong>: (1) 投薬と傷病名の整合チェックをチェックリストに明記（M-03、D-06の確認を必須化）、(2) レセコンの薬剤-病名マッチングチェック機能を有効化、(3) 2次点検で処方薬ごとの対応病名確認を標準手順に追加。</p>
+</div>
+</details>
+
+<h4>演習4: BPO受託の見積もりとSLA設計</h4>
+<p>以下の条件のクリニックからBPO受託の相談を受けた。点検体制と主要KPIを含むSLA案を作成せよ。</p>
+<pre><code>クリニック条件:
+- 診療科: 内科・消化器内科
+- 月次レセプト件数: 約350件
+- 現状の返戻率: 約3.5%（業界平均の約2倍）
+- 現行点検体制: 事務スタッフ1名が2日かけて実施（非専門）
+- 使用レセコン: ORCA（v5.3）
+- 主な診療: 生活習慣病管理、内視鏡検査、在宅医療あり</code></pre>
+
+<h4>12. Q&amp;A</h4>
+<p>（学習中の質疑応答をここに蓄積する）</p>
+
+<h4>参考情報</h4>
+<ul>
+<li>厚生労働省「診療報酬の算定方法」（告示）</li>
+<li>厚生労働省「診療報酬請求書等の記載要領」（通知）</li>
+<li>社会保険診療報酬支払基金「レセプト電算処理システム 点検ガイド」</li>
+<li>厚生労働省「令和6年度診療報酬改定について」</li>
+<li>社会保険研究所「医科点数表の解釈」（通称:青本）</li>
+</ul>
+</section>
+
+<hr class="module-divider">
+
+<!-- ========== MODULE 08: PHYSICIAN APPROVAL ========== -->
+<section id="mod08" class="module-card">
+<h2>モジュール08: 医師確認・承認</h2>
+
+<div class="story-callout">
+<span class="story-callout-icon">&#128105;&#8205;&#9877;&#65039;</span>
+<div class="story-callout-title">なぜ「点検後」に医師確認が必要なのか</div>
+<p>Module 07で点検技術を習得したが、BPO事業者が「おかしい」と気づいても独断で修正することは<strong>絶対にできない</strong>。レセプトの診断・治療内容は<strong>医師の医学的判断</strong>に基づくものであり、最終的な答えを出せるのは診察した医師だけである。</p>
+<p>BPO事業者の点検は、医師が見落としやすい事務的・制度的なエラーを発見し、「これを医師に確認してほしい」という<strong>橋渡し役</strong>を担うプロセスである。この工程を効率よく運用できるかどうかが、BPOサービスの価値の核心を決める。</p>
+</div>
+
+<h3 id="mod08-goals">1. このモジュールで学ぶこと</h3>
+<ol>
+<li><strong>医師確認が必要なケースを即座に判断できる</strong> &mdash; 疑義・病名・コメント等について、医師確認が必要かBPO側で解決できるかを区別し、適切に仕分けられる</li>
+<li><strong>疑義照会リストを体系的に作成できる</strong> &mdash; 医師への質問を項目別・優先度別に整理し、一度の確認で漏れなく回答を得られる照会リストを作成できる</li>
+<li><strong>症状詳記の必要条件を判断し、依頼文を作成できる</strong> &mdash; リスクの高いレセプトに対し、適切な症状詳記の添付を医師に依頼できる</li>
+<li><strong>承認プロセスを管理できる</strong> &mdash; 医師の回答を記録・反映し、承認後のルールに従って適切にレセプトを最終化できる</li>
+<li><strong>クライアント医師との協働関係を設計できる</strong> &mdash; 医師の負担を最小化する照会フォーマット・タイミング・コミュニケーションルールを設計できる</li>
+</ol>
+
+<h3 id="mod08-story">2. 業務フロー上の位置づけ</h3>
+<div class="flow-chart">
+<div class="flow-row">
+<div class="flow-box">レセプト作成</div><span class="flow-arrow">&rarr;</span>
+<div class="flow-box">BPO点検</div><span class="flow-arrow">&rarr;</span>
+<div class="flow-box">疑義項目を抽出</div><span class="flow-arrow">&rarr;</span>
+<div class="flow-box green">医師へ照会</div>
+</div>
+<div class="flow-row" style="margin-top:8px">
+<div class="flow-box">審査機関へ請求</div><span class="flow-arrow">&larr;</span>
+<div class="flow-box green">承認・最終化</div><span class="flow-arrow">&larr;</span>
+<div class="flow-box">回答を反映</div><span class="flow-arrow">&larr;</span>
+<div class="flow-box green">医師が確認・回答</div>
+</div>
+</div>
+
+<h3 id="mod08-overview">3. 医師確認・承認の全体像</h3>
+
+<h4>3.1 法的根拠</h4>
+<p>医師による診療報酬請求への関与は、<strong>保険医療機関及び保険医療養担当規則</strong>（療担規則）によって義務づけられている。</p>
+<blockquote>
+<strong>療担規則 第8条</strong>: 保険医は、患者の診療を行った場合には、遅滞なく、診療録に当該診療に関し必要な事項を記載しなければならない。<br><br>
+<strong>療担規則 第22条</strong>: 保険医療機関は、療養の給付に関する費用の請求を行わなければならない。
+</blockquote>
+<p>つまり、<strong>保険医が診療内容を正確に記録する義務を負い、その記録に基づいて保険医療機関として請求が行われる</strong>。BPO事業者はあくまでも代行・補助であり、内容の正確性についての最終責任は常に医師・医療機関に帰属する。</p>
+
+<h4>3.2 医師とBPO事業者の権限範囲</h4>
+<table>
+<thead><tr><th>区分</th><th>実施主体</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>医師が行うこと</strong></td><td>保険医</td><td>診断・治療行為の実施、病名の確定・転帰の決定、症状詳記の記載、最終承認</td></tr>
+<tr><td><strong>BPO事業者が行うこと</strong></td><td>BPO担当者</td><td>診療録とレセプトの突合・整合性確認、算定ルールの照合、疑義事項の整理・照会、回答のレセプトへの反映</td></tr>
+<tr><td><strong>BPO事業者が行ってはならないこと</strong></td><td>&mdash;</td><td>病名の独断追加・削除、診療内容の無断修正、症状詳記の代筆（捏造）、承認を省略した請求</td></tr>
+</tbody>
+</table>
+<div class="narrative-question">BPO担当者が「明らかに不要な算定」と判断した場合でも、医師の確認なしに項目を削除してはならない。疑義として医師に提示し、判断を仰ぐことが正しい手順である。</div>
+
+<h3 id="mod08-cases">4. 確認が必要なケース</h3>
+
+<h4>4.1 病名の追加・修正・転帰</h4>
+<table>
+<thead><tr><th>ケース</th><th>具体例</th><th>確認すべき事項</th></tr></thead>
+<tbody>
+<tr><td>算定に対応する傷病名がない</td><td>高血圧の薬が処方されているが傷病名に高血圧の記載なし</td><td>高血圧を病名として追加してよいか</td></tr>
+<tr><td>病名の表記が不正確</td><td>「感冒」と記載、投与薬から「急性上気道炎」が正確</td><td>正式病名への修正可否</td></tr>
+<tr><td>転帰の記載漏れ</td><td>通院が終了しているが転帰欄に記載がない</td><td>転帰の確定と記入</td></tr>
+<tr><td>傷病名の重複・矛盾</td><td>「高血圧症」と「本態性高血圧」が両方存在</td><td>どちらに統一するか</td></tr>
+<tr><td>過去の傷病名が放置</td><td>数年前に治癒したはずの病名が転帰なしで残存</td><td>転帰処理の実施</td></tr>
+</tbody>
+</table>
+
+<h4>転帰コードの種類</h4>
+<table>
+<thead><tr><th>コード</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>治癒（完全に治った）</td></tr>
+<tr><td>2</td><td>死亡</td></tr>
+<tr><td>3</td><td>中止（治癒せずに通院終了、転院等）</td></tr>
+<tr><td>（空白）</td><td>継続（当月も引き続き治療中）</td></tr>
+</tbody>
+</table>
+
+<h4>4.2 疑義のある算定（過剰算定・算定漏れ）</h4>
+<p><strong>過剰算定の疑い:</strong></p>
+<table>
+<thead><tr><th>ケース</th><th>確認事項</th></tr></thead>
+<tbody>
+<tr><td>同月に同種の処置が算定条件を超えて算定</td><td>診療録を確認し、医師に実施の有無・回数を確認</td></tr>
+<tr><td>病名のない処置・検査が算定</td><td>対応病名を追加するか、算定を取り消すか</td></tr>
+<tr><td>入院・外来の区分違いによる算定</td><td>算定根拠の確認</td></tr>
+<tr><td>加算要件を満たさない加算が算定</td><td>要件充足の確認（施設基準届出、文書交付等）</td></tr>
+</tbody>
+</table>
+<p><strong>算定漏れの疑い:</strong></p>
+<table>
+<thead><tr><th>ケース</th><th>確認事項</th></tr></thead>
+<tbody>
+<tr><td>診療録に実施記録があるが算定されていない</td><td>算定追加の可否を確認</td></tr>
+<tr><td>当然行うべき管理料が未算定</td><td>算定漏れか意図的な非算定かを確認</td></tr>
+<tr><td>在宅医療で関連加算が漏れている</td><td>実施記録と照合し、追加算定の可否を確認</td></tr>
+</tbody>
+</table>
+
+<h4>4.3 コメント記載の要否判断</h4>
+<table>
+<thead><tr><th>算定項目</th><th>必要なコメント</th></tr></thead>
+<tbody>
+<tr><td>時間外緊急院内検査加算</td><td>検査実施の時刻</td></tr>
+<tr><td>夜間・休日等加算</td><td>診察開始時刻</td></tr>
+<tr><td>長期投薬（28日超）</td><td>長期投薬が必要な理由</td></tr>
+<tr><td>特定薬剤治療管理料</td><td>薬剤名・測定値</td></tr>
+<tr><td>在宅自己注射指導管理料</td><td>指導管理の対象薬剤名</td></tr>
+</tbody>
+</table>
+
+<h4>4.4 症状詳記が必要な高額レセプト</h4>
+<table>
+<thead><tr><th>ケース</th><th>目安</th></tr></thead>
+<tbody>
+<tr><td>入院レセプトで高額</td><td>1件当たり100万円超が一般的な基準</td></tr>
+<tr><td>長期に渡る入院</td><td>90日を超える入院（特に精神科・療養病棟）</td></tr>
+<tr><td>高価薬の使用</td><td>分子標的薬・抗がん剤等で薬剤費が高額</td></tr>
+<tr><td>多剤投与</td><td>1患者への投薬種類が多い場合</td></tr>
+<tr><td>過去に査定を受けた診療行為の再算定</td><td>前回査定の経緯の説明が必要</td></tr>
+</tbody>
+</table>
+<div class="bpo-callout">
+<div class="bpo-callout-title">BPO事業者の役割</div>
+BPO担当者は症状詳記の「必要性の判断」と「医師への依頼」を行う。症状詳記の文章そのものは医師が記載する（代筆は不可）。ただし、記載すべき観点や構成の提案は行ってよい。
+</div>
+
+<h3 id="mod08-inquiry">5. 疑義照会の実務フロー</h3>
+
+<h4>5.1 照会リストの基本構成</h4>
+<table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>患者ID / 患者名</td><td>対象患者を特定する情報</td></tr>
+<tr><td>診療年月</td><td>対象月</td></tr>
+<tr><td>照会カテゴリ</td><td>病名 / 算定 / コメント / 症状詳記 / その他</td></tr>
+<tr><td>疑義内容</td><td>具体的に何が疑問なのかを記述</td></tr>
+<tr><td>確認選択肢</td><td>「A案/B案」の形で選択肢を提示</td></tr>
+<tr><td>優先度</td><td>高（請求額への影響大）/ 中 / 低</td></tr>
+<tr><td>回答欄</td><td>医師が記入する欄（空白で渡す）</td></tr>
+</tbody>
+</table>
+<blockquote><strong>作成のポイント</strong>: 医師が選択式で回答できるよう「&#9633; 病名追加する / &#9633; 算定削除する」など選択肢を用意する。専門用語より日常業務の言葉で記載し、医師が短時間で把握できるようにする。</blockquote>
+
+<h4>5.2 照会タイミングの設計（まとめ照会）</h4>
+<table>
+<thead><tr><th>タイミング</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>翌月5日前後</td><td>点検完了後、照会リストをまとめて送付</td></tr>
+<tr><td>翌月7日〜8日</td><td>回答期限の設定（翌月10日の提出期限から逆算）</td></tr>
+<tr><td>回答期限前日</td><td>未回答分のリマインダー連絡</td></tr>
+<tr><td>翌月10日</td><td>レセプト提出</td></tr>
+</tbody>
+</table>
+
+<h4>5.3 照会の手段</h4>
+<table>
+<thead><tr><th>手段</th><th>特徴</th><th>適した状況</th></tr></thead>
+<tbody>
+<tr><td>書面（照会リスト）</td><td>記録が残る、非同期で対応可能</td><td>標準的なケース</td></tr>
+<tr><td>電子メール＋添付</td><td>記録が残る、迅速</td><td>テレワーク環境下・遠方の医師</td></tr>
+<tr><td>対面（診療時間外の打合せ）</td><td>即時回答、ニュアンスの共有が可能</td><td>複雑な案件・初回オンボーディング</td></tr>
+<tr><td>電話</td><td>迅速だが記録が残りにくい</td><td>緊急時のみ（後でメール等で確認）</td></tr>
+</tbody>
+</table>
+
+<h4>5.4 回答の記録と反映</h4>
+<ol>
+<li><strong>回答内容の記録</strong>: 照会リストに医師の回答を正確に転記。日付・回答者名を必ず記録</li>
+<li><strong>レセプトへの反映</strong>: 回答に基づきレセプトを修正（病名追加・算定取消・コメント追加等）</li>
+<li><strong>反映後の再確認</strong>: 修正後のレセプトを再点検し、意図通りに反映されているか確認</li>
+<li><strong>未回答事項の管理</strong>: 期限までに回答が得られなかった項目は、対応方針を医師に最終確認する</li>
+</ol>
+
+<h4>5.5 疑義照会フローチャート</h4>
+<div class="mermaid-container">
+<div class="mermaid">
+flowchart TD
+    A["レセプト点検完了"] --> B{"疑義事項あり？"}
+    B -->|なし| Z["承認依頼へ進む"]
+    B -->|あり| C["疑義照会リスト作成"]
+    C --> D["医師へ照会リストを送付"]
+    D --> E{"期限内に回答あり？"}
+    E -->|あり| F["回答をレセプトに反映"]
+    F --> G{"再点検で問題なし？"}
+    G -->|なし| C
+    G -->|あり| Z
+    E -->|なし| I["リマインダー連絡"]
+    I --> J{"回答あり？"}
+    J -->|あり| F
+    J -->|なし| K["医師と緊急対応を協議"]
+    K --> F
+
+    style A fill:#2563eb,color:#fff,stroke:#1d4ed8
+    style B fill:#f59e0b,color:#fff,stroke:#d97706
+    style Z fill:#059669,color:#fff,stroke:#047857
+    style C fill:#2563eb,color:#fff,stroke:#1d4ed8
+    style K fill:#dc2626,color:#fff,stroke:#b91c1c
+</div>
+</div>
+
+<h3 id="mod08-detail">6. 症状詳記</h3>
+
+<h4>6.1 審査側が見るポイント</h4>
+<table>
+<thead><tr><th>審査側が見るポイント</th><th>医師が記載すべき内容</th></tr></thead>
+<tbody>
+<tr><td><strong>診療の必要性</strong></td><td>なぜこの診療が必要だったのか（他の選択肢ではなくこの治療を選んだ理由）</td></tr>
+<tr><td><strong>重症度・緊急性</strong></td><td>患者の症状がどれほど深刻だったか（バイタル・検査値・臨床症状）</td></tr>
+<tr><td><strong>治療効果・経過</strong></td><td>治療によって症状がどう改善したか</td></tr>
+<tr><td><strong>長期化の理由</strong></td><td>入院・投薬が長期に及んだ医学的な根拠</td></tr>
+<tr><td><strong>薬剤選択の根拠</strong></td><td>高価薬を使用した場合、その薬剤でなければならない医学的理由</td></tr>
+</tbody>
+</table>
+
+<h4>6.2 医師への依頼テンプレート</h4>
+<div class="phase-story">
+<h4>【症状詳記作成依頼】</h4>
+<p>患者名: ○○ ○○ 様（患者ID: XXXXX）<br>
+診療年月: 20XX年X月分</p>
+<p>上記患者のレセプトについて、審査機関への症状詳記の添付をお願いいたします。</p>
+<p><strong>添付が必要な理由:</strong><br>
+今月のレセプトが XXX,XXX 点（約 XX 万円）と高額となり、審査において疑義が生じる可能性があるため。</p>
+<p><strong>記載いただきたいポイント:</strong></p>
+<ul>
+<li>入院/治療が必要と判断した時点での主症状・重症度（バイタル・検査値を含む）</li>
+<li>当該治療を選択した医学的根拠</li>
+<li>治療経過と現状</li>
+<li>今後の見通し（継続加療が必要な場合はその根拠）</li>
+</ul>
+<p><strong>提出期限:</strong> 20XX年X月X日</p>
+</div>
+
+<h3 id="mod08-approval">7. 承認プロセス</h3>
+
+<h4>7.1 最終承認のタイミング</h4>
+<table>
+<thead><tr><th>タイミング</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>翌月9日前後</td><td>レセプト最終版を医師に提出し、内容確認・承認を依頼</td></tr>
+<tr><td>翌月10日（提出期限当日）</td><td>承認後、審査機関への提出</td></tr>
+</tbody>
+</table>
+<div class="narrative-question">原則: 医師の最終承認なしに審査機関へ提出することは厳禁。電子レセプトでは医師の電子署名が記録されることが一般的。</div>
+
+<h4>7.2 承認記録の管理</h4>
+<table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>対象医療機関名</td><td>クライアントの医療機関</td></tr>
+<tr><td>対象診療年月</td><td>承認を受けた診療月</td></tr>
+<tr><td>承認日時</td><td>医師が承認した日時</td></tr>
+<tr><td>承認方法</td><td>書面押印 / 電子署名 / システム承認操作等</td></tr>
+<tr><td>承認者名</td><td>承認した医師の氏名</td></tr>
+<tr><td>承認対象件数</td><td>その月の承認レセプト件数</td></tr>
+</tbody>
+</table>
+<p>記録の保管期間は<strong>5年以上</strong>が望ましい（療担規則で診療録は3年保存義務があるが、紛争対応・監査対応の観点から5年以上を推奨）。</p>
+
+<h4>7.3 承認後の修正ルール</h4>
+<p>原則として、医師の承認後にBPO事業者がレセプト内容を変更することは<strong>禁止</strong>。</p>
+<p><strong>承認後に変更が必要になった場合の手順:</strong></p>
+<ol>
+<li>変更の必要性と内容を明確にし、医師に説明する</li>
+<li>医師の確認・再承認を得る</li>
+<li>変更内容と再承認の記録を残す</li>
+<li>変更後のレセプトを正式版として管理する</li>
+</ol>
+<blockquote><strong>例外</strong>: 明らかな入力ミス（患者氏名の誤字等の事務的エラー）は、医師への報告の上、軽微なものは確認のみで修正が認められる場合もある。ただし、算定内容・病名・点数に関わる変更は必ず再承認を要する。</blockquote>
+
+<h3 id="mod08-bpo">8. BPO視点 &mdash; 医師との協働設計</h3>
+
+<h4>8.1 契約・業務開始時に取り決めるべき事項</h4>
+<table>
+<thead><tr><th>取り決め事項</th><th>具体例</th></tr></thead>
+<tbody>
+<tr><td>照会の手段と窓口</td><td>「Gメールで疑義照会リストを送付→医師が直接返信」</td></tr>
+<tr><td>照会の頻度・タイミング</td><td>「毎月5日前後に一括送付、8日までに回答依頼」</td></tr>
+<tr><td>回答のフォーマット</td><td>「選択肢に○を付けて返信」</td></tr>
+<tr><td>緊急時の連絡方法</td><td>「提出期限当日の緊急時は電話で直接確認」</td></tr>
+<tr><td>症状詳記の依頼期限</td><td>「毎月7日までに提出」</td></tr>
+<tr><td>最終承認の方法</td><td>「システム上の承認ボタン」または「紙の承認書に押印」</td></tr>
+<tr><td>複数医師の場合の分担</td><td>「各担当患者の疑義は担当医師へ、全体は院長が最終承認」</td></tr>
+</tbody>
+</table>
+
+<h4>8.2 照会の効率化</h4>
+<table>
+<thead><tr><th>手法</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>まとめ照会</strong></td><td>月1回、すべての疑義を一括で照会。都度の連絡を排除</td></tr>
+<tr><td><strong>選択式フォーマット</strong></td><td>「&#9633; 病名追加する / &#9633; 削除する」のように○&#215;をつけるだけの形式</td></tr>
+<tr><td><strong>優先度の明示</strong></td><td>「高優先度3件、低優先度8件」と明示し、対応順序を判断しやすくする</td></tr>
+<tr><td><strong>前月との差分表示</strong></td><td>毎月同じ患者が登場する場合は「前月と変更なし」と明記</td></tr>
+<tr><td><strong>患者情報の集約</strong></td><td>患者ID・氏名・疑義内容を1行にまとめ、スクロールなしで概要把握</td></tr>
+</tbody>
+</table>
+
+<h4>8.3 医師の負担を最小化する工夫</h4>
+<table>
+<thead><tr><th>工夫</th><th>具体的な実装</th></tr></thead>
+<tbody>
+<tr><td><strong>背景情報の提示</strong></td><td>疑義が生じた理由（算定ルール上の問題点）を簡潔に添付</td></tr>
+<tr><td><strong>推奨案の提示</strong></td><td>「BPO担当者の判断では病名追加が適切と思われます」と案を添える（最終判断は医師）</td></tr>
+<tr><td><strong>Q&amp;A形式の整理</strong></td><td>繰り返し発生するパターンをQ&amp;A化し、定型処理で対応可のルールを事前合意</td></tr>
+<tr><td><strong>月次レポートの提供</strong></td><td>疑義件数・修正内容サマリーを医師にフィードバックし、経営改善につなげる</td></tr>
+</tbody>
+</table>
+
+<h3 id="mod08-check">9. チェックリスト</h3>
+<ul class="checklist">
+<li>レセプト点検後に医師確認が必要な理由を、療担規則の根拠とともに説明できるか？</li>
+<li>BPO事業者が独断でレセプト内容を変更してはならない理由を説明できるか？</li>
+<li>病名の転帰コード（1/2/3/空白）の意味をすべて答えられるか？</li>
+<li>算定漏れと過剰算定の違いを具体例で説明できるか？</li>
+<li>症状詳記が必要になる条件を3つ以上挙げられるか？</li>
+<li>症状詳記に記載すべき5つの観点を説明できるか？</li>
+<li>疑義照会リストに含めるべき項目を列挙できるか？</li>
+<li>「まとめ照会」が医師・BPO双方にとってなぜ有効かを説明できるか？</li>
+<li>承認後にレセプトを修正する場合の手順を説明できるか？</li>
+<li>承認記録として保管すべき情報を5項目以上挙げられるか？</li>
+<li>業務開始時に医師と取り決めるべきルールを3つ以上挙げられるか？</li>
+</ul>
+
+<h3 id="mod08-exercises">10. 演習問題</h3>
+
+<h4>演習1: 疑義の分類と対応方針の判断</h4>
+<p>以下の点検結果について、「BPO側で処理可能」か「医師確認が必要」かを判断し、医師確認が必要な場合は照会文を作成せよ。</p>
+<table>
+<thead><tr><th>#</th><th>点検で発見した内容</th></tr></thead>
+<tbody>
+<tr><td>(1)</td><td>患者A（50歳・高血圧）：アムロジピン5mgが処方されているが、傷病名に「高血圧症」の記載なし</td></tr>
+<tr><td>(2)</td><td>患者B（68歳）：2025年3月に「急性胃炎」の病名が付いたが、転帰が空白のまま。2026年2月現在、胃炎の治療は行われていない</td></tr>
+<tr><td>(3)</td><td>患者C（45歳）：夜間急患で「時間外緊急院内検査加算」が算定されているが、レセプトコメント欄に検査実施時刻の記載がない</td></tr>
+<tr><td>(4)</td><td>患者D（72歳・糖尿病・高血圧・脂質異常症）：今月の処方が10種類の内服薬。過去3か月も同様</td></tr>
+</tbody>
+</table>
+<details>
+<summary>解答を表示</summary>
+<div class="answer">
+<table>
+<thead><tr><th>#</th><th>分類</th><th>対応内容</th></tr></thead>
+<tbody>
+<tr><td>(1)</td><td><strong>医師確認が必要</strong></td><td>「患者Aについて、アムロジピン5mgが処方されておりますが、傷病名に高血圧症の記載がございません。&#9633; 高血圧症を追加する / &#9633; 別の傷病名（具体的に: ）/ &#9633; 処方を削除する」</td></tr>
+<tr><td>(2)</td><td><strong>医師確認が必要</strong></td><td>「患者Bについて、2025年3月付の『急性胃炎』の転帰が未処理です。&#9633; 治癒（転帰1） / &#9633; 中止（転帰3） / &#9633; 継続（引き続き治療中）」</td></tr>
+<tr><td>(3)</td><td><strong>BPO側で処理可能</strong>（診療録に時刻あれば）</td><td>診療録から検査実施時刻を確認しコメント欄に記載。診療録に記録がない場合は医師に確認</td></tr>
+<tr><td>(4)</td><td><strong>医師確認が必要</strong>（症状詳記検討）</td><td>多剤投与（10種類）が3か月継続。審査機関で疑義が生じる可能性あり。症状詳記の添付をご検討ください</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+
+<h4>演習2: 疑義照会リストの作成</h4>
+<p>以下の情報をもとに、医師へ送付する疑義照会リストを作成せよ。</p>
+<p><strong>状況</strong>: 2026年2月分レセプト、クライアント: さくら在宅クリニック</p>
+<ul>
+<li><strong>患者X（80歳・男性・ID:12345）</strong>: 訪問診療を週2回実施しているが、訪問看護の記録があるにもかかわらず訪問看護指示料が算定されていない。算定漏れの可能性あり。</li>
+<li><strong>患者Y（65歳・女性・ID:23456）</strong>: 傷病名に「2型糖尿病」があるが、2月の受診時に「近くの内科に転医します」との記録がある。転帰の処理が必要。</li>
+</ul>
+<details>
+<summary>解答を表示</summary>
+<div class="answer">
+<p><strong>【疑義照会リスト】</strong><br>
+送付先: 院長 ○○先生<br>
+送付日: 2026年3月5日 / 回答期限: 2026年3月8日<br>
+送付者: BPO担当 ○○</p>
+<table>
+<thead><tr><th>#</th><th>患者ID</th><th>患者名</th><th>カテゴリ</th><th>疑義内容</th><th>確認選択肢</th><th>優先度</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>12345</td><td>X様（80歳・男）</td><td>算定漏れ</td><td>訪問看護の記録がありますが訪問看護指示料が未算定</td><td>&#9633; 算定追加 / &#9633; 今月は指示書未交付のため不要</td><td><strong>高</strong></td></tr>
+<tr><td>2</td><td>23456</td><td>Y様（65歳・女）</td><td>病名転帰</td><td>「近くの内科へ転医」の記録あり。「2型糖尿病」の転帰処理を確認</td><td>&#9633; 中止（転帰3） / &#9633; 継続 / &#9633; その他</td><td><strong>中</strong></td></tr>
+</tbody>
+</table>
+</div>
+</details>
+
+<h4>演習3: 症状詳記が必要かの判断</h4>
+<p>以下のレセプト情報から、症状詳記の添付が必要かどうかを判断し、必要な場合は依頼メールの骨子を示せ。</p>
+<pre><code>患者Z: 58歳・男性
+傷病名: 肺がん（非小細胞肺がん、IIIb期）
+入院期間: 2026年1月20日〜2月28日（40日間）
+主な治療: 化学放射線療法（ニボルマブ + カルボプラチン + パクリタキセル + 放射線療法）
+今月の請求点数: 820,000点（約820万円）
+過去の査定歴: なし</code></pre>
+<details>
+<summary>解答を表示</summary>
+<div class="answer">
+<p><strong>判断: 症状詳記の添付が必要</strong></p>
+<p><strong>理由</strong>: (1) 請求点数820,000点＝約820万円と100万円を大幅に超える高額レセプト、(2) 高価な分子標的薬（ニボルマブ）使用、(3) 入院期間40日（長期入院に注意）</p>
+<p><strong>依頼メール骨子:</strong></p>
+<ul>
+<li>件名: 【症状詳記依頼】患者Z様 2026年2月分</li>
+<li>理由: 820,000点の高額レセプト、高価薬剤（ニボルマブ）使用のため審査で医学的必要性の確認が求められる可能性</li>
+<li>記載ポイント: 入院時の主症状・重症度、化学放射線療法を選択した根拠（外科的切除不能の説明）、ニボルマブ使用の根拠（PD-L1発現状況等）、治療経過と現状</li>
+<li>提出期限: 2026年3月8日</li>
+</ul>
+</div>
+</details>
+
+<h4>11. Q&amp;A</h4>
+<p>（学習中の質疑応答をここに蓄積する）</p>
+
+<h4>参考情報</h4>
+<ul>
+<li>厚生労働省「保険医療機関及び保険医療養担当規則」（昭和32年厚生省令第15号）</li>
+<li>厚生労働省「診療報酬請求書等の記載要領等について」（各年度通知）</li>
+<li>社会保険診療報酬支払基金「診療報酬明細書の摘要欄への記載事項等一覧」</li>
+<li>厚生労働省「症状詳記の記載方法について」（各審査機関への通知）</li>
+<li>国民健康保険中央会「レセプト審査の手引き」</li>
+</ul>
+</section>
+
+</main>
+<footer class="site-footer">
+<p>p012 レセプトBPOサービス &mdash; レセプト業務マスタートレーニング Phase 3</p>
+<p>最終更新日: 2026-03-09</p>
+</footer>
+<script>
+function toggleSidebar(){
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.querySelector('.sidebar-overlay').classList.toggle('open');
+}
+function toggleSubNav(btn){
+  var subNav=btn.parentElement.nextElementSibling;
+  if(subNav){subNav.classList.toggle('open');btn.classList.toggle('open');}
+}
+document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(){
+    if(window.innerWidth<=900){
+      document.querySelector('.sidebar').classList.remove('open');
+      document.querySelector('.sidebar-overlay').classList.remove('open');
+    }
+  });
+});
+</script>
+</body>
+</html>
