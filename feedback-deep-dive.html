@@ -255,7 +255,7 @@ ul li, ol li { margin-bottom: 3px; }
   margin: 12px 0 20px;
 }
 
-/* ===== Scenario Highlight (for Scenario E) ===== */
+/* ===== Scenario Highlight (for recommended model) ===== */
 .scenario-highlight {
   background: linear-gradient(135deg, #ecfdf5, #d1fae5);
   border: 2px solid #10b981;
@@ -276,6 +276,15 @@ table tr.row-recommended td {
 }
 table tr.row-recommended:hover td {
   background: #bbf7d0 !important;
+}
+
+/* ===== Negative row highlight ===== */
+table tr.row-negative td {
+  background: #fef2f2 !important;
+  color: #991b1b;
+}
+table tr.row-negative:hover td {
+  background: #fee2e2 !important;
 }
 
 /* ===== Triple Layer Structure ===== */
@@ -400,6 +409,8 @@ table tr.row-recommended:hover td {
 .kpi-card.kpi-blue .kpi-value { color: #1d4ed8; }
 .kpi-card.kpi-amber { border-color: #f59e0b; }
 .kpi-card.kpi-amber .kpi-value { color: #b45309; }
+.kpi-card.kpi-red { border-color: #ef4444; }
+.kpi-card.kpi-red .kpi-value { color: #dc2626; }
 
 /* ===== Answer Box (final section) ===== */
 .answer-box {
@@ -431,6 +442,49 @@ table tr.row-recommended:hover td {
   color: #047857;
   border: 1px solid #a7f3d0;
 }
+
+/* ===== Before / After Compare Cards ===== */
+.compare-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+.compare-card {
+  border-radius: 10px;
+  padding: 20px 22px;
+  font-size: 0.84rem;
+}
+.compare-card h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 0.92rem;
+}
+.compare-card ul {
+  padding-left: 18px;
+  margin-bottom: 0;
+}
+.compare-card-before {
+  background: #fef2f2;
+  border: 2px solid #fca5a5;
+}
+.compare-card-before h4 { color: #991b1b; }
+.compare-card-after {
+  background: #ecfdf5;
+  border: 2px solid #6ee7b7;
+}
+.compare-card-after h4 { color: #047857; }
+.compare-card .card-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.compare-card-before .card-tag { background: #ef4444; }
+.compare-card-after .card-tag { background: #10b981; }
 
 /* ===== Source table ===== */
 .source-table td:first-child {
@@ -467,6 +521,7 @@ table tr.row-recommended:hover td {
   .phase-steps { flex-direction: column; }
   .kpi-grid { grid-template-columns: 1fr; }
   .triple-layer { margin: 16px 0; }
+  .compare-cards { grid-template-columns: 1fr; }
 }
 
 /* ===== Print ===== */
@@ -492,6 +547,9 @@ table tr.row-recommended:hover td {
   .kpi-grid { page-break-inside: avoid; }
   .kpi-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   table tr.row-recommended td { background: #d1fae5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  table tr.row-negative td { background: #fef2f2 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .compare-cards { page-break-inside: avoid; }
+  .compare-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 </style>
 </head>
@@ -519,10 +577,10 @@ table tr.row-recommended:hover td {
       <h3>このレポートの目的</h3>
       <p style="font-size:0.82rem; margin-bottom:8px;">
         本レポートは、山科さんからのフィードバック<strong>「要するに我々に何ができるのか、それがどこまで価値になるのか」</strong>への回答として、既存リサーチを深掘りし、事業判断に必要な追加データを整理したものです。
-        PLの改善シナリオ、病院が抱える本質課題の構造分析、診療報酬改定の実務影響、ベンダーがカバーしない領域の明確化を通じて、当社の提供価値と事業の実現可能性を論証します。
+        既存BPO正社員の兼任モデルに基づくPLの再設計、病院が抱える本質課題の構造分析、診療報酬改定の実務影響、ベンダーがカバーしない領域の明確化を通じて、当社の提供価値と事業の実現可能性を論証します。
       </p>
       <ul>
-        <li><strong>セクション1</strong> — 事業収益性の再設計（5シナリオのPL比較と推奨モデル）</li>
+        <li><strong>セクション1</strong> — 事業収益性の再設計（兼任モデル3パターンのPL比較と推奨モデル）</li>
         <li><strong>セクション2</strong> — 病院の本質課題（属人化・改定・医師-事務断絶の三重構造）</li>
         <li><strong>セクション3</strong> — 診療報酬改定の実務影響（2026年度改定の規模とBPOニーズ）</li>
         <li><strong>セクション4</strong> — 電子カルテとレセプトの齟齬問題（構造的ミスの発生メカニズム）</li>
@@ -539,30 +597,139 @@ table tr.row-recommended:hover td {
   <!-- ================================================================ -->
   <h2 class="section-title" id="sec-pl">1. 事業収益性の再設計（PLの改善）</h2>
 
-  <h3 class="subsection-title">1-1. 既存PLの問題点</h3>
+  <h3 class="subsection-title">1-1. 既存PLの問題点と前提転換</h3>
 
-  <p>初期PLモデルは3年間で累計 <strong>-2,526万円</strong> の赤字を計上し、3年以内の黒字化が達成できない構造になっています。以下の3つの構造的問題を抱えています。</p>
+  <p>初期PLモデルは正社員3名を専任配置する前提で、3年間で累計 <strong>-2,526万円</strong> の赤字を計上し、3年以内の黒字化が達成できない構造になっています。以下の3つの構造的問題を抱えています。</p>
 
   <ul>
-    <li><strong>固定費構造が正社員中心で過大</strong> — Year 1の人件費1,120万円（正社員3名想定）が売上を大幅に上回る</li>
+    <li><strong>固定費構造が専任正社員中心で過大</strong> — Year 1の人件費1,120万円（正社員3名想定）が売上を大幅に上回る</li>
     <li><strong>在宅特化なのに顧客単価が低すぎる</strong> — 月額8万円はソラスト等の大手価格帯であり、専門特化型サービスの付加価値を反映していない</li>
-    <li><strong>スケーリングに固定費が線形増加</strong> — 顧客増に応じて正社員を増員する前提のため、規模の経済が働かない</li>
+    <li><strong>スケーリングに固定費が線形増加</strong> — 顧客増に応じて専任正社員を増員する前提のため、規模の経済が働かない</li>
   </ul>
 
   <div class="why-box">
-    正社員中心モデルでは、月額8万円×37社で黒字化ラインに到達するが、在宅医療特化という狭いマーケットで37社の獲得には3年以上を要する見込み。コスト構造と価格設定の両面から根本的な再設計が必要。
+    専任3名モデルでは、月額8万円×37社で黒字化ラインに到達するが、在宅医療特化という狭いマーケットで37社の獲得には3年以上を要する見込み。コスト構造の根本的な再設計が必要。
+  </div>
+
+  <h4>前提の転換: 既存BPO正社員の兼任モデル</h4>
+
+  <p>この問題を解決するのが、<strong>既存BPO正社員の兼任モデル</strong>です。レセプトBPO専用に新規採用するのではなく、既存の労務BPO（p006）・総務BPO（p008）の正社員スタッフがレセプトBPO業務を兼任します。</p>
+
+  <!-- Before / After Compare Cards -->
+  <div class="compare-cards">
+    <div class="compare-card compare-card-before">
+      <span class="card-tag">BEFORE: 専任3名モデル</span>
+      <h4>旧前提</h4>
+      <ul>
+        <li>レセプトBPO専任で正社員3名を新規配置</li>
+        <li>月間固定費: 93万円</li>
+        <li>黒字化に37社が必要</li>
+        <li>撤退時のコスト: 人員の配置転換が困難</li>
+        <li>3年累計: <strong style="color:#dc2626;">-2,526万円</strong></li>
+      </ul>
+    </div>
+    <div class="compare-card compare-card-after">
+      <span class="card-tag">AFTER: 兼任2名モデル</span>
+      <h4>新前提</h4>
+      <ul>
+        <li>既存BPOスタッフ（p006/p008）から2名を兼任選定</li>
+        <li>月間固定費: 22万円（人件費配賦）</li>
+        <li>黒字化に<strong>3〜4社</strong>で到達</li>
+        <li>撤退時のコスト: 配賦を止めるだけ（低リスク）</li>
+        <li>3年累計（推奨B）: <strong style="color:#047857;">+637万円</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="context-box">
+    <span class="label">兼任モデルの構造:</span>
+    p006（労務BPO）に2名（村瀬、田代）、p008（総務BPO）に2名（石井、渡邊）= 計4名の既存スタッフ。このうち2名をレセプトBPO兼任に選定。1名あたり月額人件費コスト約27万円。兼任率 Y1=20%、Y2=25%、Y3=30%。スケーラビリティ上限は兼任で5〜8社。それ以上は専任スタッフ追加が必要（Y3で1名追加を計画）。
   </div>
 
 
-  <h3 class="subsection-title">1-2. 改善シナリオ比較</h3>
+  <h3 class="subsection-title">1-2. 固定費内訳</h3>
 
-  <p>5つの改善シナリオについて、3年間のPL推移を比較します。各シナリオは独立した施策を前提とし、シナリオEは全施策を統合した推奨モデルです。</p>
+  <p>兼任モデルでは人件費を「配賦」（稼働時間按分）で計上するため、固定費が大幅に圧縮されます。</p>
+
+  <table>
+    <thead>
+      <tr><th>項目</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>備考</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>人件費配賦（2名分）</td>
+        <td>130万円</td>
+        <td>162万円</td>
+        <td>195万円</td>
+        <td>27万円 x 2名 x 12ヶ月 x 兼任率</td>
+      </tr>
+      <tr>
+        <td>専任スタッフ追加（Y3のみ）</td>
+        <td>0</td>
+        <td>0</td>
+        <td>324万円</td>
+        <td>Y3で1名追加（月額27万円 x 12ヶ月）</td>
+      </tr>
+      <tr>
+        <td>点検ツール</td>
+        <td>10万円</td>
+        <td>12万円</td>
+        <td>18万円</td>
+        <td>AI搭載レセプト点検ツール等</td>
+      </tr>
+      <tr>
+        <td>Pマーク（按分）</td>
+        <td>40万円</td>
+        <td>10万円</td>
+        <td>10万円</td>
+        <td>Y1は初期取得費用を含む</td>
+      </tr>
+      <tr>
+        <td>保険（按分）</td>
+        <td>20万円</td>
+        <td>25万円</td>
+        <td>30万円</td>
+        <td>賠償責任保険等</td>
+      </tr>
+      <tr>
+        <td>営業資料・Web</td>
+        <td>50万円</td>
+        <td>10万円</td>
+        <td>10万円</td>
+        <td>Y1はLP・営業資料の初期制作費を含む</td>
+      </tr>
+      <tr>
+        <td>その他（通信・システム）</td>
+        <td>10万円</td>
+        <td>10万円</td>
+        <td>15万円</td>
+        <td>VPN、クラウドストレージ等</td>
+      </tr>
+      <tr style="font-weight:700; background:#f0f0f0;">
+        <td><strong>固定費合計</strong></td>
+        <td><strong>260万円</strong></td>
+        <td><strong>229万円</strong></td>
+        <td><strong>602万円</strong></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <span class="label">Insight:</span>
+    Y1の固定費260万円は、旧モデル（1,120万円）の<strong>約23%</strong>に圧縮。人件費を「配賦」にすることで、レセプトBPO事業単体のリスクを既存事業の延長線上に抑えられる。Y3の602万円増加は専任1名追加によるものだが、この時点で顧客15社を獲得している前提のため、十分な売上でカバーできる。
+  </div>
+
+
+  <h3 class="subsection-title">1-3. パターン比較（3シナリオ + 旧モデル）</h3>
+
+  <p>兼任モデルの3パターンについて、旧モデル（専任3名）と比較します。月額単価の違いによる収益性の差を明確にします。</p>
 
   <table>
     <thead>
       <tr>
-        <th>シナリオ</th>
-        <th>主な施策</th>
+        <th>パターン</th>
+        <th>月額単価</th>
         <th>Y1 営業利益</th>
         <th>Y2 営業利益</th>
         <th>Y3 営業利益</th>
@@ -571,102 +738,84 @@ table tr.row-recommended:hover td {
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>既存（保守的）</td>
-        <td>月額8万円 / 正社員中心</td>
-        <td style="color:#dc2626;">-856万</td>
-        <td style="color:#dc2626;">-874万</td>
-        <td style="color:#dc2626;">-796万</td>
-        <td style="color:#dc2626;">-2,526万</td>
+      <tr class="row-negative">
+        <td>既存PL（専任3名）</td>
+        <td>8万円</td>
+        <td>-856万</td>
+        <td>-874万</td>
+        <td>-796万</td>
+        <td>-2,526万</td>
         <td>未達</td>
       </tr>
       <tr>
-        <td><strong>A: 単価UP</strong></td>
-        <td>月額15万円に引き上げ</td>
-        <td style="color:#dc2626;">-580万</td>
-        <td style="color:#047857;">+230万</td>
-        <td style="color:#047857;">+2,240万</td>
-        <td style="color:#047857;">+1,890万</td>
-        <td>Y2前半</td>
-      </tr>
-      <tr>
-        <td><strong>B: 変動費モデル</strong></td>
-        <td>業務委託中心に転換</td>
-        <td style="color:#dc2626;">-436万</td>
-        <td style="color:#047857;">+326万</td>
-        <td style="color:#047857;">+2,004万</td>
-        <td style="color:#047857;">+1,894万</td>
-        <td>Y1末~Y2初</td>
-      </tr>
-      <tr>
-        <td><strong>C: CAC削減のみ</strong></td>
-        <td>クロスセル70%でCAC圧縮</td>
-        <td style="color:#dc2626;">-702万</td>
-        <td style="color:#dc2626;">-566万</td>
-        <td style="color:#dc2626;">-26万</td>
-        <td style="color:#dc2626;">-1,294万</td>
-        <td>Y3末頃</td>
-      </tr>
-      <tr>
-        <td><strong>D: 成果連動のみ</strong></td>
-        <td>成果報酬+1.5万円/月</td>
-        <td style="color:#dc2626;">-796万</td>
-        <td style="color:#dc2626;">-634万</td>
-        <td style="color:#dc2626;">-136万</td>
-        <td style="color:#dc2626;">-1,566万</td>
-        <td>Y3以降</td>
+        <td><strong>兼任A</strong></td>
+        <td>8万円</td>
+        <td style="color:#dc2626;">-145万</td>
+        <td style="color:#047857;">+117万</td>
+        <td style="color:#047857;">+89万</td>
+        <td style="color:#047857;">+61万</td>
+        <td>Y1後半</td>
       </tr>
       <tr class="row-recommended">
-        <td>E: 全施策統合 <span class="tag tag-recommend">推奨</span></td>
-        <td>単価12万+成果報酬+変動費+クロスセル</td>
-        <td style="color:#dc2626;">-303万</td>
-        <td style="color:#047857;">+846万</td>
-        <td style="color:#047857;">+3,822万</td>
-        <td style="color:#047857;">+4,365万</td>
-        <td>Y1後半</td>
+        <td>兼任B <span class="tag tag-recommend">推奨</span></td>
+        <td>12万円</td>
+        <td style="color:#dc2626;">-87万</td>
+        <td style="color:#047857;">+289万</td>
+        <td style="color:#047857;">+435万</td>
+        <td style="color:#047857;">+637万</td>
+        <td>Y1中盤</td>
+      </tr>
+      <tr>
+        <td><strong>兼任C</strong></td>
+        <td>15万円</td>
+        <td style="color:#dc2626;">-44万</td>
+        <td style="color:#047857;">+419万</td>
+        <td style="color:#047857;">+694万</td>
+        <td style="color:#047857;">+1,069万</td>
+        <td>Y1前半</td>
       </tr>
     </tbody>
   </table>
 
   <div class="context-box">
-    <span class="label">前提条件:</span>
-    顧客獲得ペース: Y1=5社、Y2=15社（累計20社）、Y3=30社（累計50社）。解約率: 年15%。シナリオA/C/Dは既存モデルの1変数のみ変更。シナリオBは人件費構造を変動費モデルに転換。シナリオEはA+B+C+Dの複合施策。
+    <span class="label">共通前提:</span>
+    兼任スタッフ2名（既存p006/p008から各1名）。人件費配賦率 Y1=20%、Y2=25%、Y3=30%。1名あたり月額コスト27万円。顧客獲得ペース Y1=4社（期末）、Y2=8社（期末）、Y3=15社（期末）。平均顧客数 Y1=2社、Y2=6社、Y3=12社。変動費率40%（ツール・通信・出張等）。Y3で専任スタッフ1名追加（年間324万円）。
   </div>
 
   <div class="insight-box">
     <span class="label">Insight:</span>
-    単一施策（C: CAC削減、D: 成果連動）だけでは3年以内の黒字化は困難。コスト構造（B）と価格設定（A）の両方を変えることが最低条件であり、さらにCAC削減を加えたシナリオEが3年累計+4,365万円と圧倒的に優れている。
+    兼任モデルに転換するだけで、月額8万円のままでも3年累計+61万円と黒字化を達成できる。しかし利益水準が薄く、Y3の専任追加で利益が圧迫される。推奨は<strong>兼任B（月額12万円）</strong>で、3年累計+637万円と安定した収益基盤を確保できる。兼任Cは利益最大だが、月額15万円はソラスト等の大手と同等でありフック商品としての魅力が低下する。
   </div>
 
 
-  <h3 class="subsection-title">1-3. 推奨モデル「シナリオE」の詳細</h3>
+  <h3 class="subsection-title">1-4. 推奨モデル「兼任B」の詳細</h3>
 
   <div class="scenario-highlight">
-    <h4>シナリオE: 全施策統合モデル</h4>
+    <h4>兼任B: 月額12万円 + 成果報酬モデル</h4>
     <div class="kpi-grid">
       <div class="kpi-card kpi-green">
-        <span class="kpi-value">+4,365万</span>
+        <span class="kpi-value">+637万</span>
         <span class="kpi-label">3年累計営業利益</span>
       </div>
       <div class="kpi-card kpi-blue">
-        <span class="kpi-value">Y1後半</span>
+        <span class="kpi-value">Y1中盤</span>
         <span class="kpi-label">黒字化時期（BEP）</span>
       </div>
       <div class="kpi-card kpi-amber">
-        <span class="kpi-value">42.9%</span>
+        <span class="kpi-value">25%</span>
         <span class="kpi-label">Y3 営業利益率</span>
       </div>
     </div>
 
     <h4>主要パラメータ</h4>
     <ul>
-      <li><strong>価格設定:</strong> 月額12万円（基本料）+ 成果報酬1.5万円/月 = 実効月額13.5万円</li>
-      <li><strong>コスト構造:</strong> 業務委託中心の変動費モデル（正社員1名のみ、他は業務委託）</li>
-      <li><strong>Year 1 固定費:</strong> 830万円（既存モデル1,120万円から26%削減）</li>
-      <li><strong>粗利率:</strong> 65%（在宅特化 + 変動費モデルの効果）</li>
-      <li><strong>CAC削減:</strong> クロスセル70%（既存BPO顧客からの転換）→ CACを30万円→10万円に圧縮</li>
-      <li><strong>Year 2:</strong> 営業利益 +846万円（営業利益率26.1%）</li>
-      <li><strong>Year 3:</strong> 営業利益 +3,822万円（営業利益率42.9%）</li>
+      <li><strong>価格設定:</strong> 月額12万円（基本料）+ 成果報酬（算定漏れ改善額の15%）</li>
+      <li><strong>コスト構造:</strong> 既存BPO正社員2名の兼任配賦（固定費の配賦で既存リソースを活用）</li>
+      <li><strong>Year 1 固定費:</strong> 260万円（旧モデル1,120万円から<strong>77%削減</strong>）</li>
+      <li><strong>変動費率:</strong> 40%（ツール・通信・出張等）</li>
+      <li><strong>CAC削減:</strong> クロスセル70%（既存BPO顧客からの転換）で営業効率を最大化</li>
+      <li><strong>スケーラビリティ:</strong> 兼任で5〜8社まで対応可能。Y3に専任1名追加で15社体制に拡張</li>
+      <li><strong>損益分岐点:</strong> 月間稼働3社</li>
     </ul>
   </div>
 
@@ -679,49 +828,49 @@ table tr.row-recommended:hover td {
     </thead>
     <tbody>
       <tr>
-        <td>正社員中心</td>
+        <td>専任3名</td>
         <td>8万円</td>
         <td>93万円</td>
         <td>2.5万円</td>
         <td style="font-weight:700; color:#dc2626;">37社</td>
       </tr>
       <tr>
-        <td>正社員中心</td>
+        <td>専任3名</td>
         <td>15万円</td>
         <td>93万円</td>
         <td>5.3万円</td>
         <td>18社</td>
       </tr>
       <tr>
-        <td>業務委託中心</td>
+        <td>兼任2名</td>
         <td>8万円</td>
-        <td>69万円</td>
-        <td>5.0万円</td>
-        <td>14社</td>
-      </tr>
-      <tr>
-        <td>業務委託中心</td>
-        <td>12万円</td>
-        <td>69万円</td>
-        <td>7.8万円</td>
-        <td>9社</td>
+        <td>22万円</td>
+        <td>4.8万円</td>
+        <td>5社</td>
       </tr>
       <tr class="row-recommended">
-        <td>業務委託中心</td>
+        <td>兼任2名</td>
+        <td>12万円</td>
+        <td>22万円</td>
+        <td>7.2万円</td>
+        <td style="font-weight:700; color:#047857;">4社 <span class="tag tag-recommend">推奨</span></td>
+      </tr>
+      <tr>
+        <td>兼任2名</td>
         <td>15万円</td>
-        <td>69万円</td>
-        <td>9.8万円</td>
-        <td style="font-weight:700; color:#047857;">8社</td>
+        <td>22万円</td>
+        <td>9.0万円</td>
+        <td>3社</td>
       </tr>
     </tbody>
   </table>
 
   <div class="why-box">
-    業務委託中心モデル + 月額12万円の組み合わせなら、黒字化に必要な社数は9社。在宅医療クリニック（全国約2万施設）の0.05%の獲得で到達できる水準であり、現実的な目標値。
+    兼任モデル + 月額12万円の組み合わせなら、黒字化に必要な社数はわずか<strong>4社</strong>。専任3名モデルの37社と比較すると<strong>約1/10</strong>の水準であり、在宅医療クリニック（全国約2万施設）の0.02%の獲得で到達できる極めて現実的な目標値。
   </div>
 
 
-  <h3 class="subsection-title">1-4. フック商品モデル — レセプトBPOを入口にクロスセル</h3>
+  <h3 class="subsection-title">1-5. フック商品モデル — レセプトBPOを入口にクロスセル</h3>
 
   <p>レセプトBPOを「フック商品」として位置づけ、経理・労務・総務BPOへのクロスセルでLTVを最大化する戦略です。</p>
 
@@ -731,8 +880,8 @@ table tr.row-recommended:hover td {
       <tr><th>項目</th><th>金額</th><th>備考</th></tr>
     </thead>
     <tbody>
-      <tr><td>採算割れしない最低ライン</td><td>月額3.75万円</td><td>変動費のみ回収（固定費は他事業で吸収）</td></tr>
-      <tr><td><strong>推奨フック価格</strong></td><td><strong>月額6.5万円</strong></td><td>粗利率42%確保。十分な利益を出しつつ価格競争力あり</td></tr>
+      <tr><td>採算割れしない最低ライン</td><td>月額3万円</td><td>兼任モデルでは固定費が低いため、配賦分を回収できれば採算割れしない</td></tr>
+      <tr><td><strong>推奨フック価格</strong></td><td><strong>月額5万円</strong></td><td>粗利率34%確保。十分な利益を出しつつ強い価格競争力</td></tr>
       <tr><td>通常価格</td><td>月額12万円</td><td>フック期間（3ヶ月）終了後の正規価格</td></tr>
     </tbody>
   </table>
@@ -746,7 +895,7 @@ table tr.row-recommended:hover td {
       <tr><td>経理BPO</td><td>30-40%</td><td>+10-15万円</td><td>レセプト業務と経理（窓口会計・入金消込）は10箇所のタッチポイント</td></tr>
       <tr><td>労務BPO</td><td>20-30%</td><td>+8-12万円</td><td>給与計算・社会保険は医療法人共通の課題</td></tr>
       <tr><td>総務BPO</td><td>15-20%</td><td>+5-8万円</td><td>備品管理・契約管理は小規模クリニックで手薄</td></tr>
-      <tr><td><strong>いずれか合計</strong></td><td><strong>50-60%</strong></td><td>—</td><td>複数サービスの提案で転換率が相乗的に上昇</td></tr>
+      <tr><td><strong>いずれか合計</strong></td><td><strong>50-60%</strong></td><td>---</td><td>複数サービスの提案で転換率が相乗的に上昇</td></tr>
     </tbody>
   </table>
 
@@ -784,14 +933,14 @@ table tr.row-recommended:hover td {
 
   <div class="insight-box">
     <span class="label">Insight:</span>
-    レセプトBPOの真の価値は「単体サービスの収益」ではなく、「バックオフィス全体のエントリーポイント」として機能すること。LTV/CAC比138.6倍は、SaaS業界の優良企業（通常3-5倍）を大幅に上回る水準であり、投資対効果の高い事業構造を実現できる。
+    レセプトBPOの真の価値は「単体サービスの収益」ではなく、「バックオフィス全体のエントリーポイント」として機能すること。LTV/CAC比138.6倍は、SaaS業界の優良企業（通常3-5倍）を大幅に上回る水準であり、投資対効果の高い事業構造を実現できる。兼任モデルではフック価格を月額5万円まで引き下げられるため、導入ハードルがさらに低下し、より多くのクリニックをファネルに取り込める。
   </div>
 
 
   <!-- ================================================================ -->
   <!-- SECTION 2: 病院の本質課題                                         -->
   <!-- ================================================================ -->
-  <h2 class="section-title" id="sec-pain">2. 病院の本質課題 — 「なぜ困っているのか」</h2>
+  <h2 class="section-title" id="sec-pain">2. 病院の本質課題 --- 「なぜ困っているのか」</h2>
 
   <h3 class="subsection-title">2-1. 本質課題の三重構造（仮説）</h3>
 
@@ -799,15 +948,15 @@ table tr.row-recommended:hover td {
 
   <div class="triple-layer">
     <div class="layer layer-1">
-      <span class="layer-label">第1層</span>属人化 — 1人のベテランに依存する構造
+      <span class="layer-label">第1層</span>属人化 --- 1人のベテランに依存する構造
       <span class="layer-desc">少人数のクリニックでは、レセプト業務を担当できるのは通常1〜2名。その人が退職・休職すると業務が即座に停止するリスクを常に抱えている。</span>
     </div>
     <div class="layer layer-2">
-      <span class="layer-label">第2層</span>改定対応の継続負荷 — 2年ごとに知識が陳腐化
+      <span class="layer-label">第2層</span>改定対応の継続負荷 --- 2年ごとに知識が陳腐化
       <span class="layer-desc">診療報酬は2年に1回大改定（2026年度は+3.09%で30年ぶりの高水準）。4万点以上の点数表の変更を把握し、運用に落とし込む作業が永続的に発生する。</span>
     </div>
     <div class="layer layer-3">
-      <span class="layer-label">第3層</span>医師-事務の構造的断絶 — 病名付与・確認のコミュニケーション不全
+      <span class="layer-label">第3層</span>医師-事務の構造的断絶 --- 病名付与・確認のコミュニケーション不全
       <span class="layer-desc">電子カルテの普及により医師が直接入力するようになったが、診療報酬の知識がない医師が入力するため、レセプトとの齟齬が構造的に発生する。</span>
     </div>
   </div>
@@ -875,14 +1024,19 @@ table tr.row-recommended:hover td {
   <p>「BPOに外注せず、院内でスタッフを育成すればよいのでは？」という自然な疑問に対する回答です。</p>
 
   <ul>
-    <li><strong>基礎入力は確かに低コストで育成可能</strong> — 受付・会計入力は数週間〜1ヶ月で習得でき、院内OJTで十分対応できる</li>
-    <li><strong>しかし点検は2〜3年のOJTが必要</strong> — 月1回しか実践できず、多様なパターンを経験するには年単位の時間が必要</li>
-    <li><strong>離職率が高い</strong> — 医療・福祉業界の新卒3年以内離職率は41.5〜49.3%。2〜3年かけて育成しても、育成完了前に退職するリスクが高い</li>
-    <li><strong>教育する側の人材が不在</strong> — そもそも教えられるベテランが1人しかおらず、その人が日常業務と並行で教育する余裕がない</li>
+    <li><strong>基礎入力は確かに低コストで育成可能</strong> --- 受付・会計入力は数週間〜1ヶ月で習得でき、院内OJTで十分対応できる</li>
+    <li><strong>しかし点検は2〜3年のOJTが必要</strong> --- 月1回しか実践できず、多様なパターンを経験するには年単位の時間が必要</li>
+    <li><strong>離職率が高い</strong> --- 医療・福祉業界の新卒3年以内離職率は41.5〜49.3%。2〜3年かけて育成しても、育成完了前に退職するリスクが高い</li>
+    <li><strong>教育する側の人材が不在</strong> --- そもそも教えられるベテランが1人しかおらず、その人が日常業務と並行で教育する余裕がない</li>
   </ul>
 
   <div class="why-box">
     院内育成のROI計算: 育成コスト（3年×月給25万円×教育効率50%）= 450万円。離職確率49.3%を加味すると、期待コストは450万÷(1-0.493) = 約887万円/人。BPO費用（年間144万円 = 月額12万円×12ヶ月）と比較すると、BPOの方が6年間は経済的に有利。
+  </div>
+
+  <div class="synergy-box">
+    <h4>兼任モデルの強み: 労務・社保の知見がレセプト業務と親和性が高い</h4>
+    <p style="font-size:0.84rem;">当社の既存BPOスタッフは労務BPO（p006）・総務BPO（p008）で社会保険手続き・給与計算・行政対応の実務経験を持つ。レセプト業務で頻出する「保険証確認」「公費制度の適用判断」「社会保険の区分判定」はこれらの知見と直結しており、まったくの未経験者と比較して習熟速度が大幅に速い。特に在宅医療で発生する「介護保険と医療保険の併用ケース」は、労務・社保の知識が直接活きる領域。</p>
   </div>
 
 
@@ -1240,7 +1394,7 @@ table tr.row-recommended:hover td {
   <!-- ================================================================ -->
   <!-- SECTION 6: ベストソリューションの検討                                -->
   <!-- ================================================================ -->
-  <h2 class="section-title" id="sec-solution">6. ベストソリューションの検討 — BPO vs RPO vs 研修</h2>
+  <h2 class="section-title" id="sec-solution">6. ベストソリューションの検討 --- BPO vs RPO vs 研修</h2>
 
   <h3 class="subsection-title">6-1. 3モデル比較</h3>
 
@@ -1248,7 +1402,7 @@ table tr.row-recommended:hover td {
 
   <table>
     <thead>
-      <tr><th>評価軸</th><th>BPO（業務委託）</th><th>人材紹介・派遣（RPO）</th><th>研修・教育</th></tr>
+      <tr><th>評価軸</th><th>BPO（兼任モデル）</th><th>人材紹介・派遣（RPO）</th><th>研修・教育</th></tr>
     </thead>
     <tbody>
       <tr>
@@ -1259,7 +1413,7 @@ table tr.row-recommended:hover td {
       </tr>
       <tr>
         <td><strong>コスト構造</strong></td>
-        <td>変動費（月額制）</td>
+        <td>固定費の配賦（既存リソース活用）</td>
         <td>固定費（人件費）</td>
         <td>スポット（研修費）</td>
       </tr>
@@ -1298,7 +1452,32 @@ table tr.row-recommended:hover td {
 
   <div class="context-box">
     <span class="label">市場の実態:</span>
-    多くの医療機関は「いずれは内製化したい」と考えている。しかし、2-3のスキルレベル分析で示した通り、高度な点検スキルの育成には3年以上を要し、かつ離職リスクが高い。この「理想と現実のギャップ」を埋めるのが、次に提案する「教育支援型BPO」モデル。
+    多くの医療機関は「いずれは内製化したい」と考えている。しかし、2-2のスキルレベル分析で示した通り、高度な点検スキルの育成には3年以上を要し、かつ離職リスクが高い。この「理想と現実のギャップ」を埋めるのが、次に提案する「教育支援型BPO」モデル。
+  </div>
+
+  <h4>兼任モデルの戦略的優位性</h4>
+
+  <div class="compare-cards">
+    <div class="compare-card compare-card-after">
+      <span class="card-tag">強み</span>
+      <h4>兼任モデルのメリット</h4>
+      <ul>
+        <li><strong>既存BPOチームの多能工化</strong> --- 労務・総務のスキルにレセプト点検スキルが加わり、チーム全体の市場価値が向上</li>
+        <li><strong>撤退コストが低い</strong> --- 事業が不調でも配賦を止めるだけ。新規採用の解雇コストが発生しない</li>
+        <li><strong>クロスセルが自然に発生</strong> --- 既に労務・総務BPOを提供しているクライアントに対し、追加サービスとして自然に提案できる</li>
+        <li><strong>労務・社保の知見がレセプトと親和的</strong> --- 保険証確認・公費判定・介護保険併用など、既存知識が直接活きる</li>
+      </ul>
+    </div>
+    <div class="compare-card compare-card-before">
+      <span class="card-tag">リスク</span>
+      <h4>兼任モデルのリスク</h4>
+      <ul>
+        <li><strong>既存業務の品質低下リスク</strong> --- レセプト業務に注力するあまり、本来の労務・総務BPO品質が落ちる可能性</li>
+        <li><strong>月初の業務集中</strong> --- レセプト提出期限（毎月10日）と給与計算・社保手続きの月初業務が重複する</li>
+        <li><strong>スケーラビリティに上限</strong> --- 兼任で対応できるのは5〜8社まで。それ以上は専任追加が必要</li>
+        <li><strong>兼任スタッフの負荷管理</strong> --- 兼任率が上がるほど、本来業務との両立が難しくなる</li>
+      </ul>
+    </div>
   </div>
 
 
@@ -1341,10 +1520,10 @@ table tr.row-recommended:hover td {
 
   <h4>なぜこのモデルがベストか</h4>
   <ol>
-    <li><strong>院長の「いずれ内製化したい」ニーズに応える</strong> — 「ずっと外注」ではなく「自立支援」として提案することで、導入ハードルが下がる</li>
-    <li><strong>BPO解約リスクを研修による関係構築でヘッジ</strong> — 研修を通じてスタッフとの信頼関係が構築され、Phase 3でも継続的な関係が維持される</li>
-    <li><strong>研修単体より高単価が取れる</strong> — BPO+研修のパッケージは、研修単体（10〜30万円/回）よりも月額ベースで高い収益を確保できる</li>
-    <li><strong>「卒業」しても改定時・繁忙期の支援で長期関係維持</strong> — Phase 3に移行しても月額3〜5万円のバックアップ契約で関係が続く</li>
+    <li><strong>院長の「いずれ内製化したい」ニーズに応える</strong> --- 「ずっと外注」ではなく「自立支援」として提案することで、導入ハードルが下がる</li>
+    <li><strong>BPO解約リスクを研修による関係構築でヘッジ</strong> --- 研修を通じてスタッフとの信頼関係が構築され、Phase 3でも継続的な関係が維持される</li>
+    <li><strong>研修単体より高単価が取れる</strong> --- BPO+研修のパッケージは、研修単体（10〜30万円/回）よりも月額ベースで高い収益を確保できる</li>
+    <li><strong>「卒業」しても改定時・繁忙期の支援で長期関係維持</strong> --- Phase 3に移行しても月額3〜5万円のバックアップ契約で関係が続く</li>
   </ol>
 
   <div class="why-box">
@@ -1378,18 +1557,18 @@ table tr.row-recommended:hover td {
   <!-- ================================================================ -->
   <!-- SECTION 7: 全体のまとめ                                            -->
   <!-- ================================================================ -->
-  <h2 class="section-title" id="sec-conclusion">7. 全体のまとめ — 「我々に何ができるのか、それがどこまで価値になるのか」</h2>
+  <h2 class="section-title" id="sec-conclusion">7. 全体のまとめ --- 「我々に何ができるのか、それがどこまで価値になるのか」</h2>
 
   <p>山科さんの最終問い<strong>「要するに我々に何ができるのか、それがどこまで価値になるのか」</strong>への回答を整理します。</p>
 
   <div class="answer-box">
     <h4>当社ができること（提供価値）</h4>
     <ol>
-      <li><strong>在宅医療特化のレセプト点検・算定最適化</strong> — 年間700万円の算定漏れを発見・改善する専門的な点検サービス</li>
-      <li><strong>改定対応の運用支援</strong> — レセコンベンダーがカバーしない「どう運用に落とし込むか」の部分を代行</li>
-      <li><strong>院内スタッフの教育</strong> — 属人化を解消し、組織的にレセプト業務を回せる体制を構築支援</li>
-      <li><strong>電カル→レセプトの齟齬チェック</strong> — 医師-事務間の構造的断絶による算定ミスを第三者目線で検出</li>
-      <li><strong>バックオフィスBPOへのクロスセル入口</strong> — レセプトBPOを起点に経理・労務・総務BPOへ展開</li>
+      <li><strong>在宅医療特化のレセプト点検・算定最適化</strong> --- 年間700万円の算定漏れを発見・改善する専門的な点検サービス</li>
+      <li><strong>改定対応の運用支援</strong> --- レセコンベンダーがカバーしない「どう運用に落とし込むか」の部分を代行</li>
+      <li><strong>院内スタッフの教育</strong> --- 属人化を解消し、組織的にレセプト業務を回せる体制を構築支援</li>
+      <li><strong>電カル→レセプトの齟齬チェック</strong> --- 医師-事務間の構造的断絶による算定ミスを第三者目線で検出</li>
+      <li><strong>バックオフィスBPOへのクロスセル入口</strong> --- レセプトBPOを起点に経理・労務・総務BPOへ展開</li>
     </ol>
   </div>
 
@@ -1434,7 +1613,7 @@ table tr.row-recommended:hover td {
   </table>
 
 
-  <h3 class="subsection-title">実現可能性</h3>
+  <h3 class="subsection-title">実現可能性（兼任Bモデル）</h3>
 
   <table>
     <thead>
@@ -1443,36 +1622,41 @@ table tr.row-recommended:hover td {
     <tbody>
       <tr>
         <td>Year 1 営業利益</td>
-        <td>-303万円</td>
-        <td>業務委託モデルで赤字を圧縮。初期投資として許容範囲</td>
+        <td>-87万円</td>
+        <td>兼任モデルで赤字を最小限に圧縮。初期投資として十分許容範囲</td>
       </tr>
       <tr>
         <td>Year 2 営業利益</td>
-        <td style="color:#047857; font-weight:700;">+846万円（利益率26.1%）</td>
-        <td>黒字化達成</td>
+        <td style="color:#047857; font-weight:700;">+289万円</td>
+        <td>黒字化達成。安定的な利益体質に移行</td>
       </tr>
       <tr>
         <td>Year 3 営業利益</td>
-        <td style="color:#047857; font-weight:700;">+3,822万円（利益率42.9%）</td>
-        <td>事業として十分に成立する水準</td>
+        <td style="color:#047857; font-weight:700;">+435万円（利益率25%）</td>
+        <td>専任1名追加後も利益率25%を確保。事業として十分に成立</td>
       </tr>
       <tr>
         <td>BEP（損益分岐点）</td>
-        <td>月間稼働6社</td>
-        <td>業務委託中心モデルで6社稼働すれば黒字化</td>
+        <td>月間稼働3社</td>
+        <td>兼任モデルで<strong>3社稼働すれば黒字化</strong>。極めて低いハードル</td>
       </tr>
       <tr>
         <td>3年累計</td>
-        <td style="color:#047857; font-weight:700;">+4,365万円</td>
-        <td>十分な投資回収</td>
+        <td style="color:#047857; font-weight:700;">+637万円</td>
+        <td>既存リソース活用による低リスク参入で安定した投資回収</td>
       </tr>
     </tbody>
   </table>
 
+  <div class="insight-box">
+    <span class="label">Insight:</span>
+    旧モデル（専任3名・3年累計-2,526万円）から兼任Bモデル（3年累計+637万円）への転換は、<strong>差額にして3,163万円の改善</strong>。しかもリスクプロファイルが根本的に異なる。旧モデルは「新規採用→失敗時に解雇コスト発生」の不可逆的なリスクだが、兼任モデルは「既存社員の稼働配分を調整する」だけであり、撤退時のダメージが極めて小さい。
+  </div>
 
-  <h3 class="subsection-title">次の検証ステップ（ヒアリング）</h3>
 
-  <p>本レポートの仮説を現場で検証するために、以下の4つのアクションを推奨します。</p>
+  <h3 class="subsection-title">次の検証ステップ</h3>
+
+  <p>本レポートの仮説を現場で検証するために、以下のアクションを推奨します。</p>
 
   <table>
     <thead>
@@ -1503,12 +1687,24 @@ table tr.row-recommended:hover td {
         <td>在宅クリニック院長 3〜5名</td>
         <td>「BPO+院内育成支援」のハイブリッドモデルへの関心度を測定</td>
       </tr>
+      <tr>
+        <td>5</td>
+        <td><strong>月初の業務集中度テスト</strong></td>
+        <td>兼任候補スタッフ</td>
+        <td>レセプト提出期限（毎月10日）と既存業務（給与計算・社保手続き）の重複度を検証。1〜2ヶ月間のタイムログで実際の負荷を測定</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><strong>兼任スタッフ候補の適性確認</strong></td>
+        <td>p006/p008の4名（村瀬・田代・石井・渡邊）</td>
+        <td>レセプト業務への関心度・医療事務資格の有無・学習意欲を面談で確認し、兼任2名を選定</td>
+      </tr>
     </tbody>
   </table>
 
   <div class="insight-box">
     <span class="label">Insight:</span>
-    上記4つの検証は、それぞれ「課題の存在確認」「価格の妥当性」「技術的実現可能性」「ソリューションの受容性」に対応しており、この4つが全てクリアされれば事業判断のGo/No-Goを出せる状態になる。最も重要なのは#1と#2であり、院長ヒアリングが次のアクションの最優先事項。
+    上記6つの検証のうち、#1〜#4は従来から必要だった「市場検証」、#5〜#6は兼任モデル固有の「社内検証」である。特に#5（月初の業務集中度テスト）は、兼任モデルの実行可能性を左右する最重要項目。レセプト提出期限と既存業務の月初ピークが重なるため、1〜2ヶ月の実地テストで現実的な兼任率を確定させることが不可欠。
   </div>
 
 
@@ -1550,6 +1746,7 @@ table tr.row-recommended:hover td {
       <tr><td>28</td><td>Seven Rich Group BPO事業実績</td><td>既存BPO事業（p006/p008）の営業・オンボーディングノウハウ</td><td>1, 6</td></tr>
       <tr><td>29</td><td>p012 リサーチレポート（全24項目）</td><td>本レポートの基礎データ</td><td>全セクション</td></tr>
       <tr><td>30</td><td>p012 ステークホルダーフローチャート分析</td><td>レセプト業務と他バックオフィス部門のタッチポイント分析</td><td>1</td></tr>
+      <tr><td>31</td><td>Seven Rich Group 人員配置データ</td><td>p006/p008の既存スタッフ構成（4名）と月額人件費コスト</td><td>1, 7</td></tr>
     </tbody>
   </table>
 
@@ -1557,7 +1754,7 @@ table tr.row-recommended:hover td {
   <!-- ===== Footer ===== -->
   <footer class="report-footer">
     <p>p012（レセプトBPOサービス） フィードバック対応 深掘りレポート / 作成日: 2026-03-09 / Desk Secretary System</p>
-    <p style="margin-top:4px;">本レポートは、ステークホルダー（山科さん）からのフィードバックに基づく追加リサーチとして作成されたものです。基礎データの詳細はリサーチレポート（全24項目）および結論レポートを参照してください。</p>
+    <p style="margin-top:4px;">本レポートは、ステークホルダー（山科さん）からのフィードバックに基づく追加リサーチとして作成されたものです。コスト構造は「既存BPO正社員の兼任モデル」を前提としています。基礎データの詳細はリサーチレポート（全24項目）および結論レポートを参照してください。</p>
   </footer>
 
 </div><!-- /#main -->
